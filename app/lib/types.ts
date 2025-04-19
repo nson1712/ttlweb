@@ -8,7 +8,7 @@ export interface Novel {
   author: string;
   rating: number;
   totalRatings: number;
-  genres: string[];
+  categories: string[];
   description?: string;
   updatedAt?: string;
   chapterCount?: number;
@@ -29,8 +29,8 @@ export interface Chapter {
 }
 
 export interface FilterOptions {
-  genres: string[];
-  excludedGenres: string[];
+  categories: string[];
+  excludedCategories: string[];
   tags: string[];
   excludedTags: string[];
   searchTerm: string;

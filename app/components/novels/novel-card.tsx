@@ -13,7 +13,7 @@ export interface NovelCardProps {
   author: string;
   rating: number;
   totalRatings: number;
-  genres: string[];
+  categories: string[];
   description?: string;
   updatedAt?: string;
   chapterCount?: number;
@@ -26,12 +26,11 @@ export function NovelCard({
   author,
   rating,
   totalRatings,
-  genres,
+  categories,
   description,
   updatedAt,
   chapterCount,
 }: NovelCardProps) {
-  console.log("SLUGGGGGGGGG: ", slug)
   return (
     <div className="flex flex-col md:flex-row gap-4 bg-gray-800 rounded-lg overflow-hidden p-4">
       <div className="relative w-full md:w-48 h-64 md:h-auto flex-shrink-0">
@@ -83,9 +82,9 @@ export function NovelCard({
         </div>
         
         <div className="flex flex-wrap gap-2 my-2">
-          {genres.map((genre) => (
-            <Badge key={genre} variant="secondary" className="bg-gray-700">
-              {genre}
+          {categories.map((cate) => (
+            <Badge key={cate} variant="secondary" className="bg-gray-700 hover:scale-110 transition-transform cursor-pointer">
+              {cate}
             </Badge>
           ))}
         </div>

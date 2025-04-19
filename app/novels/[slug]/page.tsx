@@ -251,9 +251,9 @@ export default function NovelDetailPage() {
           </div>
 
           <div className="flex flex-wrap gap-2 my-4">
-            {novel.genres.map((genre) => (
-              <Badge key={genre} variant="secondary" className="bg-gray-700">
-                {genre}
+            {novel.categories.map((cate) => (
+              <Badge key={cate} variant="secondary" className="bg-gray-700">
+                {cate}
               </Badge>
             ))}
           </div>
@@ -503,7 +503,7 @@ export default function NovelDetailPage() {
             .filter(
               (n) =>
                 n.slug !== novel.slug &&
-                n.genres.some((g) => novel.genres.includes(g))
+                n.categories.some((g) => novel.categories.includes(g))
             )
             .slice(0, 4)
             .map((similarNovel) => (

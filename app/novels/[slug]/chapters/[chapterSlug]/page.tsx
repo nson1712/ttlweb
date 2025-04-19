@@ -4,9 +4,14 @@ import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "../../../../components/ui/button";
-import { ChevronLeftIcon, ChevronRightIcon, BookmarkIcon, HomeIcon, ListIcon } from "lucide-react";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  BookmarkIcon,
+  HomeIcon,
+  ListIcon,
+} from "lucide-react";
 import { mockNovels } from "../../../../lib/mock-data";
-
 
 // Mock chapter content
 const mockChapterContent = `
@@ -61,89 +66,152 @@ const mockChapterContent = `
 
 // Mock chapters data
 const mockChapters = [
-  { id: "ch1", slug: "ch1", title: "Chapter 1: The Beginning", number: 1, createdAt: "2023-01-01" },
-  { id: "ch2", slug: "ch2", title: "Chapter 2: The Journey", number: 2, createdAt: "2023-01-05" },
-  { id: "ch3", slug: "ch3", title: "Chapter 3: The Challenge", number: 3, createdAt: "2023-01-10" },
-  { id: "ch4", slug: "ch4", title: "Chapter 4: The Revelation", number: 4, createdAt: "2023-01-15" },
-  { id: "ch5", slug: "ch5", title: "Chapter 5: The Confrontation", number: 5, createdAt: "2023-01-20" },
-  { id: "ch6", slug: "ch6", title: "Chapter 6: The Resolution", number: 6, createdAt: "2023-01-25" },
-  { id: "ch7", slug: "ch7", title: "Chapter 7: The New Beginning", number: 7, createdAt: "2023-01-30" },
-  { id: "ch8", slug: "ch8", title: "Chapter 8: The Adventure Continues", number: 8, createdAt: "2023-02-05" },
-  { id: "ch9", slug: "ch9", title: "Chapter 9: The Unexpected Turn", number: 9, createdAt: "2023-02-10" },
-  { id: "ch10", slug: "ch10", title: "Chapter 10: The Final Battle", number: 10, createdAt: "2023-02-15" },
+  {
+    id: "ch1",
+    slug: "ch1",
+    title: "Chapter 1: The Beginning",
+    number: 1,
+    createdAt: "2023-01-01",
+  },
+  {
+    id: "ch2",
+    slug: "ch2",
+    title: "Chapter 2: The Journey",
+    number: 2,
+    createdAt: "2023-01-05",
+  },
+  {
+    id: "ch3",
+    slug: "ch3",
+    title: "Chapter 3: The Challenge",
+    number: 3,
+    createdAt: "2023-01-10",
+  },
+  {
+    id: "ch4",
+    slug: "ch4",
+    title: "Chapter 4: The Revelation",
+    number: 4,
+    createdAt: "2023-01-15",
+  },
+  {
+    id: "ch5",
+    slug: "ch5",
+    title: "Chapter 5: The Confrontation",
+    number: 5,
+    createdAt: "2023-01-20",
+  },
+  {
+    id: "ch6",
+    slug: "ch6",
+    title: "Chapter 6: The Resolution",
+    number: 6,
+    createdAt: "2023-01-25",
+  },
+  {
+    id: "ch7",
+    slug: "ch7",
+    title: "Chapter 7: The New Beginning",
+    number: 7,
+    createdAt: "2023-01-30",
+  },
+  {
+    id: "ch8",
+    slug: "ch8",
+    title: "Chapter 8: The Adventure Continues",
+    number: 8,
+    createdAt: "2023-02-05",
+  },
+  {
+    id: "ch9",
+    slug: "ch9",
+    title: "Chapter 9: The Unexpected Turn",
+    number: 9,
+    createdAt: "2023-02-10",
+  },
+  {
+    id: "ch10",
+    slug: "ch10",
+    title: "Chapter 10: The Final Battle",
+    number: 10,
+    createdAt: "2023-02-15",
+  },
 ];
 
 export default function ReadChapterPage() {
   const params = useParams();
   const router = useRouter();
   const novelSlug = params.slug as string;
-  const chapterSlug = params.chapterSlug as string || "ch1";
-  
+  const chapterSlug = (params.chapterSlug as string) || "ch1";
+
   // Find the novel from mock data
   interface LocalNovel {
-      id: string;
-      slug: string;
-      title: string;
-      author: string;
-      description?: string;
-      coverImage: string;
-    }
+    id: string;
+    slug: string;
+    title: string;
+    author: string;
+    description?: string;
+    coverImage: string;
+  }
 
+  const novel: LocalNovel =
+    mockNovels.find((n: LocalNovel) => n.slug === novelSlug) || mockNovels[0];
 
-  const novel: LocalNovel = mockNovels.find((n: LocalNovel) => n.slug === novelSlug) || mockNovels[0];
-  
   // Find the current chapter
-  const currentChapterIndex = mockChapters.findIndex(ch => ch.slug === chapterSlug);
-  const currentChapter = currentChapterIndex >= 0 
-    ? mockChapters[currentChapterIndex] 
-    : mockChapters[0];
-  
+  const currentChapterIndex = mockChapters.findIndex(
+    (ch) => ch.slug === chapterSlug
+  );
+  const currentChapter =
+    currentChapterIndex >= 0
+      ? mockChapters[currentChapterIndex]
+      : mockChapters[0];
+
   // Determine previous and next chapters
-  const prevChapter = currentChapterIndex > 0 
-    ? mockChapters[currentChapterIndex - 1] 
-    : null;
-  
-  const nextChapter = currentChapterIndex < mockChapters.length - 1 
-    ? mockChapters[currentChapterIndex + 1] 
-    : null;
-  
+  const prevChapter =
+    currentChapterIndex > 0 ? mockChapters[currentChapterIndex - 1] : null;
+
+  const nextChapter =
+    currentChapterIndex < mockChapters.length - 1
+      ? mockChapters[currentChapterIndex + 1]
+      : null;
+
   const [fontSize, setFontSize] = useState(16);
   const [showChapterList, setShowChapterList] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
-  
+
   // Increase font size
   const increaseFontSize = () => {
     if (fontSize < 24) {
       setFontSize(fontSize + 2);
     }
   };
-  
+
   // Decrease font size
   const decreaseFontSize = () => {
     if (fontSize > 12) {
       setFontSize(fontSize - 2);
     }
   };
-  
+
   // Toggle bookmark
   const toggleBookmark = () => {
     setIsBookmarked(!isBookmarked);
   };
-  
+
   // Navigate to previous chapter
   const goToPrevChapter = () => {
     if (prevChapter) {
       router.push(`/novels/${novelSlug}/chapters/${prevChapter.slug}`);
     }
   };
-  
+
   // Navigate to next chapter
   const goToNextChapter = () => {
     if (nextChapter) {
       router.push(`/novels/${novelSlug}/chapters/${nextChapter.slug}`);
     }
   };
-  
+
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -153,55 +221,56 @@ export default function ReadChapterPage() {
         goToNextChapter();
       }
     };
-    
+
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [prevChapter, nextChapter]);
-  
+
   return (
     <div className="max-w-4xl mx-auto">
       {/* Reading Controls */}
       <div className="bg-gray-800 p-4 rounded-lg mb-6 sticky top-16 z-10">
-        <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="sm:flex items-center justify-between gap-2 space-y-2 sm:space-y-0">
           <div className="flex items-center gap-2">
             <Link href={`/novels/${novelSlug}`}>
-              <Button className="bg-transparent" size="sm">
+              <Button className="bg-transparent sm:text-base" size="sm">
                 <HomeIcon className="h-4 w-4 mr-1" />
                 Novel Page
               </Button>
             </Link>
-            
-            <Button 
-              size="sm" 
+
+            <Button
+              className="sm:text-base"
+              size="sm"
               onClick={() => setShowChapterList(!showChapterList)}
             >
               <ListIcon className="h-4 w-4 mr-1" />
               Chapters
             </Button>
-            
-            <Button 
+
+            <Button
               size="sm"
-              className={isBookmarked ? "bg-gray-700" : ""}
+              className={`sm:text-base ${isBookmarked ? "bg-gray-700" : ""}`}
               onClick={toggleBookmark}
             >
               <BookmarkIcon className="h-4 w-4 mr-1" />
               {isBookmarked ? "Bookmarked" : "Bookmark"}
             </Button>
           </div>
-          
-          <div className="flex items-center gap-2">
-            <Button 
-              size="lg" 
+
+          <div className="flex items-center gap-2 justify-center">
+            <Button
+              size="lg"
               onClick={decreaseFontSize}
               disabled={fontSize <= 12}
             >
               A-
             </Button>
-            
+
             <span className="text-gray-300">{fontSize}</span>
-            
-            <Button 
-              size="lg" 
+
+            <Button
+              size="lg"
               onClick={increaseFontSize}
               disabled={fontSize >= 24}
             >
@@ -209,19 +278,19 @@ export default function ReadChapterPage() {
             </Button>
           </div>
         </div>
-        
+
         {/* Chapter List (Collapsible) */}
         {showChapterList && (
-          <div className="mt-4 bg-gray-700 p-3 rounded-md max-h-60 overflow-y-auto">
+          <div className="mt-4 bg-gray-700 p-3 rounded-md max-h-96 overflow-y-auto">
             <h3 className="font-medium mb-2">Chapters</h3>
             <div className="space-y-1">
               {mockChapters.map((chapter) => (
-                <Link 
-                  key={chapter.id} 
+                <Link
+                  key={chapter.id}
                   href={`/novels/${novelSlug}/chapters/${chapter.id}`}
                   className={`block p-2 rounded ${
-                    chapter.id === chapterSlug 
-                      ? "bg-blue-600 text-white" 
+                    chapter.id === chapterSlug
+                      ? "bg-blue-600 text-white"
                       : "hover:bg-gray-600"
                   }`}
                 >
@@ -232,26 +301,26 @@ export default function ReadChapterPage() {
           </div>
         )}
       </div>
-      
+
       {/* Chapter Title */}
       <div className="mb-6 text-center">
         <h1 className="text-2xl font-bold text-blue-400">{novel.title}</h1>
         <h2 className="text-xl mt-2">{currentChapter.title}</h2>
       </div>
-      
+
       {/* Chapter Navigation - Top */}
       <div className="flex justify-between mb-6">
-        <Button 
-          variant="outline" 
+        <Button
           onClick={goToPrevChapter}
+          variant="outline"
           disabled={!prevChapter}
         >
           <ChevronLeftIcon className="h-4 w-4 mr-1" />
           Previous Chapter
         </Button>
-        
-        <Button 
-          variant="outline" 
+
+        <Button
+          variant="outline"
           onClick={goToNextChapter}
           disabled={!nextChapter}
         >
@@ -259,31 +328,31 @@ export default function ReadChapterPage() {
           <ChevronRightIcon className="h-4 w-4 ml-1" />
         </Button>
       </div>
-      
+
       {/* Chapter Content */}
-      <div 
+      <div
         className="bg-gray-800 p-6 rounded-lg mb-6"
         style={{ fontSize: `${fontSize}px` }}
       >
-        <div 
+        <div
           className="prose prose-invert max-w-none"
           dangerouslySetInnerHTML={{ __html: mockChapterContent }}
         />
       </div>
-      
+
       {/* Chapter Navigation - Bottom */}
       <div className="flex justify-between mb-6">
-        <Button 
-          variant="outline" 
+        <Button
+          variant="outline"
           onClick={goToPrevChapter}
           disabled={!prevChapter}
         >
           <ChevronLeftIcon className="h-4 w-4 mr-1" />
           Previous Chapter
         </Button>
-        
-        <Button 
-          variant="outline" 
+
+        <Button
+          variant="outline"
           onClick={goToNextChapter}
           disabled={!nextChapter}
         >
@@ -291,22 +360,24 @@ export default function ReadChapterPage() {
           <ChevronRightIcon className="h-4 w-4 ml-1" />
         </Button>
       </div>
-      
+
       {/* Comments Section */}
       <div className="bg-gray-800 p-4 rounded-lg">
         <h3 className="text-lg font-semibold mb-4">Chapter Comments</h3>
-        
+
         <div className="mb-6">
           <textarea
             placeholder="Add your comment..."
             className="w-full bg-gray-700 text-white border-gray-600 rounded-md p-3 min-h-24"
           ></textarea>
           <div className="flex justify-end mt-2">
-            <Button>Post Comment</Button>
+            <Button variant="outline">Post Comment</Button>
           </div>
         </div>
-        
-        <p className="text-gray-400 text-center">No comments yet for this chapter.</p>
+
+        <p className="text-gray-400 text-center">
+          No comments yet for this chapter.
+        </p>
       </div>
     </div>
   );
