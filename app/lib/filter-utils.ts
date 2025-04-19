@@ -14,14 +14,14 @@ export function filterNovels(novels: Novel[], filterOptions: FilterOptions): Nov
     }
     
     // Filter by selected genres (if any)
-    if (filterOptions.genres.length > 0 && 
-        !filterOptions.genres.some(genre => novel.genres.includes(genre))) {
+    if (filterOptions.categories.length > 0 && 
+        !filterOptions.categories.some(cate => novel.categories.includes(cate))) {
       return false;
     }
     
     // Filter out excluded genres
-    if (filterOptions.excludedGenres.length > 0 && 
-        filterOptions.excludedGenres.some(genre => novel.genres.includes(genre))) {
+    if (filterOptions.excludedCategories.length > 0 && 
+        filterOptions.excludedCategories.some(exCate => novel.categories.includes(exCate))) {
       return false;
     }
     

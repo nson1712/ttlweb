@@ -11,7 +11,7 @@ export const mockNovels: Novel[] = [
     author: "Solver Keter",
     rating: 4.5,
     totalRatings: 11,
-    genres: ["Adventure", "Fantasy", "Action"],
+    categories: ["Adventure", "Fantasy", "Action"],
     description:
       'Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!... Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...',
     updatedAt: "8 hours ago",
@@ -30,7 +30,7 @@ export const mockNovels: Novel[] = [
     author: "Unknown Author",
     rating: 4.2,
     totalRatings: 21,
-    genres: [
+    categories: [
       "Adventure",
       "Fantasy",
       "Historical",
@@ -58,7 +58,7 @@ export const mockNovels: Novel[] = [
     author: "Unknown Author",
     rating: 4.7,
     totalRatings: 19,
-    genres: [
+    categories: [
       "Comedy",
       "Psychological",
       "Gender Bender",
@@ -85,7 +85,7 @@ export const mockNovels: Novel[] = [
     author: "Cuttlefish That Loves Diving",
     rating: 4.7,
     totalRatings: 853,
-    genres: ["Fantasy", "Mystery", "Supernatural"],
+    categories: ["Fantasy", "Mystery", "Supernatural"],
     description:
       "With the rising tide of steam power and machinery, who can come close to being a Beyonder? Shrouded in the fog of history and darkness, who or what is the lurking evil that murmurs into our ears?",
     updatedAt: "2 days ago",
@@ -104,7 +104,7 @@ export const mockNovels: Novel[] = [
     author: "Chocolion",
     rating: 4.7,
     totalRatings: 712,
-    genres: ["Sci-Fi", "Adventure", "Fantasy"],
+    categories: ["Sci-Fi", "Adventure", "Fantasy"],
     description:
       "What would a regular old-school game player do when he's transported into a futuristic virtual game world filled with spaceships, wormholes, advanced technology, and superpowers?",
     updatedAt: "1 day ago",
@@ -123,7 +123,7 @@ export const mockNovels: Novel[] = [
     author: "Guiltythree",
     rating: 4.1,
     totalRatings: 769,
-    genres: ["Fantasy", "Action", "Adventure"],
+    categories: ["Fantasy", "Action", "Adventure"],
     description:
       "Growing up in poverty, Sunny never expected anything good from life. However, even he did not anticipate being chosen by the Nightmare Spell and becoming one of the Awakened - an elite group of people gifted with supernatural powers.",
     updatedAt: "12 hours ago",
@@ -142,7 +142,7 @@ export const mockNovels: Novel[] = [
     author: "Cuttlefish That Loves Diving",
     rating: 4.6,
     totalRatings: 528,
-    genres: ["Fantasy", "Mystery", "Supernatural"],
+    categories: ["Fantasy", "Mystery", "Supernatural"],
     description:
       "A mysterious world filled with Beyonders and extraordinary abilities. Follow the protagonist as they navigate through the intricate web of secrets and powers.",
     updatedAt: "3 days ago",
@@ -161,7 +161,7 @@ export const mockNovels: Novel[] = [
     author: "Ren Wo Xiao",
     rating: 4.5,
     totalRatings: 542,
-    genres: ["Fantasy", "Adventure", "Martial Arts"],
+    categories: ["Fantasy", "Adventure", "Martial Arts"],
     description:
       "Han Jue was transmigrated into a cultivation world with an almost omnipotent system. However, he quickly discovered that offending even a single person could lead to unimaginable consequences.",
     updatedAt: "5 days ago",
@@ -180,7 +180,7 @@ export const mockNovels: Novel[] = [
     author: "Victor_Weismann",
     rating: 4.1,
     totalRatings: 587,
-    genres: ["Fantasy", "Romance", "Supernatural", "Harem"],
+    categories: ["Fantasy", "Romance", "Supernatural", "Harem"],
     description:
       "Victor was a normal young man who was visiting a night club until it was attacked by vampires. When he wakes up, he finds himself in the house of a vampire ready to be sacrificed.",
     updatedAt: "1 day ago",
@@ -199,7 +199,7 @@ export const mockNovels: Novel[] = [
     author: "MyLittleBrother",
     rating: 3.6,
     totalRatings: 579,
-    genres: ["Fantasy", "Adventure", "Martial Arts", "Virtual Reality"],
+    categories: ["Fantasy", "Adventure", "Martial Arts", "Virtual Reality"],
     description:
       "Yuan was born with an incurable illness that left him blind at a young age and crippled a few years later, rendering everything below his head useless. Deemed hopeless and irredeemable, his parents abandoned him, and soon after, he lost his will to live.",
     updatedAt: "2 days ago",
@@ -245,8 +245,8 @@ export const recentUpdates = [
   },
 ];
 
-// Available genres for filtering
-export const availableGenres = [
+// Available categories for filtering
+export const availableCategories = [
   "Action",
   "Adventure",
   "Comedy",

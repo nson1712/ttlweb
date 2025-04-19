@@ -14,7 +14,7 @@ import {
   SelectValue,
 } from "../components/ui/select";
 import { Novel, FilterOptions } from "../lib/types";
-import { mockNovels, availableGenres, availableTags, languages } from "../lib/mock-data";
+import { mockNovels, availableCategories, availableTags, languages } from "../lib/mock-data";
 import { filterNovels, sortNovels } from "../lib/filter-utils";
 
 export default function NovelsPage() {
@@ -26,8 +26,8 @@ export default function NovelsPage() {
   
   // Filter state
   const [filterOptions, setFilterOptions] = useState<FilterOptions>({
-    genres: [],
-    excludedGenres: [],
+    categories: [],
+    excludedCategories: [],
     tags: [],
     excludedTags: [],
     searchTerm: "",
@@ -47,35 +47,35 @@ export default function NovelsPage() {
     setIsClient(true);
   }, []);
 
-  // Toggle genre selection
-  const toggleGenre = (genre: string) => {
+  // Toggle cateogies selection
+  const toggleCategories = (cate: string) => {
     setFilterOptions(prev => {
-      if (prev.genres.includes(genre)) {
+      if (prev.categories.includes(cate)) {
         return {
           ...prev,
-          genres: prev.genres.filter(g => g !== genre)
+          categories: prev.categories.filter(g => g !== cate)
         };
       } else {
         return {
           ...prev,
-          genres: [...prev.genres, genre]
+          categories: [...prev.categories, cate]
         };
       }
     });
   };
 
-  // Toggle excluded genre
-  const toggleExcludedGenre = (genre: string) => {
+  // Toggle excluded cate
+  const toggleExcludedCategories = (cate: string) => {
     setFilterOptions(prev => {
-      if (prev.excludedGenres.includes(genre)) {
+      if (prev.excludedCategories.includes(cate)) {
         return {
           ...prev,
-          excludedGenres: prev.excludedGenres.filter(g => g !== genre)
+          excludedCategories: prev.excludedCategories.filter(g => g !== cate)
         };
       } else {
         return {
           ...prev,
-          excludedGenres: [...prev.excludedGenres, genre]
+          excludedCategories: [...prev.excludedCategories, cate]
         };
       }
     });
@@ -235,8 +235,8 @@ export default function NovelsPage() {
   // Reset all filters
   const resetFilters = () => {
     setFilterOptions({
-      genres: [],
-      excludedGenres: [],
+      categories: [],
+      excludedCategories: [],
       tags: [],
       excludedTags: [],
       searchTerm: "",
@@ -260,11 +260,11 @@ export default function NovelsPage() {
       <div className="bg-gray-800 p-4 rounded-lg">
         <div className="flex flex-col md:flex-row gap-4 mb-4">
           <div className="flex-1">
-            <Label htmlFor="genres">Genres</Label>
+            <Label htmlFor="categories">Categories</Label>
             <Input 
-              id="genres" 
+              id="categories" 
               placeholder="Slice of Life, Drama etc..." 
-              value={filterOptions.genres.join(", ")}
+              value={filterOptions.categories.join(", ")}
               readOnly
               onClick={() => setShowAdvancedFilters(true)}
               className="bg-gray-700 text-white border-gray-600"
@@ -272,11 +272,11 @@ export default function NovelsPage() {
           </div>
           
           <div className="flex-1">
-            <Label htmlFor="exclude-genres">Exclude genres</Label>
+            <Label htmlFor="exclude-categories">Exclude Categories</Label>
             <Input 
-              id="exclude-genres" 
+              id="exclude-categories" 
               placeholder="Yaoi, Josei, Shounen Ai, Gender Bender etc..." 
-              value={filterOptions.excludedGenres.join(", ")}
+              value={filterOptions.excludedCategories.join(", ")}
               readOnly
               onClick={() => setShowAdvancedFilters(true)}
               className="bg-gray-700 text-white border-gray-600"
@@ -321,35 +321,35 @@ export default function NovelsPage() {
         {/* Advanced Filters */}
         {showAdvancedFilters && (
           <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Genres Section */}
+            {/* Categories Section */}
             <div>
-              <Label className="block mb-2">Genres</Label>
+              <Label className="block mb-2">Categories</Label>
               <div className="grid grid-cols-2 gap-2 mt-2 max-h-40 overflow-y-auto">
-                {availableGenres.map(genre => (
-                  <div key={genre} className="flex items-center space-x-2">
+                {availableCategories.map(cate => (
+                  <div key={cate} className="flex items-center space-x-2">
                     <Checkbox 
-                      id={`genre-${genre}`} 
-                      checked={filterOptions.genres.includes(genre)}
-                      onCheckedChange={() => toggleGenre(genre)}
+                      id={`cate-${cate}`} 
+                      checked={filterOptions.categories.includes(cate)}
+                      onCheckedChange={() => toggleCategories(cate)}
                     />
-                    <Label htmlFor={`genre-${genre}`} className="text-sm">{genre}</Label>
+                    <Label htmlFor={`cate-${cate}`} className="text-sm">{cate}</Label>
                   </div>
                 ))}
               </div>
             </div>
             
-            {/* Exclude Genres Section */}
+            {/* Exclude Categories Section */}
             <div>
-              <Label className="block mb-2">Exclude Genres</Label>
+              <Label className="block mb-2">Exclude Categories</Label>
               <div className="grid grid-cols-2 gap-2 mt-2 max-h-40 overflow-y-auto">
-                {availableGenres.map(genre => (
-                  <div key={`exclude-${genre}`} className="flex items-center space-x-2">
+                {availableCategories.map(cate => (
+                  <div key={`exclude-${cate}`} className="flex items-center space-x-2">
                     <Checkbox 
-                      id={`exclude-genre-${genre}`} 
-                      checked={filterOptions.excludedGenres.includes(genre)}
-                      onCheckedChange={() => toggleExcludedGenre(genre)}
+                      id={`exclude-cate-${cate}`}
+                      checked={filterOptions.excludedCategories.includes(cate)}
+                      onCheckedChange={() => toggleExcludedCategories(cate)}
                     />
-                    <Label htmlFor={`exclude-genre-${genre}`} className="text-sm">{genre}</Label>
+                    <Label htmlFor={`exclude-cate-${cate}`} className="text-sm">{cate}</Label>
                   </div>
                 ))}
               </div>

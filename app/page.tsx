@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 // import { useState } from "react";
 import {
@@ -9,6 +9,8 @@ import {
 } from "../app/components/ui/tabs";
 import { NovelCard } from "../app/components/novels/novel-card";
 import Image from "next/image";
+import Link from "next/link";
+// import { PaginationWithLinks } from "./components/components/pagination";
 
 // Mock data for featured novels
 const featuredNovels = [
@@ -21,7 +23,7 @@ const featuredNovels = [
     author: "Solver Keter",
     rating: 4.5,
     totalRatings: 11,
-    genres: ["Adventure", "Fantasy", "Action"],
+    categories: ["Adventure", "Fantasy", "Action"],
     description:
       'Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!... Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...',
     updatedAt: "8 hours ago",
@@ -36,7 +38,7 @@ const featuredNovels = [
     author: "Unknown Author",
     rating: 4.2,
     totalRatings: 21,
-    genres: [
+    categories: [
       "Adventure",
       "Fantasy",
       "Historical",
@@ -60,7 +62,7 @@ const featuredNovels = [
     author: "Unknown Author",
     rating: 4.7,
     totalRatings: 19,
-    genres: [
+    categories: [
       "Comedy",
       "Psychological",
       "Gender Bender",
@@ -83,7 +85,7 @@ const featuredNovels = [
     author: "Unknown Author",
     rating: 4.7,
     totalRatings: 19,
-    genres: [
+    categories: [
       "Comedy",
       "Psychological",
       "Gender Bender",
@@ -104,57 +106,57 @@ const bestNovels = [
   {
     id: "lord-mysteries",
     slug: "lord-mysteries",
-    title: "Lord of the Mysteries",
+    title: "Lord of the Mysteries á dá ac ác xzc sxc xzc sa zxc zxc á á",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
     author: "Cuttlefish That Loves Diving",
     rating: 4.7,
     totalRatings: 853,
-    genres: ["Fantasy", "Mystery", "Supernatural"],
+    categories: ["Fantasy", "Mystery", "Supernatural"],
   },
   {
     id: "legendary-mechanic",
     slug: "legendary-mechanic",
     title: "The Legendary Mechanic",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
     author: "Chocolion",
     rating: 4.7,
     totalRatings: 712,
-    genres: ["Sci-Fi", "Adventure", "Fantasy"],
+    categories: ["Sci-Fi", "Adventure", "Fantasy"],
   },
   {
     id: "shadow-slave",
     slug: "shadow-slave",
     title: "Shadow Slave",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
     author: "Guiltythree",
     rating: 4.1,
     totalRatings: 769,
-    genres: ["Fantasy", "Action", "Adventure"],
+    categories: ["Fantasy", "Action", "Adventure"],
   },
   {
     id: "circle-inevitability",
     slug: "circle-inevitability",
     title: "Circle of Inevitability",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
     author: "Cuttlefish That Loves Diving",
     rating: 4.6,
     totalRatings: 528,
-    genres: ["Fantasy", "Mystery", "Supernatural"],
+    categories: ["Fantasy", "Mystery", "Supernatural"],
   },
   {
     id: "circle-inevitability 2",
     slug: "circle-inevitability 2",
     title: "Circle of Inevitability",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
     author: "Cuttlefish That Loves Diving",
     rating: 4.6,
     totalRatings: 528,
-    genres: ["Fantasy", "Mystery", "Supernatural"],
+    categories: ["Fantasy", "Mystery", "Supernatural"],
   },
 ];
 
@@ -163,6 +165,8 @@ const recentUpdates = [
   {
     id: "lord-void",
     slug: "lord-void",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
     title: "The Lord of Void and Real",
     chapter: "Chapter 319: Three Stars Demolishing Demons",
     updatedAt: "9 minutes ago",
@@ -170,6 +174,8 @@ const recentUpdates = [
   {
     id: "beast-taming",
     slug: "beast-taming",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
     title: "Beast Taming Patrol",
     chapter: "Chapter 674: Youyou Advances!",
     updatedAt: "14 minutes ago",
@@ -177,6 +183,8 @@ const recentUpdates = [
   {
     id: "disciple-simulator",
     slug: "disciple-simulator",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
     title: "I Have A Disciple Simulator",
     chapter: "Chapter 911: The Humble Hallucinatory Dark Demon Venerable!",
     updatedAt: "14 minutes ago",
@@ -184,6 +192,8 @@ const recentUpdates = [
   {
     id: "grinding-experience",
     slug: "grinding-experience",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
     title: "I Am Grinding Experience In Another World",
     chapter: "Chapter 671: Return to Qingqiu",
     updatedAt: "15 minutes ago",
@@ -191,39 +201,91 @@ const recentUpdates = [
   {
     id: "reversing-life",
     slug: "reversing-life",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
     title: "Reversing Life With Item Copy",
     chapter: "Chapter 128: Not Quite Yet",
     updatedAt: "16 minutes ago",
   },
 ];
 
-export default function HomePage() {
+export default function HomePage(
+//   {
+//   searchParams,
+// }: {
+//   searchParams: { [key: string]: string | string[] | undefined };
+// }
+) {
   // const [activeTab, setActiveTab] = useState("best-novels");
+  // const page = parseInt(
+  //   Array.isArray(searchParams.page)
+  //     ? searchParams.page[0]
+  //     : searchParams.page ?? "1",
+  //   10
+  // );
+  // const pageSize = parseInt(
+  //   Array.isArray(searchParams.pageSize)
+  //     ? searchParams.pageSize[0]
+  //     : searchParams.pageSize ?? "20",
+  //   10
+  // );
 
   return (
     <div className="space-y-8">
       {/* Featured Novels Section */}
       <section className="md:flex gap-x-4 space-y-4 md:space-y-0">
-        
         <div>
-        <section>
+          <section>
             <h2 className="flex items-center justify-center bg-gray-800 py-4 mb-4">
               <div className="flex items-center w-full max-w-screen-md px-4">
-                <div className="flex-grow border-t border-gray-500"></div>
+                <div className="flex-grow h-0.5 bg-gradient-to-l from-green-300 to-transparent"></div>
                 <span className="mx-4 text-sm font-semibold text-gray-300">
                   UPDATE TAPE
                 </span>
-                <div className="flex-grow border-t border-gray-500"></div>
+                <div className="flex-grow h-0.5 bg-gradient-to-r from-green-300 to-transparent"></div>
               </div>
             </h2>
             <div className="space-y-4">
               {recentUpdates.map((update) => (
-                <div key={update.id} className="bg-gray-800 p-3 rounded-lg">
-                  <h3 className="font-medium text-blue-400">{update.title}</h3>
-                  <p className="text-sm text-gray-300">{update.chapter}</p>
-                  <p className="text-xs text-gray-500">{update.updatedAt}</p>
-                </div>
+                <Link href={`/novels/${update.slug}`} key={update.id}>
+                  <div
+                    key={update.id}
+                    className="bg-gray-800 p-3 rounded-lg hover:scale-102 transition-transform duration-200 mb-2 flex gap-x-4"
+                  >
+                    <Image
+                      src={update.coverImage}
+                      alt={update.title}
+                      className="object-cover rounded-md"
+                      width={50}
+                      height={64}
+                    />
+
+                    <div>
+                      <h3 className="font-medium text-blue-400">
+                        {update.title}
+                      </h3>
+                      <p className="text-sm text-gray-300 line-clamp-1">
+                        {update.chapter}
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        {update.updatedAt}
+                      </p>
+                    </div>
+                  </div>
+                </Link>
               ))}
+
+              {/* <PaginationWithLinks
+                pageSearchParam="page"
+                pageSizeSelectOptions={{
+                  pageSizeSearchParam: "size",
+                  pageSizeOptions: [10, 20, 50, 100],
+                }}
+                page={page}
+                pageSize={pageSize}
+                totalCount={300}
+              /> */}
+
             </div>
           </section>
           <h2 className="text-2xl font-bold my-4">Featured Novels</h2>
@@ -232,8 +294,6 @@ export default function HomePage() {
               <NovelCard key={novel.id} {...novel} />
             ))}
           </div>
-          
-          
         </div>
 
         <Tabs defaultValue="best-novels" className="w-full">
@@ -248,17 +308,19 @@ export default function HomePage() {
             {bestNovels.map((novel) => (
               <div
                 key={novel.id}
-                className="flex items-center gap-4 bg-gray-800 p-3 rounded-lg"
+                className="flex items-center gap-4 bg-gray-800 p-3 rounded-lg min-w-72 hover:scale-102 transition-transform duration-200"
               >
                 <Image
                   src={novel.coverImage}
                   alt={novel.title}
                   className="object-cover rounded-md"
-                  width={64}
-                  height={64}
+                  width={50}
+                  height={50}
                 />
                 <div className="flex-1">
-                  <h3 className="font-medium text-blue-400">{novel.title}</h3>
+                  <h3 className="font-medium text-blue-400 line-clamp-2">
+                    {novel.title}
+                  </h3>
                   <p className="text-sm text-gray-400">{novel.author}</p>
                   <p className="text-xs text-gray-500">
                     Rating: {novel.rating.toFixed(1)} / 5 from{" "}
@@ -277,57 +339,6 @@ export default function HomePage() {
           </TabsContent>
         </Tabs>
       </section>
-
-      {/* Best Novels / Most Discussed Tabs */}
-      <section>
-        {/*<Tabs defaultValue="best-novels" className="w-full">
-          <div className="flex justify-between items-center mb-4">
-            <TabsList>
-              <TabsTrigger value="best-novels">Best novels</TabsTrigger>
-              <TabsTrigger value="most-discussed">Most Discussed</TabsTrigger>
-            </TabsList>
-          </div>
-          
-          <TabsContent value="best-novels" className="space-y-4">
-            {bestNovels.map((novel) => (
-              <div key={novel.id} className="flex items-center gap-4 bg-gray-800 p-3 rounded-lg">
-                <Image
-                  src={novel.coverImage}
-                  alt={novel.title}
-                  className="object-cover rounded-md"
-                  width={64}
-                  height={64}
-                />
-                <div className="flex-1">
-                  <h3 className="font-medium text-blue-400">{novel.title}</h3>
-                  <p className="text-sm text-gray-400">{novel.author}</p>
-                  <p className="text-xs text-gray-500">
-                    Rating: {novel.rating.toFixed(1)} / 5 from {novel.totalRatings} ratings
-                  </p>
-                </div>
-              </div>
-            ))}
-          </TabsContent>
-          
-          <TabsContent value="most-discussed" className="space-y-4">
-            <p className="text-gray-400">Most discussed novels would appear here.</p>
-          </TabsContent>
-        </Tabs> */}
-      </section>
-
-      {/* Update Tape Section */}
-      {/* <section>
-        <h2 className="text-2xl font-bold mb-4 text-center">UPDATE TAPE</h2>
-        <div className="space-y-4">
-          {recentUpdates.map((update) => (
-            <div key={update.id} className="bg-gray-800 p-3 rounded-lg">
-              <h3 className="font-medium text-blue-400">{update.title}</h3>
-              <p className="text-sm text-gray-300">{update.chapter}</p>
-              <p className="text-xs text-gray-500">{update.updatedAt}</p>
-            </div>
-          ))}
-        </div>
-      </section> */}
     </div>
   );
 }
