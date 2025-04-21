@@ -24,3 +24,33 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.account-container {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  min-height: 100vh;
+  color: white;
+}
+
+.account-card {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.positive-badge {
+  background-color: rgba(74, 222, 128, 0.2);
+  color: #4ade80;
+  border: none;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.4rem;
+  margin-left: 0.25rem;
+  border-radius: 4px;
+}
+
+.match-victory {
+  border-left: 4px solid #4ade80;
+}
+
+.match-defeat {
+  border-left: 4px solid #f87171;
+}

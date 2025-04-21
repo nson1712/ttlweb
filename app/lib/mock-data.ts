@@ -1,6 +1,44 @@
 // Mock data for the application
 import { Novel } from "./types";
 
+import { Champion, Region, Story } from './types'
+
+export const champions: Champion[] = [
+  {
+    id: 'ahri',
+    name: 'Ahri',
+    title: 'the Nine-Tailed Fox',
+    region: 'Ionia',
+    description: 'Innately connected to the magic of the spirit realm...',
+    image: '/champions/ahri.jpg',
+    tags: ['Mage', 'Assassin'],
+  },
+  // Add more champions...
+]
+
+export const regions: Region[] = [
+  {
+    id: 'demacia',
+    name: 'Demacia',
+    description: 'A strong, lawful kingdom with a prestigious military history...',
+    image: '/regions/demacia.jpg',
+    bannerImage: '/regions/demacia-banner.jpg',
+  },
+  // Add more regions...
+]
+
+export const stories: Story[] = [
+  {
+    id: 'the-ruined-king',
+    title: 'The Ruined King',
+    description: 'The tragic tale of the Ruined King and his doomed kingdom...',
+    image: '/stories/ruined-king.jpg',
+    date: '2023-05-15',
+    author: 'Riot Games',
+  },
+  // Add more stories...
+]
+
 export const mockNovels: Novel[] = [
   {
     id: "1",

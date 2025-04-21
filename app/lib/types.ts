@@ -50,3 +50,30 @@ export interface FilterOptions {
   excludedTranslators?: string[];
   sortBy: string;
 }
+
+export interface Champion {
+  id: string
+  name: string
+  title: string
+  region: string
+  description: string
+  image: string
+  tags: string[]
+}
+
+export interface Region {
+  id: string
+  name: string
+  description: string
+  image: string
+  bannerImage: string
+}
+
+export interface Story {
+  id: string
+  title: string
+  description: string
+  image: string
+  date: string
+  author: string
+}
