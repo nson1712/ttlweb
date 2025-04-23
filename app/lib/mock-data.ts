@@ -252,31 +252,46 @@ export const mockNovels: Novel[] = [
 // Recent updates for the update tape
 export const recentUpdates = [
   {
+    id: "lord-void",
     slug: "lord-void",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
     title: "The Lord of Void and Real",
     chapter: "Chapter 319: Three Stars Demolishing Demons",
     updatedAt: "9 minutes ago",
   },
   {
+    id: "beast-taming",
     slug: "beast-taming",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
     title: "Beast Taming Patrol",
     chapter: "Chapter 674: Youyou Advances!",
     updatedAt: "14 minutes ago",
   },
   {
+    id: "disciple-simulator",
     slug: "disciple-simulator",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
     title: "I Have A Disciple Simulator",
     chapter: "Chapter 911: The Humble Hallucinatory Dark Demon Venerable!",
     updatedAt: "14 minutes ago",
   },
   {
+    id: "grinding-experience",
     slug: "grinding-experience",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
     title: "I Am Grinding Experience In Another World",
     chapter: "Chapter 671: Return to Qingqiu",
     updatedAt: "15 minutes ago",
   },
   {
+    id: "reversing-life",
     slug: "reversing-life",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
     title: "Reversing Life With Item Copy",
     chapter: "Chapter 128: Not Quite Yet",
     updatedAt: "16 minutes ago",

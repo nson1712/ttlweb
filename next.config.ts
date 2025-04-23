@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
         hostname: "png.pngtree.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "static.bigbrain.gg",
+        pathname: "/**",
+      },
     ],
   },
 };
