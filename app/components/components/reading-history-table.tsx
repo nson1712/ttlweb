@@ -79,7 +79,7 @@ export default function ReadingHistoryTable() {
       case 'in-progress':
         return (
           <div className="flex items-center">
-            <div className="bg-blue-900/50 p-1 rounded-full mr-2 border border-blue-700">
+            <div className="bg-emerald-900/50 p-1 rounded-full mr-2 border border-blue-700">
               <Clock size={14} className="text-blue-400" />
             </div>
             <span className="text-blue-400">{progress}% Read</span>
@@ -88,10 +88,10 @@ export default function ReadingHistoryTable() {
       case 'bookmarked':
         return (
           <div className="flex items-center">
-            <div className="bg-indigo-900/50 p-1 rounded-full mr-2 border border-indigo-700">
-              <BookOpen size={14} className="text-indigo-400" />
+            <div className="bg-emerald-900/50 p-1 rounded-full mr-2 border border-emerald-700">
+              <BookOpen size={14} className="text-emerald-400" />
             </div>
-            <span className="text-indigo-400">Bookmarked</span>
+            <span className="text-emerald-400">Bookmarked</span>
           </div>
         );
       default:
@@ -107,7 +107,7 @@ export default function ReadingHistoryTable() {
       <div className="relative bg-majestic-card rounded-xl border border-gray-800 overflow-hidden transition-all duration-300 hover:border-gray-700">
         {/* Tabs Navigation */}
         <div className="flex border-b border-gray-800">
-          <button className="px-6 py-3 text-white font-medium border-b-2 border-blue-500 bg-gradient-to-b from-blue-500/10 to-transparent">
+          <button className="px-6 py-3 text-white font-medium border-b-2 border-emerald-500 bg-gradient-to-b from-emerald-500/10 to-transparent">
             Reading History
           </button>
           <button className="px-6 py-3 text-gray-400 hover:text-white transition-colors">
@@ -131,12 +131,12 @@ export default function ReadingHistoryTable() {
               key={item.id} 
               className="grid grid-cols-4 p-4 gap-x-2 text-white hover:bg-gray-800/50 transition-colors duration-200"
             >
-              <div className="font-medium text-blue-400 line-clamp-2">{item.novel}</div>
+              <div className="font-medium text-emerald-400 line-clamp-2">{item.novel}</div>
               <div className="text-gray-300 line-clamp-2">{item.chapter}</div>
               <div className="flex items-center">
                 <div className="w-16 h-2 bg-gray-800 rounded-full mr-2 overflow-hidden">
                   <div 
-                    className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full"
+                    className="h-full bg-gradient-to-r from-emerald-500 to-emerald-500 rounded-full"
                     style={{ width: `${item.progress}%` }}
                   ></div>
                 </div>

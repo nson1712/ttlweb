@@ -21,7 +21,7 @@ export default function ReaderCommunityChat() {
       user: {
         name: 'Marcus Reid',
         avatar: '/reader-avatar-2.jpg',
-        badge: { text: 'VIP', color: 'bg-purple-500' }
+        badge: { text: 'VIP', color: 'bg-emerald-500' }
       },
       message: 'Has anyone started reading "Eternal Flames"? I heard the worldbuilding is amazing.',
       time: '15:25'
@@ -31,7 +31,7 @@ export default function ReaderCommunityChat() {
       user: {
         name: 'Sophia Chen',
         avatar: '/reader-avatar-3.jpg',
-        badge: { text: 'AUTHOR', color: 'bg-indigo-500' }
+        badge: { text: 'AUTHOR', color: 'bg-emerald-500' }
       },
       message: 'Thank you all for the support on my new chapter! More coming this weekend.',
       time: '15:21'
@@ -71,7 +71,7 @@ export default function ReaderCommunityChat() {
       user: {
         name: 'Alex',
         avatar: '/reader-avatar.jpg',
-        badge: { text: 'PREMIUM', color: 'bg-purple-500' }
+        badge: { text: 'PREMIUM', color: 'bg-emerald-500' }
       },
       message: '',
       time: '15:08'
@@ -84,7 +84,7 @@ export default function ReaderCommunityChat() {
       <div className="p-4 border-b border-gray-800 bg-gradient-to-r from-gray-900 to-gray-800">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <MessageCircle size={18} className="text-purple-500 mr-2" />
+            <MessageCircle size={18} className="text-emerald-500 mr-2" />
             <h3 className="text-white font-medium">Reader Community</h3>
           </div>
           <div className="bg-gray-700 px-2 py-0.5 rounded text-xs text-gray-300">
@@ -96,7 +96,7 @@ export default function ReaderCommunityChat() {
       {/* Community Channels */}
       <div className="px-4 py-2 border-b border-gray-800 bg-gray-900/50">
         <div className="flex space-x-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
-          <button className="bg-purple-500/20 text-purple-400 text-xs px-3 py-1 rounded-full whitespace-nowrap border border-purple-500/30">
+          <button className="bg-emerald-500/20 text-emerald-400 text-xs px-3 py-1 rounded-full whitespace-nowrap border border-emerald-500/30">
             General
           </button>
           <button className="bg-gray-800 text-gray-400 hover:text-white text-xs px-3 py-1 rounded-full whitespace-nowrap border border-gray-700 hover:border-gray-600 transition-colors">
@@ -138,7 +138,7 @@ export default function ReaderCommunityChat() {
             
             <div className="flex-1">
               <div className="flex items-center mb-1">
-                <span className="text-white font-medium mr-2 group-hover:text-purple-500 transition-colors">{chat.user.name}</span>
+                <span className="text-white font-medium mr-2 group-hover:text-emerald-500 transition-colors">{chat.user.name}</span>
                 <span className={`${chat.user.badge.color} text-black text-xs px-1.5 py-0.5 rounded`}>
                   {chat.user.badge.text}
                 </span>
@@ -178,7 +178,7 @@ export default function ReaderCommunityChat() {
             </div>
             <p className="text-gray-400 text-xs">Share your thoughts on this trending novel!</p>
           </div>
-          <button className="bg-purple-500 hover:bg-purple-600 text-white text-xs px-2 py-1 rounded transition-colors">
+          <button className="bg-emerald-500 hover:bg-emerald-600 text-white text-xs px-2 py-1 rounded transition-colors">
             Share
           </button>
         </div>
@@ -190,7 +190,7 @@ export default function ReaderCommunityChat() {
           <input 
             type="text" 
             placeholder="Share your thoughts on books..." 
-            className="w-full bg-gray-800 border border-gray-700 rounded-full py-2 pl-4 pr-12 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500/30 transition-all"
+            className="w-full bg-gray-800 border border-gray-700 rounded-full py-2 pl-4 pr-12 text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/30 transition-all"
           />
           
           <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center space-x-1">
@@ -200,7 +200,7 @@ export default function ReaderCommunityChat() {
             <button className="text-gray-400 hover:text-gray-300 transition-colors p-1">
               <BookOpen size={16} />
             </button>
-            <button className="bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white rounded-full p-1.5 transition-colors transform hover:scale-105">
+            <button className="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white rounded-full p-1.5 transition-colors transform hover:scale-105">
               <Send size={14} />
             </button>
           </div>
@@ -223,8 +223,8 @@ export default function ReaderCommunityChat() {
       </div>
       
       {/* Decorative elements */}
-      <div className="absolute top-0 right-0 h-40 w-40 bg-gradient-to-br from-purple-500/5 to-indigo-600/5 rounded-full blur-xl"></div>
-      <div className="absolute bottom-0 left-0 h-40 w-40 bg-gradient-to-br from-purple-500/5 to-indigo-600/5 rounded-full blur-xl"></div>
+      <div className="absolute top-0 right-0 h-40 w-40 bg-gradient-to-br from-emerald-500/5 to-emerald-600/5 rounded-full blur-xl"></div>
+      <div className="absolute bottom-0 left-0 h-40 w-40 bg-gradient-to-br from-emerald-500/5 to-emerald-600/5 rounded-full blur-xl"></div>
     </div>
   );
 }
