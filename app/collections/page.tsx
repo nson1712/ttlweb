@@ -172,9 +172,9 @@ export default function CollectionsPage() {
               <button
                 onClick={() => setViewMode("grid")}
                 className={cn(
-                  "flex items-center gap-2 px-4 py-2 transition-colors",
+                  "flex items-center gap-2 px-4 py-2 transition-colors rounded-l-lg",
                   viewMode === "grid"
-                    ? "bg-emerald-500 text-white"
+                    ? "bg-gradient-to-r from-emerald-400 to-teal-500 text-white"
                     : "text-gray-300 hover:bg-gray-700"
                 )}
               >
@@ -184,9 +184,9 @@ export default function CollectionsPage() {
               <button
                 onClick={() => setViewMode("list")}
                 className={cn(
-                  "flex items-center gap-2 px-4 py-2 transition-colors",
+                  "flex items-center gap-2 px-4 py-2 transition-colors rounded-r-lg",
                   viewMode === "list"
-                    ? "bg-emerald-500 text-white"
+                    ? "bg-gradient-to-r from-emerald-400 to-teal-500 text-white"
                     : "text-gray-300 hover:bg-gray-700"
                 )}
               >
@@ -312,7 +312,7 @@ export default function CollectionsPage() {
                 ))}
               </div>
             ) : (
-              <div className="space-y-4">
+              <div className="flex flex-col gap-y-2">
                 {sortedCollections.map((collection) => (
                   <CollectionListItem
                     key={collection.id}

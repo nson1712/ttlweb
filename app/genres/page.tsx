@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Search, Filter, Grid, List, ChevronDown, X, BookOpen } from "lucide-react";
-import { cn } from "../../lib/utils";
+import { cn } from "../lib/utils";
 
 // Genre type definition
 interface Genre {
@@ -25,16 +25,16 @@ export default function GenreCatalogPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [showFilters, setShowFilters] = useState(false);
-  
+
   // Filter genres based on search query and category
   const filteredGenres = genres.filter(genre => {
-    const matchesSearch = genre.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    const matchesSearch = genre.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          genre.description.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory === "all" || genre.category.toLowerCase() === selectedCategory.toLowerCase();
-    
+
     return matchesSearch && matchesCategory;
   });
-  
+
   // Group genres by category for the list view
   const genresByCategory = filteredGenres.reduce((acc, genre) => {
     if (!acc[genre.category]) {
@@ -43,15 +43,15 @@ export default function GenreCatalogPage() {
     acc[genre.category].push(genre);
     return acc;
   }, {} as Record<string, Genre[]>);
-  
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-950">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         {/* Hero Section */}
         <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-gray-800 to-gray-900 p-8 mb-8">
           <div className="absolute inset-0 opacity-20">
-            <Image 
-              src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" 
+            <Image
+              src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
               alt="Books background"
               fill
               className="object-cover"
@@ -60,12 +60,12 @@ export default function GenreCatalogPage() {
           <div className="relative z-10">
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">Genre Catalog</h1>
             <p className="text-gray-300 max-w-2xl">
-              Explore our extensive collection of novels across various genres, themes, settings, and origins. 
+              Explore our extensive collection of novels across various genres, themes, settings, and origins.
               Find your next favorite read by browsing categories that match your interests.
             </p>
           </div>
         </div>
-        
+
         {/* Search and Filters */}
         <div className="mb-8 space-y-4">
           <div className="flex flex-col gap-4 sm:flex-row">
@@ -82,7 +82,7 @@ export default function GenreCatalogPage() {
                 className="w-full rounded-lg border border-gray-700 bg-gray-800 py-2 pl-10 pr-4 text-white placeholder-gray-400 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
               />
             </div>
-            
+
             {/* Filter Toggle */}
             <button
               onClick={() => setShowFilters(!showFilters)}
@@ -95,15 +95,15 @@ export default function GenreCatalogPage() {
                 showFilters && "rotate-180"
               )} />
             </button>
-            
+
             {/* View Mode Toggle */}
             <div className="flex rounded-lg border border-gray-700 bg-gray-800">
               <button
                 onClick={() => setViewMode("grid")}
                 className={cn(
                   "flex items-center gap-2 px-4 py-2 transition-colors",
-                  viewMode === "grid" 
-                    ? "bg-emerald-500 text-white" 
+                  viewMode === "grid"
+                    ? "bg-emerald-500 text-white"
                     : "text-gray-300 hover:bg-gray-700"
                 )}
               >
@@ -114,8 +114,8 @@ export default function GenreCatalogPage() {
                 onClick={() => setViewMode("list")}
                 className={cn(
                   "flex items-center gap-2 px-4 py-2 transition-colors",
-                  viewMode === "list" 
-                    ? "bg-emerald-500 text-white" 
+                  viewMode === "list"
+                    ? "bg-emerald-500 text-white"
                     : "text-gray-300 hover:bg-gray-700"
                 )}
               >
@@ -124,7 +124,7 @@ export default function GenreCatalogPage() {
               </button>
             </div>
           </div>
-          
+
           {/* Expanded Filters */}
           {showFilters && (
             <div className="rounded-lg border border-gray-700 bg-gray-800 p-4">
@@ -188,7 +188,7 @@ export default function GenreCatalogPage() {
             </div>
           )}
         </div>
-        
+
         {/* Popular Genres Section */}
         {searchQuery === "" && selectedCategory === "all" && (
           <div className="mb-12">
@@ -202,14 +202,14 @@ export default function GenreCatalogPage() {
             </div>
           </div>
         )}
-        
+
         {/* All Genres Section */}
         {viewMode === "grid" ? (
           <>
             <h2 className="text-2xl font-bold text-white mb-6">
               {searchQuery ? "Search Results" : selectedCategory !== "all" ? `${selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)} Categories` : "All Genres"}
             </h2>
-            
+
             {filteredGenres.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 {filteredGenres.map(genre => (
@@ -223,7 +223,7 @@ export default function GenreCatalogPage() {
                 </div>
                 <h3 className="text-xl font-medium text-white">No genres found</h3>
                 <p className="mt-2 text-gray-400 max-w-md">
-                  We couldn't find any genres matching your search criteria. Try adjusting your filters or search term.
+                  We couldn&#39;t find any genres matching your search criteria. Try adjusting your filters or search term.
                 </p>
                 <button
                   onClick={() => {
@@ -243,7 +243,7 @@ export default function GenreCatalogPage() {
             <h2 className="text-2xl font-bold text-white mb-6">
               {searchQuery ? "Search Results" : selectedCategory !== "all" ? `${selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)} Categories` : "All Genres"}
             </h2>
-            
+
             {Object.keys(genresByCategory).length > 0 ? (
               <div className="space-y-8">
                 {Object.entries(genresByCategory).map(([category, categoryGenres]) => (
@@ -289,7 +289,7 @@ export default function GenreCatalogPage() {
                 </div>
                 <h3 className="text-xl font-medium text-white">No genres found</h3>
                 <p className="mt-2 text-gray-400 max-w-md">
-                  We couldn't find any genres matching your search criteria. Try adjusting your filters or search term.
+                  We couldn&#39;t find any genres matching your search criteria. Try adjusting your filters or search term.
                 </p>
                 <button
                   onClick={() => {
@@ -319,8 +319,8 @@ function GenreCard({ genre }: { genre: Genre }) {
         className="relative overflow-hidden rounded-xl bg-gray-800 h-full"
       >
         <div className="absolute inset-0 opacity-30">
-          <Image 
-            src={genre.image} 
+          <Image
+            src={genre.image}
             alt={genre.name}
             fill
             className="object-cover"
