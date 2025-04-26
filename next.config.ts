@@ -4,15 +4,9 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'ranobes.top',
-        pathname: '/**',
-      },
-      {
         protocol: "https",
-        hostname: "png.pngtree.com",
-        pathname: "/**",
-      },
+        hostname: "**",
+      }
     ],
   },
 };

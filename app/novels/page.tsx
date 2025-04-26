@@ -323,12 +323,13 @@ export default function NovelsPage() {
           <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Categories Section */}
             <div>
-              <Label className="block mb-2">Categories</Label>
+              <Label className="block mb-2 text-purple-400">Categories</Label>
               <div className="grid grid-cols-2 gap-2 mt-2 max-h-40 overflow-y-auto">
                 {availableCategories.map(cate => (
                   <div key={cate} className="flex items-center space-x-2">
                     <Checkbox 
                       id={`cate-${cate}`} 
+                      className="cursor-pointer border-gray-600 data-[state=checked]:bg-purple-600 data-[state=checked]:border-purple-600"
                       checked={filterOptions.categories.includes(cate)}
                       onCheckedChange={() => toggleCategories(cate)}
                     />
@@ -340,12 +341,13 @@ export default function NovelsPage() {
             
             {/* Exclude Categories Section */}
             <div>
-              <Label className="block mb-2">Exclude Categories</Label>
+              <Label className="block mb-2 text-red-400">Exclude Categories</Label>
               <div className="grid grid-cols-2 gap-2 mt-2 max-h-40 overflow-y-auto">
                 {availableCategories.map(cate => (
                   <div key={`exclude-${cate}`} className="flex items-center space-x-2">
                     <Checkbox 
                       id={`exclude-cate-${cate}`}
+                      className="cursor-pointer border-gray-600 data-[state=checked]:bg-red-600 data-[state=checked]:border-red-600"
                       checked={filterOptions.excludedCategories.includes(cate)}
                       onCheckedChange={() => toggleExcludedCategories(cate)}
                     />
@@ -357,12 +359,13 @@ export default function NovelsPage() {
             
             {/* Tags Section */}
             <div>
-              <Label className="block mb-2">Tags (events)</Label>
+              <Label className="block mb-2 text-blue-400">Tags (events)</Label>
               <div className="grid grid-cols-2 gap-2 mt-2 max-h-40 overflow-y-auto">
                 {availableTags.map(tag => (
                   <div key={tag} className="flex items-center space-x-2">
                     <Checkbox 
-                      id={`tag-${tag}`} 
+                      id={`tag-${tag}`}
+                      className="cursor-pointer border-gray-600 data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
                       checked={filterOptions.tags.includes(tag)}
                       onCheckedChange={() => toggleTag(tag)}
                     />
@@ -374,12 +377,13 @@ export default function NovelsPage() {
             
             {/* Exclude Tags Section */}
             <div>
-              <Label className="block mb-2">Exclude tags</Label>
+              <Label className="block mb-2 text-orange-400">Exclude tags</Label>
               <div className="grid grid-cols-2 gap-2 mt-2 max-h-40 overflow-y-auto">
                 {availableTags.map(tag => (
                   <div key={`exclude-${tag}`} className="flex items-center space-x-2">
                     <Checkbox 
-                      id={`exclude-tag-${tag}`} 
+                      id={`exclude-tag-${tag}`}
+                      className="cursor-pointer border-gray-600 data-[state=checked]:bg-orange-600 data-[state=checked]:border-orange-600"
                       checked={filterOptions.excludedTags.includes(tag)}
                       onCheckedChange={() => toggleExcludedTag(tag)}
                     />
@@ -391,7 +395,7 @@ export default function NovelsPage() {
             
             {/* Sort Results */}
             <div>
-              <Label htmlFor="sort">Sort results</Label>
+              <Label htmlFor="sort" className="text-indigo-400">Sort results</Label>
               <Select 
                 value={filterOptions.sortBy} 
                 onValueChange={handleSortChange}
@@ -412,7 +416,7 @@ export default function NovelsPage() {
             {/* Year Range */}
             <div className="flex gap-4">
               <div className="flex-1">
-                <Label htmlFor="year-from">Year of release from</Label>
+                <Label htmlFor="year-from" className="text-green-400">Year of release from</Label>
                 <Input 
                   id="year-from" 
                   placeholder="1990" 
@@ -423,7 +427,7 @@ export default function NovelsPage() {
                 />
               </div>
               <div className="flex-1">
-                <Label htmlFor="year-to">Year of release up to</Label>
+                <Label htmlFor="year-to" className="text-cyan-400">Year of release up to</Label>
                 <Input 
                   id="year-to" 
                   placeholder="2022" 
@@ -437,12 +441,13 @@ export default function NovelsPage() {
             
             {/* Languages */}
             <div>
-              <Label className="block mb-2">Languages</Label>
+              <Label className="block mb-2 text-lime-400">Languages</Label>
               <div className="grid grid-cols-2 gap-2">
                 {languages.map(language => (
                   <div key={language} className="flex items-center space-x-2">
                     <Checkbox 
-                      id={`lang-${language}`} 
+                      id={`lang-${language}`}
+                      className="cursor-pointer border-gray-600 data-[state=checked]:bg-lime-600 data-[state=checked]:border-lime-600"
                       checked={filterOptions.languages.includes(language)}
                       onCheckedChange={() => toggleLanguage(language)}
                     />
@@ -454,12 +459,13 @@ export default function NovelsPage() {
             
             {/* Exclude Languages */}
             <div>
-              <Label className="block mb-2">Exclude languages</Label>
+              <Label className="block mb-2 text-pink-400">Exclude languages</Label>
               <div className="grid grid-cols-2 gap-2">
                 {languages.map(language => (
                   <div key={`exclude-${language}`} className="flex items-center space-x-2">
                     <Checkbox 
-                      id={`exclude-lang-${language}`} 
+                      id={`exclude-lang-${language}`}
+                      className="cursor-pointer border-gray-600 data-[state=checked]:bg-pink-600 data-[state=checked]:border-pink-600"
                       checked={filterOptions.excludedLanguages.includes(language)}
                       onCheckedChange={() => toggleExcludedLanguage(language)}
                     />

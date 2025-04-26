@@ -1,6 +1,4 @@
-// "use client";
-
-// import { useState } from "react";
+"use client";
 import {
   Tabs,
   TabsContent,
@@ -9,8 +7,17 @@ import {
 } from "../app/components/ui/tabs";
 import { NovelCard } from "../app/components/novels/novel-card";
 import Image from "next/image";
+import { UpdateCard } from "./components/novels/update-card";
+import { AnimatePresence, motion } from "framer-motion";
+import { WeeklyFeaturedBook } from "./components/components/weekly-feature-books";
+import { CategoriesTagsSection } from "./components/components/categories-tags-section";
+import { PotentialStarletSection } from "./components/components/potential-starlet-section";
+import { RankingSection } from "./components/components/ranking-section";
+import { Eye, Sparkles } from "lucide-react";
 import Link from "next/link";
-// import { PaginationWithLinks } from "./components/components/pagination";
+import { useState } from "react";
+import { chapterPreviews } from "./lib/mock-data";
+import { ChapterPreview } from "./components/components/chapter-preview";
 
 // Mock data for featured novels
 const featuredNovels = [
@@ -209,29 +216,45 @@ const recentUpdates = [
   },
 ];
 
-export default function HomePage(
-//   {
-//   searchParams,
-// }: {
-//   searchParams: { [key: string]: string | string[] | undefined };
-// }
-) {
-  // const [activeTab, setActiveTab] = useState("best-novels");
-  // const page = parseInt(
-  //   Array.isArray(searchParams.page)
-  //     ? searchParams.page[0]
-  //     : searchParams.page ?? "1",
-  //   10
-  // );
-  // const pageSize = parseInt(
-  //   Array.isArray(searchParams.pageSize)
-  //     ? searchParams.pageSize[0]
-  //     : searchParams.pageSize ?? "20",
-  //   10
-  // );
+export default function HomePage() {
+  const [previewChapter, setPreviewChapter] = useState<string | null>(null);
+
+  const getChapterPreviewData = (chapterId: string) => {
+    return chapterPreviews.find((preview) => preview.id === chapterId) || null;
+  };
+
+  const selectedChapterPreview = previewChapter
+    ? getChapterPreviewData(previewChapter)
+    : null;
 
   return (
     <div className="space-y-8">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="mb-12 text-center"
+      >
+        <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl">
+          <span className="block">Discover Your Next</span>
+          <span className="block bg-gradient-to-r from-emerald-400 to-teal-500 bg-clip-text text-transparent">
+            Reading Adventure
+          </span>
+        </h1>
+        <p className="mx-auto mt-4 max-w-2xl text-xl text-gray-400">
+          Explore thousands of novels across all your favorite genres
+        </p>
+      </motion.div>
+
+      {/* Weekly Book Feature Section */}
+      <WeeklyFeaturedBook />
+
+      <div className="mt-12">
+        <PotentialStarletSection />
+      </div>
+
+      <RankingSection />
+
       {/* Featured Novels Section */}
       <section className="md:flex gap-x-4 space-y-4 md:space-y-0">
         <div>
@@ -239,60 +262,56 @@ export default function HomePage(
             <h2 className="flex items-center justify-center bg-gray-800 py-4 mb-4">
               <div className="flex items-center w-full max-w-screen-md px-4">
                 <div className="flex-grow h-0.5 bg-gradient-to-l from-green-300 to-transparent"></div>
-                <span className="mx-4 text-sm font-semibold text-gray-300">
-                  UPDATE TAPE
+                <span className="mx-4 text-xl font-semibold text-gray-300">
+                  Recent Updates
                 </span>
                 <div className="flex-grow h-0.5 bg-gradient-to-r from-green-300 to-transparent"></div>
               </div>
             </h2>
             <div className="space-y-4">
               {recentUpdates.map((update) => (
-                <Link href={`/novels/${update.slug}`} key={update.id}>
-                  <div
-                    key={update.id}
-                    className="bg-gray-800 p-3 rounded-lg hover:scale-102 transition-transform duration-200 mb-2 flex gap-x-4"
+                <div
+                  key={`${update.id}-${update.chapter}`}
+                  className="relative group"
+                >
+                  <UpdateCard {...update} />
+                  <button
+                    onClick={() => setPreviewChapter(`${update.id}`)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-gray-800/80 p-2 text-emerald-400 opacity-0 transition-opacity group-hover:opacity-100 hover:bg-gray-700"
+                    aria-label="Preview chapter"
                   >
-                    <Image
-                      src={update.coverImage}
-                      alt={update.title}
-                      className="object-cover rounded-md"
-                      width={50}
-                      height={64}
-                    />
-
-                    <div>
-                      <h3 className="font-medium text-blue-400">
-                        {update.title}
-                      </h3>
-                      <p className="text-sm text-gray-300 line-clamp-1">
-                        {update.chapter}
-                      </p>
-                      <p className="text-xs text-gray-500">
-                        {update.updatedAt}
-                      </p>
-                    </div>
-                  </div>
-                </Link>
+                    <Eye className="h-4 w-4 cursor-pointer" />
+                  </button>
+                </div>
               ))}
+            </div>
 
-              {/* <PaginationWithLinks
-                pageSearchParam="page"
-                pageSizeSelectOptions={{
-                  pageSizeSearchParam: "size",
-                  pageSizeOptions: [10, 20, 50, 100],
-                }}
-                page={page}
-                pageSize={pageSize}
-                totalCount={300}
-              /> */}
-
+            <div className="mt-4 text-center">
+              <Link
+                href="/updates"
+                className="inline-block bg-gray-800 border border-slate-700 rounded-md w-full px-4 py-2 text-base font-medium text-emerald-400 transition-colors hover:bg-gray-800 hover:text-emerald-300"
+              >
+                View All Updates
+              </Link>
             </div>
           </section>
-          <h2 className="text-2xl font-bold my-4">Featured Novels</h2>
+
+          <div className="my-6 flex items-center">
+            <Sparkles className="mr-2 h-5 w-5 text-emerald-400" />
+            <h2 className="text-2xl font-bold text-white">Featured Novels</h2>
+          </div>
           <div className="space-y-6">
             {featuredNovels.map((novel) => (
               <NovelCard key={novel.id} {...novel} />
             ))}
+          </div>
+          <div className="mt-4 text-center">
+            <Link
+              href="/tags"
+              className="inline-block rounded-md w-full bg-gray-800 border border-slate-700 px-4 py-2 text-sm font-medium text-emerald-400 transition-colors hover:text-emerald-300"
+            >
+              View All Feature
+            </Link>
           </div>
         </div>
 
@@ -308,7 +327,7 @@ export default function HomePage(
             {bestNovels.map((novel) => (
               <div
                 key={novel.id}
-                className="flex items-center gap-4 bg-gray-800 p-3 rounded-lg min-w-72 hover:scale-102 transition-transform duration-200"
+                className="flex items-center gap-4 bg-gradient-to-br from-gray-800/90 to-gray-900 shadow-md hover:shadow-lg p-3 rounded-lg min-w-72 hover:scale-102 transition-transform duration-200"
               >
                 <Image
                   src={novel.coverImage}
@@ -318,7 +337,7 @@ export default function HomePage(
                   height={50}
                 />
                 <div className="flex-1">
-                  <h3 className="font-medium text-blue-400 line-clamp-2">
+                  <h3 className="font-medium text-emerald-400 line-clamp-2">
                     {novel.title}
                   </h3>
                   <p className="text-sm text-gray-400">{novel.author}</p>
@@ -332,13 +351,46 @@ export default function HomePage(
           </TabsContent>
 
           <TabsContent value="most-discussed" className="space-y-4">
-            {/* This would contain most discussed novels, using same structure as best novels */}
-            <p className="text-gray-400">
-              Most discussed novels would appear here.
-            </p>
+            {bestNovels.map((novel) => (
+              <div
+                key={novel.id}
+                className="flex items-center gap-4 bg-gradient-to-br from-gray-800/90 to-gray-900 shadow-md hover:shadow-lg p-3 rounded-lg min-w-72 hover:scale-102 transition-transform duration-200"
+              >
+                <Image
+                  src={novel.coverImage}
+                  alt={novel.title}
+                  className="object-cover rounded-md"
+                  width={50}
+                  height={50}
+                />
+                <div className="flex-1">
+                  <h3 className="font-medium text-emerald-400 line-clamp-2">
+                    {novel.title}
+                  </h3>
+                  <p className="text-sm text-gray-400">{novel.author}</p>
+                  <p className="text-xs text-gray-500">
+                    Rating: {novel.rating.toFixed(1)} / 5 from{" "}
+                    {novel.totalRatings} ratings
+                  </p>
+                </div>
+              </div>
+            ))}
           </TabsContent>
         </Tabs>
       </section>
+
+      <div className="mb-12">
+        <CategoriesTagsSection />
+      </div>
+
+      <AnimatePresence>
+        {selectedChapterPreview && (
+          <ChapterPreview
+            {...selectedChapterPreview}
+            onClose={() => setPreviewChapter(null)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

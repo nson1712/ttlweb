@@ -32,7 +32,7 @@ export function NovelCard({
   chapterCount,
 }: NovelCardProps) {
   return (
-    <div className="flex flex-col md:flex-row gap-4 bg-gray-800 rounded-lg overflow-hidden p-4">
+    <div className="group relative flex flex-col md:flex-row gap-4 bg-gradient-to-br from-gray-800/90 to-gray-900 shadow-md transition-all hover:shadow-2xl rounded-lg overflow-hidden p-4">
       <div className="relative w-full md:w-48 h-64 md:h-auto flex-shrink-0">
         <Image
           src={coverImage}
@@ -42,17 +42,17 @@ export function NovelCard({
           sizes="(max-width: 768px) 100vw, 192px"
         />
       </div>
-      
+
       <div className="flex-1 flex flex-col">
         <div className="flex justify-between items-start">
           <div>
             <Link href={`/novels/${slug}`}>
-              <h2 className="text-xl font-bold text-blue-400 hover:text-blue-300 transition-colors">
+              <h2 className="text-xl font-bold text-emerald-400 hover:text-emerald-300 transition-colors">
                 {title}
               </h2>
             </Link>
             <p className="text-gray-400">{author}</p>
-            
+
             <div className="flex items-center mt-1">
               <div className="flex">
                 {[1, 2, 3, 4, 5].map((star) => (
@@ -75,31 +75,39 @@ export function NovelCard({
               </span>
             </div>
           </div>
-          
+
           <Button variant="ghost" size="icon">
             <BookmarkIcon className="h-5 w-5" />
           </Button>
         </div>
-        
+
         <div className="flex flex-wrap gap-2 my-2">
           {categories.map((cate) => (
-            <Badge key={cate} variant="secondary" className="bg-gray-700 hover:scale-110 transition-transform cursor-pointer">
+            <Link key={cate} href={`/tags/${cate}`}>
+            <Badge
+              key={cate}
+              variant="secondary"
+              className="text-emerald-400 bg-gray-700 hover:scale-110 transition-transform cursor-pointer"
+            >
               {cate}
             </Badge>
+            </Link>
           ))}
         </div>
-        
+
         {description && (
-          <p className="text-gray-300 text-sm mt-2 line-clamp-3">{description}</p>
+          <p className="text-gray-300 text-sm mt-2 line-clamp-3">
+            {description}
+          </p>
         )}
-        
+
         <div className="mt-auto flex items-center justify-between pt-4">
           {updatedAt && (
             <div className="text-xs text-gray-400 bg-gray-700 px-2 py-1 rounded">
               {updatedAt}
             </div>
           )}
-          
+
           <div className="flex items-center gap-4 ml-auto">
             {chapterCount !== undefined && (
               <div className="flex items-center text-gray-400">
@@ -120,15 +128,17 @@ export function NovelCard({
                 {chapterCount}
               </div>
             )}
-            
+
             <Link href={`/novels/${slug}/chapters`}>
-              <Button className="bg-gray-700 hover:bg-gray-600">
+              <Button className="rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 px-6 py-2.5 text-sm font-medium text-white shadow-lg transition-all hover:shadow-emerald-500/20">
                 ◃ Read ▹
               </Button>
             </Link>
           </div>
         </div>
       </div>
+
+      <div className="absolute inset-x-0 bottom-0 h-0.5 w-0 bg-gradient-to-r from-emerald-500 to-teal-600 transition-all duration-300 group-hover:w-full"></div>
     </div>
   );
 }
