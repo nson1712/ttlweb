@@ -23,7 +23,7 @@ interface CategoriesTagProps {
 export function CategoriesTagsSection() {
   return (
     <section className="rounded-xl bg-gray-800/50 p-6 backdrop-blur-sm">
-      <h2 className="mb-6 text-2xl font-bold text-white">Popular Categories</h2>
+      <h2 className="mb-6 text-2xl font-bold text-white">Popular Tags</h2>
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
         {popularTags.map((tag) => (
@@ -34,9 +34,9 @@ export function CategoriesTagsSection() {
       <div className="mt-4 text-center">
         <Link
           href="/tags"
-          className="inline-block rounded-full bg-gray-700 px-4 py-2 text-sm font-medium text-emerald-400 transition-colors hover:bg-gray-600 hover:text-emerald-300"
+          className="inline-block w-full rounded-md bg-gray-800 border border-slate-700 px-4 py-2 text-sm font-medium text-emerald-400 transition-colors hover:text-emerald-300"
         >
-          View All Categories
+          View All Tags
         </Link>
       </div>
     </section>

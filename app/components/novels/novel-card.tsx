@@ -83,13 +83,15 @@ export function NovelCard({
 
         <div className="flex flex-wrap gap-2 my-2">
           {categories.map((cate) => (
+            <Link key={cate} href={`/tags/${cate}`}>
             <Badge
               key={cate}
               variant="secondary"
-              className="bg-gray-700 hover:scale-110 transition-transform cursor-pointer"
+              className="text-emerald-400 bg-gray-700 hover:scale-110 transition-transform cursor-pointer"
             >
               {cate}
             </Badge>
+            </Link>
           ))}
         </div>
 

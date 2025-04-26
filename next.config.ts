@@ -18,6 +18,16 @@ const nextConfig: NextConfig = {
         hostname: "static.bigbrain.gg",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "m.media-amazon.com",
+        pathname: "/**",
+      },
     ],
   },
 };

@@ -1,39 +1,19 @@
 "use client"
 
 import { useState, useEffect } from "react"
-// import Image from "next/image"
-import Link from "next/link"
-// import { motion } from "framer-motion"
+ import Link from "next/link"
 import { ChevronLeft, Tag as TagIcon, Filter, SortAsc, SortDesc, Grid, List } from "lucide-react"
 import { NovelCard } from "../../components/novels/novel-card"
-// import { PaginationWithLinks } from "../../components/ui/pagination"
 import { cn } from "../../lib/utils"
 import { PaginationWithLinks } from "@/app/components/components/pagination"
 import { useParams, useSearchParams } from "next/navigation"
 
-// interface TagDetailPageProps {
-//   params: {
-//     tag: string
-//   }
-//   searchParams?: { 
-//     page?: string
-//     pageSize?: string
-//     sort?: string
-//     view?: string
-//   }
-// }
-
 export default function TagDetailPage(
-//   {
-//   params, 
-//   searchParams = { page: "1", pageSize: "10", sort: "popular", view: "grid" }
-// }: TagDetailPageProps
 ) {
 
  const { tag: rawTag } = useParams()
  const searchParams = useSearchParams()
   const tag = decodeURIComponent(Array.isArray(rawTag) ? rawTag[0] : rawTag ?? "")
-  // const tag = decodeURIComponent(tag)
 
   interface Novel {
     id: string
@@ -58,7 +38,7 @@ export default function TagDetailPage(
   
   const sort = searchParams.get("sort") ?? "popular"
   
-  const view = searchParams.get("view") ?? "grid"
+  const view = searchParams.get("view") ?? "list"
   
   // Get tag color based on tag name
   const getTagColor = (tagName: string) => {

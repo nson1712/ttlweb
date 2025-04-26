@@ -82,7 +82,7 @@ export default function TagsPage() {
               <button
                 onClick={() => setSelectedCategory(null)}
                 className={cn(
-                  "rounded-full px-3 py-1 text-sm font-medium transition-colors",
+                  "rounded-full px-3 py-1 text-sm font-medium transition-colors cursor-pointer",
                   selectedCategory === null
                     ? "bg-emerald-500 text-white"
                     : "bg-gray-700 text-gray-300 hover:bg-gray-600"
@@ -95,7 +95,7 @@ export default function TagsPage() {
                   key={category}
                   onClick={() => setSelectedCategory(category)}
                   className={cn(
-                    "rounded-full px-3 py-1 text-sm font-medium transition-colors",
+                    "rounded-full px-3 py-1 text-sm font-medium transition-colors cursor-pointer",
                     selectedCategory === category
                       ? "bg-emerald-500 text-white"
                       : "bg-gray-700 text-gray-300 hover:bg-gray-600"

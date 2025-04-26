@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { Star, BookOpen } from "lucide-react";
 
 export function WeeklyFeaturedBook() {
-  // Using the first featured novel as the weekly featured book
   const featuredBook = {
     id: "timeless-assassin",
     slug: "timeless-assassin",

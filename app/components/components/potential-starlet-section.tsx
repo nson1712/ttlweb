@@ -30,7 +30,7 @@ export function PotentialStarletSection() {
         </Link>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+      <div className="grid grid-cols-4 gap-4 md:grid-cols-5 lg:grid-cols-10">
         {potentialStarlets.map((novel) => (
           <PotentialStarletCard key={novel.id} {...novel} />
         ))}
@@ -79,7 +79,7 @@ function PotentialStarletCard({
           </div>
 
           <div>
-            <h3 className="font-medium text-white line-clamp-1 group-hover:text-emerald-400">
+            <h3 className="text-sm font-medium text-white line-clamp-2 group-hover:text-emerald-400">
               {title}
             </h3>
             <p className="text-xs text-gray-400">{author}</p>
@@ -138,7 +138,133 @@ const potentialStarlets = [
     categories: ["Fantasy", "Mythology"],
   },
   {
-    id: "limitless-sovereign",
+    id: "limitless-sovereign-216523146",
+    slug: "limitless-sovereign",
+    title: "The Limitless Sovereign",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+    author: "Sovereign Writer",
+    categories: ["Fantasy", "Cultivation"],
+  },
+  {
+    id: "limitless-sovereign-123123213",
+    slug: "limitless-sovereign",
+    title: "The Limitless Sovereign",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+    author: "Sovereign Writer",
+    categories: ["Fantasy", "Cultivation"],
+  },
+  {
+    id: "limitless-sovereign-99",
+    slug: "limitless-sovereign",
+    title: "The Limitless Sovereign",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+    author: "Sovereign Writer",
+    categories: ["Fantasy", "Cultivation"],
+  },
+  {
+    id: "limitless-sovereign-123",
+    slug: "limitless-sovereign",
+    title: "The Limitless Sovereign",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+    author: "Sovereign Writer",
+    categories: ["Fantasy", "Cultivation"],
+  },
+  {
+    id: "limitless-sovereign-123123",
+    slug: "limitless-sovereign",
+    title: "The Limitless Sovereign",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+    author: "Sovereign Writer",
+    categories: ["Fantasy", "Cultivation"],
+  },
+  {
+    id: "limitless-sovereign-235235",
+    slug: "limitless-sovereign",
+    title: "The Limitless Sovereign",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+    author: "Sovereign Writer",
+    categories: ["Fantasy", "Cultivation"],
+  },
+  {
+    id: "limitless-sovereign-1",
+    slug: "limitless-sovereign",
+    title: "The Limitless Sovereign",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+    author: "Sovereign Writer",
+    categories: ["Fantasy", "Cultivation"],
+  },
+  {
+    id: "limitless-sovereign-2",
+    slug: "limitless-sovereign",
+    title: "The Limitless Sovereign",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+    author: "Sovereign Writer",
+    categories: ["Fantasy", "Cultivation"],
+  },
+  {
+    id: "limitless-sovereign-3",
+    slug: "limitless-sovereign",
+    title: "The Limitless Sovereign",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+    author: "Sovereign Writer",
+    categories: ["Fantasy", "Cultivation"],
+  },
+  {
+    id: "limitless-sovereign-4",
+    slug: "limitless-sovereign",
+    title: "The Limitless Sovereign",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+    author: "Sovereign Writer",
+    categories: ["Fantasy", "Cultivation"],
+  },
+  {
+    id: "limitless-sovereign-5",
+    slug: "limitless-sovereign",
+    title: "The Limitless Sovereign",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+    author: "Sovereign Writer",
+    categories: ["Fantasy", "Cultivation"],
+  },
+  {
+    id: "limitless-sovereign-6",
+    slug: "limitless-sovereign",
+    title: "The Limitless Sovereign",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+    author: "Sovereign Writer",
+    categories: ["Fantasy", "Cultivation"],
+  },
+  {
+    id: "limitless-sovereign-7",
+    slug: "limitless-sovereign",
+    title: "The Limitless Sovereign",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+    author: "Sovereign Writer",
+    categories: ["Fantasy", "Cultivation"],
+  },
+  {
+    id: "limitless-sovereign-8",
+    slug: "limitless-sovereign",
+    title: "The Limitless Sovereign",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+    author: "Sovereign Writer",
+    categories: ["Fantasy", "Cultivation"],
+  },
+  {
+    id: "limitless-sovereign-9",
     slug: "limitless-sovereign",
     title: "The Limitless Sovereign",
     coverImage:

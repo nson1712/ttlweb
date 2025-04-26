@@ -51,14 +51,14 @@ export function RankingSection() {
             className="flex items-center gap-1"
           >
             <TrendingUp className="h-4 w-4" />
-            <span>Power Ranking</span>
+            <span>Power</span>
           </TabsTrigger>
           <TabsTrigger
             value="collection-ranking"
             className="flex items-center gap-1"
           >
             <Star className="h-4 w-4" />
-            <span>Collection Ranking</span>
+            <span>Collection</span>
           </TabsTrigger>
           <TabsTrigger value="new-releases" className="flex items-center gap-1">
             <Flame className="h-4 w-4" />
