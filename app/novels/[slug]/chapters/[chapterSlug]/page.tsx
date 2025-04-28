@@ -383,234 +383,275 @@
 //   );
 // }
 
+"use client";
 
-"use client"
-
-import React, { useState } from "react"
+import React, { useState } from "react";
 // import Image from "next/image"
-import Link from "next/link"
-import { motion, AnimatePresence } from "framer-motion"
-import { 
-  ChevronLeft, 
-  ChevronRight, 
-  Settings, 
-  Moon, 
-  Sun, 
-  BookOpen, 
-  List, 
-  MessageSquare, 
-  ThumbsUp, 
-  Share2, 
-  Bookmark, 
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Settings,
+  Moon,
+  Sun,
+  BookOpen,
+  List,
+  MessageSquare,
+  ThumbsUp,
+  Share2,
+  Bookmark,
   X,
   Eye,
   Calendar,
   ArrowLeft,
   User,
-} from "lucide-react"
-import { cn } from "@/app/lib/utils"
-import { useParams } from "next/navigation"
+} from "lucide-react";
+import { cn } from "@/app/lib/utils";
+import { useParams } from "next/navigation";
 
 // interface ChapterDetailPageProps {
 //   params: Promise<{ slug: string; order: string }>
 // }
 
 export default function ChapterDetailPage() {
-  const params = useParams()
+  const params = useParams();
   // const chapterOrder = parseInt(order, 10)
-  const {chapterSlug, slug} = params
+  const { chapterSlug, slug } = params;
   // console.log("SLUG: ", slug)
   // console.log("ORDER: ", chapterSlug)
   // Reading settings state
-  const [fontSize, setFontSize] = useState<"small" | "medium" | "large">("medium")
-  const [theme, setTheme] = useState<"light" | "dark" | "sepia">("dark")
-  const [showSettings, setShowSettings] = useState(false)
-  const [showChapterList, setShowChapterList] = useState(false)
-  const [showComments, setShowComments] = useState(false)
-  const [isBookmarked, setIsBookmarked] = useState(false)
-  const [isLiked, setIsLiked] = useState(false)
-  
+  const [fontSize, setFontSize] = useState<"small" | "medium" | "large">(
+    "medium"
+  );
+  const [theme, setTheme] = useState<"light" | "dark" | "sepia">("dark");
+  const [showSettings, setShowSettings] = useState(false);
+  const [showChapterList, setShowChapterList] = useState(false);
+  const [showComments, setShowComments] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+
   // Parse chapter order
   // const chapterOrder = parseInt(params.order, 10)
-  
-  // Find novel by slug
-  const novel = allNovels.find(novel => novel.slug === slug)
 
-  console.log("novel: ", novel)
-  
+  // Find novel by slug
+  const novel = allNovels.find((novel) => novel.slug === slug);
+
+  console.log("novel: ", novel);
+
   if (!novel) {
     return (
       <div className="flex h-[70vh] flex-col items-center justify-center">
         <h1 className="text-2xl font-bold text-white">Novel not found</h1>
-        <p className="mt-2 text-gray-400">The novel you&#39;re looking for doesn&#39;t exist or has been removed.</p>
-        <Link 
-          href="/" 
+        <p className="mt-2 text-gray-400">
+          The novel you&#39;re looking for doesn&#39;t exist or has been
+          removed.
+        </p>
+        <Link
+          href="/"
           className="mt-4 rounded-full bg-emerald-500 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-600"
         >
           Return to Home
         </Link>
       </div>
-    )
+    );
   }
-  
-  // Get all chapters for this novel
-  const novelChapters = allChapters.filter(chapter => chapter.novelSlug === novel.slug)
-    .sort((a, b) => a.order - b.order)
 
-  console.log("NOVEL CHAPTERS: ", novelChapters)
-  
+  // Get all chapters for this novel
+  const novelChapters = allChapters
+    .filter((chapter) => chapter.novelSlug === novel.slug)
+    .sort((a, b) => a.order - b.order);
+
+  console.log("NOVEL CHAPTERS: ", novelChapters);
+
   // Find current chapter
-  const currentChapter = novelChapters.find(chapter => chapter.order === Number(chapterSlug))
-  console.log("CURRENT CHAP: ", currentChapter)
-  
+  const currentChapter = novelChapters.find(
+    (chapter) => chapter.order === Number(chapterSlug)
+  );
+  console.log("CURRENT CHAP: ", currentChapter);
+
   if (!currentChapter) {
     return (
       <div className="flex h-[70vh] flex-col items-center justify-center">
         <h1 className="text-2xl font-bold text-white">Chapter not found</h1>
-        <p className="mt-2 text-gray-400">The chapter you&#39;re looking for doesn&#39;t exist or has been removed.</p>
-        <Link 
+        <p className="mt-2 text-gray-400">
+          The chapter you&#39;re looking for doesn&#39;t exist or has been
+          removed.
+        </p>
+        <Link
           href={`/novels/${slug}`}
           className="mt-4 rounded-full bg-emerald-500 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-600"
         >
           Return to Novel
         </Link>
       </div>
-    )
+    );
   }
-  
-  // Find chapter content
-  const chapterContent = allChapterContents.find(content => 
-    content.novelSlug === slug && content.order === Number(chapterSlug)
-  )
 
-  console.log("CHAPTER CONTENT: ", chapterContent)
-  
+  // Find chapter content
+  const chapterContent = allChapterContents.find(
+    (content) =>
+      content.novelSlug === slug && content.order === Number(chapterSlug)
+  );
+
+  console.log("CHAPTER CONTENT: ", chapterContent);
+
   // Find previous and next chapters
-  const currentIndex = novelChapters.findIndex(chapter => chapter.order === Number(chapterSlug))
-  const previousChapter = currentIndex > 0 ? novelChapters[currentIndex - 1] : null
-  const nextChapter = currentIndex < novelChapters.length - 1 ? novelChapters[currentIndex + 1] : null
-  
+  const currentIndex = novelChapters.findIndex(
+    (chapter) => chapter.order === Number(chapterSlug)
+  );
+  const previousChapter =
+    currentIndex > 0 ? novelChapters[currentIndex - 1] : null;
+  const nextChapter =
+    currentIndex < novelChapters.length - 1
+      ? novelChapters[currentIndex + 1]
+      : null;
+
   // Font size classes
   const fontSizeClasses = {
     small: "text-sm",
     medium: "text-base",
     large: "text-lg",
-  }
-  
+  };
+
   // Theme classes
   const themeClasses = {
     light: "bg-gray-100 text-gray-900",
     dark: "bg-gray-900 text-gray-100",
     sepia: "bg-[#f8f1e3] text-[#5f4b32]",
-  }
-  
+  };
+
   // Progress calculation
-  const progress = ((currentIndex + 1) / novelChapters.length) * 100
-  
+  const progress = ((currentIndex + 1) / novelChapters.length) * 100;
+
   // Auto-scroll to top when chapter changes
   // useEffect(() => {
   //   window.scrollTo(0, 0)
   // }, [order])
-  
+
   return (
-    <div className={cn(
-      "min-h-screen transition-colors duration-300",
-      themeClasses[theme]
-    )}>
+    <div
+      className={cn(
+        "min-h-screen transition-colors duration-300",
+        themeClasses[theme]
+      )}
+    >
       {/* Top Navigation Bar */}
-      <header className={cn(
-        "sticky top-0 z-40 border-b backdrop-blur transition-colors duration-300",
-        theme === "light" ? "border-gray-200 bg-white/90" : 
-        theme === "dark" ? "border-gray-800 bg-gray-900/90" : 
-        "border-[#e8d9c0] bg-[#f8f1e3]/90"
-      )}>
+      <header
+        className={cn(
+          "sticky top-0 z-40 border-b backdrop-blur transition-colors duration-300",
+          theme === "light"
+            ? "border-gray-200 bg-white/90"
+            : theme === "dark"
+            ? "border-gray-800 bg-gray-900/90"
+            : "border-[#e8d9c0] bg-[#f8f1e3]/90"
+        )}
+      >
         <div className="mx-auto flex h-16 max-w-4xl items-center justify-between px-4">
           <div className="flex items-center gap-4">
-            <Link 
+            <Link
               href={`/novels/${slug}`}
               className={cn(
                 "flex items-center gap-1 rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
-                theme === "light" ? "bg-gray-100 text-gray-700 hover:bg-gray-200" : 
-                theme === "dark" ? "bg-gray-800 text-gray-300 hover:bg-gray-700" : 
-                "bg-[#e8d9c0] text-[#5f4b32] hover:bg-[#e0ceb0]"
+                theme === "light"
+                  ? "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  : theme === "dark"
+                  ? "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  : "bg-[#e8d9c0] text-[#5f4b32] hover:bg-[#e0ceb0]"
               )}
             >
               <ArrowLeft className="h-4 w-4" />
               <span className="hidden sm:inline">Back to Novel</span>
             </Link>
-            
-            <h1 className={cn(
-              "truncate text-sm font-medium",
-              theme === "light" ? "text-gray-700" : 
-              theme === "dark" ? "text-gray-300" : 
-              "text-[#5f4b32]"
-            )}>
+
+            <h1
+              className={cn(
+                "truncate text-sm font-medium",
+                theme === "light"
+                  ? "text-gray-700"
+                  : theme === "dark"
+                  ? "text-gray-300"
+                  : "text-[#5f4b32]"
+              )}
+            >
               <span className="hidden sm:inline">{novel.title}: </span>
               <span>Chapter {currentChapter.order}</span>
             </h1>
           </div>
-          
+
           <div className="flex items-center gap-2">
             <button
               onClick={() => setShowSettings(!showSettings)}
               className={cn(
-                "rounded-full p-2 transition-colors",
-                theme === "light" ? "hover:bg-gray-200" : 
-                theme === "dark" ? "hover:bg-gray-800" : 
-                "hover:bg-[#e8d9c0]",
-                showSettings ? (
-                  theme === "light" ? "bg-gray-200 text-gray-900" : 
-                  theme === "dark" ? "bg-gray-800 text-white" : 
-                  "bg-[#e8d9c0] text-[#5f4b32]"
-                ) : (
-                  theme === "light" ? "text-gray-700" : 
-                  theme === "dark" ? "text-gray-300" : 
-                  "text-[#5f4b32]"
-                )
+                "rounded-full p-2 transition-colors cursor-pointer",
+                theme === "light"
+                  ? "hover:bg-gray-200"
+                  : theme === "dark"
+                  ? "hover:bg-gray-800"
+                  : "hover:bg-[#e8d9c0]",
+                showSettings
+                  ? theme === "light"
+                    ? "bg-gray-200 text-gray-900"
+                    : theme === "dark"
+                    ? "bg-gray-800 text-white"
+                    : "bg-[#e8d9c0] text-[#5f4b32]"
+                  : theme === "light"
+                  ? "text-gray-700"
+                  : theme === "dark"
+                  ? "text-gray-300"
+                  : "text-[#5f4b32]"
               )}
               aria-label="Reading Settings"
             >
               <Settings className="h-5 w-5" />
             </button>
-            
+
             <button
               onClick={() => setShowChapterList(!showChapterList)}
               className={cn(
-                "rounded-full p-2 transition-colors",
-                theme === "light" ? "hover:bg-gray-200" : 
-                theme === "dark" ? "hover:bg-gray-800" : 
-                "hover:bg-[#e8d9c0]",
-                showChapterList ? (
-                  theme === "light" ? "bg-gray-200 text-gray-900" : 
-                  theme === "dark" ? "bg-gray-800 text-white" : 
-                  "bg-[#e8d9c0] text-[#5f4b32]"
-                ) : (
-                  theme === "light" ? "text-gray-700" : 
-                  theme === "dark" ? "text-gray-300" : 
-                  "text-[#5f4b32]"
-                )
+                "rounded-full p-2 transition-colors cursor-pointer",
+                theme === "light"
+                  ? "hover:bg-gray-200"
+                  : theme === "dark"
+                  ? "hover:bg-gray-800"
+                  : "hover:bg-[#e8d9c0]",
+                showChapterList
+                  ? theme === "light"
+                    ? "bg-gray-200 text-gray-900"
+                    : theme === "dark"
+                    ? "bg-gray-800 text-white"
+                    : "bg-[#e8d9c0] text-[#5f4b32]"
+                  : theme === "light"
+                  ? "text-gray-700"
+                  : theme === "dark"
+                  ? "text-gray-300"
+                  : "text-[#5f4b32]"
               )}
               aria-label="Chapter List"
             >
               <List className="h-5 w-5" />
             </button>
-            
+
             <button
               onClick={() => setShowComments(!showComments)}
               className={cn(
-                "rounded-full p-2 transition-colors",
-                theme === "light" ? "hover:bg-gray-200" : 
-                theme === "dark" ? "hover:bg-gray-800" : 
-                "hover:bg-[#e8d9c0]",
-                showComments ? (
-                  theme === "light" ? "bg-gray-200 text-gray-900" : 
-                  theme === "dark" ? "bg-gray-800 text-white" : 
-                  "bg-[#e8d9c0] text-[#5f4b32]"
-                ) : (
-                  theme === "light" ? "text-gray-700" : 
-                  theme === "dark" ? "text-gray-300" : 
-                  "text-[#5f4b32]"
-                )
+                "rounded-full p-2 transition-colors cursor-pointer",
+                theme === "light"
+                  ? "hover:bg-gray-200"
+                  : theme === "dark"
+                  ? "hover:bg-gray-800"
+                  : "hover:bg-[#e8d9c0]",
+                showComments
+                  ? theme === "light"
+                    ? "bg-gray-200 text-gray-900"
+                    : theme === "dark"
+                    ? "bg-gray-800 text-white"
+                    : "bg-[#e8d9c0] text-[#5f4b32]"
+                  : theme === "light"
+                  ? "text-gray-700"
+                  : theme === "dark"
+                  ? "text-gray-300"
+                  : "text-[#5f4b32]"
               )}
               aria-label="Comments"
             >
@@ -618,67 +659,83 @@ export default function ChapterDetailPage() {
             </button>
           </div>
         </div>
-        
+
         {/* Reading Progress Bar */}
         <div className="h-1 w-full bg-gray-200 dark:bg-gray-800">
-          <div 
-            className="h-full bg-emerald-500" 
+          <div
+            className="h-full bg-emerald-500"
             style={{ width: `${progress}%` }}
           ></div>
         </div>
       </header>
-      
+
       {/* Main Content */}
-      <main className={cn(
-        "mx-auto max-w-4xl px-4 py-8 transition-colors duration-300",
-        theme === "light" ? "text-gray-900" : 
-        theme === "dark" ? "text-gray-100" : 
-        "text-[#5f4b32]"
-      )}>
+      <main
+        className={cn(
+          "mx-auto max-w-4xl px-4 py-8 transition-colors duration-300",
+          theme === "light"
+            ? "text-gray-900"
+            : theme === "dark"
+            ? "text-gray-100"
+            : "text-[#5f4b32]"
+        )}
+      >
         {/* Chapter Header */}
         <div className="mb-8 text-center">
           <h1 className="text-2xl font-bold sm:text-3xl">
             Chapter {currentChapter.order}: {currentChapter.title}
           </h1>
           <div className="mt-2 flex items-center justify-center gap-4 text-sm">
-            <div className={cn(
-              "flex items-center gap-1",
-              theme === "light" ? "text-gray-600" : 
-              theme === "dark" ? "text-gray-400" : 
-              "text-[#8a7055]"
-            )}>
+            <div
+              className={cn(
+                "flex items-center gap-1",
+                theme === "light"
+                  ? "text-gray-600"
+                  : theme === "dark"
+                  ? "text-gray-400"
+                  : "text-[#8a7055]"
+              )}
+            >
               <Calendar className="h-4 w-4" />
               <span>{currentChapter.releaseDate}</span>
             </div>
-            <div className={cn(
-              "flex items-center gap-1",
-              theme === "light" ? "text-gray-600" : 
-              theme === "dark" ? "text-gray-400" : 
-              "text-[#8a7055]"
-            )}>
+            <div
+              className={cn(
+                "flex items-center gap-1",
+                theme === "light"
+                  ? "text-gray-600"
+                  : theme === "dark"
+                  ? "text-gray-400"
+                  : "text-[#8a7055]"
+              )}
+            >
               <Eye className="h-4 w-4" />
               <span>{currentChapter.views.toLocaleString()} views</span>
             </div>
           </div>
         </div>
-        
+
         {/* Chapter Content */}
-        <div className={cn(
-          "prose max-w-none transition-colors duration-300",
-          fontSizeClasses[fontSize],
-          theme === "light" ? "prose-gray" : 
-          theme === "dark" ? "prose-invert" : 
-          "prose-stone"
-        )}>
+        <div
+          className={cn(
+            "prose max-w-none transition-colors duration-300",
+            fontSizeClasses[fontSize],
+            theme === "light"
+              ? "prose-gray"
+              : theme === "dark"
+              ? "prose-invert"
+              : "prose-stone"
+          )}
+        >
           {chapterContent ? (
-            chapterContent.content.split('\n\n').map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
-            ))
+            chapterContent.content
+              .split("\n\n")
+              .map((paragraph, index) => <p key={index}>{paragraph}</p>)
           ) : (
             <p className="text-center italic">Chapter content not available.</p>
           )}
         </div>
-        
+
         {/* Chapter Navigation */}
         <div className="mt-12 flex items-center justify-between">
           {previousChapter ? (
@@ -686,9 +743,11 @@ export default function ChapterDetailPage() {
               href={`/novels/${slug}/chapters/${previousChapter.order}`}
               className={cn(
                 "flex items-center gap-2 rounded-lg px-4 py-2 transition-colors",
-                theme === "light" ? "bg-gray-100 text-gray-700 hover:bg-gray-200" : 
-                theme === "dark" ? "bg-gray-800 text-gray-300 hover:bg-gray-700" : 
-                "bg-[#e8d9c0] text-[#5f4b32] hover:bg-[#e0ceb0]"
+                theme === "light"
+                  ? "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  : theme === "dark"
+                  ? "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  : "bg-[#e8d9c0] text-[#5f4b32] hover:bg-[#e0ceb0]"
               )}
             >
               <ChevronLeft className="h-5 w-5" />
@@ -699,63 +758,71 @@ export default function ChapterDetailPage() {
           ) : (
             <div></div>
           )}
-          
+
           <div className="flex items-center gap-2">
             <button
               onClick={() => setIsLiked(!isLiked)}
               className={cn(
-                "rounded-full p-2 transition-colors",
-                isLiked ? (
-                  "text-emerald-500"
-                ) : (
-                  theme === "light" ? "text-gray-700 hover:bg-gray-100" : 
-                  theme === "dark" ? "text-gray-300 hover:bg-gray-800" : 
-                  "text-[#5f4b32] hover:bg-[#e8d9c0]"
-                )
+                "rounded-full p-2 transition-colors cursor-pointer",
+                isLiked
+                  ? "text-emerald-500"
+                  : theme === "light"
+                  ? "text-gray-700 hover:bg-gray-100"
+                  : theme === "dark"
+                  ? "text-gray-300 hover:bg-gray-800"
+                  : "text-[#5f4b32] hover:bg-[#e8d9c0]"
               )}
               aria-label={isLiked ? "Unlike" : "Like"}
             >
-              <ThumbsUp className={cn("h-5 w-5", isLiked && "fill-emerald-500")} />
+              <ThumbsUp
+                className={cn("h-5 w-5", isLiked && "fill-emerald-500")}
+              />
             </button>
-            
+
             <button
               onClick={() => setIsBookmarked(!isBookmarked)}
               className={cn(
-                "rounded-full p-2 transition-colors",
-                isBookmarked ? (
-                  "text-emerald-500"
-                ) : (
-                  theme === "light" ? "text-gray-700 hover:bg-gray-100" : 
-                  theme === "dark" ? "text-gray-300 hover:bg-gray-800" : 
-                  "text-[#5f4b32] hover:bg-[#e8d9c0]"
-                )
+                "rounded-full p-2 transition-colors cursor-pointer",
+                isBookmarked
+                  ? "text-emerald-500"
+                  : theme === "light"
+                  ? "text-gray-700 hover:bg-gray-100"
+                  : theme === "dark"
+                  ? "text-gray-300 hover:bg-gray-800"
+                  : "text-[#5f4b32] hover:bg-[#e8d9c0]"
               )}
               aria-label={isBookmarked ? "Remove Bookmark" : "Bookmark"}
             >
-              <Bookmark className={cn("h-5 w-5", isBookmarked && "fill-emerald-500")} />
+              <Bookmark
+                className={cn("h-5 w-5", isBookmarked && "fill-emerald-500")}
+              />
             </button>
-            
+
             <button
               className={cn(
-                "rounded-full p-2 transition-colors",
-                theme === "light" ? "text-gray-700 hover:bg-gray-100" : 
-                theme === "dark" ? "text-gray-300 hover:bg-gray-800" : 
-                "text-[#5f4b32] hover:bg-[#e8d9c0]"
+                "rounded-full p-2 transition-colors cursor-pointer",
+                theme === "light"
+                  ? "text-gray-700 hover:bg-gray-100"
+                  : theme === "dark"
+                  ? "text-gray-300 hover:bg-gray-800"
+                  : "text-[#5f4b32] hover:bg-[#e8d9c0]"
               )}
               aria-label="Share"
             >
               <Share2 className="h-5 w-5" />
             </button>
           </div>
-          
+
           {nextChapter ? (
             <Link
               href={`/novels/${slug}/chapters/${nextChapter.order}`}
               className={cn(
                 "flex items-center gap-2 rounded-lg px-4 py-2 transition-colors",
-                theme === "light" ? "bg-gray-100 text-gray-700 hover:bg-gray-200" : 
-                theme === "dark" ? "bg-gray-800 text-gray-300 hover:bg-gray-700" : 
-                "bg-[#e8d9c0] text-[#5f4b32] hover:bg-[#e0ceb0]"
+                theme === "light"
+                  ? "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  : theme === "dark"
+                  ? "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  : "bg-[#e8d9c0] text-[#5f4b32] hover:bg-[#e0ceb0]"
               )}
             >
               <div className="flex flex-col items-end">
@@ -768,7 +835,7 @@ export default function ChapterDetailPage() {
           )}
         </div>
       </main>
-      
+
       {/* Reading Settings Panel */}
       <AnimatePresence>
         {showSettings && (
@@ -779,9 +846,11 @@ export default function ChapterDetailPage() {
             transition={{ duration: 0.2 }}
             className={cn(
               "fixed inset-x-0 top-16 z-50 border-b p-4 shadow-lg backdrop-blur-lg transition-colors duration-300",
-              theme === "light" ? "border-gray-200 bg-white/90 text-gray-900" : 
-              theme === "dark" ? "border-gray-800 bg-gray-900/90 text-white" : 
-              "border-[#e8d9c0] bg-[#f8f1e3]/90 text-[#5f4b32]"
+              theme === "light"
+                ? "border-gray-200 bg-white/90 text-gray-900"
+                : theme === "dark"
+                ? "border-gray-800 bg-gray-900/90 text-white"
+                : "border-[#e8d9c0] bg-[#f8f1e3]/90 text-[#5f4b32]"
             )}
           >
             <div className="mx-auto max-w-4xl">
@@ -791,25 +860,31 @@ export default function ChapterDetailPage() {
                   onClick={() => setShowSettings(false)}
                   className={cn(
                     "rounded-full p-1.5 transition-colors",
-                    theme === "light" ? "hover:bg-gray-100 text-gray-700" : 
-                    theme === "dark" ? "hover:bg-gray-800 text-gray-300" : 
-                    "hover:bg-[#e8d9c0] text-[#5f4b32]"
+                    theme === "light"
+                      ? "hover:bg-gray-100 text-gray-700"
+                      : theme === "dark"
+                      ? "hover:bg-gray-800 text-gray-300"
+                      : "hover:bg-[#e8d9c0] text-[#5f4b32]"
                   )}
                   aria-label="Close Settings"
                 >
                   <X className="h-5 w-5" />
                 </button>
               </div>
-              
+
               <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2">
                 {/* Font Size */}
                 <div>
-                  <h3 className={cn(
-                    "mb-2 text-sm font-medium",
-                    theme === "light" ? "text-gray-700" : 
-                    theme === "dark" ? "text-gray-300" : 
-                    "text-[#5f4b32]"
-                  )}>
+                  <h3
+                    className={cn(
+                      "mb-2 text-sm font-medium",
+                      theme === "light"
+                        ? "text-gray-700"
+                        : theme === "dark"
+                        ? "text-gray-300"
+                        : "text-[#5f4b32]"
+                    )}
+                  >
                     Font Size
                   </h3>
                   <div className="flex items-center gap-2">
@@ -817,15 +892,17 @@ export default function ChapterDetailPage() {
                       onClick={() => setFontSize("small")}
                       className={cn(
                         "flex h-10 w-10 items-center justify-center rounded-lg text-sm transition-colors",
-                        fontSize === "small" ? (
-                          theme === "light" ? "bg-gray-900 text-white" : 
-                          theme === "dark" ? "bg-emerald-500 text-white" : 
-                          "bg-[#5f4b32] text-[#f8f1e3]"
-                        ) : (
-                          theme === "light" ? "bg-gray-100 text-gray-700 hover:bg-gray-200" : 
-                          theme === "dark" ? "bg-gray-800 text-gray-300 hover:bg-gray-700" : 
-                          "bg-[#e8d9c0] text-[#5f4b32] hover:bg-[#e0ceb0]"
-                        )
+                        fontSize === "small"
+                          ? theme === "light"
+                            ? "bg-gray-900 text-white"
+                            : theme === "dark"
+                            ? "bg-emerald-500 text-white"
+                            : "bg-[#5f4b32] text-[#f8f1e3]"
+                          : theme === "light"
+                          ? "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                          : theme === "dark"
+                          ? "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                          : "bg-[#e8d9c0] text-[#5f4b32] hover:bg-[#e0ceb0]"
                       )}
                     >
                       A
@@ -834,15 +911,17 @@ export default function ChapterDetailPage() {
                       onClick={() => setFontSize("medium")}
                       className={cn(
                         "flex h-10 w-10 items-center justify-center rounded-lg text-base transition-colors",
-                        fontSize === "medium" ? (
-                          theme === "light" ? "bg-gray-900 text-white" : 
-                          theme === "dark" ? "bg-emerald-500 text-white" : 
-                          "bg-[#5f4b32] text-[#f8f1e3]"
-                        ) : (
-                          theme === "light" ? "bg-gray-100 text-gray-700 hover:bg-gray-200" : 
-                          theme === "dark" ? "bg-gray-800 text-gray-300 hover:bg-gray-700" : 
-                          "bg-[#e8d9c0] text-[#5f4b32] hover:bg-[#e0ceb0]"
-                        )
+                        fontSize === "medium"
+                          ? theme === "light"
+                            ? "bg-gray-900 text-white"
+                            : theme === "dark"
+                            ? "bg-emerald-500 text-white"
+                            : "bg-[#5f4b32] text-[#f8f1e3]"
+                          : theme === "light"
+                          ? "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                          : theme === "dark"
+                          ? "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                          : "bg-[#e8d9c0] text-[#5f4b32] hover:bg-[#e0ceb0]"
                       )}
                     >
                       A
@@ -851,30 +930,36 @@ export default function ChapterDetailPage() {
                       onClick={() => setFontSize("large")}
                       className={cn(
                         "flex h-10 w-10 items-center justify-center rounded-lg text-lg transition-colors",
-                        fontSize === "large" ? (
-                          theme === "light" ? "bg-gray-900 text-white" : 
-                          theme === "dark" ? "bg-emerald-500 text-white" : 
-                          "bg-[#5f4b32] text-[#f8f1e3]"
-                        ) : (
-                          theme === "light" ? "bg-gray-100 text-gray-700 hover:bg-gray-200" : 
-                          theme === "dark" ? "bg-gray-800 text-gray-300 hover:bg-gray-700" : 
-                          "bg-[#e8d9c0] text-[#5f4b32] hover:bg-[#e0ceb0]"
-                        )
+                        fontSize === "large"
+                          ? theme === "light"
+                            ? "bg-gray-900 text-white"
+                            : theme === "dark"
+                            ? "bg-emerald-500 text-white"
+                            : "bg-[#5f4b32] text-[#f8f1e3]"
+                          : theme === "light"
+                          ? "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                          : theme === "dark"
+                          ? "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                          : "bg-[#e8d9c0] text-[#5f4b32] hover:bg-[#e0ceb0]"
                       )}
                     >
                       A
                     </button>
                   </div>
                 </div>
-                
+
                 {/* Theme */}
                 <div>
-                  <h3 className={cn(
-                    "mb-2 text-sm font-medium",
-                    theme === "light" ? "text-gray-700" : 
-                    theme === "dark" ? "text-gray-300" : 
-                    "text-[#5f4b32]"
-                  )}>
+                  <h3
+                    className={cn(
+                      "mb-2 text-sm font-medium",
+                      theme === "light"
+                        ? "text-gray-700"
+                        : theme === "dark"
+                        ? "text-gray-300"
+                        : "text-[#5f4b32]"
+                    )}
+                  >
                     Theme
                   </h3>
                   <div className="flex items-center gap-2">
@@ -882,12 +967,11 @@ export default function ChapterDetailPage() {
                       onClick={() => setTheme("light")}
                       className={cn(
                         "flex h-10 items-center gap-2 rounded-lg px-3 text-sm transition-colors",
-                        theme === "light" ? (
-                          "bg-gray-900 text-white"
-                        ) : (
-                          theme === "dark" ? "bg-gray-800 text-gray-300 hover:bg-gray-700" : 
-                          "bg-[#e8d9c0] text-[#5f4b32] hover:bg-[#e0ceb0]"
-                        )
+                        theme === "light"
+                          ? "bg-gray-900 text-white"
+                          : theme === "dark"
+                          ? "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                          : "bg-[#e8d9c0] text-[#5f4b32] hover:bg-[#e0ceb0]"
                       )}
                     >
                       <Sun className="h-4 w-4" />
@@ -897,12 +981,11 @@ export default function ChapterDetailPage() {
                       onClick={() => setTheme("dark")}
                       className={cn(
                         "flex h-10 items-center gap-2 rounded-lg px-3 text-sm transition-colors",
-                        theme === "dark" ? (
-                          "bg-emerald-500 text-white"
-                        ) : (
-                          theme === "light" ? "bg-gray-100 text-gray-700 hover:bg-gray-200" : 
-                          "bg-[#e8d9c0] text-[#5f4b32] hover:bg-[#e0ceb0]"
-                        )
+                        theme === "dark"
+                          ? "bg-emerald-500 text-white"
+                          : theme === "light"
+                          ? "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                          : "bg-[#e8d9c0] text-[#5f4b32] hover:bg-[#e0ceb0]"
                       )}
                     >
                       <Moon className="h-4 w-4" />
@@ -912,12 +995,11 @@ export default function ChapterDetailPage() {
                       onClick={() => setTheme("sepia")}
                       className={cn(
                         "flex h-10 items-center gap-2 rounded-lg px-3 text-sm transition-colors",
-                        theme === "sepia" ? (
-                          "bg-[#5f4b32] text-[#f8f1e3]"
-                        ) : (
-                          theme === "light" ? "bg-gray-100 text-gray-700 hover:bg-gray-200" : 
-                          "bg-gray-800 text-gray-300 hover:bg-gray-700"
-                        )
+                        theme === "sepia"
+                          ? "bg-[#5f4b32] text-[#f8f1e3]"
+                          : theme === "light"
+                          ? "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                          : "bg-gray-800 text-gray-300 hover:bg-gray-700"
                       )}
                     >
                       <BookOpen className="h-4 w-4" />
@@ -930,7 +1012,7 @@ export default function ChapterDetailPage() {
           </motion.div>
         )}
       </AnimatePresence>
-      
+
       {/* Chapter List Panel */}
       <AnimatePresence>
         {showChapterList && (
@@ -941,9 +1023,11 @@ export default function ChapterDetailPage() {
             transition={{ duration: 0.3 }}
             className={cn(
               "fixed inset-y-0 left-0 z-50 w-full max-w-sm overflow-y-auto border-r shadow-xl transition-colors duration-300 sm:w-80",
-              theme === "light" ? "border-gray-200 bg-white text-gray-900" : 
-              theme === "dark" ? "border-gray-800 bg-gray-900 text-white" : 
-              "border-[#e8d9c0] bg-[#f8f1e3] text-[#5f4b32]"
+              theme === "light"
+                ? "border-gray-200 bg-white text-gray-900"
+                : theme === "dark"
+                ? "border-gray-800 bg-gray-900 text-white"
+                : "border-[#e8d9c0] bg-[#f8f1e3] text-[#5f4b32]"
             )}
           >
             <div className="sticky top-0 z-10 flex items-center justify-between border-b p-4 backdrop-blur transition-colors duration-300">
@@ -952,16 +1036,18 @@ export default function ChapterDetailPage() {
                 onClick={() => setShowChapterList(false)}
                 className={cn(
                   "rounded-full p-1.5 transition-colors",
-                  theme === "light" ? "hover:bg-gray-100 text-gray-700" : 
-                  theme === "dark" ? "hover:bg-gray-800 text-gray-300" : 
-                  "hover:bg-[#e8d9c0] text-[#5f4b32]"
+                  theme === "light"
+                    ? "hover:bg-gray-100 text-gray-700"
+                    : theme === "dark"
+                    ? "hover:bg-gray-800 text-gray-300"
+                    : "hover:bg-[#e8d9c0] text-[#5f4b32]"
                 )}
                 aria-label="Close Chapter List"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
-            
+
             <div className="p-4">
               <div className="space-y-2">
                 {novelChapters.map((chapter) => (
@@ -970,38 +1056,54 @@ export default function ChapterDetailPage() {
                     href={`/novels/${slug}/chapters/${chapter.order}`}
                     className={cn(
                       "block rounded-lg p-3 transition-colors",
-                      chapter.order === Number(chapterSlug) ? (
-                        theme === "light" ? "bg-gray-900 text-white" : 
-                        theme === "dark" ? "bg-emerald-500 text-white" : 
-                        "bg-[#5f4b32] text-[#f8f1e3]"
-                      ) : (
-                        theme === "light" ? "hover:bg-gray-100" : 
-                        theme === "dark" ? "hover:bg-gray-800" : 
-                        "hover:bg-[#e8d9c0]"
-                      )
+                      chapter.order === Number(chapterSlug)
+                        ? theme === "light"
+                          ? "bg-gray-900 text-white"
+                          : theme === "dark"
+                          ? "bg-emerald-500 text-white"
+                          : "bg-[#5f4b32] text-[#f8f1e3]"
+                        : theme === "light"
+                        ? "hover:bg-gray-100"
+                        : theme === "dark"
+                        ? "hover:bg-gray-800"
+                        : "hover:bg-[#e8d9c0]"
                     )}
                     onClick={() => setShowChapterList(false)}
                   >
                     <div className="flex items-center justify-between">
                       <div>
-                        <div className="font-medium">Chapter {chapter.order}</div>
-                        <div className={cn(
-                          "text-sm",
-                          theme === "light" ? "text-gray-600" : 
-                          theme === "dark" ? (chapter.order === Number(chapterSlug) ? "text-gray-100" : "text-gray-400") : 
-                          (chapter.order === Number(chapterSlug) ? "text-[#f8f1e3]" : "text-[#8a7055]")
-                        )}>
+                        <div className="font-medium">
+                          Chapter {chapter.order}
+                        </div>
+                        <div
+                          className={cn(
+                            "text-sm",
+                            theme === "light"
+                              ? "text-gray-600"
+                              : theme === "dark"
+                              ? chapter.order === Number(chapterSlug)
+                                ? "text-gray-100"
+                                : "text-gray-400"
+                              : chapter.order === Number(chapterSlug)
+                              ? "text-[#f8f1e3]"
+                              : "text-[#8a7055]"
+                          )}
+                        >
                           {chapter.title}
                         </div>
                       </div>
-                      
+
                       {chapter.isNew && (
-                        <span className={cn(
-                          "rounded-full px-2 py-0.5 text-xs font-medium",
-                          theme === "light" ? "bg-emerald-100 text-emerald-800" : 
-                          theme === "dark" ? "bg-emerald-500/20 text-emerald-400" : 
-                          "bg-[#c8b28e] text-[#5f4b32]"
-                        )}>
+                        <span
+                          className={cn(
+                            "rounded-full px-2 py-0.5 text-xs font-medium",
+                            theme === "light"
+                              ? "bg-emerald-100 text-emerald-800"
+                              : theme === "dark"
+                              ? "bg-emerald-500/20 text-emerald-400"
+                              : "bg-[#c8b28e] text-[#5f4b32]"
+                          )}
+                        >
                           NEW
                         </span>
                       )}
@@ -1013,7 +1115,7 @@ export default function ChapterDetailPage() {
           </motion.div>
         )}
       </AnimatePresence>
-      
+
       {/* Comments Panel */}
       <AnimatePresence>
         {showComments && (
@@ -1024,9 +1126,11 @@ export default function ChapterDetailPage() {
             transition={{ duration: 0.3 }}
             className={cn(
               "fixed inset-y-0 right-0 z-50 w-full max-w-md overflow-y-auto border-l shadow-xl transition-colors duration-300 sm:w-96",
-              theme === "light" ? "border-gray-200 bg-white text-gray-900" : 
-              theme === "dark" ? "border-gray-800 bg-gray-900 text-white" : 
-              "border-[#e8d9c0] bg-[#f8f1e3] text-[#5f4b32]"
+              theme === "light"
+                ? "border-gray-200 bg-white text-gray-900"
+                : theme === "dark"
+                ? "border-gray-800 bg-gray-900 text-white"
+                : "border-[#e8d9c0] bg-[#f8f1e3] text-[#5f4b32]"
             )}
           >
             <div className="sticky top-0 z-10 flex items-center justify-between border-b p-4 backdrop-blur transition-colors duration-300">
@@ -1035,125 +1139,160 @@ export default function ChapterDetailPage() {
                 onClick={() => setShowComments(false)}
                 className={cn(
                   "rounded-full p-1.5 transition-colors",
-                  theme === "light" ? "hover:bg-gray-100 text-gray-700" : 
-                  theme === "dark" ? "hover:bg-gray-800 text-gray-300" : 
-                  "hover:bg-[#e8d9c0] text-[#5f4b32]"
+                  theme === "light"
+                    ? "hover:bg-gray-100 text-gray-700"
+                    : theme === "dark"
+                    ? "hover:bg-gray-800 text-gray-300"
+                    : "hover:bg-[#e8d9c0] text-[#5f4b32]"
                 )}
                 aria-label="Close Comments"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
-            
+
             <div className="p-4">
               {/* Comment Input */}
-              <div className={cn(
-                "mb-6 rounded-lg border p-3 transition-colors duration-300",
-                theme === "light" ? "border-gray-200" : 
-                theme === "dark" ? "border-gray-800" : 
-                "border-[#e8d9c0]"
-              )}>
+              <div
+                className={cn(
+                  "mb-6 rounded-lg border p-3 transition-colors duration-300",
+                  theme === "light"
+                    ? "border-gray-200"
+                    : theme === "dark"
+                    ? "border-gray-800"
+                    : "border-[#e8d9c0]"
+                )}
+              >
                 <textarea
                   placeholder="Add a comment..."
                   rows={3}
                   className={cn(
                     "w-full resize-none bg-transparent outline-none transition-colors duration-300",
-                    theme === "light" ? "placeholder:text-gray-500" : 
-                    theme === "dark" ? "placeholder:text-gray-500" : 
-                    "placeholder:text-[#8a7055]"
+                    theme === "light"
+                      ? "placeholder:text-gray-500"
+                      : theme === "dark"
+                      ? "placeholder:text-gray-500"
+                      : "placeholder:text-[#8a7055]"
                   )}
                 ></textarea>
                 <div className="mt-2 flex justify-end">
                   <button
                     className={cn(
                       "rounded-full px-4 py-1.5 text-sm font-medium transition-colors",
-                      theme === "light" ? "bg-gray-900 text-white hover:bg-gray-800" : 
-                      theme === "dark" ? "bg-emerald-500 text-white hover:bg-emerald-600" : 
-                      "bg-[#5f4b32] text-[#f8f1e3] hover:bg-[#4a3a27]"
+                      theme === "light"
+                        ? "bg-gray-900 text-white hover:bg-gray-800"
+                        : theme === "dark"
+                        ? "bg-emerald-500 text-white hover:bg-emerald-600"
+                        : "bg-[#5f4b32] text-[#f8f1e3] hover:bg-[#4a3a27]"
                     )}
                   >
                     Post Comment
                   </button>
                 </div>
               </div>
-              
+
               {/* Comments List */}
-              {chapterContent?.comments && chapterContent.comments.length > 0 ? (
+              {chapterContent?.comments &&
+              chapterContent.comments.length > 0 ? (
                 <div className="space-y-4">
                   {chapterContent.comments.map((comment) => (
-                    <div 
-                      key={comment.id} 
+                    <div
+                      key={comment.id}
                       className={cn(
                         "rounded-lg border p-3 transition-colors duration-300",
-                        theme === "light" ? "border-gray-200" : 
-                        theme === "dark" ? "border-gray-800" : 
-                        "border-[#e8d9c0]"
+                        theme === "light"
+                          ? "border-gray-200"
+                          : theme === "dark"
+                          ? "border-gray-800"
+                          : "border-[#e8d9c0]"
                       )}
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <div className={cn(
-                            "flex h-8 w-8 items-center justify-center rounded-full",
-                            theme === "light" ? "bg-gray-200 text-gray-700" : 
-                            theme === "dark" ? "bg-gray-800 text-gray-300" : 
-                            "bg-[#e8d9c0] text-[#5f4b32]"
-                          )}>
+                          <div
+                            className={cn(
+                              "flex h-8 w-8 items-center justify-center rounded-full",
+                              theme === "light"
+                                ? "bg-gray-200 text-gray-700"
+                                : theme === "dark"
+                                ? "bg-gray-800 text-gray-300"
+                                : "bg-[#e8d9c0] text-[#5f4b32]"
+                            )}
+                          >
                             <User className="h-5 w-5" />
                           </div>
                           <div>
-                            <div className="font-medium">{comment.username}</div>
-                            <div className={cn(
-                              "text-xs",
-                              theme === "light" ? "text-gray-600" : 
-                              theme === "dark" ? "text-gray-400" : 
-                              "text-[#8a7055]"
-                            )}>
+                            <div className="font-medium">
+                              {comment.username}
+                            </div>
+                            <div
+                              className={cn(
+                                "text-xs",
+                                theme === "light"
+                                  ? "text-gray-600"
+                                  : theme === "dark"
+                                  ? "text-gray-400"
+                                  : "text-[#8a7055]"
+                              )}
+                            >
                               {comment.date}
                             </div>
                           </div>
                         </div>
-                        
+
                         <button
                           className={cn(
                             "flex items-center gap-1 rounded-full px-2 py-1 text-xs transition-colors",
-                            theme === "light" ? "hover:bg-gray-100 text-gray-700" : 
-                            theme === "dark" ? "hover:bg-gray-800 text-gray-300" : 
-                            "hover:bg-[#e8d9c0] text-[#5f4b32]"
+                            theme === "light"
+                              ? "hover:bg-gray-100 text-gray-700"
+                              : theme === "dark"
+                              ? "hover:bg-gray-800 text-gray-300"
+                              : "hover:bg-[#e8d9c0] text-[#5f4b32]"
                           )}
                         >
                           <ThumbsUp className="h-3.5 w-3.5" />
                           <span>{comment.likes}</span>
                         </button>
                       </div>
-                      
-                      <p className={cn(
-                        "mt-2 text-sm",
-                        theme === "light" ? "text-gray-700" : 
-                        theme === "dark" ? "text-gray-300" : 
-                        "text-[#5f4b32]"
-                      )}>
+
+                      <p
+                        className={cn(
+                          "mt-2 text-sm",
+                          theme === "light"
+                            ? "text-gray-700"
+                            : theme === "dark"
+                            ? "text-gray-300"
+                            : "text-[#5f4b32]"
+                        )}
+                      >
                         {comment.content}
                       </p>
                     </div>
                   ))}
                 </div>
               ) : (
-                <div className={cn(
-                  "flex flex-col items-center justify-center rounded-lg border p-8 text-center",
-                  theme === "light" ? "border-gray-200 text-gray-500" : 
-                  theme === "dark" ? "border-gray-800 text-gray-400" : 
-                  "border-[#e8d9c0] text-[#8a7055]"
-                )}>
+                <div
+                  className={cn(
+                    "flex flex-col items-center justify-center rounded-lg border p-8 text-center",
+                    theme === "light"
+                      ? "border-gray-200 text-gray-500"
+                      : theme === "dark"
+                      ? "border-gray-800 text-gray-400"
+                      : "border-[#e8d9c0] text-[#8a7055]"
+                  )}
+                >
                   <MessageSquare className="h-12 w-12 opacity-50" />
                   <h3 className="mt-2 font-medium">No comments yet</h3>
-                  <p className="mt-1 text-sm">Be the first to share your thoughts!</p>
+                  <p className="mt-1 text-sm">
+                    Be the first to share your thoughts!
+                  </p>
                 </div>
               )}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-      
+
       {/* Overlay when panels are open */}
       <AnimatePresence>
         {(showChapterList || showComments) && (
@@ -1164,14 +1303,14 @@ export default function ChapterDetailPage() {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
             onClick={() => {
-              setShowChapterList(false)
-              setShowComments(false)
+              setShowChapterList(false);
+              setShowComments(false);
             }}
           />
         )}
       </AnimatePresence>
     </div>
-  )
+  );
 }
 
 // Extended mock data for novels
@@ -1186,7 +1325,8 @@ const allNovels = [
     rating: 4.7,
     totalRatings: 853,
     categories: ["Fantasy", "Mystery", "Supernatural"],
-    description: "In the waves of steam and machinery, who could achieve extraordinary? In the fogs of history and darkness, who was whispering? I woke up from the realm of mysteries and opened my eyes to the world. This is a different world. Everybody wakes up to be faced with a mystical card with different abilities. But with a glance, I knew that the world was not simple. The world was full of mysteries, and danger was hiding in the shadows. So I walked on my path, searching for the secrets of the world. Follow Klein Moretti's journey to unravel the mysteries of the world and find his true self.",
+    description:
+      "In the waves of steam and machinery, who could achieve extraordinary? In the fogs of history and darkness, who was whispering? I woke up from the realm of mysteries and opened my eyes to the world. This is a different world. Everybody wakes up to be faced with a mystical card with different abilities. But with a glance, I knew that the world was not simple. The world was full of mysteries, and danger was hiding in the shadows. So I walked on my path, searching for the secrets of the world. Follow Klein Moretti's journey to unravel the mysteries of the world and find his true self.",
     updatedAt: "2025-04-15T10:30:00Z",
     chapterCount: 1430,
     views: 2543789,
@@ -1201,7 +1341,8 @@ const allNovels = [
     rating: 4.7,
     totalRatings: 712,
     categories: ["Sci-Fi", "Adventure", "Fantasy"],
-    description: "What would happen if a game's NPC possessed the player's mind? Han Xiao, a fateful NPC, got a second chance at life. As a lowly mechanic, he had managed to save a galaxy from destruction! But before he could savor his triumph, he had died. However, destiny had other plans.",
+    description:
+      "What would happen if a game's NPC possessed the player's mind? Han Xiao, a fateful NPC, got a second chance at life. As a lowly mechanic, he had managed to save a galaxy from destruction! But before he could savor his triumph, he had died. However, destiny had other plans.",
     updatedAt: "2025-04-18T14:45:00Z",
     chapterCount: 1465,
     views: 1987654,
@@ -1219,7 +1360,7 @@ const allChapters = [
     slug: "transmigration",
     releaseDate: "Jan 2, 2025",
     views: 234567,
-    isNew: false
+    isNew: false,
   },
   {
     id: "lord-mysteries-2",
@@ -1229,7 +1370,7 @@ const allChapters = [
     slug: "the-fool",
     releaseDate: "Jan 5, 2025",
     views: 198765,
-    isNew: false
+    isNew: false,
   },
   {
     id: "lord-mysteries-3",
@@ -1239,7 +1380,7 @@ const allChapters = [
     slug: "the-tarot-club",
     releaseDate: "Jan 8, 2025",
     views: 187654,
-    isNew: false
+    isNew: false,
   },
   {
     id: "lord-mysteries-4",
@@ -1249,7 +1390,7 @@ const allChapters = [
     slug: "sequence-potion",
     releaseDate: "Jan 11, 2025",
     views: 176543,
-    isNew: false
+    isNew: false,
   },
   {
     id: "lord-mysteries-5",
@@ -1259,7 +1400,7 @@ const allChapters = [
     slug: "the-hanged-man",
     releaseDate: "Jan 14, 2025",
     views: 165432,
-    isNew: false
+    isNew: false,
   },
   {
     id: "lord-mysteries-1430",
@@ -1269,9 +1410,9 @@ const allChapters = [
     slug: "the-fools-gambit",
     releaseDate: "Apr 15, 2025",
     views: 54321,
-    isNew: true
+    isNew: true,
   },
-  
+
   // Legendary Mechanic chapters
   {
     id: "legendary-mechanic-1",
@@ -1281,7 +1422,7 @@ const allChapters = [
     slug: "awakening",
     releaseDate: "Jan 5, 2025",
     views: 187654,
-    isNew: false
+    isNew: false,
   },
   {
     id: "legendary-mechanic-2",
@@ -1291,7 +1432,7 @@ const allChapters = [
     slug: "the-game-begins",
     releaseDate: "Jan 8, 2025",
     views: 176543,
-    isNew: false
+    isNew: false,
   },
   {
     id: "legendary-mechanic-1465",
@@ -1301,7 +1442,7 @@ const allChapters = [
     slug: "mechanical-apocalypse",
     releaseDate: "Apr 18, 2025",
     views: 43210,
-    isNew: true
+    isNew: true,
   },
 ];
 
@@ -1403,25 +1544,28 @@ And unaware of the ancient powers that had orchestrated it all.`,
       {
         id: "comment-1",
         username: "MysteryFan42",
-        content: "This first chapter hooked me immediately! The concept of transmigration is handled so well here, and I love how the author sets up the mystery right from the start.",
+        content:
+          "This first chapter hooked me immediately! The concept of transmigration is handled so well here, and I love how the author sets up the mystery right from the start.",
         date: "Jan 3, 2025",
-        likes: 24
+        likes: 24,
       },
       {
         id: "comment-2",
         username: "NovelReader",
-        content: "I've read this three times now and keep finding new details. The foreshadowing is subtle but it's definitely there!",
+        content:
+          "I've read this three times now and keep finding new details. The foreshadowing is subtle but it's definitely there!",
         date: "Jan 5, 2025",
-        likes: 18
+        likes: 18,
       },
       {
         id: "comment-3",
         username: "BookwormAlice",
-        content: "The world-building is already fascinating. I can tell this is going to be a complex story with lots of layers.",
+        content:
+          "The world-building is already fascinating. I can tell this is going to be a complex story with lots of layers.",
         date: "Jan 10, 2025",
-        likes: 15
-      }
-    ]
+        likes: 15,
+      },
+    ],
   },
   {
     novelSlug: "lord-mysteries",
@@ -1493,7 +1637,7 @@ Who was he, really? Klein Moretti, a young man seeking a position at a universit
 As he walked home, lost in thought, he didn't notice the figure watching him from across the street—a tall man in a black coat, his face hidden by the shadow of his hat. The man observed Klein for a long moment, then turned and disappeared into the crowd, leaving no trace of his presence except a lingering scent of something ancient and otherworldly.
 
 The game had begun, and The Fool had taken his first step off the cliff.`,
-    comments: []
+    comments: [],
   },
   {
     novelSlug: "legendary-mechanic",
@@ -1622,17 +1766,19 @@ The universe wouldn't know what hit it.`,
       {
         id: "comment-1",
         username: "SciFiLover",
-        content: "I love the concept of this novel! The idea of a player being transported into the game world with all his knowledge is fascinating.",
+        content:
+          "I love the concept of this novel! The idea of a player being transported into the game world with all his knowledge is fascinating.",
         date: "Jan 6, 2025",
-        likes: 31
+        likes: 31,
       },
       {
         id: "comment-2",
         username: "GamerGirl",
-        content: "As a gamer myself, I can totally relate to Han Xiao's attachment to the game. The way the author describes the gaming experience feels so authentic!",
+        content:
+          "As a gamer myself, I can totally relate to Han Xiao's attachment to the game. The way the author describes the gaming experience feels so authentic!",
         date: "Jan 7, 2025",
-        likes: 27
-      }
-    ]
-  }
+        likes: 27,
+      },
+    ],
+  },
 ];

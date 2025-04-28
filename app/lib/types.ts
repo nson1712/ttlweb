@@ -16,16 +16,22 @@ export interface Novel {
   status?: 'ongoing' | 'completed' | 'hiatus';
   yearOfRelease?: number;
   tags?: string[];
+  featuredReason?: string;
+  views?: number;
 }
 
 export interface Chapter {
+  id?: string
   slug: string;
   storySlug: string;
   title: string;
+  views?: number;
   number: number;
   content: string;
   createdAt: string;
   updatedAt: string;
+  releaseDate?: string;
+  isNew?: boolean
 }
 
 export interface FilterOptions {
