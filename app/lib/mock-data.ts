@@ -1178,6 +1178,7 @@ export const allChapters = [
   {
     id: "lord-mysteries-1",
     novelSlug: "lord-mysteries",
+    slug: "a",
     number: 1,
     title: "Transmigration",
     releaseDate: "Jan 2, 2025",
@@ -1187,6 +1188,7 @@ export const allChapters = [
   {
     id: "lord-mysteries-2",
     novelSlug: "lord-mysteries",
+    slug: "b",
     number: 2,
     title: "The Fool",
     releaseDate: "Jan 5, 2025",
@@ -1196,6 +1198,7 @@ export const allChapters = [
   {
     id: "lord-mysteries-3",
     novelSlug: "lord-mysteries",
+    slug: "c",
     number: 3,
     title: "The Tarot Club",
     releaseDate: "Jan 8, 2025",
@@ -1205,6 +1208,7 @@ export const allChapters = [
   {
     id: "lord-mysteries-4",
     novelSlug: "lord-mysteries",
+    slug: "d",
     number: 4,
     title: "Sequence Potion",
     releaseDate: "Jan 11, 2025",
@@ -1214,6 +1218,7 @@ export const allChapters = [
   {
     id: "lord-mysteries-5",
     novelSlug: "lord-mysteries",
+    slug: "e",
     number: 5,
     title: "The Hanged Man",
     releaseDate: "Jan 14, 2025",
@@ -1223,6 +1228,7 @@ export const allChapters = [
   {
     id: "lord-mysteries-6",
     novelSlug: "lord-mysteries",
+    slug: "g",
     number: 6,
     title: "The Magician",
     releaseDate: "Jan 17, 2025",
@@ -1232,6 +1238,7 @@ export const allChapters = [
   {
     id: "lord-mysteries-7",
     novelSlug: "lord-mysteries",
+    slug: "asd",
     number: 7,
     title: "The High Priestess",
     releaseDate: "Jan 20, 2025",
@@ -1241,6 +1248,7 @@ export const allChapters = [
   {
     id: "lord-mysteries-8",
     novelSlug: "lord-mysteries",
+    slug: "asdfg",
     number: 8,
     title: "The Hermit",
     releaseDate: "Jan 23, 2025",
@@ -1250,6 +1258,7 @@ export const allChapters = [
   {
     id: "lord-mysteries-9",
     novelSlug: "lord-mysteries",
+    slug: "sdfg",
     number: 9,
     title: "The Wheel of Fortune",
     releaseDate: "Jan 26, 2025",
@@ -1259,6 +1268,7 @@ export const allChapters = [
   {
     id: "lord-mysteries-10",
     novelSlug: "lord-mysteries",
+    slug: "d-fhg",
     number: 10,
     title: "The World",
     releaseDate: "Jan 29, 2025",
@@ -1268,6 +1278,7 @@ export const allChapters = [
   {
     id: "lord-mysteries-11",
     novelSlug: "lord-mysteries",
+    slug: "sdfgswer",
     number: 11,
     title: "The Chariot",
     releaseDate: "Feb 1, 2025",
@@ -1277,6 +1288,7 @@ export const allChapters = [
   {
     id: "lord-mysteries-12",
     novelSlug: "lord-mysteries",
+    slug: "asdfasdf",
     number: 12,
     title: "The Star",
     releaseDate: "Feb 4, 2025",
@@ -1286,6 +1298,7 @@ export const allChapters = [
   {
     id: "lord-mysteries-13",
     novelSlug: "lord-mysteries",
+    slug: "qwerq",
     number: 13,
     title: "The Sun",
     releaseDate: "Feb 7, 2025",
@@ -1295,6 +1308,7 @@ export const allChapters = [
   {
     id: "lord-mysteries-14",
     novelSlug: "lord-mysteries",
+    slug: "jhtegd",
     number: 14,
     title: "The Moon",
     releaseDate: "Feb 10, 2025",
@@ -1304,6 +1318,7 @@ export const allChapters = [
   {
     id: "lord-mysteries-15",
     novelSlug: "lord-mysteries",
+    slug: "sdfgsdfg",
     number: 15,
     title: "The Emperor",
     releaseDate: "Feb 13, 2025",
@@ -1313,6 +1328,7 @@ export const allChapters = [
   {
     id: "lord-mysteries-16",
     novelSlug: "lord-mysteries",
+    slug: "qwerqwer",
     number: 16,
     title: "The Empress",
     releaseDate: "Feb 16, 2025",
@@ -1322,6 +1338,7 @@ export const allChapters = [
   {
     id: "lord-mysteries-17",
     novelSlug: "lord-mysteries",
+    slug: "gsdfgsdfg",
     number: 17,
     title: "The Lovers",
     releaseDate: "Feb 19, 2025",
@@ -1331,6 +1348,7 @@ export const allChapters = [
   {
     id: "lord-mysteries-18",
     novelSlug: "lord-mysteries",
+    slug: "gsdfgsdfg",
     number: 18,
     title: "The Tower",
     releaseDate: "Feb 22, 2025",
@@ -1340,6 +1358,7 @@ export const allChapters = [
   {
     id: "lord-mysteries-19",
     novelSlug: "lord-mysteries",
+    slug: "sdfgsdfgsdfg",
     number: 19,
     title: "The Devil",
     releaseDate: "Feb 25, 2025",
@@ -1349,6 +1368,7 @@ export const allChapters = [
   {
     id: "lord-mysteries-20",
     novelSlug: "lord-mysteries",
+    slug: "sdfgsdfgsdf",
     number: 20,
     title: "The Judgment",
     releaseDate: "Feb 28, 2025",
@@ -1358,6 +1378,7 @@ export const allChapters = [
   {
     id: "lord-mysteries-1430",
     novelSlug: "lord-mysteries",
+    slug: "sdfgsdfgsdfg",
     number: 1430,
     title: "The Fool's Gambit",
     releaseDate: "Apr 15, 2025",
@@ -1369,6 +1390,7 @@ export const allChapters = [
   {
     id: "legendary-mechanic-1",
     novelSlug: "legendary-mechanic",
+    slug: "sdfgsdfg",
     number: 1,
     title: "Awakening",
     releaseDate: "Jan 5, 2025",
@@ -1378,6 +1400,7 @@ export const allChapters = [
   {
     id: "legendary-mechanic-2",
     novelSlug: "legendary-mechanic",
+    slug: "sdfgsdfghsdf",
     number: 2,
     title: "The Game Begins",
     releaseDate: "Jan 8, 2025",
@@ -1387,6 +1410,7 @@ export const allChapters = [
   {
     id: "legendary-mechanic-1465",
     novelSlug: "legendary-mechanic",
+    slug: "hsdfhgdfh",
     number: 1465,
     title: "Mechanical Apocalypse",
     releaseDate: "Apr 18, 2025",
@@ -1398,6 +1422,7 @@ export const allChapters = [
   {
     id: "shadow-slave-1",
     novelSlug: "shadow-slave",
+    slug: "brthb",
     number: 1,
     title: "The Nightmare Spell",
     releaseDate: "Jan 10, 2025",
@@ -1407,6 +1432,7 @@ export const allChapters = [
   {
     id: "shadow-slave-2",
     novelSlug: "shadow-slave",
+    slug: "zsdxtzxdt",
     number: 2,
     title: "Awakened",
     releaseDate: "Jan 13, 2025",
@@ -1416,6 +1442,7 @@ export const allChapters = [
   {
     id: "shadow-slave-790",
     novelSlug: "shadow-slave",
+    slug: "xchgxcgj",
     number: 790,
     title: "Darkness Ascendant",
     releaseDate: "Apr 22, 2025",

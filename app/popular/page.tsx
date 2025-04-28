@@ -114,8 +114,8 @@ export default function PopularPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-950">
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="min-h-screen">
+      <div className="mx-auto">
         {/* Hero Section */}
         <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-gray-800 to-gray-900 p-8 mb-8">
           <div className="absolute inset-0 opacity-20">
@@ -378,7 +378,7 @@ export default function PopularPage() {
           </h2>
 
           {sortedNovels.length > 0 ? (
-            <div className="space-y-4">
+            <div className="flex flex-col gap-y-2">
               {sortedNovels.map((novel, index) => (
                 <PopularNovelCard
                   key={novel.id}

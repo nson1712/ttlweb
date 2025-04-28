@@ -312,7 +312,7 @@ export default function CollectionsPage() {
                 ))}
               </div>
             ) : (
-              <div className="space-y-4">
+              <div className="flex flex-col gap-y-2">
                 {sortedCollections.map((collection) => (
                   <CollectionListItem
                     key={collection.id}

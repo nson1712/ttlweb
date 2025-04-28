@@ -33,7 +33,7 @@ export function NovelCard({
 }: NovelCardProps) {
   return (
     <div className="group relative flex flex-col md:flex-row gap-4 bg-gradient-to-br from-gray-800/90 to-gray-900 shadow-md transition-all hover:shadow-2xl rounded-lg overflow-hidden p-4">
-      <div className="relative w-full md:w-48 h-64 md:h-auto flex-shrink-0">
+      <div className="relative w-full md:w-48 h-64 md:h-auto flex-shrink-0 aspect-[3/4]">
         <Image
           src={coverImage}
           alt={title}

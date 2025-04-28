@@ -344,7 +344,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Search, Menu, X, ChevronDown, Bell, BookOpen, Home, Clock, Flame, Compass, User } from "lucide-react";
+import { Search, Menu, X, Bell, BookOpen, Home, Clock, Flame, Compass, User } from "lucide-react";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import {
@@ -490,7 +490,6 @@ export function Header() {
                   <NavigationMenuTrigger className="bg-transparent hover:bg-gray-800/70 text-gray-200 hover:text-white">
                     <Compass className="w-4 h-4 mr-2" />
                     Explore
-                    <ChevronDown className="h-4 w-4 ml-1" />
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <motion.div

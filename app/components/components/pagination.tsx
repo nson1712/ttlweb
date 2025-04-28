@@ -70,7 +70,15 @@ export function PaginationWithLinks({
       for (let i = 1; i <= total; i++) {
         items.push(
           <PaginationItem key={i}>
-            <PaginationLink href={buildLink(i)} isActive={page === i}>
+            <PaginationLink
+              className={
+                page === i
+                  ? "bg-gradient-to-r from-emerald-400 to-teal-500 border-none"
+                  : "rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 border-none"
+              }
+              href={buildLink(i)}
+              isActive={page === i}
+            >
               {i}
             </PaginationLink>
           </PaginationItem>
@@ -90,7 +98,7 @@ export function PaginationWithLinks({
     }
 
     items.push(
-      <PaginationItem key={1}>
+      <PaginationItem className="" key={1}>
         <PaginationLink href={buildLink(1)} isActive={page === 1}>
           1
         </PaginationLink>
@@ -153,7 +161,9 @@ export function PaginationWithLinks({
               href={buildLink(Math.max(page - 1, 1))}
               aria-disabled={page === 1}
               tabIndex={page === 1 ? -1 : undefined}
-              className={page === 1 ? "pointer-events-none opacity-50" : undefined}
+              className={
+                page === 1 ? "pointer-events-none opacity-50" : undefined
+              }
             />
           </PaginationItem>
 
@@ -164,7 +174,11 @@ export function PaginationWithLinks({
               href={buildLink(Math.min(page + 1, totalPageCount))}
               aria-disabled={page === totalPageCount}
               tabIndex={page === totalPageCount ? -1 : undefined}
-              className={page === totalPageCount ? "pointer-events-none opacity-50" : undefined}
+              className={
+                page === totalPageCount
+                  ? "pointer-events-none opacity-50"
+                  : undefined
+              }
             />
           </PaginationItem>
         </PaginationContent>
@@ -172,29 +186,29 @@ export function PaginationWithLinks({
 
       <div className="flex items-center justify-end">
         {/* Page Size Select */}
-      {pageSizeSelectOptions && (
+        {pageSizeSelectOptions && (
           <SelectRowsPerPage
             options={pageSizeSelectOptions.pageSizeOptions}
             setPageSize={navToPageSize}
             pageSize={pageSize}
           />
-      )}
+        )}
 
-      {/* Quick‑Jumper */}
-      {totalPageCount > 1 && (
-        <div className="flex items-center gap-2 min-w-32 justify-end">
-          <span className="text-sm">Go to</span>
-          <input
-            type="number"
-            defaultValue={page}
-            min={1}
-            max={totalPageCount}
-            onKeyDown={onJumpKeyDown}
-            className="w-16 border rounded-md p-2 text-sm"
-            aria-label="Jump to page"
-          />
-        </div>
-      )}
+        {/* Quick‑Jumper */}
+        {totalPageCount > 1 && (
+          <div className="flex items-center gap-2 min-w-32 justify-end ">
+            <span className="text-sm">Go to</span>
+            <input
+              type="number"
+              defaultValue={page}
+              min={1}
+              max={totalPageCount}
+              onKeyDown={onJumpKeyDown}
+              className="w-16 border rounded-md p-2 text-sm"
+              aria-label="Jump to page"
+            />
+          </div>
+        )}
       </div>
     </div>
   );
@@ -210,7 +224,7 @@ const SelectRowsPerPage = ({
   pageSize: number;
 }) => {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 ">
       <Select
         defaultValue={String(pageSize)}
         onValueChange={(v) => setPageSize(Number(v))}
@@ -229,4 +243,4 @@ const SelectRowsPerPage = ({
       </Select>
     </div>
   );
-}
+};
