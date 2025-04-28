@@ -34,6 +34,7 @@ export default function GenreCatalogPage() {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [showFilters, setShowFilters] = useState(false);
 
+
   // Filter genres based on search query and category
   const filteredGenres = genres.filter((genre) => {
     const matchesSearch =
@@ -46,6 +47,7 @@ export default function GenreCatalogPage() {
     return matchesSearch && matchesCategory;
   });
 
+
   // Group genres by category for the list view
   const genresByCategory = filteredGenres.reduce((acc, genre) => {
     if (!acc[genre.category]) {
@@ -55,12 +57,15 @@ export default function GenreCatalogPage() {
     return acc;
   }, {} as Record<string, Genre[]>);
 
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-950">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         {/* Hero Section */}
         <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-gray-800 to-gray-900 p-8 mb-8">
           <div className="absolute inset-0 opacity-20">
+            <Image
+              src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
             <Image
               src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
               alt="Books background"
@@ -80,6 +85,7 @@ export default function GenreCatalogPage() {
           </div>
         </div>
 
+
         {/* Search and Filters */}
         <div className="mb-8 space-y-4">
           <div className="flex flex-col gap-4 sm:flex-row">
@@ -97,6 +103,7 @@ export default function GenreCatalogPage() {
               />
             </div>
 
+
             {/* Filter Toggle */}
             <button
               onClick={() => setShowFilters(!showFilters)}
@@ -111,6 +118,7 @@ export default function GenreCatalogPage() {
                 )}
               />
             </button>
+
 
             {/* View Mode Toggle */}
             <div className="flex rounded-lg border border-gray-700 bg-gray-800">
@@ -140,6 +148,7 @@ export default function GenreCatalogPage() {
               </button>
             </div>
           </div>
+
 
           {/* Expanded Filters */}
           {showFilters && (
@@ -205,6 +214,7 @@ export default function GenreCatalogPage() {
           )}
         </div>
 
+
         {/* Popular Genres Section */}
         {searchQuery === "" && selectedCategory === "all" && (
           <div className="mb-12">
@@ -221,6 +231,7 @@ export default function GenreCatalogPage() {
           </div>
         )}
 
+
         {/* All Genres Section */}
         {viewMode === "grid" ? (
           <>
@@ -234,6 +245,7 @@ export default function GenreCatalogPage() {
                   } Categories`
                 : "All Genres"}
             </h2>
+
 
             {filteredGenres.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -278,6 +290,7 @@ export default function GenreCatalogPage() {
                   } Categories`
                 : "All Genres"}
             </h2>
+
 
             {Object.keys(genresByCategory).length > 0 ? (
               <div className="space-y-8">
