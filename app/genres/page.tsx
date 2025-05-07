@@ -66,8 +66,6 @@ export default function GenreCatalogPage() {
           <div className="absolute inset-0 opacity-20">
             <Image
               src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
-            <Image
-              src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
               alt="Books background"
               fill
               className="object-cover"
@@ -139,7 +137,7 @@ export default function GenreCatalogPage() {
                 className={cn(
                   "flex items-center gap-2 px-4 py-2 transition-colors",
                   viewMode === "list"
-                    ? "bg-gradient-to-r from-emerald-400 to-teal-500 rounded-r-md hover:rounded-r-md hover:rounded-r-md text-white"
+                    ? "bg-gradient-to-r from-emerald-400 to-teal-500 rounded-r-md hover:rounded-r-md text-white"
                     : "text-gray-300 hover:bg-gray-700"
                 )}
               >

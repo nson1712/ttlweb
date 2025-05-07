@@ -18,6 +18,7 @@ import {
 import { Badge } from "../components/ui/badge"
 // import { PaginationWithLinks } from "../components/ui/pagination"
 import { cn } from "../lib/utils"
+import { useSearchParams } from "next/navigation"
 
 // Mock data for completed novels
 const completedNovels = [
@@ -203,44 +204,21 @@ const completedNovels = [
   }
 ];
 
-interface CompletedNovelsPageProps {
-  searchParams?: { 
-    page?: string
-    pageSize?: string
-    sort?: string
-    view?: string
-    search?: string
-    category?: string
-  }
-}
 
-export default function CompletedNovelsPage({ 
-  searchParams = { page: "1", pageSize: "12", sort: "rating", view: "grid" } 
-}: CompletedNovelsPageProps) {
-  const [searchQuery, setSearchQuery] = useState(searchParams.search || "")
-  const [selectedCategory, setSelectedCategory] = useState(searchParams.category || "")
+export default function CompletedNovelsPage() {
+  const searchParams = useSearchParams();
+
+  const page = parseInt(searchParams.get("page") ?? "1", 10)
   
-  const page = parseInt(
-    Array.isArray(searchParams.page)
-      ? searchParams.page[0]
-      : searchParams.page ?? "1",
-    10
-  )
+  const pageSize = parseInt(searchParams.get("pageSize") ?? "10", 10)
   
-  const pageSize = parseInt(
-    Array.isArray(searchParams.pageSize)
-      ? searchParams.pageSize[0]
-      : searchParams.pageSize ?? "12",
-    10
-  )
+  const sort = searchParams.get("sort") ?? "rating"
   
-  const sort = Array.isArray(searchParams.sort)
-    ? searchParams.sort[0]
-    : searchParams.sort ?? "rating"
-  
-  const view = Array.isArray(searchParams.view)
-    ? searchParams.view[0]
-    : searchParams.view ?? "grid"
+  const view = searchParams.get("view") ?? "list"
+
+  const [searchQuery, setSearchQuery] = useState(searchParams.get("search") || "")
+  const [selectedCategory, setSelectedCategory] = useState(searchParams.get("category") || "")
+
   
   // Get all unique categories
   const allCategories = Array.from(
