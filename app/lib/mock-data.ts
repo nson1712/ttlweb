@@ -934,7 +934,7 @@ export const allRecentUpdates = [
     chapterNumber: 157,
     updatedAt: "2 weeks ago",
     coverImage:
-      "https://truyenabc.site/1726838702_reborn-as-my-love-rivals-wife.webp",
+      "/1726838702_reborn-as-my-love-rivals-wife.webp",
     categories: ["Fantasy", "Adventure", "Action", "Time Travel"],
   },
   {
@@ -945,7 +945,7 @@ export const allRecentUpdates = [
     chapterNumber: 24,
     updatedAt: "1 month ago",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1726838702_reborn-as-my-love-rivals-wife.webp",
     categories: ["Comedy", "Psychological", "Fantasy"],
   },
 ];
@@ -956,7 +956,7 @@ export const allNovels = [
     slug: "lord-mysteries",
     title: "Lord of the Mysteries",
     coverImage:
-      "https://truyenabc.site/1726838702_reborn-as-my-love-rivals-wife.webp",
+      "/1726838702_reborn-as-my-love-rivals-wife.webp",
     author: "Cuttlefish That Loves Diving",
     rating: 4.7,
     totalRatings: 853,

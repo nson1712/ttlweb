@@ -491,7 +491,7 @@ const allNovels = [
     slug: "dimensional-storekeeper",
     title: "Dimensional Storekeeper",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1726838702_reborn-as-my-love-rivals-wife.webp",
     author: "Dimension Walker",
     rating: 4.7,
     totalRatings: 321,
@@ -505,7 +505,7 @@ const allNovels = [
     slug: "timeless-assassin",
     title: "Timeless Assassin",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1726838702_reborn-as-my-love-rivals-wife.webp",
     author: "Solver Keter",
     rating: 4.8,
     totalRatings: 287,
