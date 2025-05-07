@@ -256,7 +256,7 @@ export const recentUpdates = [
     id: "lord-void",
     slug: "lord-void",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     title: "The Lord of Void and Real",
     chapter: "Chapter 319: Three Stars Demolishing Demons",
     updatedAt: "9 minutes ago",
@@ -265,7 +265,7 @@ export const recentUpdates = [
     id: "beast-taming",
     slug: "beast-taming",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     title: "Beast Taming Patrol",
     chapter: "Chapter 674: Youyou Advances!",
     updatedAt: "14 minutes ago",
@@ -274,7 +274,7 @@ export const recentUpdates = [
     id: "disciple-simulator",
     slug: "disciple-simulator",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     title: "I Have A Disciple Simulator",
     chapter: "Chapter 911: The Humble Hallucinatory Dark Demon Venerable!",
     updatedAt: "14 minutes ago",
@@ -283,7 +283,7 @@ export const recentUpdates = [
     id: "grinding-experience",
     slug: "grinding-experience",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     title: "I Am Grinding Experience In Another World",
     chapter: "Chapter 671: Return to Qingqiu",
     updatedAt: "15 minutes ago",
@@ -292,7 +292,7 @@ export const recentUpdates = [
     id: "reversing-life",
     slug: "reversing-life",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     title: "Reversing Life With Item Copy",
     chapter: "Chapter 128: Not Quite Yet",
     updatedAt: "16 minutes ago",
@@ -360,7 +360,7 @@ export const chapterPreviews = [
     id: "lord-void",
     slug: "lord-void",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     storyTitle: "The Lord of Void and Real",
     chapterTitle: "Chapter 319: Three Stars Demolishing Demons",
     order: 319,
@@ -433,7 +433,7 @@ He looked up at the three stars, still forming their perfect triangle in the nig
     id: "beast-taming",
     slug: "beast-taming",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     storyTitle: "Beast Taming Patrol",
     chapterTitle: "Chapter 674: Youyou Advances!",
     order: 674,
@@ -520,7 +520,7 @@ The little fox had advanced, and their journey was only just beginning.`,
     id: "disciple-simulator",
     slug: "disciple-simulator",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     storyTitle: "I Have A Disciple Simulator",
     chapterTitle: "Chapter 911: The Humble Hallucinatory Dark Demon Venerable!",
     order: 911,
@@ -721,7 +721,7 @@ export const allRecentUpdates = [
     id: "lord-void",
     slug: "lord-void",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     title: "The Lord of Void and Real",
     chapter: "Chapter 319: Three Stars Demolishing Demons",
     chapterNumber: 319,
@@ -732,7 +732,7 @@ export const allRecentUpdates = [
     id: "beast-taming",
     slug: "beast-taming",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     title: "Beast Taming Patrol",
     chapter: "Chapter 674: Youyou Advances!",
     chapterNumber: 674,
@@ -743,7 +743,7 @@ export const allRecentUpdates = [
     id: "disciple-simulator",
     slug: "disciple-simulator",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     title: "I Have A Disciple Simulator",
     chapter: "Chapter 911: The Humble Hallucinatory Dark Demon Venerable!",
     chapterNumber: 911,
@@ -754,7 +754,7 @@ export const allRecentUpdates = [
     id: "grinding-experience",
     slug: "grinding-experience",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     title: "I Am Grinding Experience In Another World",
     chapter: "Chapter 671: Return to Qingqiu",
     chapterNumber: 671,
@@ -765,7 +765,7 @@ export const allRecentUpdates = [
     id: "reversing-life",
     slug: "reversing-life",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     title: "Reversing Life With Item Copy",
     chapter: "Chapter 128: Not Quite Yet",
     chapterNumber: 128,
@@ -776,7 +776,7 @@ export const allRecentUpdates = [
     id: "shadow-slave",
     slug: "shadow-slave",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     title: "Shadow Slave",
     chapter: "Chapter 790: Darkness Ascendant",
     chapterNumber: 790,
@@ -787,7 +787,7 @@ export const allRecentUpdates = [
     id: "lord-mysteries",
     slug: "lord-mysteries",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     title: "Lord of the Mysteries",
     chapter: "Chapter 1431: The Fool's Gambit",
     chapterNumber: 1431,
@@ -798,7 +798,7 @@ export const allRecentUpdates = [
     id: "legendary-mechanic",
     slug: "legendary-mechanic",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     title: "The Legendary Mechanic",
     chapter: "Chapter 1466: Mechanical Apocalypse",
     chapterNumber: 1466,
@@ -809,7 +809,7 @@ export const allRecentUpdates = [
     id: "throne-of-magical-arcana",
     slug: "throne-of-magical-arcana",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     title: "Throne of Magical Arcana",
     chapter: "Chapter 922: Arcane Convergence",
     chapterNumber: 922,
@@ -824,7 +824,7 @@ export const allRecentUpdates = [
     chapterNumber: 47,
     updatedAt: "8 hours ago",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     categories: ["Adventure", "Fantasy", "Action"],
   },
   {
@@ -835,7 +835,7 @@ export const allRecentUpdates = [
     chapterNumber: 43,
     updatedAt: "8 hours ago",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     categories: ["Adventure", "Fantasy", "Horror"],
   },
   {
@@ -846,7 +846,7 @@ export const allRecentUpdates = [
     chapterNumber: 552,
     updatedAt: "Yesterday",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     categories: ["Fantasy", "Adventure", "Action"],
   },
   {
@@ -857,7 +857,7 @@ export const allRecentUpdates = [
     chapterNumber: 2335,
     updatedAt: "Yesterday",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     categories: ["Fantasy", "Martial Arts", "Xuanhuan"],
   },
   {
@@ -868,7 +868,7 @@ export const allRecentUpdates = [
     chapterNumber: 1201,
     updatedAt: "Yesterday",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     categories: ["Fantasy", "Sci-Fi", "Adventure"],
   },
   {
@@ -879,7 +879,7 @@ export const allRecentUpdates = [
     chapterNumber: 1499,
     updatedAt: "2 days ago",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     categories: ["Fantasy", "Kingdom Building", "Adventure"],
   },
   {
@@ -890,7 +890,7 @@ export const allRecentUpdates = [
     chapterNumber: 1877,
     updatedAt: "3 days ago",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     categories: ["Fantasy", "Adventure", "Magic"],
   },
   {
@@ -901,7 +901,7 @@ export const allRecentUpdates = [
     chapterNumber: 655,
     updatedAt: "4 days ago",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     categories: ["Games", "Adventure", "Fantasy", "Cultivation"],
   },
   {
@@ -912,7 +912,7 @@ export const allRecentUpdates = [
     chapterNumber: 3422,
     updatedAt: "5 days ago",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     categories: ["Sci-Fi", "Adventure", "Mecha"],
   },
   {
@@ -923,7 +923,7 @@ export const allRecentUpdates = [
     chapterNumber: 288,
     updatedAt: "1 week ago",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     categories: ["Fantasy", "Adventure", "System"],
   },
   {
@@ -1008,7 +1008,7 @@ export const allNovels = [
     slug: "legendary-mechanic",
     title: "The Legendary Mechanic",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Chocolion",
     rating: 4.7,
     totalRatings: 712,
@@ -1032,7 +1032,7 @@ export const allNovels = [
     slug: "shadow-slave",
     title: "Shadow Slave",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Guiltythree",
     rating: 4.1,
     totalRatings: 769,
@@ -1056,7 +1056,7 @@ export const allNovels = [
     slug: "throne-of-magical-arcana",
     title: "Throne of Magical Arcana",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Cuttlefish That Loves Diving",
     rating: 4.5,
     totalRatings: 623,
@@ -1080,7 +1080,7 @@ export const allNovels = [
     slug: "omniscient-readers-viewpoint",
     title: "Omniscient Reader's Viewpoint",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Sing-Shong",
     rating: 4.8,
     totalRatings: 892,
@@ -1104,7 +1104,7 @@ export const allNovels = [
     slug: "throne-of-magical-arcana-2",
     title: "Throne of Magical Arcana 2",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Cuttlefish That Loves Diving",
     rating: 4.5,
     totalRatings: 623,
@@ -1128,7 +1128,7 @@ export const allNovels = [
     slug: "throne-of-magical-arcana-3",
     title: "Throne of Magical Arcana 3",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Cuttlefish That Loves Diving",
     rating: 4.5,
     totalRatings: 623,
@@ -1152,7 +1152,7 @@ export const allNovels = [
     slug: "throne-of-magical-arcana-1",
     title: "Throne of Magical Arcana 1",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Cuttlefish That Loves Diving",
     rating: 4.5,
     totalRatings: 623,

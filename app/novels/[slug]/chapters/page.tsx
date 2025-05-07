@@ -444,7 +444,7 @@ const allNovels = [
     slug: "madman-family",
     title: "I Am The Madman Of This Family",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     author: "Solver Keter",
     rating: 4.5,
     totalRatings: 11,
@@ -460,7 +460,7 @@ const allNovels = [
     slug: "industrial-cthulhu",
     title: "Industrial Cthulhu: Starting as an Island Lord",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     author: "Unknown Author",
     rating: 4.2,
     totalRatings: 21,

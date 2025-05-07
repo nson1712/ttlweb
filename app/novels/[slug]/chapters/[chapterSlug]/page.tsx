@@ -1320,7 +1320,7 @@ const allNovels = [
     slug: "lord-mysteries",
     title: "Lord of the Mysteries",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Cuttlefish That Loves Diving",
     rating: 4.7,
     totalRatings: 853,
@@ -1336,7 +1336,7 @@ const allNovels = [
     slug: "legendary-mechanic",
     title: "The Legendary Mechanic",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Chocolion",
     rating: 4.7,
     totalRatings: 712,

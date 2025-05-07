@@ -440,7 +440,7 @@ const bookmarkedNovels = [
     slug: "lord-mysteries",
     title: "Lord of the Mysteries",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Cuttlefish That Loves Diving",
     rating: 4.7,
     totalRatings: 853,
@@ -456,7 +456,7 @@ const bookmarkedNovels = [
     slug: "shadow-slave",
     title: "Shadow Slave",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Guiltythree",
     rating: 4.1,
     totalRatings: 769,
@@ -472,7 +472,7 @@ const bookmarkedNovels = [
     slug: "madman-family",
     title: "I Am The Madman Of This Family",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     author: "Solver Keter",
     rating: 4.5,
     totalRatings: 11,
@@ -488,7 +488,7 @@ const bookmarkedNovels = [
     slug: "legendary-mechanic",
     title: "The Legendary Mechanic",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Chocolion",
     rating: 4.7,
     totalRatings: 712,
@@ -504,7 +504,7 @@ const bookmarkedNovels = [
     slug: "throne-of-magical-arcana",
     title: "Throne of Magical Arcana",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Cuttlefish That Loves Diving",
     rating: 4.5,
     totalRatings: 623,
@@ -520,7 +520,7 @@ const bookmarkedNovels = [
     slug: "industrial-cthulhu",
     title: "Industrial Cthulhu: Starting as an Island Lord",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     author: "Unknown Author",
     rating: 4.2,
     totalRatings: 21,

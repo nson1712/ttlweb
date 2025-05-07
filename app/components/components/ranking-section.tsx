@@ -154,7 +154,7 @@ const powerRankingNovels = [
     slug: "shadow-slave",
     title: "Shadow Slave",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Guiltythree",
     rating: 4.7,
     totalRatings: 769,
@@ -166,7 +166,7 @@ const powerRankingNovels = [
     slug: "legendary-beast-master",
     title: "The First Legendary Beast Master",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Frost Blade",
     rating: 4.5,
     totalRatings: 523,
@@ -178,7 +178,7 @@ const powerRankingNovels = [
     slug: "supreme-magus",
     title: "Supreme Magus",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Legion20",
     rating: 4.8,
     totalRatings: 612,
@@ -190,7 +190,7 @@ const powerRankingNovels = [
     slug: "cultivation-online",
     title: "Cultivation Online",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "MyLittleBrother",
     rating: 4.8,
     totalRatings: 487,
@@ -202,7 +202,7 @@ const powerRankingNovels = [
     slug: "mech-touch",
     title: "The Mech Touch",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Exlor",
     rating: 4.6,
     totalRatings: 398,
@@ -218,7 +218,7 @@ const collectionRankingNovels = [
     slug: "shadow-slave-2",
     title: "Shadow Slave",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Guiltythree",
     rating: 4.7,
     totalRatings: 769,
@@ -230,7 +230,7 @@ const collectionRankingNovels = [
     slug: "beast-tamer",
     title: "Weakest Beast Tamer Gets All SSS Dragons",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Dragon Lover",
     rating: 4.6,
     totalRatings: 612,
@@ -242,7 +242,7 @@ const collectionRankingNovels = [
     slug: "legendary-beast-master-2",
     title: "The First Legendary Beast Master",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Frost Blade",
     rating: 4.5,
     totalRatings: 523,
@@ -254,7 +254,7 @@ const collectionRankingNovels = [
     slug: "multiversal-livestreaming",
     title: "Multiversal Livestreaming System",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Cosmic Streamer",
     rating: 4.7,
     totalRatings: 487,
@@ -266,7 +266,7 @@ const collectionRankingNovels = [
     slug: "vampire-system",
     title: "My Vampire System",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "JKSManga",
     rating: 4.6,
     totalRatings: 398,
@@ -282,7 +282,7 @@ const newReleasesNovels = [
     slug: "dimensional-storekeeper",
     title: "Dimensional Storekeeper",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Dimension Walker",
     rating: 4.7,
     totalRatings: 321,
@@ -306,7 +306,7 @@ const newReleasesNovels = [
     slug: "talent-generator",
     title: "My Talent's Name Is Generator",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Talent Master",
     rating: 4.7,
     totalRatings: 254,
@@ -318,7 +318,7 @@ const newReleasesNovels = [
     slug: "multiversal-livestreaming-2",
     title: "Multiversal Livestreaming System",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Cosmic Streamer",
     rating: 4.7,
     totalRatings: 198,
@@ -330,7 +330,7 @@ const newReleasesNovels = [
     slug: "villains-pov",
     title: "THE VILLAIN'S POV",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Evil Writer",
     rating: 4.8,
     totalRatings: 176,

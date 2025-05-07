@@ -97,7 +97,7 @@ const potentialStarlets = [
     slug: "zenith-game",
     title: "Mount Zenith: Creating the best game",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1721988242_devils-music.webp",
     author: "Game Creator",
     categories: ["Fantasy", "LitRPG"],
   },
@@ -106,7 +106,7 @@ const potentialStarlets = [
     slug: "stella-khaos",
     title: "Stella & Khaos: The tale of duality",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1721988242_devils-music.webp",
     author: "Dual Writer",
     categories: ["Fantasy", "Adventure"],
   },
@@ -115,7 +115,7 @@ const potentialStarlets = [
     slug: "awakening-star",
     title: "Awakening: Path of the Star Soul",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1721988242_devils-music.webp",
     author: "Star Walker",
     categories: ["Fantasy", "Cultivation"],
   },
@@ -124,7 +124,7 @@ const potentialStarlets = [
     slug: "reincarnated-trait",
     title: "Reincarnated with SSS-Rank Trait",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1721988242_devils-music.webp",
     author: "Reincarnation Master",
     categories: ["Fantasy", "Reincarnation"],
   },
@@ -133,7 +133,7 @@ const potentialStarlets = [
     slug: "rudrastra",
     title: "RUDRASTRA: THE CREATION OF DISTRUCTION",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1721988242_devils-music.webp",
     author: "Mythic Writer",
     categories: ["Fantasy", "Mythology"],
   },
@@ -142,7 +142,7 @@ const potentialStarlets = [
     slug: "limitless-sovereign",
     title: "The Limitless Sovereign",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1721988242_devils-music.webp",
     author: "Sovereign Writer",
     categories: ["Fantasy", "Cultivation"],
   },
@@ -151,7 +151,7 @@ const potentialStarlets = [
     slug: "limitless-sovereign",
     title: "The Limitless Sovereign",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1721988242_devils-music.webp",
     author: "Sovereign Writer",
     categories: ["Fantasy", "Cultivation"],
   },
@@ -160,7 +160,7 @@ const potentialStarlets = [
     slug: "limitless-sovereign",
     title: "The Limitless Sovereign",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1721988242_devils-music.webp",
     author: "Sovereign Writer",
     categories: ["Fantasy", "Cultivation"],
   },
@@ -169,7 +169,7 @@ const potentialStarlets = [
     slug: "limitless-sovereign",
     title: "The Limitless Sovereign",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1721988242_devils-music.webp",
     author: "Sovereign Writer",
     categories: ["Fantasy", "Cultivation"],
   },
@@ -178,7 +178,7 @@ const potentialStarlets = [
     slug: "limitless-sovereign",
     title: "The Limitless Sovereign",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1721988242_devils-music.webp",
     author: "Sovereign Writer",
     categories: ["Fantasy", "Cultivation"],
   },
@@ -187,7 +187,7 @@ const potentialStarlets = [
     slug: "limitless-sovereign",
     title: "The Limitless Sovereign",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1721988242_devils-music.webp",
     author: "Sovereign Writer",
     categories: ["Fantasy", "Cultivation"],
   },
@@ -196,7 +196,7 @@ const potentialStarlets = [
     slug: "limitless-sovereign",
     title: "The Limitless Sovereign",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1721988242_devils-music.webp",
     author: "Sovereign Writer",
     categories: ["Fantasy", "Cultivation"],
   },
@@ -205,7 +205,7 @@ const potentialStarlets = [
     slug: "limitless-sovereign",
     title: "The Limitless Sovereign",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1721988242_devils-music.webp",
     author: "Sovereign Writer",
     categories: ["Fantasy", "Cultivation"],
   },
@@ -214,7 +214,7 @@ const potentialStarlets = [
     slug: "limitless-sovereign",
     title: "The Limitless Sovereign",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1721988242_devils-music.webp",
     author: "Sovereign Writer",
     categories: ["Fantasy", "Cultivation"],
   },
@@ -223,7 +223,7 @@ const potentialStarlets = [
     slug: "limitless-sovereign",
     title: "The Limitless Sovereign",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1721988242_devils-music.webp",
     author: "Sovereign Writer",
     categories: ["Fantasy", "Cultivation"],
   },
@@ -232,7 +232,7 @@ const potentialStarlets = [
     slug: "limitless-sovereign",
     title: "The Limitless Sovereign",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1721988242_devils-music.webp",
     author: "Sovereign Writer",
     categories: ["Fantasy", "Cultivation"],
   },
@@ -241,7 +241,7 @@ const potentialStarlets = [
     slug: "limitless-sovereign",
     title: "The Limitless Sovereign",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1721988242_devils-music.webp",
     author: "Sovereign Writer",
     categories: ["Fantasy", "Cultivation"],
   },
@@ -250,7 +250,7 @@ const potentialStarlets = [
     slug: "limitless-sovereign",
     title: "The Limitless Sovereign",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1721988242_devils-music.webp",
     author: "Sovereign Writer",
     categories: ["Fantasy", "Cultivation"],
   },
@@ -259,7 +259,7 @@ const potentialStarlets = [
     slug: "limitless-sovereign",
     title: "The Limitless Sovereign",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1721988242_devils-music.webp",
     author: "Sovereign Writer",
     categories: ["Fantasy", "Cultivation"],
   },
@@ -268,7 +268,7 @@ const potentialStarlets = [
     slug: "limitless-sovereign",
     title: "The Limitless Sovereign",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1721988242_devils-music.webp",
     author: "Sovereign Writer",
     categories: ["Fantasy", "Cultivation"],
   },
