@@ -11,7 +11,7 @@ export function WeeklyFeaturedBook() {
     slug: "timeless-assassin",
     title: "Timeless Assassin",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1726838702_reborn-as-my-love-rivals-wife.webp",
     author: "Solver Keter",
     rating: 4.8,
     totalRatings: 287,

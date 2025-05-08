@@ -26,7 +26,7 @@ const featuredNovels = [
     slug: "madman-family",
     title: "I Am The Madman Of This Family",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     author: "Solver Keter",
     rating: 4.5,
     totalRatings: 11,
@@ -41,7 +41,7 @@ const featuredNovels = [
     slug: "industrial-cthulhu",
     title: "Industrial Cthulhu: Starting as an Island Lord",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     author: "Unknown Author",
     rating: 4.2,
     totalRatings: 21,
@@ -65,7 +65,7 @@ const featuredNovels = [
     slug: "genius-cloning 1",
     title: "The Genius of Cloning in the Academy City",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     author: "Unknown Author",
     rating: 4.7,
     totalRatings: 19,
@@ -88,7 +88,7 @@ const featuredNovels = [
     slug: "genius-cloning 2",
     title: "The Genius of Cloning in the Academy City",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     author: "Unknown Author",
     rating: 4.7,
     totalRatings: 19,
@@ -115,7 +115,7 @@ const bestNovels = [
     slug: "lord-mysteries",
     title: "Lord of the Mysteries á dá ac ác xzc sxc xzc sa zxc zxc á á",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Cuttlefish That Loves Diving",
     rating: 4.7,
     totalRatings: 853,
@@ -126,7 +126,7 @@ const bestNovels = [
     slug: "legendary-mechanic",
     title: "The Legendary Mechanic",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Chocolion",
     rating: 4.7,
     totalRatings: 712,
@@ -137,7 +137,7 @@ const bestNovels = [
     slug: "shadow-slave",
     title: "Shadow Slave",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Guiltythree",
     rating: 4.1,
     totalRatings: 769,
@@ -148,7 +148,7 @@ const bestNovels = [
     slug: "circle-inevitability",
     title: "Circle of Inevitability",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Cuttlefish That Loves Diving",
     rating: 4.6,
     totalRatings: 528,
@@ -159,7 +159,7 @@ const bestNovels = [
     slug: "circle-inevitability 2",
     title: "Circle of Inevitability",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Cuttlefish That Loves Diving",
     rating: 4.6,
     totalRatings: 528,
@@ -173,7 +173,7 @@ const recentUpdates = [
     id: "lord-void",
     slug: "lord-void",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     title: "The Lord of Void and Real",
     chapter: "Chapter 319: Three Stars Demolishing Demons",
     updatedAt: "9 minutes ago",
@@ -182,7 +182,7 @@ const recentUpdates = [
     id: "beast-taming",
     slug: "beast-taming",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     title: "Beast Taming Patrol",
     chapter: "Chapter 674: Youyou Advances!",
     updatedAt: "14 minutes ago",
@@ -191,7 +191,7 @@ const recentUpdates = [
     id: "disciple-simulator",
     slug: "disciple-simulator",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     title: "I Have A Disciple Simulator",
     chapter: "Chapter 911: The Humble Hallucinatory Dark Demon Venerable!",
     updatedAt: "14 minutes ago",
@@ -200,7 +200,7 @@ const recentUpdates = [
     id: "grinding-experience",
     slug: "grinding-experience",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     title: "I Am Grinding Experience In Another World",
     chapter: "Chapter 671: Return to Qingqiu",
     updatedAt: "15 minutes ago",
@@ -209,7 +209,7 @@ const recentUpdates = [
     id: "reversing-life",
     slug: "reversing-life",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     title: "Reversing Life With Item Copy",
     chapter: "Chapter 128: Not Quite Yet",
     updatedAt: "16 minutes ago",

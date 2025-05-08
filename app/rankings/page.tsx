@@ -809,7 +809,7 @@ const powerRankingNovels = [
     slug: "shadow-slave",
     title: "Shadow Slave",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Guiltythree",
     rating: 4.7,
     totalRatings: 769,
@@ -825,7 +825,7 @@ const powerRankingNovels = [
     slug: "legendary-beast-master",
     title: "The First Legendary Beast Master",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Frost Blade",
     rating: 4.5,
     totalRatings: 523,
@@ -841,7 +841,7 @@ const powerRankingNovels = [
     slug: "supreme-magus",
     title: "Supreme Magus",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Legion20",
     rating: 4.8,
     totalRatings: 612,
@@ -857,7 +857,7 @@ const powerRankingNovels = [
     slug: "cultivation-online",
     title: "Cultivation Online",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "MyLittleBrother",
     rating: 4.8,
     totalRatings: 487,
@@ -873,7 +873,7 @@ const powerRankingNovels = [
     slug: "mech-touch",
     title: "The Mech Touch",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Exlor",
     rating: 4.6,
     totalRatings: 398,
@@ -889,7 +889,7 @@ const powerRankingNovels = [
     slug: "lord-mysteries",
     title: "Lord of the Mysteries",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Cuttlefish That Loves Diving",
     rating: 4.9,
     totalRatings: 853,
@@ -905,7 +905,7 @@ const powerRankingNovels = [
     slug: "legendary-mechanic",
     title: "The Legendary Mechanic",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Chocolion",
     rating: 4.7,
     totalRatings: 712,
@@ -921,7 +921,7 @@ const powerRankingNovels = [
     slug: "omniscient-reader",
     title: "Omniscient Reader's Viewpoint",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Sing-Shong",
     rating: 4.8,
     totalRatings: 689,
@@ -937,7 +937,7 @@ const powerRankingNovels = [
     slug: "second-coming-gluttony",
     title: "The Second Coming of Gluttony",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Ro Yu-jin",
     rating: 4.7,
     totalRatings: 578,
@@ -953,7 +953,7 @@ const powerRankingNovels = [
     slug: "reverend-insanity",
     title: "Reverend Insanity",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Gu Zhen Ren",
     rating: 4.6,
     totalRatings: 456,
@@ -973,7 +973,7 @@ const collectionRankingNovels = [
     slug: "shadow-slave-2",
     title: "Shadow Slave",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Guiltythree",
     rating: 4.7,
     totalRatings: 769,
@@ -989,7 +989,7 @@ const collectionRankingNovels = [
     slug: "beast-tamer",
     title: "Weakest Beast Tamer Gets All SSS Dragons",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Dragon Lover",
     rating: 4.6,
     totalRatings: 612,
@@ -1005,7 +1005,7 @@ const collectionRankingNovels = [
     slug: "legendary-beast-master-2",
     title: "The First Legendary Beast Master",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Frost Blade",
     rating: 4.5,
     totalRatings: 523,
@@ -1025,7 +1025,7 @@ const trendingNovels = [
     slug: "dimensional-storekeeper",
     title: "Dimensional Storekeeper",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1726838702_reborn-as-my-love-rivals-wife.webp",
     author: "Dimension Walker",
     rating: 4.7,
     totalRatings: 321,
@@ -1041,7 +1041,7 @@ const trendingNovels = [
     slug: "timeless-assassin",
     title: "Timeless Assassin",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1726838702_reborn-as-my-love-rivals-wife.webp",
     author: "Solver Keter",
     rating: 4.8,
     totalRatings: 287,
@@ -1061,7 +1061,7 @@ const ratingRankingNovels = [
     slug: "lord-mysteries-2",
     title: "Lord of the Mysteries",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Cuttlefish That Loves Diving",
     rating: 4.9,
     totalRatings: 853,
@@ -1077,7 +1077,7 @@ const ratingRankingNovels = [
     slug: "cultivation-online-2",
     title: "Cultivation Online",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "MyLittleBrother",
     rating: 4.8,
     totalRatings: 487,
@@ -1097,7 +1097,7 @@ const popularNovels = [
     slug: "shadow-slave-3",
     title: "Shadow Slave",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Guiltythree",
     rating: 4.7,
     totalRatings: 769,
@@ -1113,7 +1113,7 @@ const popularNovels = [
     slug: "legendary-beast-master-3",
     title: "The First Legendary Beast Master",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Frost Blade",
     rating: 4.5,
     totalRatings: 523,
@@ -1133,7 +1133,7 @@ const newReleasesNovels = [
     slug: "dimensional-storekeeper-2",
     title: "Dimensional Storekeeper",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Dimension Walker",
     rating: 4.7,
     totalRatings: 321,
@@ -1149,7 +1149,7 @@ const newReleasesNovels = [
     slug: "timeless-assassin-2",
     title: "Timeless Assassin",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Solver Keter",
     rating: 4.8,
     totalRatings: 287,
@@ -1169,7 +1169,7 @@ const completedNovels = [
     slug: "omniscient-reader-2",
     title: "Omniscient Reader's Viewpoint",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Sing-Shong",
     rating: 4.8,
     totalRatings: 689,
@@ -1185,7 +1185,7 @@ const completedNovels = [
     slug: "second-coming-gluttony-2",
     title: "The Second Coming of Gluttony",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Ro Yu-jin",
     rating: 4.7,
     totalRatings: 578,

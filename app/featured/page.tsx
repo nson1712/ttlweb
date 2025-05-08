@@ -16,7 +16,7 @@ const allFeaturedNovels = [
     slug: "madman-family",
     title: "I Am The Madman Of This Family",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     author: "Solver Keter",
     rating: 4.5,
     totalRatings: 11,
@@ -33,7 +33,7 @@ const allFeaturedNovels = [
     slug: "industrial-cthulhu",
     title: "Industrial Cthulhu: Starting as an Island Lord",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     author: "Unknown Author",
     rating: 4.2,
     totalRatings: 21,
@@ -59,7 +59,7 @@ const allFeaturedNovels = [
     slug: "genius-cloning-1",
     title: "The Genius of Cloning in the Academy City",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     author: "Unknown Author",
     rating: 4.7,
     totalRatings: 19,
@@ -84,7 +84,7 @@ const allFeaturedNovels = [
     slug: "lord-mysteries",
     title: "Lord of the Mysteries",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Cuttlefish That Loves Diving",
     rating: 4.7,
     totalRatings: 853,
@@ -100,7 +100,7 @@ const allFeaturedNovels = [
     slug: "legendary-mechanic",
     title: "The Legendary Mechanic",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Chocolion",
     rating: 4.7,
     totalRatings: 712,
@@ -116,7 +116,7 @@ const allFeaturedNovels = [
     slug: "shadow-slave",
     title: "Shadow Slave",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Guiltythree",
     rating: 4.1,
     totalRatings: 769,
@@ -132,7 +132,7 @@ const allFeaturedNovels = [
     slug: "throne-of-magical-arcana",
     title: "Throne of Magical Arcana",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Cuttlefish That Loves Diving",
     rating: 4.5,
     totalRatings: 623,
@@ -148,7 +148,7 @@ const allFeaturedNovels = [
     slug: "omniscient-readers-viewpoint",
     title: "Omniscient Reader's Viewpoint",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Sing-Shong",
     rating: 4.8,
     totalRatings: 892,

@@ -297,7 +297,7 @@ const allNovels = [
     slug: "madman-family",
     title: "I Am The Madman Of This Family",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     author: "Solver Keter",
     rating: 4.5,
     totalRatings: 11,
@@ -312,7 +312,7 @@ const allNovels = [
     slug: "industrial-cthulhu",
     title: "Industrial Cthulhu: Starting as an Island Lord",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     author: "Unknown Author",
     rating: 4.2,
     totalRatings: 21,
@@ -336,7 +336,7 @@ const allNovels = [
     slug: "genius-cloning-1",
     title: "The Genius of Cloning in the Academy City",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+      "/1742474407_the-empty-box-and-zeroth-maria.webp",
     author: "Unknown Author",
     rating: 4.7,
     totalRatings: 19,
@@ -361,7 +361,7 @@ const allNovels = [
     slug: "lord-mysteries",
     title: "Lord of the Mysteries",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Cuttlefish That Loves Diving",
     rating: 4.7,
     totalRatings: 853,
@@ -375,7 +375,7 @@ const allNovels = [
     slug: "legendary-mechanic",
     title: "The Legendary Mechanic",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Chocolion",
     rating: 4.7,
     totalRatings: 712,
@@ -389,7 +389,7 @@ const allNovels = [
     slug: "shadow-slave",
     title: "Shadow Slave",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Guiltythree",
     rating: 4.1,
     totalRatings: 769,
@@ -405,7 +405,7 @@ const allNovels = [
     slug: "throne-of-magical-arcana",
     title: "Throne of Magical Arcana",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Cuttlefish That Loves Diving",
     rating: 4.5,
     totalRatings: 623,
@@ -419,7 +419,7 @@ const allNovels = [
     slug: "omniscient-readers-viewpoint",
     title: "Omniscient Reader's Viewpoint",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Sing-Shong",
     rating: 4.8,
     totalRatings: 892,
@@ -433,7 +433,7 @@ const allNovels = [
     slug: "reverend-insanity",
     title: "Reverend Insanity",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Gu Zhen Ren",
     rating: 4.6,
     totalRatings: 745,
@@ -449,7 +449,7 @@ const allNovels = [
     slug: "supreme-magus",
     title: "Supreme Magus",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Legion20",
     rating: 4.8,
     totalRatings: 612,
@@ -463,7 +463,7 @@ const allNovels = [
     slug: "cultivation-online",
     title: "Cultivation Online",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "MyLittleBrother",
     rating: 4.8,
     totalRatings: 487,
@@ -477,7 +477,7 @@ const allNovels = [
     slug: "mech-touch",
     title: "The Mech Touch",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1744419978_blood-eagle.webp",
     author: "Exlor",
     rating: 4.6,
     totalRatings: 398,
@@ -491,7 +491,7 @@ const allNovels = [
     slug: "dimensional-storekeeper",
     title: "Dimensional Storekeeper",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1726838702_reborn-as-my-love-rivals-wife.webp",
     author: "Dimension Walker",
     rating: 4.7,
     totalRatings: 321,
@@ -505,7 +505,7 @@ const allNovels = [
     slug: "timeless-assassin",
     title: "Timeless Assassin",
     coverImage:
-      "https://ranobes.top/uploads/posts/2025-04/thumbs/1744879926_diary-of-a-dead-wizard.webp",
+      "/1726838702_reborn-as-my-love-rivals-wife.webp",
     author: "Solver Keter",
     rating: 4.8,
     totalRatings: 287,
