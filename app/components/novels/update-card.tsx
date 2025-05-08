@@ -18,7 +18,7 @@ interface UpdateCardProps {
 
 export function UpdateCard({
   id,
-  slug,
+  // slug,
   coverImage,
   title,
   chapter,
@@ -29,7 +29,8 @@ export function UpdateCard({
       whileHover={{ scale: 1.01 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
-      <Link href={`/novels/${slug}`} className="block" id={id}>
+      {/* <Link href={`/novels/${slug}`} className="block" id={id}> */}
+      <Link href={`/novels/lord-mysteries`} className="block" id={id}>
         <div className="group relative overflow-hidden rounded-lg bg-gradient-to-br from-gray-800/90 to-gray-900 p-3 shadow-md transition-all hover:shadow-lg">
           <div className="flex gap-4">
             <div className="relative h-16 w-12 flex-shrink-0 overflow-hidden rounded-md">

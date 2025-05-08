@@ -64,7 +64,8 @@ function CategoriesTag({ name, count, color = "blue" }: CategoriesTagProps) {
       whileHover={{ scale: 1.03 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
-      <Link href={`/tags/${name.toLowerCase()}`}>
+      {/* <Link href={`/tags/${name.toLowerCase()}`}> */}
+      <Link href={`/tags/fantasy`}>
         <div
           className={cn(
             "flex h-12 items-center justify-between rounded-lg border bg-gradient-to-br p-3 transition-all",

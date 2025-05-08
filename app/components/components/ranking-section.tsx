@@ -90,7 +90,7 @@ export function RankingSection() {
 
 function RankingNovelCard({
   id,
-  slug,
+  // slug,
   title,
   coverImage,
   author,
@@ -100,7 +100,8 @@ function RankingNovelCard({
   rank,
 }: RankingNovelProps) {
   return (
-    <Link href={`/novels/${slug}`} id={id}>
+    // <Link href={`/novels/${slug}`} id={id}>
+    <Link href={`/novels/lord-mysteries`} id={id}>
       <motion.div
         whileHover={{ scale: 1.02 }}
         transition={{ type: "spring", stiffness: 400, damping: 17 }}

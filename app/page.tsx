@@ -325,55 +325,59 @@ export default function HomePage() {
 
           <TabsContent value="best-novels" className="space-y-4">
             {bestNovels.map((novel) => (
-              <div
-                key={novel.id}
-                className="flex items-center gap-4 bg-gradient-to-br from-gray-800/90 to-gray-900 shadow-md hover:shadow-lg p-3 rounded-lg min-w-72 hover:scale-102 transition-transform duration-200"
-              >
-                <Image
-                  src={novel.coverImage}
-                  alt={novel.title}
-                  className="object-cover rounded-md"
-                  width={50}
-                  height={50}
-                />
-                <div className="flex-1">
-                  <h3 className="font-medium text-emerald-400 line-clamp-2">
-                    {novel.title}
-                  </h3>
-                  <p className="text-sm text-gray-400">{novel.author}</p>
-                  <p className="text-xs text-gray-500">
-                    Rating: {novel.rating.toFixed(1)} / 5 from{" "}
-                    {novel.totalRatings} ratings
-                  </p>
+              <Link href="/novels/lord-mysteries" key={novel.id}>
+                <div
+                  key={novel.id}
+                  className="flex items-center gap-4 bg-gradient-to-br from-gray-800/90 to-gray-900 shadow-md hover:shadow-lg p-3 rounded-lg min-w-72 hover:scale-102 transition-transform duration-200"
+                >
+                  <Image
+                    src={novel.coverImage}
+                    alt={novel.title}
+                    className="object-cover rounded-md"
+                    width={50}
+                    height={50}
+                  />
+                  <div className="flex-1">
+                    <h3 className="font-medium text-emerald-400 line-clamp-2">
+                      {novel.title}
+                    </h3>
+                    <p className="text-sm text-gray-400">{novel.author}</p>
+                    <p className="text-xs text-gray-500">
+                      Rating: {novel.rating.toFixed(1)} / 5 from{" "}
+                      {novel.totalRatings} ratings
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </TabsContent>
 
           <TabsContent value="most-discussed" className="space-y-4">
             {bestNovels.map((novel) => (
-              <div
-                key={novel.id}
-                className="flex items-center gap-4 bg-gradient-to-br from-gray-800/90 to-gray-900 shadow-md hover:shadow-lg p-3 rounded-lg min-w-72 hover:scale-102 transition-transform duration-200"
-              >
-                <Image
-                  src={novel.coverImage}
-                  alt={novel.title}
-                  className="object-cover rounded-md"
-                  width={50}
-                  height={50}
-                />
-                <div className="flex-1">
-                  <h3 className="font-medium text-emerald-400 line-clamp-2">
-                    {novel.title}
-                  </h3>
-                  <p className="text-sm text-gray-400">{novel.author}</p>
-                  <p className="text-xs text-gray-500">
-                    Rating: {novel.rating.toFixed(1)} / 5 from{" "}
-                    {novel.totalRatings} ratings
-                  </p>
+              <Link href="/novels/lord-mysteries" key={novel.id}>
+                <div
+                  key={novel.id}
+                  className="flex items-center gap-4 bg-gradient-to-br from-gray-800/90 to-gray-900 shadow-md hover:shadow-lg p-3 rounded-lg min-w-72 hover:scale-102 transition-transform duration-200"
+                >
+                  <Image
+                    src={novel.coverImage}
+                    alt={novel.title}
+                    className="object-cover rounded-md"
+                    width={50}
+                    height={50}
+                  />
+                  <div className="flex-1">
+                    <h3 className="font-medium text-emerald-400 line-clamp-2">
+                      {novel.title}
+                    </h3>
+                    <p className="text-sm text-gray-400">{novel.author}</p>
+                    <p className="text-xs text-gray-500">
+                      Rating: {novel.rating.toFixed(1)} / 5 from{" "}
+                      {novel.totalRatings} ratings
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </TabsContent>
         </Tabs>

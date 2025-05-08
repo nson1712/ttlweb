@@ -440,6 +440,22 @@ export default function AllChaptersPage() {
 // Mock data for all novels
 const allNovels = [
   {
+    id: "lord-mysteries",
+    slug: "lord-mysteries",
+    title: "Lord of the mysteries",
+    coverImage:
+      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741679006_industrial-cthulhu-starting-as-an-island-lord.webp",
+    author: "Solver Keter",
+    rating: 4.5,
+    totalRatings: 11,
+    categories: ["Adventure", "Fantasy", "Action"],
+    description:
+      'Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...',
+    updatedAt: "2025-04-20T08:00:00Z",
+    chapterCount: 46,
+    views: 125000,
+  },
+  {
     id: "madman-family",
     slug: "madman-family",
     title: "I Am The Madman Of This Family",
@@ -487,7 +503,7 @@ const allChapters = [
   // Chapters for "I Am The Madman Of This Family"
   {
     id: "madman-1",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 1,
     title: "The Illegitimate Son",
     releaseDate: "Jan 15, 2025",
@@ -496,7 +512,7 @@ const allChapters = [
   },
   {
     id: "madman-2",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 2,
     title: "The Archery Family",
     releaseDate: "Jan 16, 2025",
@@ -505,7 +521,7 @@ const allChapters = [
   },
   {
     id: "madman-3",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 3,
     title: "First Signs of Madness",
     releaseDate: "Jan 17, 2025",
@@ -514,7 +530,7 @@ const allChapters = [
   },
   {
     id: "madman-4",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 4,
     title: "The Regression",
     releaseDate: "Jan 18, 2025",
@@ -523,7 +539,7 @@ const allChapters = [
   },
   {
     id: "madman-5",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 5,
     title: "A New Beginning",
     releaseDate: "Jan 19, 2025",
@@ -532,7 +548,7 @@ const allChapters = [
   },
   {
     id: "madman-6",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 6,
     title: "The First Challenge",
     releaseDate: "Jan 20, 2025",
@@ -541,7 +557,7 @@ const allChapters = [
   },
   {
     id: "madman-7",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 7,
     title: "Unexpected Allies",
     releaseDate: "Jan 21, 2025",
@@ -550,7 +566,7 @@ const allChapters = [
   },
   {
     id: "madman-8",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 8,
     title: "The Family Secret",
     releaseDate: "Jan 22, 2025",
@@ -559,7 +575,7 @@ const allChapters = [
   },
   {
     id: "madman-9",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 9,
     title: "The Rival Clan",
     releaseDate: "Jan 23, 2025",
@@ -568,7 +584,7 @@ const allChapters = [
   },
   {
     id: "madman-10",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 10,
     title: "The First Victory",
     releaseDate: "Jan 24, 2025",
@@ -577,7 +593,7 @@ const allChapters = [
   },
   {
     id: "madman-11",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 11,
     title: "The Archery Tournament",
     releaseDate: "Jan 25, 2025",
@@ -586,7 +602,7 @@ const allChapters = [
   },
   {
     id: "madman-12",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 12,
     title: "Unexpected Developments",
     releaseDate: "Jan 26, 2025",
@@ -595,7 +611,7 @@ const allChapters = [
   },
   {
     id: "madman-13",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 13,
     title: "The Betrayal",
     releaseDate: "Jan 27, 2025",
@@ -604,7 +620,7 @@ const allChapters = [
   },
   {
     id: "madman-14",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 14,
     title: "The Escape",
     releaseDate: "Jan 28, 2025",
@@ -613,7 +629,7 @@ const allChapters = [
   },
   {
     id: "madman-15",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 15,
     title: "The Journey Begins",
     releaseDate: "Jan 29, 2025",
@@ -622,7 +638,7 @@ const allChapters = [
   },
   {
     id: "madman-16",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 16,
     title: "The Mountain Pass",
     releaseDate: "Jan 30, 2025",
@@ -631,7 +647,7 @@ const allChapters = [
   },
   {
     id: "madman-17",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 17,
     title: "The Hidden Village",
     releaseDate: "Jan 31, 2025",
@@ -640,7 +656,7 @@ const allChapters = [
   },
   {
     id: "madman-18",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 18,
     title: "The Old Master",
     releaseDate: "Feb 1, 2025",
@@ -649,7 +665,7 @@ const allChapters = [
   },
   {
     id: "madman-19",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 19,
     title: "The Secret Technique",
     releaseDate: "Feb 2, 2025",
@@ -658,7 +674,7 @@ const allChapters = [
   },
   {
     id: "madman-20",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 20,
     title: "The Return",
     releaseDate: "Feb 3, 2025",
@@ -667,7 +683,7 @@ const allChapters = [
   },
   {
     id: "madman-21",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 21,
     title: "The Confrontation",
     releaseDate: "Feb 4, 2025",
@@ -676,7 +692,7 @@ const allChapters = [
   },
   {
     id: "madman-22",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 22,
     title: "The Family Reunion",
     releaseDate: "Feb 5, 2025",
@@ -685,7 +701,7 @@ const allChapters = [
   },
   {
     id: "madman-23",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 23,
     title: "The New Threat",
     releaseDate: "Feb 6, 2025",
@@ -694,7 +710,7 @@ const allChapters = [
   },
   {
     id: "madman-24",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 24,
     title: "The Alliance",
     releaseDate: "Feb 7, 2025",
@@ -703,7 +719,7 @@ const allChapters = [
   },
   {
     id: "madman-25",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 25,
     title: "The Battle Plan",
     releaseDate: "Feb 8, 2025",
@@ -712,7 +728,7 @@ const allChapters = [
   },
   {
     id: "madman-26",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 26,
     title: "The First Assault",
     releaseDate: "Feb 9, 2025",
@@ -721,7 +737,7 @@ const allChapters = [
   },
   {
     id: "madman-27",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 27,
     title: "The Unexpected Turn",
     releaseDate: "Feb 10, 2025",
@@ -730,7 +746,7 @@ const allChapters = [
   },
   {
     id: "madman-28",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 28,
     title: "The Secret Weapon",
     releaseDate: "Feb 11, 2025",
@@ -739,7 +755,7 @@ const allChapters = [
   },
   {
     id: "madman-29",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 29,
     title: "The Final Showdown",
     releaseDate: "Feb 12, 2025",
@@ -748,7 +764,7 @@ const allChapters = [
   },
   {
     id: "madman-30",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 30,
     title: "The Aftermath",
     releaseDate: "Feb 13, 2025",
@@ -757,7 +773,7 @@ const allChapters = [
   },
   {
     id: "madman-31",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 31,
     title: "New Beginnings",
     releaseDate: "Feb 14, 2025",
@@ -766,7 +782,7 @@ const allChapters = [
   },
   {
     id: "madman-32",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 32,
     title: "The Journey Continues",
     releaseDate: "Feb 15, 2025",
@@ -775,7 +791,7 @@ const allChapters = [
   },
   {
     id: "madman-33",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 33,
     title: "The Ancient City",
     releaseDate: "Feb 16, 2025",
@@ -784,7 +800,7 @@ const allChapters = [
   },
   {
     id: "madman-34",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 34,
     title: "The Lost Artifact",
     releaseDate: "Feb 17, 2025",
@@ -793,7 +809,7 @@ const allChapters = [
   },
   {
     id: "madman-35",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 35,
     title: "The Guardian",
     releaseDate: "Feb 18, 2025",
@@ -802,7 +818,7 @@ const allChapters = [
   },
   {
     id: "madman-36",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 36,
     title: "The Trial",
     releaseDate: "Feb 19, 2025",
@@ -811,7 +827,7 @@ const allChapters = [
   },
   {
     id: "madman-37",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 37,
     title: "The Revelation",
     releaseDate: "Feb 20, 2025",
@@ -820,7 +836,7 @@ const allChapters = [
   },
   {
     id: "madman-38",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 38,
     title: "The True Enemy",
     releaseDate: "Feb 21, 2025",
@@ -829,7 +845,7 @@ const allChapters = [
   },
   {
     id: "madman-39",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 39,
     title: "The Gathering Storm",
     releaseDate: "Feb 22, 2025",
@@ -838,7 +854,7 @@ const allChapters = [
   },
   {
     id: "madman-40",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 40,
     title: "The Final Preparations",
     releaseDate: "Feb 23, 2025",
@@ -847,7 +863,7 @@ const allChapters = [
   },
   {
     id: "madman-41",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 41,
     title: "The Last Stand",
     releaseDate: "Feb 24, 2025",
@@ -856,7 +872,7 @@ const allChapters = [
   },
   {
     id: "madman-42",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 42,
     title: "The Ultimate Sacrifice",
     releaseDate: "Feb 25, 2025",
@@ -865,7 +881,7 @@ const allChapters = [
   },
   {
     id: "madman-43",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 43,
     title: "The New Era",
     releaseDate: "Feb 26, 2025",
@@ -874,7 +890,7 @@ const allChapters = [
   },
   {
     id: "madman-44",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 44,
     title: "The Legacy",
     releaseDate: "Feb 27, 2025",
@@ -883,7 +899,7 @@ const allChapters = [
   },
   {
     id: "madman-45",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 45,
     title: "The Future Awaits",
     releaseDate: "Feb 28, 2025",
@@ -892,7 +908,7 @@ const allChapters = [
   },
   {
     id: "madman-46",
-    novelSlug: "madman-family",
+    novelSlug: "lord-mysteries",
     number: 46,
     title: "The New Beginning",
     releaseDate: "Mar 1, 2025",

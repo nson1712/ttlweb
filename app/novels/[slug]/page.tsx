@@ -571,7 +571,8 @@ export default function NovelDetailPage() {
                 {relatedNovels.map((relatedNovel) => (
                   <Link
                     key={relatedNovel.id}
-                    href={`/novels/${relatedNovel.slug}`}
+                    // href={`/novels/${relatedNovel.slug}`}
+                    href={`/novels/lord-mysteries`}
                     className="group block"
                   >
                     <div className="relative aspect-[3/4] overflow-hidden rounded-lg">

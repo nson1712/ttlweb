@@ -84,7 +84,8 @@ export function WeeklyFeaturedBook() {
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <Link href={`/novels/${featuredBook.slug}`}>
+            {/* <Link href={`/novels/${featuredBook.slug}`}> */}
+            <Link href={`/novels/lord-mysteries`}>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -93,11 +94,12 @@ export function WeeklyFeaturedBook() {
                 Read Now
               </motion.button>
             </Link>
-            <Link href={`/novels/${featuredBook.slug}/chapters`}>
+            {/* <Link href={`/novels/${featuredBook.slug}/chapters`}> */}
+            <Link href={`/novels/lord-mysteries/chapters`}>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="rounded-full bg-gray-700 px-6 py-2.5 text-sm font-medium text-white shadow-lg transition-all hover:bg-gray-600"
+                className="rounded-full bg-gray-700 px-6 py-2.5 text-sm font-medium text-white shadow-lg transition-all hover:bg-gray-600 cursor-pointer"
               >
                 View Chapters
               </motion.button>

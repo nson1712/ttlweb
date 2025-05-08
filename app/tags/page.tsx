@@ -156,7 +156,8 @@ function TagCard({ name, count, color }: TagProps) {
       whileHover={{ scale: 1.03 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
-      <Link href={`/tags/${name.toLowerCase()}`}>
+      {/* <Link href={`/tags/${name.toLowerCase()}`}> */}
+      <Link href={`/tags/fantasy`}>
         <div className={cn(
           "flex h-24 flex-col items-center justify-center rounded-lg border bg-gradient-to-br p-3 text-center transition-all",
           colorClasses[color]

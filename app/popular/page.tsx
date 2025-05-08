@@ -460,7 +460,8 @@ function PopularNovelCard({
   getSortIcon: (field: string) => React.ReactNode;
 }) {
   return (
-    <Link href={`/novels/${novel.slug}`}>
+    // <Link href={`/novels/${novel.slug}`}>
+    <Link href={`/novels/lord-mysteries`}>
       <motion.div
         whileHover={{ y: -2 }}
         transition={{ type: "spring", stiffness: 300, damping: 10 }}
@@ -629,8 +630,8 @@ function PopularNovelCard({
 
 // Featured novel
 const featuredNovel: Novel = {
-  id: "lord-of-mysteries",
-  slug: "lord-of-mysteries",
+  id: "lord-mysteries",
+  slug: "lord-mysteries",
   title: "Lord of the Mysteries",
   coverImage:
     "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1528&q=80",
@@ -650,8 +651,8 @@ const featuredNovel: Novel = {
 // Mock data for popular novels
 const novels: Novel[] = [
   {
-    id: "lord-of-mysteries",
-    slug: "lord-of-mysteries",
+    id: "lord-mysteries",
+    slug: "lord-mysteries",
     title: "Lord of the Mysteries",
     coverImage:
       "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1528&q=80",
