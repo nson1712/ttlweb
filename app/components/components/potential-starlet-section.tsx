@@ -41,7 +41,7 @@ export function PotentialStarletSection() {
 
 function PotentialStarletCard({
   id,
-  slug,
+  // slug,
   title,
   coverImage,
   author,
@@ -52,7 +52,8 @@ function PotentialStarletCard({
       whileHover={{ y: -5 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
-      <Link href={`/novels/${slug}`} className="block" id={id}>
+      {/* <Link href={`/novels/${slug}`} className="block" id={id}> */}
+      <Link href={`/novels/lord-mysteries`} className="block" id={id}>
         <div className="group space-y-2">
           <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
             <Image

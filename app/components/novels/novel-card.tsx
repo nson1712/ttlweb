@@ -20,7 +20,7 @@ export interface NovelCardProps {
 }
 
 export function NovelCard({
-  slug,
+  // slug,
   title,
   coverImage,
   author,
@@ -46,7 +46,8 @@ export function NovelCard({
       <div className="flex-1 flex flex-col">
         <div className="flex justify-between items-start">
           <div>
-            <Link href={`/novels/${slug}`}>
+            {/* <Link href={`/novels/${slug}`}> */}
+            <Link href={`/novels/lord-mysteries`}>
               <h2 className="text-xl font-bold text-emerald-400 hover:text-emerald-300 transition-colors">
                 {title}
               </h2>
@@ -129,7 +130,8 @@ export function NovelCard({
               </div>
             )}
 
-            <Link href={`/novels/${slug}/chapters`}>
+            {/* <Link href={`/novels/${slug}/chapters`}> */}
+            <Link href={`/novels/lord-mysteries/chapters`}>
               <Button className="rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 px-6 py-2.5 text-sm font-medium text-white shadow-lg transition-all hover:shadow-emerald-500/20">
                 ◃ Read ▹
               </Button>
