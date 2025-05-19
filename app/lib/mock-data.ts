@@ -1184,6 +1184,7 @@ export const allChapters = [
     releaseDate: "Jan 2, 2025",
     views: 234567,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-2",
@@ -1194,6 +1195,7 @@ export const allChapters = [
     releaseDate: "Jan 5, 2025",
     views: 198765,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-3",
@@ -1204,6 +1206,7 @@ export const allChapters = [
     releaseDate: "Jan 8, 2025",
     views: 187654,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-4",
@@ -1214,6 +1217,7 @@ export const allChapters = [
     releaseDate: "Jan 11, 2025",
     views: 176543,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-5",
@@ -1224,6 +1228,7 @@ export const allChapters = [
     releaseDate: "Jan 14, 2025",
     views: 165432,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-6",
@@ -1234,6 +1239,7 @@ export const allChapters = [
     releaseDate: "Jan 17, 2025",
     views: 154321,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-7",
@@ -1244,6 +1250,7 @@ export const allChapters = [
     releaseDate: "Jan 20, 2025",
     views: 143210,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-8",
@@ -1254,6 +1261,7 @@ export const allChapters = [
     releaseDate: "Jan 23, 2025",
     views: 132109,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-9",
@@ -1264,6 +1272,7 @@ export const allChapters = [
     releaseDate: "Jan 26, 2025",
     views: 121098,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-10",
@@ -1274,6 +1283,7 @@ export const allChapters = [
     releaseDate: "Jan 29, 2025",
     views: 110987,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-11",
@@ -1284,6 +1294,7 @@ export const allChapters = [
     releaseDate: "Feb 1, 2025",
     views: 109876,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-12",
@@ -1294,6 +1305,7 @@ export const allChapters = [
     releaseDate: "Feb 4, 2025",
     views: 98765,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-13",
@@ -1304,6 +1316,7 @@ export const allChapters = [
     releaseDate: "Feb 7, 2025",
     views: 87654,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-14",
@@ -1314,6 +1327,7 @@ export const allChapters = [
     releaseDate: "Feb 10, 2025",
     views: 76543,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-15",
@@ -1324,6 +1338,7 @@ export const allChapters = [
     releaseDate: "Feb 13, 2025",
     views: 65432,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-16",
@@ -1334,6 +1349,7 @@ export const allChapters = [
     releaseDate: "Feb 16, 2025",
     views: 54321,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-17",
@@ -1344,6 +1360,7 @@ export const allChapters = [
     releaseDate: "Feb 19, 2025",
     views: 43210,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-18",
@@ -1354,6 +1371,7 @@ export const allChapters = [
     releaseDate: "Feb 22, 2025",
     views: 32109,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-19",
@@ -1364,6 +1382,7 @@ export const allChapters = [
     releaseDate: "Feb 25, 2025",
     views: 21098,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-20",
@@ -1374,6 +1393,7 @@ export const allChapters = [
     releaseDate: "Feb 28, 2025",
     views: 10987,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-1430",
@@ -1384,6 +1404,7 @@ export const allChapters = [
     releaseDate: "Apr 15, 2025",
     views: 54321,
     isNew: true,
+    isLocked: true,
   },
 
   // Legendary Mechanic chapters
@@ -1406,6 +1427,7 @@ export const allChapters = [
     releaseDate: "Jan 8, 2025",
     views: 176543,
     isNew: false,
+    isLocked: true
   },
   {
     id: "legendary-mechanic-1465",
@@ -1450,3 +1472,14 @@ export const allChapters = [
     isNew: true,
   },
 ];
+
+export const mockUser = {
+  name: "Alex",
+  avatar: "https://png.pngtree.com/png-clipart/20240321/original/pngtree-avatar-job-student-flat-portrait-of-man-png-image_14639683.png",
+  level: "Bookworm Lvl 42",
+  memberSince: "June 2020",
+  booksCompleted: 247,
+  readingStreak: "42 days",
+  favoriteGenre: "Fantasy",
+  coins: 50000, // Added user coins
+};

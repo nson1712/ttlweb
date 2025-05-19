@@ -18,6 +18,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { chapterPreviews } from "./lib/mock-data";
 import { ChapterPreview } from "./components/components/chapter-preview";
+import LatestReadingSection from "./components/components/latest-reading";
+// import { useResourceStore } from "./stores/useResourceStore";
 
 // Mock data for featured novels
 const featuredNovels = [
@@ -25,8 +27,7 @@ const featuredNovels = [
     id: "madman-family",
     slug: "madman-family",
     title: "I Am The Madman Of This Family",
-    coverImage:
-      "/1742474407_the-empty-box-and-zeroth-maria.webp",
+    coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
     author: "Solver Keter",
     rating: 4.5,
     totalRatings: 11,
@@ -40,8 +41,7 @@ const featuredNovels = [
     id: "industrial-cthulhu",
     slug: "industrial-cthulhu",
     title: "Industrial Cthulhu: Starting as an Island Lord",
-    coverImage:
-      "/1742474407_the-empty-box-and-zeroth-maria.webp",
+    coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
     author: "Unknown Author",
     rating: 4.2,
     totalRatings: 21,
@@ -64,8 +64,7 @@ const featuredNovels = [
     id: "genius-cloning 1",
     slug: "genius-cloning 1",
     title: "The Genius of Cloning in the Academy City",
-    coverImage:
-      "/1742474407_the-empty-box-and-zeroth-maria.webp",
+    coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
     author: "Unknown Author",
     rating: 4.7,
     totalRatings: 19,
@@ -87,8 +86,7 @@ const featuredNovels = [
     id: "genius-cloning 2",
     slug: "genius-cloning 2",
     title: "The Genius of Cloning in the Academy City",
-    coverImage:
-      "/1742474407_the-empty-box-and-zeroth-maria.webp",
+    coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
     author: "Unknown Author",
     rating: 4.7,
     totalRatings: 19,
@@ -114,8 +112,7 @@ const bestNovels = [
     id: "lord-mysteries",
     slug: "lord-mysteries",
     title: "Lord of the Mysteries á dá ac ác xzc sxc xzc sa zxc zxc á á",
-    coverImage:
-      "/1744419978_blood-eagle.webp",
+    coverImage: "/1744419978_blood-eagle.webp",
     author: "Cuttlefish That Loves Diving",
     rating: 4.7,
     totalRatings: 853,
@@ -125,8 +122,7 @@ const bestNovels = [
     id: "legendary-mechanic",
     slug: "legendary-mechanic",
     title: "The Legendary Mechanic",
-    coverImage:
-      "/1744419978_blood-eagle.webp",
+    coverImage: "/1744419978_blood-eagle.webp",
     author: "Chocolion",
     rating: 4.7,
     totalRatings: 712,
@@ -136,8 +132,7 @@ const bestNovels = [
     id: "shadow-slave",
     slug: "shadow-slave",
     title: "Shadow Slave",
-    coverImage:
-      "/1744419978_blood-eagle.webp",
+    coverImage: "/1744419978_blood-eagle.webp",
     author: "Guiltythree",
     rating: 4.1,
     totalRatings: 769,
@@ -147,8 +142,7 @@ const bestNovels = [
     id: "circle-inevitability",
     slug: "circle-inevitability",
     title: "Circle of Inevitability",
-    coverImage:
-      "/1744419978_blood-eagle.webp",
+    coverImage: "/1744419978_blood-eagle.webp",
     author: "Cuttlefish That Loves Diving",
     rating: 4.6,
     totalRatings: 528,
@@ -158,8 +152,7 @@ const bestNovels = [
     id: "circle-inevitability 2",
     slug: "circle-inevitability 2",
     title: "Circle of Inevitability",
-    coverImage:
-      "/1744419978_blood-eagle.webp",
+    coverImage: "/1744419978_blood-eagle.webp",
     author: "Cuttlefish That Loves Diving",
     rating: 4.6,
     totalRatings: 528,
@@ -172,8 +165,7 @@ const recentUpdates = [
   {
     id: "lord-void",
     slug: "lord-void",
-    coverImage:
-      "/1742474407_the-empty-box-and-zeroth-maria.webp",
+    coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
     title: "The Lord of Void and Real",
     chapter: "Chapter 319: Three Stars Demolishing Demons",
     updatedAt: "9 minutes ago",
@@ -181,8 +173,7 @@ const recentUpdates = [
   {
     id: "beast-taming",
     slug: "beast-taming",
-    coverImage:
-      "/1742474407_the-empty-box-and-zeroth-maria.webp",
+    coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
     title: "Beast Taming Patrol",
     chapter: "Chapter 674: Youyou Advances!",
     updatedAt: "14 minutes ago",
@@ -190,8 +181,7 @@ const recentUpdates = [
   {
     id: "disciple-simulator",
     slug: "disciple-simulator",
-    coverImage:
-      "/1742474407_the-empty-box-and-zeroth-maria.webp",
+    coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
     title: "I Have A Disciple Simulator",
     chapter: "Chapter 911: The Humble Hallucinatory Dark Demon Venerable!",
     updatedAt: "14 minutes ago",
@@ -199,8 +189,7 @@ const recentUpdates = [
   {
     id: "grinding-experience",
     slug: "grinding-experience",
-    coverImage:
-      "/1742474407_the-empty-box-and-zeroth-maria.webp",
+    coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
     title: "I Am Grinding Experience In Another World",
     chapter: "Chapter 671: Return to Qingqiu",
     updatedAt: "15 minutes ago",
@@ -208,8 +197,7 @@ const recentUpdates = [
   {
     id: "reversing-life",
     slug: "reversing-life",
-    coverImage:
-      "/1742474407_the-empty-box-and-zeroth-maria.webp",
+    coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
     title: "Reversing Life With Item Copy",
     chapter: "Chapter 128: Not Quite Yet",
     updatedAt: "16 minutes ago",
@@ -217,6 +205,30 @@ const recentUpdates = [
 ];
 
 export default function HomePage() {
+  // const { fetchResource } = useResourceStore();
+  // const [page, setPage] = useState(0);
+  // const story = useResourceStore((s) => s.resources.stories);
+  // const collections = useResourceStore((s) => s.resources.collections);
+
+  // useEffect(() => {
+  //   fetchResource("stories", "data/private/data/story", {
+  //     categoryCode: "ngon-tinh",
+  //     page: page,
+  //     size: 20,
+  //     sortBy: "totalView",
+  //     sortDirection: "DESC",
+  //   });
+  // }, [fetchResource, page]);
+
+  // useEffect(() => {
+  //   fetchResource("collections", "data/private/data/collections", {
+  //     page: 1,
+  //     pageSize: 20,
+  //   });
+  // }, [fetchResource]);
+
+  // console.log("RESOURCE.STORY: ", story);
+  // console.log("RESOURCE.COLLECTION: ", collections);
   const [previewChapter, setPreviewChapter] = useState<string | null>(null);
 
   const getChapterPreviewData = (chapterId: string) => {
@@ -248,6 +260,8 @@ export default function HomePage() {
 
       {/* Weekly Book Feature Section */}
       <WeeklyFeaturedBook />
+
+      <LatestReadingSection />
 
       <div className="mt-12">
         <PotentialStarletSection />

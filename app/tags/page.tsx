@@ -28,8 +28,8 @@ export default function TagsPage() {
   const categories = Array.from(new Set(allTags.map(tag => tag.category)))
   
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-950">
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="min-h-screen">
+      <div className="mx-auto">
         {/* Header */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

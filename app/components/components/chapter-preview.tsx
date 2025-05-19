@@ -166,7 +166,8 @@ export function ChapterPreview({
             )}
             
             <Link
-              href={`/novels/${slug}/chapters/${slug}`}
+              // href={`/novels/${slug}/chapters/${slug}`}
+              href={`/novels/lord-mysteries/chapters/1`}
               className="rounded-lg bg-emerald-500 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-600"
             >
               Read Full Chapter

@@ -59,8 +59,7 @@ export default function AllChaptersPage() {
   // Get chapters for this novel
   const novelChapters = allChapters.filter(chapter => chapter.novelSlug === novel.slug)
 
-  console.log("NOVEL CHAPTERS: ", novelChapters)
-  
+
   // Initialize search query from URL parameter
   // useEffect(() => {
   //   setSearchQuery(search)
@@ -116,8 +115,8 @@ export default function AllChaptersPage() {
     : novelChapters.length
   
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-950">
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="min-h-screen">
+      <div className="mx-auto">
         {/* Breadcrumb */}
         <div className="mb-6">
           <nav className="flex items-center text-sm text-gray-400">

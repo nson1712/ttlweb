@@ -19,6 +19,7 @@ import {
   SortDesc,
   Grid,
   List as ListIcon,
+  LockKeyhole,
 } from "lucide-react";
 import { Badge } from "../../components/ui/badge";
 import {
@@ -103,10 +104,6 @@ export default function NovelDetailPage() {
           <nav className="flex items-center text-sm text-gray-400">
             <Link href="/" className="hover:text-emerald-400">
               Home
-            </Link>
-            <ChevronRight className="mx-2 h-4 w-4" />
-            <Link href="/browse" className="hover:text-emerald-400">
-              Browse
             </Link>
             <ChevronRight className="mx-2 h-4 w-4" />
             <span className="text-emerald-400">{novel.title}</span>
@@ -398,6 +395,11 @@ export default function NovelDetailPage() {
                           {chapter.isNew && (
                             <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text-xs font-medium text-emerald-400">
                               NEW
+                            </span>
+                          )}
+                          {chapter.isLocked && (
+                            <span className="p-0.5 text-xs font-medium text-emerald-400">
+                              <LockKeyhole className="h-5 w-5 text-emerald-400" />
                             </span>
                           )}
                           <ChevronRight className="h-5 w-5 text-gray-500 group-hover:text-emerald-400" />

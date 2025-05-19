@@ -56,8 +56,8 @@ export function Footer() {
       <button 
         onClick={scrollToTop}
         className={cn(
-          "fixed bottom-6 right-6 z-50 p-3 rounded-full bg-emerald-500 text-white shadow-lg transition-all duration-300 hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2",
-          showScrollTop ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
+          "fixed bottom-6 right-6 z-50 p-3 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 text-white shadow-lg transition-all duration-300 hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2",
+          showScrollTop ? "opacity-100 translate-y-0 cursor-pointer" : "opacity-0 translate-y-10 pointer-events-none"
         )}
         aria-label="Scroll to top"
       >

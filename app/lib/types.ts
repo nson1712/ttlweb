@@ -23,7 +23,7 @@ export interface Novel {
 export interface Chapter {
   id?: string
   slug: string;
-  storySlug: string;
+  novelSlug: string;
   title: string;
   views?: number;
   number: number;
