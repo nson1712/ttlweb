@@ -12,7 +12,7 @@ interface ResourceState {
   error: Record<string, string | null>;
 
   // actions
-    fetchResource: (key: string, url: string, params?: Params) => Promise<void>;
+  fetchResource: (key: string, url: string, params?: Params) => Promise<void>;
   createResource: (key: string, url: string, data: Payload) => Promise<void>;
   updateResource: (key: string, url: string, data: Payload) => Promise<void>;
   patchResource: (key: string, url: string, data: Payload) => Promise<void>;

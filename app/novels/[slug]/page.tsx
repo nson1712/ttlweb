@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -10,11 +10,11 @@ import {
   Share2,
   Bookmark,
   ChevronRight,
-  MessageSquare,
+  // MessageSquare,
   User,
   Calendar,
   Eye,
-  ThumbsUp,
+  // ThumbsUp,
   SortAsc,
   SortDesc,
   Grid,
@@ -31,9 +31,12 @@ import {
 import { cn } from "../../lib/utils";
 import { useParams, useSearchParams } from "next/navigation";
 import { PaginationWithLinks } from "@/app/components/components/pagination";
-import { allChapters, allNovels } from "@/app/lib/mock-data";
+import { allChapters } from "@/app/lib/mock-data";
+import { useResourceStore } from "@/app/stores/useResourceStore";
+import { StoryDetailsApiResponse } from "@/app/interfaces/story";
 
 export default function NovelDetailPage() {
+  const {fetchResource} = useResourceStore();
   const [activeTab, setActiveTab] = useState("chapters");
   const [isFollowing, setIsFollowing] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -49,10 +52,22 @@ export default function NovelDetailPage() {
 
   const view = searchParams.get("view") ?? "list";
 
-  // Find novel by slug
-  const novel = allNovels.find((novel) => novel.slug === params.slug);
+  const storyDetailsReponse = useResourceStore((s) => s.resources?.storyDetails) as StoryDetailsApiResponse;
 
-  if (!novel) {
+  useEffect(() => {
+    fetchResource("storyDetails", "/api/story/detail", {
+      slug: params.slug
+    });
+
+    fetchResource("chapters", "")
+  }, [fetchResource, params.slug])
+
+  // Find novel by slug
+  const storyDetails = storyDetailsReponse?.data
+
+  console.log("STORY DETAILSSSS", storyDetailsReponse?.data);
+
+  if (!storyDetails) {
     return (
       <div className="flex h-[70vh] flex-col items-center justify-center">
         <h1 className="text-2xl font-bold text-white">Novel not found</h1>
@@ -72,7 +87,7 @@ export default function NovelDetailPage() {
 
   // Get chapters for this novel
   const novelChapters = allChapters.filter(
-    (chapter) => chapter.novelSlug === novel.slug
+    (chapter) => chapter.novelSlug === storyDetails.slug
   );
 
   // Sort chapters based on sort parameter
@@ -88,13 +103,13 @@ export default function NovelDetailPage() {
   const paginatedChapters = sortedChapters.slice(start, end);
 
   // Get related novels (same categories)
-  const relatedNovels = allNovels
-    .filter(
-      (n) =>
-        n.slug !== novel.slug &&
-        n.categories.some((category) => novel.categories.includes(category))
-    )
-    .slice(0, 20);
+  // const relatedNovels = allNovels
+  //   .filter(
+  //     (n) =>
+  //       n.slug !== novel.slug &&
+  //       n.categories.some((category) => novel.categories.includes(category))
+  //   )
+  //   .slice(0, 20);
 
   return (
     <div className="min-h-screen">
@@ -106,7 +121,7 @@ export default function NovelDetailPage() {
               Home
             </Link>
             <ChevronRight className="mx-2 h-4 w-4" />
-            <span className="text-emerald-400">{novel.title}</span>
+            <span className="text-emerald-400">{storyDetails.title}</span>
           </nav>
         </div>
 
@@ -114,8 +129,8 @@ export default function NovelDetailPage() {
         <div className="relative mb-8 overflow-hidden rounded-xl bg-gradient-to-br from-gray-800/90 to-gray-900 p-6 shadow-xl">
           <div className="absolute inset-0 overflow-hidden opacity-10">
             <Image
-              src={novel.coverImage}
-              alt={novel.title}
+              src={storyDetails.coverImage}
+              alt={storyDetails.title}
               fill
               className="object-cover"
               priority
@@ -127,8 +142,8 @@ export default function NovelDetailPage() {
             <div className="relative mx-auto w-48 md:mx-0 md:w-56 flex-shrink-0">
               <div className="aspect-[3/4] overflow-hidden rounded-lg shadow-lg">
                 <Image
-                  src={novel.coverImage}
-                  alt={novel.title}
+                  src={storyDetails.coverImage}
+                  alt={storyDetails.title}
                   width={224}
                   height={336}
                   className="h-full w-full object-cover"
@@ -139,8 +154,8 @@ export default function NovelDetailPage() {
               <div className="absolute bottom-1 left-1  rounded-full bg-black/80 px-3 py-1 text-sm font-medium text-white shadow-md">
                 <div className="flex items-center gap-1">
                   <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                  <span>{novel.rating.toFixed(1)}</span>
-                  <span className="text-gray-300">({novel.totalRatings})</span>
+                  <span>{storyDetails.rate.toFixed(1)}</span>
+                  {/* <span className="text-gray-300">({storyDetails.totalRatings})</span> */}
                 </div>
               </div>
             </div>
@@ -149,42 +164,46 @@ export default function NovelDetailPage() {
             <div className="flex-1 space-y-4">
               <div>
                 <h1 className="text-3xl font-bold text-white md:text-4xl">
-                  {novel.title}
+                  {storyDetails.title}
                 </h1>
                 <div className="mt-2 flex items-center gap-3">
                   <div className="flex items-center gap-1 text-sm text-gray-300">
                     <User className="h-4 w-4 text-emerald-400" />
-                    <span>{novel.author}</span>
+                    {/* <span>{storyDetails.author}</span> */}
                   </div>
                   <div className="flex items-center gap-1 text-sm text-gray-300">
                     <BookOpen className="h-4 w-4 text-emerald-400" />
-                    <span>{novel.chapterCount} chapters</span>
+                    {/* <span>{storyDetails.chapterCount} chapters</span> */}
                   </div>
                   <div className="flex items-center gap-1 text-sm text-gray-300">
                     <Eye className="h-4 w-4 text-emerald-400" />
-                    <span>{novel.views.toLocaleString()} views</span>
+                    <span>{storyDetails.totalView.toLocaleString()} views</span>
                   </div>
                 </div>
               </div>
 
               <div className="flex flex-wrap gap-2">
-                {novel.categories.map((category) => (
-                  <Link href={`/tags/${category.toLowerCase()}`} key={category}>
+                {storyDetails.categories.map((category) => (
+                  <Link href={`/tags/${category}`} key={category.id}>
                     <Badge
                       variant="outline"
                       className="bg-gray-700/50 text-xs text-emerald-300 border-emerald-500/20 hover:bg-emerald-900/20"
                     >
-                      {category}
+                      {category.name}
                     </Badge>
                   </Link>
                 ))}
               </div>
 
-              <p className="text-gray-300">{novel.description}</p>
+              <div className="line-clamp-5 text-gray-300"
+        dangerouslySetInnerHTML={{ __html: storyDetails.shortDescription }}
+      />
+
+              {/* <p className="text-gray-300 line-clamp-5">{storyDetails.shortDescription}</p> */}
 
               <div className="flex flex-wrap gap-3">
                 <Link
-                  href={`/novels/${novel.slug}/chapters/${
+                  href={`/novels/${storyDetails.slug}/chapters/${
                     novelChapters[0]?.number || 1
                   }`}
                   className="rounded-full bg-gradient-to-r from-emerald-400 to-teal-500 px-6 py-2 text-sm font-medium text-white hover:bg-emerald-600"
@@ -192,7 +211,7 @@ export default function NovelDetailPage() {
                   Start Reading
                 </Link>
                 <Link
-                  href={`/novels/${novel.slug}/chapters/${
+                  href={`/novels/${storyDetails.slug}/chapters/${
                     novelChapters[novelChapters.length - 1]?.number || 1
                   }`}
                   className="rounded-full bg-gray-700 px-6 py-2 text-sm font-medium text-white hover:bg-gray-600"
@@ -276,7 +295,7 @@ export default function NovelDetailPage() {
                 <div className="flex items-center gap-2">
                   <div className="flex items-center gap-2 rounded-lg bg-gray-700 p-1">
                     <Link
-                      href={`/novels/${novel.slug}?sort=newest&view=${view}`}
+                      href={`/novels/${storyDetails.slug}?sort=newest&view=${view}`}
                       className={cn(
                         "rounded-md px-3 py-1 text-sm",
                         sort === "newest"
@@ -288,7 +307,7 @@ export default function NovelDetailPage() {
                       Newest
                     </Link>
                     <Link
-                      href={`/novels/${novel.slug}?sort=oldest&view=${view}`}
+                      href={`/novels/${storyDetails.slug}?sort=oldest&view=${view}`}
                       className={cn(
                         "rounded-md px-3 py-1 text-sm",
                         sort === "oldest"
@@ -303,7 +322,7 @@ export default function NovelDetailPage() {
 
                   <div className="flex items-center gap-1 rounded-lg bg-gray-700 p-1">
                     <Link
-                      href={`/novels/${novel.slug}?sort=${sort}&view=list`}
+                      href={`/novels/${storyDetails.slug}?sort=${sort}&view=list`}
                       className={cn(
                         "rounded-md p-1.5",
                         view === "list"
@@ -314,7 +333,7 @@ export default function NovelDetailPage() {
                       <ListIcon className="h-4 w-4" />
                     </Link>
                     <Link
-                      href={`/novels/${novel.slug}?sort=${sort}&view=grid`}
+                      href={`/novels/${storyDetails.slug}?sort=${sort}&view=grid`}
                       className={cn(
                         "rounded-md p-1.5",
                         view === "grid"
@@ -340,7 +359,7 @@ export default function NovelDetailPage() {
                 {paginatedChapters.map((chapter) => (
                   <Link
                     key={chapter.id}
-                    href={`/novels/${novel.slug}/chapters/${chapter.number}`}
+                    href={`/novels/${storyDetails.slug}/chapters/${chapter.number}`}
                     className={cn(
                       "group block",
                       view === "grid"
@@ -431,7 +450,7 @@ export default function NovelDetailPage() {
                 {/* Rating Summary */}
                 <div className="flex flex-col items-center rounded-lg bg-gray-800 p-4 sm:w-64">
                   <div className="text-5xl font-bold text-white">
-                    {novel.rating.toFixed(1)}
+                    {storyDetails.rate.toFixed(1)}
                   </div>
                   <div className="mb-4 flex items-center gap-1">
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -439,7 +458,7 @@ export default function NovelDetailPage() {
                         key={star}
                         className={cn(
                           "h-5 w-5",
-                          star <= Math.round(novel.rating)
+                          star <= Math.round(storyDetails.rate)
                             ? "fill-yellow-400 text-yellow-400"
                             : "text-gray-600"
                         )}
@@ -447,7 +466,7 @@ export default function NovelDetailPage() {
                     ))}
                   </div>
                   <div className="text-sm text-gray-400">
-                    {novel.totalRatings} ratings
+                    {/* {storyDetails.totalRatings} ratings */}
                   </div>
 
                   <div className="mt-4 w-full space-y-2">
@@ -460,29 +479,29 @@ export default function NovelDetailPage() {
                           </span>
                         </div>
                         <div className="h-2 flex-1 overflow-hidden rounded-full bg-gray-700">
-                          <div
+                          {/* <div
                             className="h-full bg-yellow-400"
                             style={{
                               width: `${Math.round(
-                                (novel.ratingDistribution[
-                                  rating as keyof typeof novel.ratingDistribution
+                                (storyDetails.ratingDistribution[
+                                  rating as keyof typeof storyDetails.ratingDistribution
                                 ] /
-                                  novel.totalRatings) *
+                                  storyDetails.totalRatings) *
                                   100
                               )}%%`,
                             }}
-                          ></div>
+                          ></div> */}
                         </div>
-                        <div className="text-xs text-gray-400">
+                        {/* <div className="text-xs text-gray-400">
                           {Math.round(
-                            (novel.ratingDistribution[
-                              rating as keyof typeof novel.ratingDistribution
+                            (storyDetails.ratingDistribution[
+                              rating as keyof typeof storyDetails.ratingDistribution
                             ] /
-                              novel.totalRatings) *
+                              storyDetails.totalRatings) *
                               100
                           )}
                           %
-                        </div>
+                        </div> */}
                       </div>
                     ))}
                   </div>
@@ -493,9 +512,9 @@ export default function NovelDetailPage() {
                 </div>
 
                 {/* Reviews List */}
-                <div className="flex-1 space-y-4">
-                  {novel.reviews.length > 0 ? (
-                    novel.reviews.map((review) => (
+                {/* <div className="flex-1 space-y-4">
+                  {storyDetails.reviews.length > 0 ? (
+                    storyDetails.reviews.map((review) => (
                       <div
                         key={review.id}
                         className="rounded-lg bg-gray-800 p-4"
@@ -557,7 +576,7 @@ export default function NovelDetailPage() {
                       </button>
                     </div>
                   )}
-                </div>
+                </div> */}
               </div>
             </div>
           </TabsContent>
@@ -569,7 +588,7 @@ export default function NovelDetailPage() {
                 Similar Novels
               </h2>
 
-              <div className="grid grid-cols-2 gap-6 sm:grid-cols-5">
+              {/* <div className="grid grid-cols-2 gap-6 sm:grid-cols-5">
                 {relatedNovels.map((relatedNovel) => (
                   <Link
                     key={relatedNovel.id}
@@ -605,14 +624,14 @@ export default function NovelDetailPage() {
                     </div>
                   </Link>
                 ))}
-              </div>
+              </div> */}
 
               <div className="mt-6 text-center">
                 <Link
-                  href={`/tags/${novel.categories[0].toLowerCase()}`}
+                  href={`/tags/${storyDetails.categories?.[0]}`}
                   className="inline-block rounded-full bg-gray-700 px-6 py-2 text-sm font-medium text-white hover:bg-gray-600"
                 >
-                  View More {novel.categories[0]} Novels
+                  View More {storyDetails.categories?.[0]?.name} Novels
                 </Link>
               </div>
             </div>

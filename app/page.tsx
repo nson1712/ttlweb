@@ -9,17 +9,21 @@ import { NovelCard } from "../app/components/novels/novel-card";
 import Image from "next/image";
 import { UpdateCard } from "./components/novels/update-card";
 import { AnimatePresence, motion } from "framer-motion";
-import { WeeklyFeaturedBook } from "./components/components/weekly-feature-books";
+import { WeeklyStory } from "./components/components/weekly-story";
 import { CategoriesTagsSection } from "./components/components/categories-tags-section";
 import { PotentialStarletSection } from "./components/components/potential-starlet-section";
 import { RankingSection } from "./components/components/ranking-section";
 import { Eye, Sparkles } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { chapterPreviews } from "./lib/mock-data";
 import { ChapterPreview } from "./components/components/chapter-preview";
-import LatestReadingSection from "./components/components/latest-reading";
-// import { useResourceStore } from "./stores/useResourceStore";
+import { useResourceStore } from "./stores/useResourceStore";
+import {
+  PotentialStarletApiResponse,
+  RankingNovelApiResponse,
+  StoryApiResponse,
+} from "./interfaces/story";
 
 // Mock data for featured novels
 const featuredNovels = [
@@ -205,30 +209,55 @@ const recentUpdates = [
 ];
 
 export default function HomePage() {
-  // const { fetchResource } = useResourceStore();
-  // const [page, setPage] = useState(0);
-  // const story = useResourceStore((s) => s.resources.stories);
-  // const collections = useResourceStore((s) => s.resources.collections);
+  const { fetchResource } = useResourceStore();
 
-  // useEffect(() => {
-  //   fetchResource("stories", "data/private/data/story", {
-  //     categoryCode: "ngon-tinh",
-  //     page: page,
-  //     size: 20,
-  //     sortBy: "totalView",
-  //     sortDirection: "DESC",
-  //   });
-  // }, [fetchResource, page]);
+  const weeklyStory = useResourceStore(
+    (s) => s.resources?.weeklyStory
+  ) as StoryApiResponse;
 
-  // useEffect(() => {
-  //   fetchResource("collections", "data/private/data/collections", {
-  //     page: 1,
-  //     pageSize: 20,
-  //   });
-  // }, [fetchResource]);
+  const potentialStarletResponse = useResourceStore(
+    (s) => s.resources?.potentialStarlet
+  ) as PotentialStarletApiResponse;
 
-  // console.log("RESOURCE.STORY: ", story);
-  // console.log("RESOURCE.COLLECTION: ", collections);
+  const rankingStoriesResponse = useResourceStore(
+    (s) => s.resources?.ranking
+  ) as RankingNovelApiResponse;
+
+  // const hashtagResponse = useResourceStore(
+  //   (s) => s.resources?.hashtag
+  // )
+
+  // console.log("HASHTAGGGGGGG ", hashtagResponse?.data?.data);
+
+  useEffect(() => {
+    fetchResource("weeklyStory", "api/story/weekly", {
+      page: 0,
+      size: 20,
+    });
+
+    fetchResource("potentialStarlet", "api/story/potential/list", {
+      page: 0,
+      size: 20,
+    });
+
+    fetchResource("ranking", "api/story/ranking/list", {
+      page: 0,
+      size: 20,
+    });
+
+    fetchResource("hashtag", "private/hash-tag/popular", {
+      page: 0,
+      size: 12,
+    });
+
+    fetchResource("categories", "api/category/list", {
+      page: 0,
+      size: 20,
+    });
+  }, [fetchResource]);
+
+  console.log("RANK")
+
   const [previewChapter, setPreviewChapter] = useState<string | null>(null);
 
   const getChapterPreviewData = (chapterId: string) => {
@@ -258,16 +287,19 @@ export default function HomePage() {
         </p>
       </motion.div>
 
-      {/* Weekly Book Feature Section */}
-      <WeeklyFeaturedBook />
-
-      <LatestReadingSection />
+      {/* Reading Book Feature Section */}
+      <WeeklyStory weeklyStory={weeklyStory?.data?.data?.[0]} />
 
       <div className="mt-12">
-        <PotentialStarletSection />
+        <PotentialStarletSection
+          potentialStarlets={potentialStarletResponse?.data?.data ?? []}
+        />
       </div>
 
-      <RankingSection />
+      <RankingSection 
+      rankingNovels={rankingStoriesResponse?.data?.data ?? []}
+
+      />
 
       {/* Featured Novels Section */}
       <section className="md:flex gap-x-4 space-y-4 md:space-y-0">
