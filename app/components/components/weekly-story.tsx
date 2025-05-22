@@ -95,8 +95,7 @@ export const WeeklyStory: FC<WeeklyStoryPropsType> = ({weeklyStory}) => {
           </div>
 
           <div className="flex flex-wrap gap-3">
-            {/* <Link href={`/novels/${weeklyStory.slug}`}> */}
-            <Link href={`/novels/lord-mysteries`}>
+            <Link href={`/novels/${weeklyStory?.slug}`}>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

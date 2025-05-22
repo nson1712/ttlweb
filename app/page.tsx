@@ -24,6 +24,8 @@ import {
   RankingNovelApiResponse,
   StoryApiResponse,
 } from "./interfaces/story";
+import Head from "next/head";
+import Script from "next/script";
 
 // Mock data for featured novels
 const featuredNovels = [
@@ -230,7 +232,7 @@ export default function HomePage() {
   // console.log("HASHTAGGGGGGG ", hashtagResponse?.data?.data);
 
   useEffect(() => {
-    fetchResource("weeklyStory", "api/story/weekly", {
+    fetchResource("weeklyStory", "api/story/weekly/list", {
       page: 0,
       size: 20,
     });
@@ -268,7 +270,24 @@ export default function HomePage() {
     ? getChapterPreviewData(previewChapter)
     : null;
 
+    const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Discover Your Next Reading Adventure',
+    description:
+      'Explore thousands of novels across all your favorite genres. Start your reading journey today on YourSiteName!',
+    url: 'https://yoursite.com/',
+  };
   return (
+    <>
+    <Head>
+        <link rel="canonical" href="https://truyenabc.site/" />
+      </Head>
+      <Script
+        id="json-ld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     <div className="space-y-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -442,5 +461,6 @@ export default function HomePage() {
         )}
       </AnimatePresence>
     </div>
+    </>
   );
 }

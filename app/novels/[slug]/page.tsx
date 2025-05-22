@@ -53,17 +53,20 @@ export default function NovelDetailPage() {
   const view = searchParams.get("view") ?? "list";
 
   const storyDetailsReponse = useResourceStore((s) => s.resources?.storyDetails) as StoryDetailsApiResponse;
-
+  const storyDetails = storyDetailsReponse?.data
+  console.log("STORY DETAILS: ", storyDetails)
   useEffect(() => {
     fetchResource("storyDetails", "/api/story/detail", {
       slug: params.slug
     });
 
-    fetchResource("chapters", "")
-  }, [fetchResource, params.slug])
+    fetchResource("chapters", "/chapter", {
+      storyId: storyDetails?.id,
+    })
+  }, [fetchResource, params.slug, storyDetails?.id])
 
   // Find novel by slug
-  const storyDetails = storyDetailsReponse?.data
+  
 
   console.log("STORY DETAILSSSS", storyDetailsReponse?.data);
 
@@ -184,7 +187,7 @@ export default function NovelDetailPage() {
 
               <div className="flex flex-wrap gap-2">
                 {storyDetails.categories.map((category) => (
-                  <Link href={`/tags/${category}`} key={category.id}>
+                  <Link href={`/tags/${category.name}`} key={category.id}>
                     <Badge
                       variant="outline"
                       className="bg-gray-700/50 text-xs text-emerald-300 border-emerald-500/20 hover:bg-emerald-900/20"
@@ -628,7 +631,7 @@ export default function NovelDetailPage() {
 
               <div className="mt-6 text-center">
                 <Link
-                  href={`/tags/${storyDetails.categories?.[0]}`}
+                  href={`/tags/${storyDetails.categories?.[0]?.name}`}
                   className="inline-block rounded-full bg-gray-700 px-6 py-2 text-sm font-medium text-white hover:bg-gray-600"
                 >
                   View More {storyDetails.categories?.[0]?.name} Novels
