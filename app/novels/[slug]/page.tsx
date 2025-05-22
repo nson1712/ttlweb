@@ -33,10 +33,13 @@ import { useParams, useSearchParams } from "next/navigation";
 import { PaginationWithLinks } from "@/app/components/components/pagination";
 import { allChapters } from "@/app/lib/mock-data";
 import { useResourceStore } from "@/app/stores/useResourceStore";
-import { StoryDetailsApiResponse } from "@/app/interfaces/story";
+import {
+  ChaptersApiResponse,
+  StoryDetailsApiResponse,
+} from "@/app/interfaces/story";
 
 export default function NovelDetailPage() {
-  const {fetchResource} = useResourceStore();
+  const { fetchResource } = useResourceStore();
   const [activeTab, setActiveTab] = useState("chapters");
   const [isFollowing, setIsFollowing] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -46,29 +49,31 @@ export default function NovelDetailPage() {
 
   const page = parseInt(searchParams.get("page") ?? "1", 10);
 
-  const pageSize = parseInt(searchParams.get("pageSize") ?? "10", 10);
+  const pageSize = parseInt(searchParams.get("pageSize") ?? "20", 10);
 
   const sort = searchParams.get("sort") ?? "popular";
 
   const view = searchParams.get("view") ?? "list";
 
-  const storyDetailsReponse = useResourceStore((s) => s.resources?.storyDetails) as StoryDetailsApiResponse;
-  const storyDetails = storyDetailsReponse?.data
-  console.log("STORY DETAILS: ", storyDetails)
+  const storyDetailsReponse = useResourceStore(
+    (s) => s.resources?.storyDetails
+  ) as StoryDetailsApiResponse;
+  const chaptersReponse = useResourceStore(
+    (s) => s.resources?.chapters
+  ) as ChaptersApiResponse;
+  const storyDetails = storyDetailsReponse?.data;
+
   useEffect(() => {
     fetchResource("storyDetails", "/api/story/detail", {
-      slug: params.slug
+      slug: params.slug,
     });
 
     fetchResource("chapters", "/chapter", {
-      storyId: storyDetails?.id,
-    })
-  }, [fetchResource, params.slug, storyDetails?.id])
-
-  // Find novel by slug
-  
-
-  console.log("STORY DETAILSSSS", storyDetailsReponse?.data);
+      page: page,
+      size: pageSize,
+      filter: `storyId|eq|${storyDetails?.id}`,
+    });
+  }, [fetchResource, params.slug, storyDetails?.id, page, pageSize]);
 
   if (!storyDetails) {
     return (
@@ -94,16 +99,16 @@ export default function NovelDetailPage() {
   );
 
   // Sort chapters based on sort parameter
-  const sortedChapters = [...novelChapters].sort((a, b) => {
-    if (sort === "newest") return b.number - a.number;
-    if (sort === "oldest") return a.number - b.number;
-    return 0;
-  });
+  // const sortedChapters = [...novelChapters].sort((a, b) => {
+  //   if (sort === "newest") return b.number - a.number;
+  //   if (sort === "oldest") return a.number - b.number;
+  //   return 0;
+  // });
 
   // Paginate chapters
-  const start = (page - 1) * pageSize;
-  const end = start + pageSize;
-  const paginatedChapters = sortedChapters.slice(start, end);
+  // const start = (page - 1) * pageSize;
+  // const end = start + pageSize;
+  // const paginatedChapters = sortedChapters.slice(start, end);
 
   // Get related novels (same categories)
   // const relatedNovels = allNovels
@@ -198,9 +203,12 @@ export default function NovelDetailPage() {
                 ))}
               </div>
 
-              <div className="line-clamp-5 text-gray-300"
-        dangerouslySetInnerHTML={{ __html: storyDetails.shortDescription }}
-      />
+              <div
+                className="line-clamp-5 text-gray-300"
+                dangerouslySetInnerHTML={{
+                  __html: storyDetails.shortDescription,
+                }}
+              />
 
               {/* <p className="text-gray-300 line-clamp-5">{storyDetails.shortDescription}</p> */}
 
@@ -359,10 +367,10 @@ export default function NovelDetailPage() {
                     : "space-y-3"
                 )}
               >
-                {paginatedChapters.map((chapter) => (
+                {chaptersReponse?.data?.data.map((chapter) => (
                   <Link
                     key={chapter.id}
-                    href={`/novels/${storyDetails.slug}/chapters/${chapter.number}`}
+                    href={`/novels/${storyDetails.slug}/chapters/${chapter.order}`}
                     className={cn(
                       "group block",
                       view === "grid"
@@ -381,11 +389,9 @@ export default function NovelDetailPage() {
                       >
                         <h3 className="font-medium text-emerald-400 group-hover:text-emerald-300">
                           {view === "grid" ? (
-                            <>Chapter {chapter.number}</>
+                            <>Chương {chapter.order}</>
                           ) : (
-                            <>
-                              Chapter {chapter.number}: {chapter.title}
-                            </>
+                            <>{chapter.title}</>
                           )}
                         </h3>
 
@@ -403,23 +409,23 @@ export default function NovelDetailPage() {
                         >
                           <div className="flex items-center gap-1">
                             <Calendar className="h-3 w-3" />
-                            <span>{chapter.releaseDate}</span>
+                            <span>{chapter.createdAt}</span>
                           </div>
-                          <div className="flex items-center gap-1">
+                          {/* <div className="flex items-center gap-1">
                             <Eye className="h-3 w-3" />
                             <span>{chapter.views.toLocaleString()}</span>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
 
                       {view === "list" && (
                         <div className="ml-4 flex items-center gap-2">
-                          {chapter.isNew && (
+                          {/* {chapter.isNew && (
                             <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text-xs font-medium text-emerald-400">
                               NEW
                             </span>
-                          )}
-                          {chapter.isLocked && (
+                          )} */}
+                          {chapter.price !== 0 && (
                             <span className="p-0.5 text-xs font-medium text-emerald-400">
                               <LockKeyhole className="h-5 w-5 text-emerald-400" />
                             </span>
@@ -441,7 +447,7 @@ export default function NovelDetailPage() {
                 }}
                 page={page}
                 pageSize={pageSize}
-                totalCount={novelChapters.length}
+                totalCount={chaptersReponse?.data?.totalElements ?? 0}
               />
             </div>
           </TabsContent>
@@ -648,4 +654,3 @@ export default function NovelDetailPage() {
     </div>
   );
 }
-

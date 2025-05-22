@@ -1,4 +1,9 @@
-import { PotenialStarletType, RankingNovelProps, StoryType } from "../types/story";
+import { ChapterDetailType, ChapterType } from "../types/chapter";
+import {
+  PotenialStarletType,
+  RankingNovelProps,
+  StoryType,
+} from "../types/story";
 
 export interface StoryApiResponse {
   data: {
@@ -34,11 +39,23 @@ export interface RankingNovelApiResponse {
 }
 
 export interface StoryDetailsApiResponse {
-    data: StoryType
+  data: StoryType;
+  totalElements: number;
+  totalPages: number;
+  page: number;
+  size: number;
+  hasNext: boolean;
+}
+export interface ChaptersApiResponse {
+  data: {
+    data: ChapterType[];
     totalElements: number;
     totalPages: number;
     page: number;
     size: number;
     hasNext: boolean;
+  };
 }
-
+export interface ChapterDetailsApiResponse {
+    data: ChapterDetailType[];
+}
