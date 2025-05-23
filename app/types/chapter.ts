@@ -4,18 +4,20 @@ export type ChapterType = {
   title: string;
   slug: string;
   order: number;
+  seoTitle?: string;
+  metaDescription?: string;
+  metaKeywords?: string;
   status: string;
   price: number;
+  prevChapterId: number;
+  nextChapterId: number;
   createdAt: string;
   updatedAt: string;
-  publishedAt: string;
+  publishedAt?: string;
 };
 
 export type ChapterDetailType = {
   id: string;
   content: string;
   order: number;
-  chapterId: number;
-  totalReport: number;
-  totalComment: number;
 };

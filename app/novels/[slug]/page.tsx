@@ -47,7 +47,7 @@ export default function NovelDetailPage() {
   const params = useParams();
   const searchParams = useSearchParams();
 
-  const page = parseInt(searchParams.get("page") ?? "1", 10);
+  const page = parseInt(searchParams.get("page") ?? "0", 10);
 
   const pageSize = parseInt(searchParams.get("pageSize") ?? "20", 10);
 
@@ -68,7 +68,7 @@ export default function NovelDetailPage() {
       slug: params.slug,
     });
 
-    fetchResource("chapters", "/chapter", {
+    fetchResource("chapters", "/chapters", {
       page: page,
       size: pageSize,
       filter: `storyId|eq|${storyDetails?.id}`,
@@ -118,6 +118,9 @@ export default function NovelDetailPage() {
   //       n.categories.some((category) => novel.categories.includes(category))
   //   )
   //   .slice(0, 20);
+
+
+  console.log("")
 
   return (
     <div className="min-h-screen">
@@ -219,7 +222,7 @@ export default function NovelDetailPage() {
                   }`}
                   className="rounded-full bg-gradient-to-r from-emerald-400 to-teal-500 px-6 py-2 text-sm font-medium text-white hover:bg-emerald-600"
                 >
-                  Start Reading
+                  Đọc ngay
                 </Link>
                 <Link
                   href={`/novels/${storyDetails.slug}/chapters/${
@@ -297,7 +300,7 @@ export default function NovelDetailPage() {
             <div className="rounded-xl bg-gray-800/50 p-3 backdrop-blur-sm">
               <div className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <h2 className="text-xl font-bold text-white">
-                  All Chapters
+                  Danh sách chương
                   <span className="ml-2 text-sm font-normal text-gray-400">
                     ({novelChapters.length})
                   </span>
@@ -306,10 +309,10 @@ export default function NovelDetailPage() {
                 <div className="flex items-center gap-2">
                   <div className="flex items-center gap-2 rounded-lg bg-gray-700 p-1">
                     <Link
-                      href={`/novels/${storyDetails.slug}?sort=newest&view=${view}`}
+                      href={`/novels/${storyDetails.slug}?sort=DESC&view=${view}`}
                       className={cn(
                         "rounded-md px-3 py-1 text-sm",
-                        sort === "newest"
+                        sort === "DESC"
                           ? "bg-gray-600 text-white"
                           : "text-gray-300 hover:bg-gray-600/50"
                       )}
@@ -318,10 +321,10 @@ export default function NovelDetailPage() {
                       Newest
                     </Link>
                     <Link
-                      href={`/novels/${storyDetails.slug}?sort=oldest&view=${view}`}
+                      href={`/novels/${storyDetails.slug}?sort=ASC&view=${view}`}
                       className={cn(
                         "rounded-md px-3 py-1 text-sm",
-                        sort === "oldest"
+                        sort === "ASC"
                           ? "bg-gray-600 text-white"
                           : "text-gray-300 hover:bg-gray-600/50"
                       )}
@@ -370,7 +373,7 @@ export default function NovelDetailPage() {
                 {chaptersReponse?.data?.data.map((chapter) => (
                   <Link
                     key={chapter.id}
-                    href={`/novels/${storyDetails.slug}/chapters/${chapter.order}`}
+                    href={`/novels/${storyDetails.slug}/chapters/${chapter.slug}`}
                     className={cn(
                       "group block",
                       view === "grid"
@@ -447,7 +450,7 @@ export default function NovelDetailPage() {
                 }}
                 page={page}
                 pageSize={pageSize}
-                totalCount={chaptersReponse?.data?.totalElements ?? 0}
+                totalCount={chaptersReponse?.data?.totalElements ? (chaptersReponse.data.totalElements - pageSize) : 0}
               />
             </div>
           </TabsContent>

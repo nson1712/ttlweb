@@ -56,6 +56,10 @@ export interface ChaptersApiResponse {
     hasNext: boolean;
   };
 }
+
+export interface ChapterApiResponse {
+  data: ChapterType
+}
 export interface ChapterDetailsApiResponse {
     data: ChapterDetailType[];
 }
