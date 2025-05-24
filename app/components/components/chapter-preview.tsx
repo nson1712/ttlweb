@@ -152,7 +152,7 @@ export function ChapterPreview({
           <div className="flex items-center justify-between">
             {previousChapter ? (
               <Link
-                href={`/novels/${slug}/chapters/${previousChapter.slug}`}
+                href={`/novels/${slug}/${previousChapter.slug}`}
                 className="flex items-center gap-1 rounded-lg bg-gray-800 px-3 py-2 text-sm font-medium text-white hover:bg-gray-700"
               >
                 <ChevronLeft className="h-4 w-4" />
@@ -167,7 +167,7 @@ export function ChapterPreview({
             
             <Link
               // href={`/novels/${slug}/chapters/${slug}`}
-              href={`/novels/lord-mysteries/chapters/1`}
+              href={`/novels/lord-mysteries/1`}
               className="rounded-lg bg-emerald-500 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-600"
             >
               Read Full Chapter
@@ -175,7 +175,7 @@ export function ChapterPreview({
             
             {nextChapter ? (
               <Link
-                href={`/novels/${slug}/chapters/${nextChapter.slug}`}
+                href={`/novels/${slug}/${nextChapter.slug}`}
                 className="flex items-center gap-1 rounded-lg bg-gray-800 px-3 py-2 text-sm font-medium text-white hover:bg-gray-700"
               >
                 <span className="truncate max-w-[100px] sm:max-w-[150px]">

@@ -581,7 +581,7 @@ export default function ReadingHistoryPage() {
                                 {item.novel}
                               </h3>
                             </Link>
-                            <Link href={`/novels/${item.novelSlug}/chapters/${item.chapterNumber}`}>
+                            <Link href={`/novels/${item.novelSlug}/${item.chapterNumber}`}>
                               <p className="text-sm text-gray-300">{item.chapter}</p>
                             </Link>
                             <div className="mt-1 flex items-center gap-3 text-xs text-gray-400">
@@ -615,7 +615,7 @@ export default function ReadingHistoryPage() {
                                 {item.novel}
                               </h3>
                             </Link>
-                            <Link href={`/novels/${item.novelSlug}/chapters/${item.chapterNumber}`}>
+                            <Link href={`/novels/${item.novelSlug}/${item.chapterNumber}`}>
                               <p className="text-sm text-gray-300 line-clamp-1">{item.chapter}</p>
                             </Link>
                             <div className="mt-1 flex flex-col items-center justify-center text-xs text-gray-400">

@@ -217,7 +217,7 @@ export default function NovelDetailPage() {
 
               <div className="flex flex-wrap gap-3">
                 <Link
-                  href={`/novels/${storyDetails.slug}/chapters/${
+                  href={`/novels/${storyDetails.slug}/${
                     novelChapters[0]?.number || 1
                   }`}
                   className="rounded-full bg-gradient-to-r from-emerald-400 to-teal-500 px-6 py-2 text-sm font-medium text-white hover:bg-emerald-600"
@@ -225,7 +225,7 @@ export default function NovelDetailPage() {
                   Đọc ngay
                 </Link>
                 <Link
-                  href={`/novels/${storyDetails.slug}/chapters/${
+                  href={`/novels/${storyDetails.slug}/${
                     novelChapters[novelChapters.length - 1]?.number || 1
                   }`}
                   className="rounded-full bg-gray-700 px-6 py-2 text-sm font-medium text-white hover:bg-gray-600"
@@ -373,7 +373,7 @@ export default function NovelDetailPage() {
                 {chaptersReponse?.data?.data.map((chapter) => (
                   <Link
                     key={chapter.id}
-                    href={`/novels/${storyDetails.slug}/chapters/${chapter.slug}`}
+                    href={`/novels/${storyDetails.slug}/${chapter.slug}`}
                     className={cn(
                       "group block",
                       view === "grid"
