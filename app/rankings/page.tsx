@@ -245,7 +245,7 @@ export default function RankingsPage() {
               </div>
               <input
                 type="text"
-                placeholder="Search novels by title, author, or genre..."
+                placeholder="Tìm kiếm truyện theo tên, tác giả, hoặc thể loại..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full rounded-lg border border-gray-700 bg-gray-800 py-2 pl-10 pr-4 text-white placeholder-gray-400 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"

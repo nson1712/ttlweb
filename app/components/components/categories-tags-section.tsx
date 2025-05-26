@@ -20,7 +20,7 @@ interface CategoriesTagProps {
 export function CategoriesTagsSection() {
   return (
     <section className="rounded-xl bg-gray-800/50 p-6 backdrop-blur-sm">
-      <h2 className="mb-6 text-2xl font-bold text-white">Popular Tags</h2>
+      <h2 className="mb-6 text-2xl font-bold text-white">Hashtags Nổi Bật</h2>
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
         {popularTags.map((tag) => (

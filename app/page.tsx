@@ -297,7 +297,7 @@ export default async function HomePage() {
                 <div className="flex items-center w-full max-w-screen-md px-4">
                   <div className="flex-grow h-0.5 bg-gradient-to-l from-green-300 to-transparent"></div>
                   <span className="mx-4 text-xl font-semibold text-gray-300">
-                    Recent Updates
+                    Mới cập nhật
                   </span>
                   <div className="flex-grow h-0.5 bg-gradient-to-r from-green-300 to-transparent"></div>
                 </div>
@@ -325,14 +325,14 @@ export default async function HomePage() {
                   href="/updates"
                   className="inline-block bg-gray-800 border border-slate-700 rounded-md w-full px-4 py-2 text-base font-medium text-emerald-400 transition-colors hover:bg-gray-800 hover:text-emerald-300"
                 >
-                  View All Updates
+                  Xem thêm
                 </Link>
               </div>
             </section>
 
             <div className="my-6 flex items-center">
               <Sparkles className="mr-2 h-5 w-5 text-emerald-400" />
-              <h2 className="text-2xl font-bold text-white">Featured Novels</h2>
+              <h2 className="text-2xl font-bold text-white">Truyện đặc sắc</h2>
             </div>
             <div className="space-y-6">
               {featuredNovels.map((novel) => (
@@ -352,8 +352,8 @@ export default async function HomePage() {
           <Tabs defaultValue="best-novels" className="w-full">
             <div className="flex justify-between items-center mb-4">
               <TabsList>
-                <TabsTrigger value="best-novels">Best novels</TabsTrigger>
-                <TabsTrigger value="most-discussed">Most Discussed</TabsTrigger>
+                <TabsTrigger value="best-novels">Truyện hay nhất</TabsTrigger>
+                <TabsTrigger value="most-discussed">Thảo luận nhiều nhất</TabsTrigger>
               </TabsList>
             </div>
 

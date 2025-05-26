@@ -204,7 +204,7 @@ export function Header() {
               <form onSubmit={handleSearch} className="relative group">
                 <Input
                   type="text"
-                  placeholder="Search novels..."
+                  placeholder="Tìm kiếm truyện..."
                   className="w-64 bg-gray-800/70 text-white border-gray-700 rounded-full pl-10 pr-4 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
@@ -384,7 +384,7 @@ export function Header() {
               <form onSubmit={handleSearch} className="relative">
                 <Input
                   type="text"
-                  placeholder="Search novels..."
+                  placeholder="Tìm kiếm truyện..."
                   className="w-full bg-gray-800 text-white border-gray-700 rounded-lg pl-10 pr-4 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
