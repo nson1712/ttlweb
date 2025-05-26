@@ -171,9 +171,7 @@
 //       });
 //     };
 
-
 //     fetchData();
-
 
 //   }, [chapterSlug, fetchResource, chapterDetails?.id, storySlug]);
 
@@ -635,39 +633,75 @@
 //   );
 // }
 
+import { Suspense } from "react";
+import ChapterContent from "./ChapterContent";
+import type {
+  ChapterApiResponse,
+  ChapterDetailsApiResponse,
+  ChaptersApiResponse,
+} from "@/app/interfaces/story";
+import { LoaderIcon } from "lucide-react";
+import { httpClient } from "@/app/utils/httpClient";
 
-import { Suspense } from 'react';
-import ChapterContent from './ChapterContent';
-import type { ChapterApiResponse, ChapterDetailsApiResponse } from '@/app/interfaces/story';
-import { LoaderIcon } from 'lucide-react';
-
-async function fetchBySlug(slug: string, chapterSlug: string): Promise<ChapterApiResponse> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chapter/${slug}/${chapterSlug}`);
-  if (!res.ok) throw new Error('Failed to fetch chapter by slug');
+async function fetchBySlug(
+  slug: string,
+  chapterSlug: string
+): Promise<ChapterApiResponse> {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/chapter/${slug}/${chapterSlug}`
+  );
+  if (!res.ok) throw new Error("Failed to fetch chapter by slug");
   return res.json();
 }
 
 async function fetchById(chapterId: number): Promise<ChapterApiResponse> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chapter/${chapterId}`);
-  if (!res.ok) throw new Error('Failed to fetch chapter by id');
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/chapter/${chapterId}`
+  );
+  if (!res.ok) throw new Error("Failed to fetch chapter by id");
   return res.json();
 }
 
-async function fetchContents(chapterId: number): Promise<ChapterDetailsApiResponse> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chapter/details?chapterId=${chapterId}`);
-  if (!res.ok) throw new Error('Failed to fetch chapter contents');
-  return res.json();
+async function fetchContents(
+  chapterId: number
+): Promise<ChapterDetailsApiResponse> {
+  const res = await httpClient.get({
+    url: "/chapter/details",
+    params: { chapterId: chapterId.toString()}
+  }
+  );
+  return res
 }
 
-export default async function ChapterDetailPage({ params: { slug, chapterSlug } }: { params: { slug: string; chapterSlug: string } }) {
-  // 1. Lấy detail of current chap (by slug or by id)
+async function fetchChapters(
+  storyId: number,
+  page: number,
+  size: number
+): Promise<ChaptersApiResponse> {
+  const res = await httpClient.get({
+    url: "/chapters",
+    params: {
+      page: page || 0,
+      size: size || 50,
+      filter: `storyId|eq|${storyId}`,
+    },
+  });
+  return res;
+}
+
+export default async function ChapterDetailPage({
+  params: { slug, chapterSlug },
+  searchParams: { page, pageSize },
+}: {
+  params: { slug: string; chapterSlug: string };
+  searchParams: { page?: number | undefined; pageSize?: number | undefined };
+}) {
   const isId = /^\d+$/.test(chapterSlug);
   const detailResp = isId
     ? await fetchById(Number(chapterSlug))
     : await fetchBySlug(slug, chapterSlug);
   const detail = detailResp.data;
 
-  // 2. Prefetch prev/next slug nếu có
   const prevSlug = detail.prevChapterId
     ? (await fetchById(detail.prevChapterId)).data.slug
     : null;
@@ -675,8 +709,13 @@ export default async function ChapterDetailPage({ params: { slug, chapterSlug } 
     ? (await fetchById(detail.nextChapterId)).data.slug
     : null;
 
-  // 3. Lấy nội dung chapter
   const contentsResp = await fetchContents(Number(detail.id));
+
+  const chaptersList = await fetchChapters(
+    Number(detail.storyId),
+    page ?? 0,
+    pageSize ?? 50
+  );
 
   return (
     <Suspense fallback={<LoaderIcon />}>
@@ -687,6 +726,7 @@ export default async function ChapterDetailPage({ params: { slug, chapterSlug } 
         contents={contentsResp.data}
         prevSlug={prevSlug}
         nextSlug={nextSlug}
+        chaptersList={chaptersList}
       />
     </Suspense>
   );

@@ -26,7 +26,7 @@ interface PaginationWithLinksProps {
   };
   totalCount: number;
   pageSize: number;
-  page: number; // zero-based page index
+  page: number;
   pageSearchParam?: string;
 }
 export function PaginationWithLinks({
@@ -224,7 +224,7 @@ const SelectRowsPerPage = ({
   pageSize: number;
 }) => {
   return (
-    <div className="flex items-center gap-2 ">
+    <div className="flex items-center gap-2">
       <Select
         defaultValue={String(pageSize)}
         onValueChange={(v) => setPageSize(Number(v))}
