@@ -647,19 +647,19 @@ async function fetchBySlug(
   slug: string,
   chapterSlug: string
 ): Promise<ChapterApiResponse> {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/chapter/${slug}/${chapterSlug}`
+  const res = await httpClient.get({
+    url: `/chapter/slug/${slug}/${chapterSlug}`,
+  }
   );
-  if (!res.ok) throw new Error("Failed to fetch chapter by slug");
-  return res.json();
+  return res;
 }
 
 async function fetchById(chapterId: number): Promise<ChapterApiResponse> {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/chapter/${chapterId}`
+  const res = await httpClient.get({
+    url: `/chapter/${chapterId}`,
+  }
   );
-  if (!res.ok) throw new Error("Failed to fetch chapter by id");
-  return res.json();
+  return res
 }
 
 async function fetchContents(

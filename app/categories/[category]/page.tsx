@@ -11,9 +11,9 @@ import { useParams, useSearchParams } from "next/navigation"
 export default function TagDetailPage(
 ) {
 
- const { tag: rawTag } = useParams()
+ const { category: rawCategory } = useParams()
  const searchParams = useSearchParams()
-  const tag = decodeURIComponent(Array.isArray(rawTag) ? rawTag[0] : rawTag ?? "")
+  const category = decodeURIComponent(Array.isArray(rawCategory) ? rawCategory[0] : rawCategory ?? "")
 
   interface Novel {
     id: string
@@ -41,12 +41,12 @@ export default function TagDetailPage(
   const view = searchParams.get("view") ?? "list"
   
   // Get tag color based on tag name
-  const getTagColor = (tagName: string) => {
-    const tag = allTags.find(t => t.name.toLowerCase() === tagName.toLowerCase())
-    return tag?.color || "teal"
+  const getCategoryColor = (categoryName: string) => {
+    const category = allCategory.find(t => t.name.toLowerCase() === categoryName.toLowerCase())
+    return category?.color || "teal"
   }
   
-  const tagColor = getTagColor(tag)
+  const categoryColor = getCategoryColor(category)
   
   // Get color classes based on tag color
   const getColorClasses = (color: string) => {
@@ -63,7 +63,7 @@ export default function TagDetailPage(
     return colorMap[color] || colorMap.teal
   }
   
-  const colorClasses = getColorClasses(tagColor)
+  const colorClasses = getColorClasses(categoryColor)
   
   // Fetch novels by tag
   useEffect(() => {
@@ -74,7 +74,7 @@ export default function TagDetailPage(
       // For now, we'll filter the mock data
       const filteredNovels = allNovels.filter(novel => 
         novel.categories.some((category: string) => 
-          category.toLowerCase() === tag.toLowerCase()
+          category.toLowerCase() === category.toLowerCase()
         )
       )
       
@@ -97,12 +97,12 @@ export default function TagDetailPage(
     }
     
     fetchNovels()
-  }, [tag, page, pageSize, sort])
+  }, [category, page, pageSize, sort])
   
   // Get total count of novels with this tag
   const totalCount = allNovels.filter(novel => 
     novel.categories.some((category: string) => 
-      category.toLowerCase() === tag.toLowerCase()
+      category.toLowerCase() === category.toLowerCase()
     )
   ).length
   
@@ -112,7 +112,7 @@ export default function TagDetailPage(
         {/* Header */}
         <div className="mb-8">
           <Link 
-            href="/tags" 
+            href="/categories" 
             className="mb-4 inline-flex items-center text-sm font-medium text-emerald-400 hover:text-emerald-300"
           >
             <ChevronLeft className="mr-1 h-4 w-4" />
@@ -127,7 +127,7 @@ export default function TagDetailPage(
               <TagIcon className="h-6 w-6" />
             </div>
             <h1 className="text-3xl font-bold text-white">
-              {tag.charAt(0).toUpperCase() + tag.slice(1)}
+              {category.charAt(0).toUpperCase() + category.slice(1)}
             </h1>
             <span className="rounded-full bg-gray-800 px-3 py-1 text-sm font-medium text-gray-300">
               {totalCount} novels
@@ -135,7 +135,7 @@ export default function TagDetailPage(
           </div>
           
           <p className="mt-2 text-gray-400">
-            Browse all novels tagged with {tag.toLowerCase()}
+            Browse all novels tagged with {category.toLowerCase()}
           </p>
         </div>
         
@@ -145,7 +145,7 @@ export default function TagDetailPage(
             <Filter className="h-5 w-5 text-gray-400" />
             <span className="text-sm font-medium text-white">Sort by:</span>
             <Link
-              href={`/tags/${tag}?sort=popular&view=${view}`}
+              href={`/categories/${category}?sort=popular&view=${view}`}
               className={cn(
                 "rounded-full px-3 py-1 text-sm font-medium transition-colors",
                 sort === "popular"
@@ -156,7 +156,7 @@ export default function TagDetailPage(
               Popular
             </Link>
             <Link
-              href={`/tags/${tag}?sort=rating&view=${view}`}
+              href={`/categories/${category}?sort=rating&view=${view}`}
               className={cn(
                 "rounded-full px-3 py-1 text-sm font-medium transition-colors",
                 sort === "rating"
@@ -167,7 +167,7 @@ export default function TagDetailPage(
               Rating
             </Link>
             <Link
-              href={`/tags/${tag}?sort=newest&view=${view}`}
+              href={`/categories/${category}?sort=newest&view=${view}`}
               className={cn(
                 "rounded-full px-3 py-1 text-sm font-medium transition-colors",
                 sort === "newest"
@@ -179,7 +179,7 @@ export default function TagDetailPage(
               Newest
             </Link>
             <Link
-              href={`/tags/${tag}?sort=oldest&view=${view}`}
+              href={`/categories/${category}?sort=oldest&view=${view}`}
               className={cn(
                 "rounded-full px-3 py-1 text-sm font-medium transition-colors",
                 sort === "oldest"
@@ -195,7 +195,7 @@ export default function TagDetailPage(
           <div className="flex items-center gap-2">
             <span className="text-sm font-medium text-white">View:</span>
             <Link
-              href={`/tags/${tag}?sort=${sort}&view=grid`}
+              href={`/categories/${category}?sort=${sort}&view=grid`}
               className={cn(
                 "rounded-full p-1.5 transition-colors",
                 view === "grid"
@@ -206,7 +206,7 @@ export default function TagDetailPage(
               <Grid className="h-4 w-4" />
             </Link>
             <Link
-              href={`/tags/${tag}?sort=${sort}&view=list`}
+              href={`/categories/${category}?sort=${sort}&view=list`}
               className={cn(
                 "rounded-full p-1.5 transition-colors",
                 view === "list"
@@ -239,10 +239,10 @@ export default function TagDetailPage(
             <TagIcon className="h-12 w-12 text-gray-500" />
             <h3 className="mt-4 text-xl font-medium text-white">No novels found</h3>
             <p className="mt-2 text-gray-400">
-              We couldn&#39;t find any novels tagged with {tag.toLowerCase()}
+              We couldn&#39;t find any novels tagged with {category.toLowerCase()}
             </p>
             <Link
-              href="/tags"
+              href="/categories"
               className="mt-4 rounded-full bg-emerald-500 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-600"
             >
               Browse all tags
@@ -271,7 +271,7 @@ export default function TagDetailPage(
 }
 
 // Mock data for all tags (same as in tags/page.tsx)
-const allTags = [
+const allCategory = [
   { name: "Fantasy", count: 1250, color: "teal" },
   { name: "Adventure", count: 987, color: "blue" },
   { name: "Romance", count: 856, color: "pink" },

@@ -6,19 +6,9 @@ import { motion } from "framer-motion";
 import { Star, BookOpen } from "lucide-react";
 import { FC } from "react";
 import { WeeklyStoryPropsType } from "@/app/types/story";
+import { formatDateTime } from "@/app/lib/utils";
 
 export const WeeklyStory: FC<WeeklyStoryPropsType> = ({ weeklyStory }) => {
-  // const {fetchResource} = useResourceStore();
-
-  const updateIso = new Date(weeklyStory?.updatedAt || "").toLocaleDateString(
-    "vi-VN",
-    {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    }
-  );
-
   return (
     <section className="relative mb-12 overflow-hidden rounded-xl">
       <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800/95 to-transparent z-0"></div>
@@ -77,7 +67,7 @@ export const WeeklyStory: FC<WeeklyStoryPropsType> = ({ weeklyStory }) => {
               <BookOpen className="h-4 w-4" />
               {/* <span>{weeklyStory.chapterCount} chapters</span> */}
             </div>
-            <span>Cập nhật: {updateIso}</span>
+            <span>Cập nhật: {formatDateTime(weeklyStory?.updatedAt)}</span>
           </div>
 
           <div className="flex flex-wrap gap-3">

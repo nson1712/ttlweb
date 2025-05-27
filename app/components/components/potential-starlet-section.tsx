@@ -9,8 +9,10 @@ import { PotenialStarletType } from "@/app/types/story";
 
 export type PotenialStarletPropsType = {
   potentialStarlets: PotenialStarletType[];
-}
-export const PotentialStarletSection: FC<PotenialStarletPropsType> = ({potentialStarlets}) => {
+};
+export const PotentialStarletSection: FC<PotenialStarletPropsType> = ({
+  potentialStarlets,
+}) => {
   return (
     <section className="space-y-6">
       <div className="flex items-center justify-between">
@@ -33,11 +35,11 @@ export const PotentialStarletSection: FC<PotenialStarletPropsType> = ({potential
       </div>
     </section>
   );
-}
+};
 
 function PotentialStarletCard({
   id,
-  // slug,
+  slug,
   title,
   coverImage,
   // author,
@@ -48,8 +50,7 @@ function PotentialStarletCard({
       whileHover={{ y: -5 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
-      {/* <Link href={`/novels/${slug}`} className="block" id={id}> */}
-      <Link href={`/novels/lord-mysteries`} className="block" id={id}>
+      <Link href={`/novels/${slug}`} className="block" id={id}>
         <div className="group space-y-2">
           <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
             <Image
@@ -86,187 +87,3 @@ function PotentialStarletCard({
     </motion.div>
   );
 }
-
-// Mock data for potential starlet novels
-// const potentialStarlets = [
-//   {
-//     id: "zenith-game",
-//     slug: "zenith-game",
-//     title: "Mount Zenith: Creating the best game",
-//     coverImage:
-//       "/1721988242_devils-music.webp",
-//     author: "Game Creator",
-//     categories: ["Fantasy", "LitRPG"],
-//   },
-//   {
-//     id: "stella-khaos",
-//     slug: "stella-khaos",
-//     title: "Stella & Khaos: The tale of duality",
-//     coverImage:
-//       "/1721988242_devils-music.webp",
-//     author: "Dual Writer",
-//     categories: ["Fantasy", "Adventure"],
-//   },
-//   {
-//     id: "awakening-star",
-//     slug: "awakening-star",
-//     title: "Awakening: Path of the Star Soul",
-//     coverImage:
-//       "/1721988242_devils-music.webp",
-//     author: "Star Walker",
-//     categories: ["Fantasy", "Cultivation"],
-//   },
-//   {
-//     id: "reincarnated-trait",
-//     slug: "reincarnated-trait",
-//     title: "Reincarnated with SSS-Rank Trait",
-//     coverImage:
-//       "/1721988242_devils-music.webp",
-//     author: "Reincarnation Master",
-//     categories: ["Fantasy", "Reincarnation"],
-//   },
-//   {
-//     id: "rudrastra",
-//     slug: "rudrastra",
-//     title: "RUDRASTRA: THE CREATION OF DISTRUCTION",
-//     coverImage:
-//       "/1721988242_devils-music.webp",
-//     author: "Mythic Writer",
-//     categories: ["Fantasy", "Mythology"],
-//   },
-//   {
-//     id: "limitless-sovereign-216523146",
-//     slug: "limitless-sovereign",
-//     title: "The Limitless Sovereign",
-//     coverImage:
-//       "/1721988242_devils-music.webp",
-//     author: "Sovereign Writer",
-//     categories: ["Fantasy", "Cultivation"],
-//   },
-//   {
-//     id: "limitless-sovereign-123123213",
-//     slug: "limitless-sovereign",
-//     title: "The Limitless Sovereign",
-//     coverImage:
-//       "/1721988242_devils-music.webp",
-//     author: "Sovereign Writer",
-//     categories: ["Fantasy", "Cultivation"],
-//   },
-//   {
-//     id: "limitless-sovereign-99",
-//     slug: "limitless-sovereign",
-//     title: "The Limitless Sovereign",
-//     coverImage:
-//       "/1721988242_devils-music.webp",
-//     author: "Sovereign Writer",
-//     categories: ["Fantasy", "Cultivation"],
-//   },
-//   {
-//     id: "limitless-sovereign-123",
-//     slug: "limitless-sovereign",
-//     title: "The Limitless Sovereign",
-//     coverImage:
-//       "/1721988242_devils-music.webp",
-//     author: "Sovereign Writer",
-//     categories: ["Fantasy", "Cultivation"],
-//   },
-//   {
-//     id: "limitless-sovereign-123123",
-//     slug: "limitless-sovereign",
-//     title: "The Limitless Sovereign",
-//     coverImage:
-//       "/1721988242_devils-music.webp",
-//     author: "Sovereign Writer",
-//     categories: ["Fantasy", "Cultivation"],
-//   },
-//   {
-//     id: "limitless-sovereign-235235",
-//     slug: "limitless-sovereign",
-//     title: "The Limitless Sovereign",
-//     coverImage:
-//       "/1721988242_devils-music.webp",
-//     author: "Sovereign Writer",
-//     categories: ["Fantasy", "Cultivation"],
-//   },
-//   {
-//     id: "limitless-sovereign-1",
-//     slug: "limitless-sovereign",
-//     title: "The Limitless Sovereign",
-//     coverImage:
-//       "/1721988242_devils-music.webp",
-//     author: "Sovereign Writer",
-//     categories: ["Fantasy", "Cultivation"],
-//   },
-//   {
-//     id: "limitless-sovereign-2",
-//     slug: "limitless-sovereign",
-//     title: "The Limitless Sovereign",
-//     coverImage:
-//       "/1721988242_devils-music.webp",
-//     author: "Sovereign Writer",
-//     categories: ["Fantasy", "Cultivation"],
-//   },
-//   {
-//     id: "limitless-sovereign-3",
-//     slug: "limitless-sovereign",
-//     title: "The Limitless Sovereign",
-//     coverImage:
-//       "/1721988242_devils-music.webp",
-//     author: "Sovereign Writer",
-//     categories: ["Fantasy", "Cultivation"],
-//   },
-//   {
-//     id: "limitless-sovereign-4",
-//     slug: "limitless-sovereign",
-//     title: "The Limitless Sovereign",
-//     coverImage:
-//       "/1721988242_devils-music.webp",
-//     author: "Sovereign Writer",
-//     categories: ["Fantasy", "Cultivation"],
-//   },
-//   {
-//     id: "limitless-sovereign-5",
-//     slug: "limitless-sovereign",
-//     title: "The Limitless Sovereign",
-//     coverImage:
-//       "/1721988242_devils-music.webp",
-//     author: "Sovereign Writer",
-//     categories: ["Fantasy", "Cultivation"],
-//   },
-//   {
-//     id: "limitless-sovereign-6",
-//     slug: "limitless-sovereign",
-//     title: "The Limitless Sovereign",
-//     coverImage:
-//       "/1721988242_devils-music.webp",
-//     author: "Sovereign Writer",
-//     categories: ["Fantasy", "Cultivation"],
-//   },
-//   {
-//     id: "limitless-sovereign-7",
-//     slug: "limitless-sovereign",
-//     title: "The Limitless Sovereign",
-//     coverImage:
-//       "/1721988242_devils-music.webp",
-//     author: "Sovereign Writer",
-//     categories: ["Fantasy", "Cultivation"],
-//   },
-//   {
-//     id: "limitless-sovereign-8",
-//     slug: "limitless-sovereign",
-//     title: "The Limitless Sovereign",
-//     coverImage:
-//       "/1721988242_devils-music.webp",
-//     author: "Sovereign Writer",
-//     categories: ["Fantasy", "Cultivation"],
-//   },
-//   {
-//     id: "limitless-sovereign-9",
-//     slug: "limitless-sovereign",
-//     title: "The Limitless Sovereign",
-//     coverImage:
-//       "/1721988242_devils-music.webp",
-//     author: "Sovereign Writer",
-//     categories: ["Fantasy", "Cultivation"],
-//   },
-// ];

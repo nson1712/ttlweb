@@ -12,11 +12,11 @@ export type StoryType = {
   updatedAt: string;
   shortDescription: string;
   categories: TCategory[];
-}
+};
 
 export type WeeklyStoryPropsType = {
   weeklyStory: StoryType;
-}
+};
 
 export type PotenialStarletType = {
   id: string;
@@ -30,7 +30,7 @@ export type PotenialStarletType = {
   updatedAt: string;
   shortDescription: string;
   categories: TCategory[];
-}
+};
 
 export type RankingNovelProps = {
   id: string;
@@ -42,4 +42,17 @@ export type RankingNovelProps = {
   totalRatings: number;
   categories: string[];
   rank: number;
-}
+};
+
+export type RecentUpdatesType = {
+  id: number;
+  status: string;
+  slug: string;
+  chapterSlug: string;
+  chapterId: number;
+  coverImage: string;
+  rate: number;
+  title: string;
+  chapterTitle: string;
+  updatedAt: string;
+};

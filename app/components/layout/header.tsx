@@ -16,13 +16,13 @@ import {
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
+  // DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../../components/ui/dropdown-menu";
 import { useAuth } from "../../lib/auth-context";
-import Image from "next/image";
+// import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "../../lib/utils";
 
@@ -102,7 +102,7 @@ export function Header() {
                       "bg-transparent hover:bg-gray-800/70 text-gray-200 hover:text-white"
                     )}>
                       <Home className="w-4 h-4 mr-2" />
-                      Home
+                      Trang chủ
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
@@ -114,7 +114,7 @@ export function Header() {
                       "bg-transparent hover:bg-gray-800/70 text-gray-200 hover:text-white"
                     )}>
                       <BookOpen className="w-4 h-4 mr-2" />
-                      Novels
+                      Truyện
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
@@ -126,7 +126,7 @@ export function Header() {
                       "bg-transparent hover:bg-gray-800/70 text-gray-200 hover:text-white"
                     )}>
                       <Clock className="w-4 h-4 mr-2" />
-                      Updates
+                      Mới cập nhật
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
@@ -138,7 +138,7 @@ export function Header() {
                       "bg-transparent hover:bg-gray-800/70 text-gray-200 hover:text-white"
                     )}>
                       <Flame className="w-4 h-4 mr-2" />
-                      Popular
+                      Nổi bật
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
@@ -146,7 +146,7 @@ export function Header() {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="bg-transparent hover:bg-gray-800/70 text-gray-200 hover:text-white">
                     <Compass className="w-4 h-4 mr-2" />
-                    Explore
+                    Khám phá
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <motion.div
@@ -159,19 +159,19 @@ export function Header() {
                         <div className="grid grid-cols-2 gap-3">
                           <ExploreMenuItem 
                             href="/genres" 
-                            title="Genre Catalog" 
+                            title="Thể loại" 
                             description="Browse novels by genre categories"
                             icon="📚"
                           />
                           <ExploreMenuItem 
                             href="/completed" 
-                            title="Completed Novels" 
+                            title="Truyện đã hoàn" 
                             description="Finished stories with no waiting"
                             icon="✅"
                           />
                           <ExploreMenuItem 
                             href="/collections" 
-                            title="Collections" 
+                            title="Bộ sưu tập" 
                             description="Curated novel collections and series"
                             icon="📑"
                           />
@@ -287,7 +287,7 @@ export function Header() {
             )}
 
             {/* User Menu */}
-            {isLoggedIn ? (
+            {/* {isLoggedIn ? (
               <DropdownMenu >
                 <DropdownMenuTrigger asChild>
                   <Button className="hidden sm:flex bg-transparent hover:bg-gray-800/70 pl-2 pr-4 py-1 items-center gap-2 transition-all hover:border-gray-600">
@@ -349,11 +349,11 @@ export function Header() {
               <div className="hidden sm:flex items-center gap-2">
                 <Link href="/login">
                   <Button className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white border-none">
-                    Login
+                    Đăng nhập
                   </Button>
                 </Link>
               </div>
-            )}
+            )} */}
 
             {/* Mobile Menu Toggle */}
             <Button
@@ -415,16 +415,16 @@ export function Header() {
               <div className="mt-4 pb-4 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700/50 p-2">
                 <nav className="flex flex-col">
                   <MobileNavItem href="/" icon={<Home className="h-4 w-4" />}>
-                    Home
+                    Trang chủ
                   </MobileNavItem>
                   <MobileNavItem href="/novels" icon={<BookOpen className="h-4 w-4" />}>
-                    Novels
+                    Truyện
                   </MobileNavItem>
                   <MobileNavItem href="/updates" icon={<Clock className="h-4 w-4" />}>
-                    Updates
+                    Mới cập nhật
                   </MobileNavItem>
                   <MobileNavItem href="/popular" icon={<Flame className="h-4 w-4" />}>
-                    Popular
+                    Nổi bật
                   </MobileNavItem>
                   
                   <div className="px-4 py-2 text-xs font-semibold text-gray-400 mt-2">

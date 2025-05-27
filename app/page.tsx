@@ -6,9 +6,8 @@ import {
 } from "../app/components/ui/tabs";
 import { NovelCard } from "../app/components/novels/novel-card";
 import Image from "next/image";
-import { UpdateCard } from "./components/novels/update-card";
 import { CategoriesTagsSection } from "./components/components/categories-tags-section";
-import { Eye, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import Link from "next/link";
 import Head from "next/head";
 import Script from "next/script";
@@ -17,6 +16,9 @@ import { WeeklyStory } from "./components/components/weekly-story";
 import { httpClient } from "./utils/httpClient";
 import { PotentialStarletSection } from "./components/components/potential-starlet-section";
 import { RankingSection } from "./components/components/ranking-section";
+import { RecentUpdates } from "./components/components/recently-updated";
+import { LinkButton } from "./components/components/link-btn";
+import { GreenLineTitle } from "./components/components/green-line-title";
 
 // Mock data for featured novels
 const featuredNovels = [
@@ -158,48 +160,48 @@ const bestNovels = [
 ];
 
 // Mock data for recent updates
-const recentUpdates = [
-  {
-    id: "lord-void",
-    slug: "lord-void",
-    coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
-    title: "The Lord of Void and Real",
-    chapter: "Chapter 319: Three Stars Demolishing Demons",
-    updatedAt: "9 minutes ago",
-  },
-  {
-    id: "beast-taming",
-    slug: "beast-taming",
-    coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
-    title: "Beast Taming Patrol",
-    chapter: "Chapter 674: Youyou Advances!",
-    updatedAt: "14 minutes ago",
-  },
-  {
-    id: "disciple-simulator",
-    slug: "disciple-simulator",
-    coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
-    title: "I Have A Disciple Simulator",
-    chapter: "Chapter 911: The Humble Hallucinatory Dark Demon Venerable!",
-    updatedAt: "14 minutes ago",
-  },
-  {
-    id: "grinding-experience",
-    slug: "grinding-experience",
-    coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
-    title: "I Am Grinding Experience In Another World",
-    chapter: "Chapter 671: Return to Qingqiu",
-    updatedAt: "15 minutes ago",
-  },
-  {
-    id: "reversing-life",
-    slug: "reversing-life",
-    coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
-    title: "Reversing Life With Item Copy",
-    chapter: "Chapter 128: Not Quite Yet",
-    updatedAt: "16 minutes ago",
-  },
-];
+// const recentUpdates = [
+//   {
+//     id: "lord-void",
+//     slug: "lord-void",
+//     coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
+//     title: "The Lord of Void and Real",
+//     chapter: "Chapter 319: Three Stars Demolishing Demons",
+//     updatedAt: "9 minutes ago",
+//   },
+//   {
+//     id: "beast-taming",
+//     slug: "beast-taming",
+//     coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
+//     title: "Beast Taming Patrol",
+//     chapter: "Chapter 674: Youyou Advances!",
+//     updatedAt: "14 minutes ago",
+//   },
+//   {
+//     id: "disciple-simulator",
+//     slug: "disciple-simulator",
+//     coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
+//     title: "I Have A Disciple Simulator",
+//     chapter: "Chapter 911: The Humble Hallucinatory Dark Demon Venerable!",
+//     updatedAt: "14 minutes ago",
+//   },
+//   {
+//     id: "grinding-experience",
+//     slug: "grinding-experience",
+//     coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
+//     title: "I Am Grinding Experience In Another World",
+//     chapter: "Chapter 671: Return to Qingqiu",
+//     updatedAt: "15 minutes ago",
+//   },
+//   {
+//     id: "reversing-life",
+//     slug: "reversing-life",
+//     coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
+//     title: "Reversing Life With Item Copy",
+//     chapter: "Chapter 128: Not Quite Yet",
+//     updatedAt: "16 minutes ago",
+//   },
+// ];
 
 export default async function HomePage() {
   async function fetchWeekly() {
@@ -218,6 +220,7 @@ export default async function HomePage() {
       })
     ).data;
   }
+
   async function fetchRanking() {
     return (
       await httpClient.get({
@@ -227,11 +230,20 @@ export default async function HomePage() {
     ).data;
   }
 
+  async function fetchLatestChapters() {
+    return (
+      await httpClient.get({
+        url: "/api/story/latest-chapter",
+        params: { page: 0, size: 20 },
+      })
+    ).data;
+  }
+
   async function fetchHashtag() {
     return (
       await httpClient.get({
         url: "private/hash-tag/popular",
-        params: { page: 0, size: 20 },
+        params: { page: 1, size: 20 },
       })
     ).data;
   }
@@ -240,19 +252,27 @@ export default async function HomePage() {
     return (
       await httpClient.get({
         url: "api/category/list",
-        params: { page: 0, size: 20 },
       })
     ).data;
   }
 
-  const [weeklyRes, potentialRes, rankingRes, hashtagRes, categoriesRes] =
-    await Promise.all([
-      fetchWeekly(),
-      fetchPotential(),
-      fetchRanking(),
-      fetchHashtag(),
-      fetchCategories(),
-    ]);
+  const [
+    weeklyRes,
+    potentialRes,
+    rankingRes,
+    recentUpdatesRes,
+    // hashtagRes,
+    categoriesRes,
+  ] = await Promise.all([
+    fetchWeekly(),
+    fetchPotential(),
+    fetchRanking(),
+    fetchLatestChapters(),
+    fetchHashtag(),
+    fetchCategories(),
+  ]);
+
+  console.log("categoriesRes: ", categoriesRes);
 
   // const [previewChapter, setPreviewChapter] = useState<string | null>(null);
 
@@ -269,9 +289,10 @@ export default async function HomePage() {
     "@type": "WebPage",
     name: "Discover Your Next Reading Adventure",
     description:
-      "Explore thousands of novels across all your favorite genres. Start your reading journey today on YourSiteName!",
-    url: "https://yoursite.com/",
+      "Explore thousands of novels across all your favorite genres. Start your reading journey today on TruyenABC!",
+    url: "https://truyenabc.com/",
   };
+
   return (
     <>
       <Head>
@@ -289,45 +310,12 @@ export default async function HomePage() {
         <PotentialStarletSection potentialStarlets={potentialRes?.data ?? []} />
         <RankingSection rankingNovels={rankingRes?.data ?? []} />
 
-        {/* Featured Novels Section */}
         <section className="md:flex gap-x-4 space-y-4 md:space-y-0">
           <div>
             <section>
-              <h2 className="flex items-center justify-center bg-gray-800 py-4 mb-4">
-                <div className="flex items-center w-full max-w-screen-md px-4">
-                  <div className="flex-grow h-0.5 bg-gradient-to-l from-green-300 to-transparent"></div>
-                  <span className="mx-4 text-xl font-semibold text-gray-300">
-                    Mới cập nhật
-                  </span>
-                  <div className="flex-grow h-0.5 bg-gradient-to-r from-green-300 to-transparent"></div>
-                </div>
-              </h2>
-              <div className="space-y-4">
-                {recentUpdates.map((update) => (
-                  <div
-                    key={`${update.id}-${update.chapter}`}
-                    className="relative group"
-                  >
-                    <UpdateCard {...update} />
-                    {/* <button
-                    onClick={() => setPreviewChapter(`${update.id}`)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-gray-800/80 p-2 text-emerald-400 opacity-0 transition-opacity group-hover:opacity-100 hover:bg-gray-700"
-                    aria-label="Preview chapter"
-                  >
-                    <Eye className="h-4 w-4 cursor-pointer" />
-                  </button> */}
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-4 text-center">
-                <Link
-                  href="/updates"
-                  className="inline-block bg-gray-800 border border-slate-700 rounded-md w-full px-4 py-2 text-base font-medium text-emerald-400 transition-colors hover:bg-gray-800 hover:text-emerald-300"
-                >
-                  Xem thêm
-                </Link>
-              </div>
+              <GreenLineTitle title="Mới cập nhật" />
+              <RecentUpdates recentUpdates={recentUpdatesRes?.data ?? []} />
+              <LinkButton href="/updates" label="Xem thêm" />
             </section>
 
             <div className="my-6 flex items-center">
@@ -339,21 +327,16 @@ export default async function HomePage() {
                 <NovelCard key={novel.id} {...novel} />
               ))}
             </div>
-            <div className="mt-4 text-center">
-              <Link
-                href="/featured"
-                className="inline-block rounded-md w-full bg-gray-800 border border-slate-700 px-4 py-2 text-sm font-medium text-emerald-400 transition-colors hover:text-emerald-300"
-              >
-                View All Feature
-              </Link>
-            </div>
+            <LinkButton href="/featured" label="Xem thêm" />
           </div>
 
           <Tabs defaultValue="best-novels" className="w-full">
             <div className="flex justify-between items-center mb-4">
               <TabsList>
                 <TabsTrigger value="best-novels">Truyện hay nhất</TabsTrigger>
-                <TabsTrigger value="most-discussed">Thảo luận nhiều nhất</TabsTrigger>
+                <TabsTrigger value="most-discussed">
+                  Thảo luận nhiều nhất
+                </TabsTrigger>
               </TabsList>
             </div>
 
@@ -417,18 +400,12 @@ export default async function HomePage() {
           </Tabs>
         </section>
 
-        <div className="mb-12">
-          <CategoriesTagsSection />
-        </div>
-
-        {/* <AnimatePresence>
-        {selectedChapterPreview && (
-          <ChapterPreview
-            {...selectedChapterPreview}
-            onClose={() => setPreviewChapter(null)}
+        <section className="mb-12">
+          <CategoriesTagsSection
+            categories={categoriesRes.slice(0, 12) ?? []}
           />
-        )}
-      </AnimatePresence> */}
+          <LinkButton href="/categories" label="Xem thêm" />
+        </section>
       </div>
     </>
   );
