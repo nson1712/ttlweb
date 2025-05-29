@@ -68,7 +68,7 @@ export default function ChapterContent({
         <Link
           href={prevSlug ? `/novels/${novelSlug}/${prevSlug}` : "#"}
           className={cn(
-            "flex items-center py-2 px-3 rounded font-medium select-none border text-gray-900 bg-gray-300 transition-colors hover:bg-slate-800 hover:text-white",
+            "flex items-center py-2 px-3 rounded font-medium select-none bg-gradient-to-r from-emerald-400 to-teal-500",
             !prevSlug && "pointer-events-none opacity-50"
           )}
         >
@@ -90,10 +90,10 @@ export default function ChapterContent({
                 <LoadingSpinner className="" />
               ) : (
                 <div className="space-y-1.5 mb-4 max-h-[20%] overflow-y-auto">
-                  {chaptersList?.data.data.map((chapter) => (
+                  {chaptersList?.data?.data?.map((chapter) => (
                     <Link
-                      key={chapter.id}
-                      href={`/novels/${novelSlug}/${chapter.slug}`}
+                      key={chapter?.id}
+                      href={`/novels/${novelSlug}/${chapter?.slug}`}
                       className={
                         "group block rounded-lg bg-gray-700/50 p-3 hover:bg-gray-700"
                       }
@@ -132,7 +132,7 @@ export default function ChapterContent({
               <div className="mx-auto">
                 <RangeSelect
                   pageSearchParam="page"
-                  totalCount={chaptersList.data.totalElements}
+                  totalCount={chaptersList?.data?.totalElements}
                 />
               </div>
             </div>
@@ -142,7 +142,7 @@ export default function ChapterContent({
         <Link
           href={nextSlug ? `/novels/${novelSlug}/${nextSlug}` : "#"}
           className={cn(
-            "flex items-center py-2 px-3 rounded font-medium select-none border text-gray-900 bg-gray-300 transition-colors hover:bg-slate-800 hover:text-white",
+            "flex items-center py-2 px-3 rounded font-medium select-none bg-gradient-to-r from-emerald-400 to-teal-500",
             !nextSlug && "pointer-events-none opacity-50"
           )}
         >

@@ -648,18 +648,16 @@ async function fetchBySlug(
   chapterSlug: string
 ): Promise<ChapterApiResponse> {
   const res = await httpClient.get({
-    url: `/chapter/slug/${slug}/${chapterSlug}`,
-  }
-  );
+    url: `/chapter/${slug}/${chapterSlug}`,
+  });
   return res;
 }
 
 async function fetchById(chapterId: number): Promise<ChapterApiResponse> {
   const res = await httpClient.get({
     url: `/chapter/${chapterId}`,
-  }
-  );
-  return res
+  });
+  return res;
 }
 
 async function fetchContents(
@@ -667,10 +665,9 @@ async function fetchContents(
 ): Promise<ChapterDetailsApiResponse> {
   const res = await httpClient.get({
     url: "/chapter/details",
-    params: { chapterId: chapterId.toString()}
-  }
-  );
-  return res
+    params: { chapterId: chapterId.toString() },
+  });
+  return res;
 }
 
 async function fetchChapters(
@@ -690,12 +687,14 @@ async function fetchChapters(
 }
 
 export default async function ChapterDetailPage({
-  params: { slug, chapterSlug },
-  searchParams: { page, pageSize },
+  params,
+  searchParams,
 }: {
-  params: { slug: string; chapterSlug: string };
-  searchParams: { page?: number | undefined; pageSize?: number | undefined };
+  params: Promise<{ slug: string; chapterSlug: string }>;
+  searchParams: Promise<{ page?: number | undefined; pageSize?: number | undefined }>;
 }) {
+  const {slug, chapterSlug} = await params
+  const {page, pageSize} = await searchParams
   const isId = /^\d+$/.test(chapterSlug);
   const detailResp = isId
     ? await fetchById(Number(chapterSlug))

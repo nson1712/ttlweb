@@ -265,9 +265,21 @@ export default function NovelsPage() {
 
       {/* Search and Filter Section */}
       <div className="bg-gray-800 p-4 rounded-lg">
-        <div className="flex items-end gap-4 mb-4">
+        <div className="sm:flex space-y-4 sm:space-y-0 items-end gap-4 mb-4">
+                 <div className="flex items-end gap-4">
           <div className="flex-1">
-            <Label htmlFor="categories">Categories</Label>
+            <Label htmlFor="search">Tìm kiếm theo tên</Label>
+            <Input
+              id="search"
+              placeholder="Reincarn.."
+              value={filterOptions.searchTerm}
+              onChange={handleSearchChange}
+              className="bg-gray-700 text-white border-gray-600"
+            />
+          </div>
+        </div>
+          <div className="flex-1">
+            <Label htmlFor="categories">Thể loại</Label>
             <Input
               id="categories"
               placeholder="Slice of Life, Drama etc..."
@@ -288,32 +300,21 @@ export default function NovelsPage() {
               className="bg-gray-700 text-white border-gray-600"
             />
           </div>
-          <Button
+          <div className="flex gap-x-4">
+            <Button
             onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-            variant="outline"
+            className="bg-gradient-to-br from-blue-500 to-blue-600"
           >
-            {isClient && showAdvancedFilters ? "Hide options" : "More options"}
+            {isClient && showAdvancedFilters ? "ẨN BỚT" : "HIỆN THÊM"}
           </Button>
 
-          <Button className="bg-red-600 hover:bg-red-700" onClick={applySearch}>
-            SEARCH
+          <Button className="bg-gradient-to-r from-emerald-400 to-teal-500" onClick={applySearch}>
+            TÌM KIẾM
           </Button>
 
-          <Button variant="outline" onClick={resetFilters}>
-            RESET
+          <Button className="bg-gradient-to-br from-red-400 to-red-500" onClick={resetFilters}>
+            ĐẶT LẠI
           </Button>
-        </div>
-
-        <div className="flex items-end gap-4">
-          <div className="flex-1">
-            <Label htmlFor="search">Novel title must contain</Label>
-            <Input
-              id="search"
-              placeholder="Reincarn.."
-              value={filterOptions.searchTerm}
-              onChange={handleSearchChange}
-              className="bg-gray-700 text-white border-gray-600"
-            />
           </div>
         </div>
 
@@ -322,7 +323,7 @@ export default function NovelsPage() {
           <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Categories Section */}
             <div>
-              <Label className="block mb-2 text-purple-400">Categories</Label>
+              <Label className="block mb-2 text-purple-400">Thể loại</Label>
               <div className="grid grid-cols-2 gap-2 mt-2 max-h-40 overflow-y-auto">
                 {availableCategories.map((cate) => (
                   <div key={cate} className="flex items-center space-x-2">
@@ -342,7 +343,7 @@ export default function NovelsPage() {
 
             {/* Tags Section */}
             <div>
-              <Label className="block mb-2 text-blue-400">Tags (events)</Label>
+              <Label className="block mb-2 text-blue-400">Hashtags</Label>
               <div className="grid grid-cols-2 gap-2 mt-2 max-h-40 overflow-y-auto">
                 {availableTags.map((tag) => (
                   <div key={tag} className="flex items-center space-x-2">
@@ -363,7 +364,7 @@ export default function NovelsPage() {
             {/* Sort Results */}
             <div>
               <Label htmlFor="sort" className="text-indigo-400">
-                Sort results
+                Sắp xếp
               </Label>
               <Select
                 value={filterOptions.sortBy}
@@ -385,7 +386,7 @@ export default function NovelsPage() {
 
             {/* Translate Status */}
             <div>
-              <Label htmlFor="translate-status">Translate status</Label>
+              <Label htmlFor="translate-status">Trạng thái</Label>
               <Select
                 value={filterOptions.translateStatus || "any"}
                 onValueChange={handleTranslateStatusChange}

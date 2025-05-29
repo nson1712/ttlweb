@@ -1,3 +1,4 @@
+import { MotionTitle } from "../components/components/motion-title";
 import { PaginationWithLinks } from "../components/components/pagination";
 import { RecentUpdates } from "../components/components/recently-updated";
 import { httpClient } from "../utils/httpClient";
@@ -5,22 +6,23 @@ import { httpClient } from "../utils/httpClient";
 export default async function UpdatesPage({
   searchParams,
 }: {
-  searchParams: {
-    page?: string;
-    pageSize?: string;
+  searchParams: Promise<{
+    page?: string | undefined;
+    pageSize?: string | undefined;
     filter?: string;
     timeframe?: string;
     keyword?: string;
-  };
+  }>;
 }) {
-  const page = parseInt(searchParams.page ?? "0", 10);
-  const pageSize = parseInt(searchParams.pageSize ?? "20", 10);
+  const { page, pageSize } = await searchParams;
+  const parsedPage = typeof page === "string" ? parseInt(page, 10) : page ?? 0;
+  const parsedPageSize = typeof pageSize === "string" ? parseInt(pageSize, 10) : pageSize ?? 20;
 
   async function fetchLatestChapters() {
     return (
       await httpClient.get({
         url: "/api/story/latest-chapter",
-        params: { page: page ?? 0, size: pageSize ?? 20 },
+        params: { page: parsedPage, size: parsedPageSize },
       })
     ).data;
   }
@@ -29,17 +31,18 @@ export default async function UpdatesPage({
 
   return (
     <div className="min-h-screen">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-7xl space-y-4">
         <div className="mb-8 text-center responsive-margin">
-          <h1 className="text-3xl font-serif font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl responsive-heading">
-            <span className="block">Truyện</span>
-            <span className="block bg-gradient-to-r from-emerald-400 to-teal-500 bg-clip-text text-transparent">
+          <MotionTitle title="Truyện" subTitle="Mới Cập Nhật"/>
+          {/* <h1 className={`${nunito.className}  font-serif font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl `}>
+            <div className="">Truyện</div>
+            <div className=" bg-gradient-to-r from-emerald-400 to-teal-500 bg-clip-text text-transparent">
               Mới Cập Nhật
-            </span>
+            </div>
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-xl text-gray-400">
             Stay up to date with the latest chapters from your favorite novels
-          </p>
+          </p> */}
         </div>
         <RecentUpdates recentUpdates={recentUpdatesRes?.data ?? []} />
         <PaginationWithLinks
@@ -48,11 +51,11 @@ export default async function UpdatesPage({
             pageSizeSearchParam: "pageSize",
             pageSizeOptions: [10, 20, 50, 100],
           }}
-          page={page}
-          pageSize={pageSize}
+          page={parsedPage}
+          pageSize={parsedPageSize}
           totalCount={
             recentUpdatesRes?.totalElements
-              ? recentUpdatesRes.totalElements - pageSize
+              ? recentUpdatesRes.totalElements - parsedPageSize
               : 0
           }
         />

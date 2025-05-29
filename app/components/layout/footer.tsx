@@ -118,14 +118,14 @@ export function Footer() {
             <div>
               <h3 className="text-white text-lg font-semibold mb-6 flex items-center">
                 <Compass className="mr-2 h-5 w-5 text-emerald-400" />
-                Quick Links
+                Điều hướng
               </h3>
               <ul className="space-y-3">
-                <FooterLink href="/" icon={<Home size={16} />}>Home</FooterLink>
-                <FooterLink href="/novels" icon={<BookOpen size={16} />}>Novels</FooterLink>
-                <FooterLink href="/updates" icon={<Clock size={16} />}>Updates</FooterLink>
-                <FooterLink href="/popular" icon={<Flame size={16} />}>Popular</FooterLink>
-                <FooterLink href="/genres" icon={<BookMarked size={16} />}>Genre Catalog</FooterLink>
+                <FooterLink href="/" icon={<Home size={16} />}>Trang chủ</FooterLink>
+                <FooterLink href="/novels" icon={<BookOpen size={16} />}>Danh sách truyện</FooterLink>
+                <FooterLink href="/updates" icon={<Clock size={16} />}>Truyện mới cập nhật</FooterLink>
+                <FooterLink href="/popular" icon={<Flame size={16} />}>Truyện nổi bật</FooterLink>
+                <FooterLink href="/genres" icon={<BookMarked size={16} />}>Thể loại truyện</FooterLink>
               </ul>
             </div>
             
@@ -144,31 +144,6 @@ export function Footer() {
               </ul>
             </div>
             
-            {/* App Download */}
-            <div>
-              <h3 className="text-white text-lg font-semibold mb-6">Mobile App</h3>
-              <p className="text-gray-400 mb-4">
-                Read your favorite novels on the go with our mobile app.
-              </p>
-              <div className="flex flex-col space-y-3">
-                <Link href="#" className="transition-transform hover:scale-105">
-                  <Image 
-                    src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" 
-                    alt="Download on App Store" 
-                    width={140} 
-                    height={42} 
-                  />
-                </Link>
-                <Link href="#" className="transition-transform hover:scale-105">
-                  <Image 
-                    src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" 
-                    alt="Get it on Google Play" 
-                    width={140} 
-                    height={42} 
-                  />
-                </Link>
-              </div>
-            </div>
           </div>
           
           {/* Bottom section */}

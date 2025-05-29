@@ -239,14 +239,14 @@ export default async function HomePage() {
     ).data;
   }
 
-  async function fetchHashtag() {
-    return (
-      await httpClient.get({
-        url: "private/hash-tag/popular",
-        params: { page: 1, size: 20 },
-      })
-    ).data;
-  }
+  // async function fetchHashtag() {
+  //   return (
+  //     await httpClient.get({
+  //       url: "private/hash-tag/popular",
+  //       params: { page: 1, size: 20 },
+  //     })
+  //   ).data;
+  // }
 
   async function fetchCategories() {
     return (
@@ -268,7 +268,7 @@ export default async function HomePage() {
     fetchPotential(),
     fetchRanking(),
     fetchLatestChapters(),
-    fetchHashtag(),
+    // fetchHashtag(),
     fetchCategories(),
   ]);
 

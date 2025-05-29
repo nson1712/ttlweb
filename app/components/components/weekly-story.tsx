@@ -3,10 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Star, BookOpen } from "lucide-react";
+import { Star, BookOpen, Clock } from "lucide-react";
 import { FC } from "react";
 import { WeeklyStoryPropsType } from "@/app/types/story";
 import { formatDateTime } from "@/app/lib/utils";
+import { BaseTag } from "./base-tag";
 
 export const WeeklyStory: FC<WeeklyStoryPropsType> = ({ weeklyStory }) => {
   return (
@@ -29,8 +30,8 @@ export const WeeklyStory: FC<WeeklyStoryPropsType> = ({ weeklyStory }) => {
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-          <div className="absolute bottom-2 left-2 flex items-center gap-1 rounded-full bg-black/60 px-2 py-1 text-xs font-medium text-white backdrop-blur-sm">
-            <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+          <div className="absolute bottom-2 left-2 flex items-center gap-1 rounded-full bg-black/60 px-2 py-1 text-sm font-medium text-white backdrop-blur-sm">
+            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
             <span>{weeklyStory?.rate.toFixed(1)}</span>
             {/* <span className="text-gray-300">({weeklyStory.totalRatings})</span> */}
           </div>
@@ -49,24 +50,27 @@ export const WeeklyStory: FC<WeeklyStoryPropsType> = ({ weeklyStory }) => {
 
           <div className="flex flex-wrap gap-2">
             {weeklyStory?.categories.map((category) => (
-              <span
+              <BaseTag
                 key={category.id}
-                className="rounded-full bg-gray-700/50 px-3 py-1 text-xs font-medium text-emerald-300"
-              >
-                {category.name}
-              </span>
+                href={`categories/${category.name}`}
+                name={category.name}
+              />
             ))}
           </div>
 
-          <p className="text-gray-400 line-clamp-3 md:line-clamp-4">
-            {/* {weeklyStory.description} */}
-          </p>
+          <p
+            className="text-gray-400 line-clamp-3"
+            dangerouslySetInnerHTML={{
+              __html: weeklyStory.shortDescription,
+            }}
+          ></p>
 
           <div className="flex items-center gap-4 text-sm text-gray-400">
             <div className="flex items-center gap-1">
               <BookOpen className="h-4 w-4" />
-              {/* <span>{weeklyStory.chapterCount} chapters</span> */}
+              <span>{weeklyStory.totalChapters ?? 0} chương</span>
             </div>
+            <Clock className="w-4 h-4" />
             <span>Cập nhật: {formatDateTime(weeklyStory?.updatedAt)}</span>
           </div>
 

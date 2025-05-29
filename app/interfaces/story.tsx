@@ -39,12 +39,14 @@ export interface RankingNovelApiResponse {
 }
 
 export interface StoryDetailsApiResponse {
-  data: StoryType;
+  data: {
+    data: StoryType;
   totalElements: number;
   totalPages: number;
   page: number;
   size: number;
   hasNext: boolean;
+  }
 }
 export interface ChaptersApiResponse {
   data: {
