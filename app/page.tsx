@@ -19,189 +19,8 @@ import { RankingSection } from "./components/components/ranking-section";
 import { RecentUpdates } from "./components/components/recently-updated";
 import { LinkButton } from "./components/components/link-btn";
 import { GreenLineTitle } from "./components/components/green-line-title";
-
-// Mock data for featured novels
-const featuredNovels = [
-  {
-    id: "madman-family",
-    slug: "madman-family",
-    title: "I Am The Madman Of This Family",
-    coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
-    author: "Solver Keter",
-    rating: 4.5,
-    totalRatings: 11,
-    categories: ["Adventure", "Fantasy", "Action"],
-    description:
-      'Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!... Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...',
-    updatedAt: "8 hours ago",
-    chapterCount: 46,
-  },
-  {
-    id: "industrial-cthulhu",
-    slug: "industrial-cthulhu",
-    title: "Industrial Cthulhu: Starting as an Island Lord",
-    coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
-    author: "Unknown Author",
-    rating: 4.2,
-    totalRatings: 21,
-    categories: [
-      "Adventure",
-      "Fantasy",
-      "Historical",
-      "Horror",
-      "Mystery",
-      "Supernatural",
-      "Tragedy",
-      "Action",
-    ],
-    description:
-      '"I saw with my own eyes that they used the finest, rustproof refined steel to make utensils and cans, filling them with just a little food, then casually throwing them away after eating." "I saw with my own eyes that they used giant beasts as tall as mountains to devour soil and rocks, digging out..."',
-    updatedAt: "8 hours ago",
-    chapterCount: 42,
-  },
-  {
-    id: "genius-cloning 1",
-    slug: "genius-cloning 1",
-    title: "The Genius of Cloning in the Academy City",
-    coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
-    author: "Unknown Author",
-    rating: 4.7,
-    totalRatings: 19,
-    categories: [
-      "Comedy",
-      "Psychological",
-      "Gender Bender",
-      "Fantasy",
-      "Supernatural",
-      "Adventure",
-      "Martial Arts",
-    ],
-    description:
-      "I awoke as Violet, a familiar villainess trapped in a shady corporate research lab. Screw this! With my unstoppable cloning technique, I'm getting out of here and going to the Academy to live my own life!...",
-    updatedAt: "3 hours ago",
-    chapterCount: 23,
-  },
-  {
-    id: "genius-cloning 2",
-    slug: "genius-cloning 2",
-    title: "The Genius of Cloning in the Academy City",
-    coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
-    author: "Unknown Author",
-    rating: 4.7,
-    totalRatings: 19,
-    categories: [
-      "Comedy",
-      "Psychological",
-      "Gender Bender",
-      "Fantasy",
-      "Supernatural",
-      "Adventure",
-      "Martial Arts",
-    ],
-    description:
-      "I awoke as Violet, a familiar villainess trapped in a shady corporate research lab. Screw this! With my unstoppable cloning technique, I'm getting out of here and going to the Academy to live my own life!...",
-    updatedAt: "3 hours ago",
-    chapterCount: 23,
-  },
-];
-
-// Mock data for best novels
-const bestNovels = [
-  {
-    id: "lord-mysteries",
-    slug: "lord-mysteries",
-    title: "Lord of the Mysteries á dá ac ác xzc sxc xzc sa zxc zxc á á",
-    coverImage: "/1744419978_blood-eagle.webp",
-    author: "Cuttlefish That Loves Diving",
-    rating: 4.7,
-    totalRatings: 853,
-    categories: ["Fantasy", "Mystery", "Supernatural"],
-  },
-  {
-    id: "legendary-mechanic",
-    slug: "legendary-mechanic",
-    title: "The Legendary Mechanic",
-    coverImage: "/1744419978_blood-eagle.webp",
-    author: "Chocolion",
-    rating: 4.7,
-    totalRatings: 712,
-    categories: ["Sci-Fi", "Adventure", "Fantasy"],
-  },
-  {
-    id: "shadow-slave",
-    slug: "shadow-slave",
-    title: "Shadow Slave",
-    coverImage: "/1744419978_blood-eagle.webp",
-    author: "Guiltythree",
-    rating: 4.1,
-    totalRatings: 769,
-    categories: ["Fantasy", "Action", "Adventure"],
-  },
-  {
-    id: "circle-inevitability",
-    slug: "circle-inevitability",
-    title: "Circle of Inevitability",
-    coverImage: "/1744419978_blood-eagle.webp",
-    author: "Cuttlefish That Loves Diving",
-    rating: 4.6,
-    totalRatings: 528,
-    categories: ["Fantasy", "Mystery", "Supernatural"],
-  },
-  {
-    id: "circle-inevitability 2",
-    slug: "circle-inevitability 2",
-    title: "Circle of Inevitability",
-    coverImage: "/1744419978_blood-eagle.webp",
-    author: "Cuttlefish That Loves Diving",
-    rating: 4.6,
-    totalRatings: 528,
-    categories: ["Fantasy", "Mystery", "Supernatural"],
-  },
-];
-
-// Mock data for recent updates
-// const recentUpdates = [
-//   {
-//     id: "lord-void",
-//     slug: "lord-void",
-//     coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
-//     title: "The Lord of Void and Real",
-//     chapter: "Chapter 319: Three Stars Demolishing Demons",
-//     updatedAt: "9 minutes ago",
-//   },
-//   {
-//     id: "beast-taming",
-//     slug: "beast-taming",
-//     coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
-//     title: "Beast Taming Patrol",
-//     chapter: "Chapter 674: Youyou Advances!",
-//     updatedAt: "14 minutes ago",
-//   },
-//   {
-//     id: "disciple-simulator",
-//     slug: "disciple-simulator",
-//     coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
-//     title: "I Have A Disciple Simulator",
-//     chapter: "Chapter 911: The Humble Hallucinatory Dark Demon Venerable!",
-//     updatedAt: "14 minutes ago",
-//   },
-//   {
-//     id: "grinding-experience",
-//     slug: "grinding-experience",
-//     coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
-//     title: "I Am Grinding Experience In Another World",
-//     chapter: "Chapter 671: Return to Qingqiu",
-//     updatedAt: "15 minutes ago",
-//   },
-//   {
-//     id: "reversing-life",
-//     slug: "reversing-life",
-//     coverImage: "/1742474407_the-empty-box-and-zeroth-maria.webp",
-//     title: "Reversing Life With Item Copy",
-//     chapter: "Chapter 128: Not Quite Yet",
-//     updatedAt: "16 minutes ago",
-//   },
-// ];
+import { StoryType } from "./types/story";
+import { StarRate } from "./components/components/star-rate";
 
 export default async function HomePage() {
   async function fetchWeekly() {
@@ -256,33 +75,45 @@ export default async function HomePage() {
     ).data;
   }
 
+  async function fetchFeature() {
+    return await httpClient.get({
+      url: "api/story",
+      params: {
+        sort: "rate:DESC",
+      },
+    });
+  }
+
+  async function fetchBestStories() {
+    return await httpClient.get({
+      url: "api/story",
+      params: {
+        page: 0,
+        size: 20,
+        filter: "rate|gt|4.0",
+      },
+    });
+  }
+
   const [
     weeklyRes,
     potentialRes,
     rankingRes,
     recentUpdatesRes,
-    // hashtagRes,
+    featuredRes,
+    bestStoriesRes,
+    // hashtagRes,,
     categoriesRes,
   ] = await Promise.all([
     fetchWeekly(),
     fetchPotential(),
     fetchRanking(),
     fetchLatestChapters(),
+    fetchFeature(),
+    fetchBestStories(),
     // fetchHashtag(),
     fetchCategories(),
   ]);
-
-  console.log("categoriesRes: ", categoriesRes);
-
-  // const [previewChapter, setPreviewChapter] = useState<string | null>(null);
-
-  // const getChapterPreviewData = (chapterId: string) => {
-  //   return chapterPreviews.find((preview) => preview.id === chapterId) || null;
-  // };
-
-  // const selectedChapterPreview = previewChapter
-  //   ? getChapterPreviewData(previewChapter)
-  //   : null;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -310,27 +141,13 @@ export default async function HomePage() {
         <PotentialStarletSection potentialStarlets={potentialRes?.data ?? []} />
         <RankingSection rankingNovels={rankingRes?.data ?? []} />
 
-        <section className="md:flex gap-x-4 space-y-4 md:space-y-0">
-          <div>
-            <section>
-              <GreenLineTitle title="Mới cập nhật" />
-              <RecentUpdates recentUpdates={recentUpdatesRes?.data ?? []} />
-              <LinkButton href="/updates" label="Xem thêm" />
-            </section>
-
-            <div className="my-6 flex items-center">
-              <Sparkles className="mr-2 h-5 w-5 text-emerald-400" />
-              <h2 className="text-2xl font-bold text-white">Truyện đặc sắc</h2>
-            </div>
-            <div className="space-y-6">
-              {featuredNovels.map((novel) => (
-                <NovelCard key={novel.id} {...novel} />
-              ))}
-            </div>
-            <LinkButton href="/featured" label="Xem thêm" />
+        <section className="md:grid md:grid-cols-6 gap-x-4 space-y-4 md:space-y-0">
+          <div className="col-span-4">
+            <GreenLineTitle title="Mới cập nhật" />
+            <RecentUpdates recentUpdates={recentUpdatesRes?.data ?? []} />
+            <LinkButton href="/updates" label="Xem thêm" />
           </div>
-
-          <Tabs defaultValue="best-novels" className="w-full">
+          <Tabs defaultValue="best-novels" className="w-full col-span-2">
             <div className="flex justify-between items-center mb-4">
               <TabsList>
                 <TabsTrigger value="best-novels">Truyện hay nhất</TabsTrigger>
@@ -341,7 +158,7 @@ export default async function HomePage() {
             </div>
 
             <TabsContent value="best-novels" className="space-y-4">
-              {bestNovels.map((novel) => (
+              {bestStoriesRes.data.data.map((novel: StoryType) => (
                 <Link href="/novels/lord-mysteries" key={novel.id}>
                   <div
                     key={novel.id}
@@ -358,11 +175,10 @@ export default async function HomePage() {
                       <h3 className="font-medium text-emerald-400 line-clamp-2">
                         {novel.title}
                       </h3>
-                      <p className="text-sm text-gray-400">{novel.author}</p>
-                      <p className="text-xs text-gray-500">
-                        Rating: {novel.rating.toFixed(1)} / 5 from{" "}
-                        {novel.totalRatings} ratings
+                      <p className="text-sm text-gray-400">
+                        {novel.author?.name}
                       </p>
+                      <StarRate rate={novel.rate} />
                     </div>
                   </div>
                 </Link>
@@ -370,7 +186,7 @@ export default async function HomePage() {
             </TabsContent>
 
             <TabsContent value="most-discussed" className="space-y-4">
-              {bestNovels.map((novel) => (
+              {/* {bestNovels.map((novel) => (
                 <Link href="/novels/lord-mysteries" key={novel.id}>
                   <div
                     key={novel.id}
@@ -388,6 +204,7 @@ export default async function HomePage() {
                         {novel.title}
                       </h3>
                       <p className="text-sm text-gray-400">{novel.author}</p>
+                      <div className="flex"></div>
                       <p className="text-xs text-gray-500">
                         Rating: {novel.rating.toFixed(1)} / 5 from{" "}
                         {novel.totalRatings} ratings
@@ -395,9 +212,22 @@ export default async function HomePage() {
                     </div>
                   </div>
                 </Link>
-              ))}
+              ))} */}
             </TabsContent>
           </Tabs>
+        </section>
+
+        <section>
+          <div className="my-6 flex items-center">
+            <Sparkles className="mr-2 h-5 w-5 text-emerald-400" />
+            <h2 className="text-2xl font-bold text-white">Truyện đặc sắc</h2>
+          </div>
+          <div className="space-y-6">
+            {featuredRes.data.data.map((novel: StoryType) => (
+              <NovelCard key={novel.id} {...novel} />
+            ))}
+          </div>
+          <LinkButton href="/featured" label="Xem thêm" />
         </section>
 
         <section className="mb-12">

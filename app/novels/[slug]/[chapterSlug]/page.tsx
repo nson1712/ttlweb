@@ -151,9 +151,9 @@
 
 //   const { fetchResource } = useResourceStore();
 
-//   const chapterDetailsResponse = useResourceStore(
-//     (s) => s.resources?.chapterDetails
-//   ) as ChapterApiResponse;
+  // const chapterDetailsResponse = useResourceStore(
+  //   (s) => s.resources?.chapterDetails
+  // ) as ChapterApiResponse;
 
 //   const chapterDetails = chapterDetailsResponse?.data
 

@@ -41,7 +41,7 @@ export function PaginationWithLinks({
   const searchParams = useSearchParams();
 
   const totalPageCount = Math.ceil(totalCount / pageSize);
-  const lastPageIndex = totalPageCount - 1;
+  const lastPageIndex = totalPageCount;
 
   const buildLink = useCallback(
     (newPageIndex: number) => {
@@ -74,7 +74,7 @@ export function PaginationWithLinks({
 
   const renderPageNumbers = () => {
     const items: ReactNode[] = [];
-    const total = totalPageCount;
+    const total = totalPageCount + 1;
 
     if (total <= 5) {
       for (let idx = 0; idx < total; idx++) {

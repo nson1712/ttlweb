@@ -1,8 +1,10 @@
+import { AuthorType } from "../lib/types";
 import { TCategory } from "./category";
 
 export type StoryType = {
   id: string;
   title: string;
+  author?: AuthorType;
   coverImage: string;
   status?: string;
   slug: string;

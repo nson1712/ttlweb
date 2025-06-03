@@ -34,15 +34,6 @@ export default async function UpdatesPage({
       <div className="mx-auto max-w-7xl space-y-4">
         <div className="mb-8 text-center responsive-margin">
           <MotionTitle title="Truyện" subTitle="Mới Cập Nhật"/>
-          {/* <h1 className={`${nunito.className}  font-serif font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl `}>
-            <div className="">Truyện</div>
-            <div className=" bg-gradient-to-r from-emerald-400 to-teal-500 bg-clip-text text-transparent">
-              Mới Cập Nhật
-            </div>
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-xl text-gray-400">
-            Stay up to date with the latest chapters from your favorite novels
-          </p> */}
         </div>
         <RecentUpdates recentUpdates={recentUpdatesRes?.data ?? []} />
         <PaginationWithLinks
