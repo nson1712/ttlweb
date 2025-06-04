@@ -174,7 +174,7 @@ export default function CollectionsPage() {
                 className={cn(
                   "flex items-center gap-2 px-4 py-2 transition-colors rounded-l-lg",
                   viewMode === "grid"
-                    ? "bg-gradient-to-r from-emerald-400 to-teal-500 text-white"
+                    ? "bg-gradient-to-r from-emerald-500 to-teal-600 text-white"
                     : "text-gray-300 hover:bg-gray-700"
                 )}
               >
@@ -186,7 +186,7 @@ export default function CollectionsPage() {
                 className={cn(
                   "flex items-center gap-2 px-4 py-2 transition-colors rounded-r-lg",
                   viewMode === "list"
-                    ? "bg-gradient-to-r from-emerald-400 to-teal-500 text-white"
+                    ? "bg-gradient-to-r from-emerald-500 to-teal-600 text-white"
                     : "text-gray-300 hover:bg-gray-700"
                 )}
               >

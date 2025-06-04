@@ -11,7 +11,7 @@ export const BaseTag: FC<BaseTagProps> = ({ href, name }) => {
     <Link href={href}>
       <Badge
         variant="outline"
-        className="bg-gray-700/50 text-xs text-emerald-300 border-emerald-500/20 hover:bg-emerald-900/20"
+        className="bg-gray-700/50 text-xs text-emerald-300 border-emerald-500/20 hover:bg-emerald-900/20 hover:scale-110 transition-all delay-50"
       >
         {name}
       </Badge>

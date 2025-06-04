@@ -85,7 +85,7 @@ export const RankingSection : FC<RankingNovelSectionProps> = ({rankingNovels}) =
 
 const RankingNovelCard: FC<RankingNovelProps> = ({
   id,
-  // slug,
+  slug,
   title,
   coverImage,
   author,
@@ -95,8 +95,7 @@ const RankingNovelCard: FC<RankingNovelProps> = ({
   rank,
 }) => {
   return (
-    // <Link href={`/novels/${slug}`} id={id}>
-    <Link href={`/novels/lord-mysteries`} id={id}>
+    <Link href={`/novels/${slug}`} id={id}>
       <motion.div
         whileHover={{ scale: 1.02 }}
         transition={{ type: "spring", stiffness: 400, damping: 17 }}

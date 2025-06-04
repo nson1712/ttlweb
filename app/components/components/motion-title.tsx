@@ -27,7 +27,7 @@ export const MotionTitle = ({
     >
       <h1 className={`${nunito.className} text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl`}>
         <span className="block">{title}</span>
-        <span className="block bg-gradient-to-r from-emerald-400 to-teal-500 bg-clip-text text-transparent">
+        <span className="block bg-gradient-to-r from-emerald-500 to-teal-600 bg-clip-text text-transparent">
           {subTitle}
         </span>
       </h1>

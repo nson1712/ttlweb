@@ -11,7 +11,7 @@ import {
   Lock,
   LockKeyhole,
 } from "lucide-react";
-import { cn } from "@/app/lib/utils";
+import { cn, formatDateTime } from "@/app/lib/utils";
 import type { ChapterDetailType, ChapterType } from "@/app/types/chapter";
 import { RangeSelect } from "@/app/components/components/range-select";
 import {
@@ -68,7 +68,7 @@ export default function ChapterContent({
         <Link
           href={prevSlug ? `/novels/${novelSlug}/${prevSlug}` : "#"}
           className={cn(
-            "flex items-center py-2 px-3 rounded font-medium select-none bg-gradient-to-r from-emerald-400 to-teal-500",
+            "flex items-center py-2 px-3 rounded font-medium select-none bg-gradient-to-r from-emerald-500 to-teal-600",
             !prevSlug && "pointer-events-none opacity-50"
           )}
         >
@@ -111,7 +111,7 @@ export default function ChapterContent({
                           >
                             <div className="flex items-center gap-1">
                               <Calendar className="h-3 w-3" />
-                              <span>{chapter?.createdAt}</span>
+                              <span>{formatDateTime(chapter?.createdAt)}</span>
                             </div>
                           </div>
                         </div>
@@ -142,7 +142,7 @@ export default function ChapterContent({
         <Link
           href={nextSlug ? `/novels/${novelSlug}/${nextSlug}` : "#"}
           className={cn(
-            "flex items-center py-2 px-3 rounded font-medium select-none bg-gradient-to-r from-emerald-400 to-teal-500",
+            "flex items-center py-2 px-3 rounded font-medium select-none bg-gradient-to-r from-emerald-500 to-teal-600",
             !nextSlug && "pointer-events-none opacity-50"
           )}
         >

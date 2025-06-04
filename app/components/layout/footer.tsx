@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 // import { motion } from "framer-motion";
 import { 
   BookOpen, 
@@ -10,16 +10,16 @@ import {
   Home, 
   Flame, 
   Compass, 
-  Mail, 
-  FileText, 
-  Lightbulb,
-  Facebook,
-  Twitter,
-  Instagram,
+  // Mail, 
+  // FileText, 
+  // Lightbulb,
+  // Facebook,
+  // Twitter,
+  // Instagram,
   Heart,
   ArrowUp,
-  Globe,
-  Shield,
+  // Globe,
+  // Shield,
   BookMarked
 } from "lucide-react";
 import { cn } from "../../lib/utils";
@@ -56,7 +56,7 @@ export function Footer() {
       <button 
         onClick={scrollToTop}
         className={cn(
-          "fixed bottom-6 right-6 z-50 p-3 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 text-white shadow-lg transition-all duration-300 hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2",
+          "fixed bottom-6 right-6 z-50 p-3 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-lg transition-all duration-300 hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2",
           showScrollTop ? "opacity-100 translate-y-0 cursor-pointer" : "opacity-0 translate-y-10 pointer-events-none"
         )}
         aria-label="Scroll to top"
@@ -107,11 +107,11 @@ export function Footer() {
                 A premium platform for reading translated novels from various languages including Chinese, Korean, Japanese, and English.
               </p>
               
-              <div className="flex space-x-4">
+              {/* <div className="flex space-x-4">
                 <SocialLink href="https://facebook.com" icon={<Facebook size={18} />} label="Facebook" />
                 <SocialLink href="https://twitter.com" icon={<Twitter size={18} />} label="Twitter" />
                 <SocialLink href="https://instagram.com" icon={<Instagram size={18} />} label="Instagram" />
-              </div>
+              </div> */}
             </div>
             
             {/* Quick Links */}
@@ -130,19 +130,18 @@ export function Footer() {
             </div>
             
             {/* Information */}
-            <div>
+            {/* <div>
               <h3 className="text-white text-lg font-semibold mb-6 flex items-center">
                 <FileText className="mr-2 h-5 w-5 text-emerald-400" />
-                Information
+                Thông tin
               </h3>
               <ul className="space-y-3">
-                <FooterLink href="/contacts" icon={<Mail size={16} />}>Contacts</FooterLink>
-                <FooterLink href="/rules" icon={<Shield size={16} />}>Rules</FooterLink>
-                <FooterLink href="/suggest" icon={<Lightbulb size={16} />}>Suggest a Novel</FooterLink>
+                <FooterLink href="/contacts" icon={<Mail size={16} />}>Liên hệ</FooterLink>
+                <FooterLink href="/rules" icon={<Shield size={16} />}>Chính sách</FooterLink>
                 <FooterLink href="/faq" icon={<Globe size={16} />}>FAQ</FooterLink>
-                <FooterLink href="/about" icon={<Heart size={16} />}>About Us</FooterLink>
+                <FooterLink href="/about" icon={<Heart size={16} />}>Về chúng tôi</FooterLink>
               </ul>
-            </div>
+            </div> */}
             
           </div>
           
@@ -178,17 +177,17 @@ export function Footer() {
 }
 
 // Helper Components
-function SocialLink({ href, icon, label }: { href: string; icon: React.ReactNode; label: string }) {
-  return (
-    <Link 
-      href={href}
-      className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-emerald-500 hover:text-white transition-all duration-200"
-      aria-label={label}
-    >
-      {icon}
-    </Link>
-  );
-}
+// function SocialLink({ href, icon, label }: { href: string; icon: React.ReactNode; label: string }) {
+//   return (
+//     <Link 
+//       href={href}
+//       className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-emerald-500 hover:text-white transition-all duration-200"
+//       aria-label={label}
+//     >
+//       {icon}
+//     </Link>
+//   );
+// }
 
 function FooterLink({ href, children, icon }: { href: string; children: React.ReactNode; icon: React.ReactNode }) {
   return (

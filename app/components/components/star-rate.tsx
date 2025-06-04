@@ -17,7 +17,7 @@ export const StarRate = ({ rate }: { rate: number }) => {
           </svg>
         ))}
       </div>
-      <span className="text-xs text-gray-500">{rate.toFixed(1)} / 5</span>
+      <span className="text-xs text-gray-500">{(rate ?? 0).toFixed(1)} / 5</span>
     </div>
   );
 };

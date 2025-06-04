@@ -11,7 +11,6 @@ import { Sparkles } from "lucide-react";
 import Link from "next/link";
 import Head from "next/head";
 import Script from "next/script";
-import { HomePageTitle } from "./components/components/home-page-title";
 import { WeeklyStory } from "./components/components/weekly-story";
 import { httpClient } from "./utils/httpClient";
 import { PotentialStarletSection } from "./components/components/potential-starlet-section";
@@ -21,6 +20,7 @@ import { LinkButton } from "./components/components/link-btn";
 import { GreenLineTitle } from "./components/components/green-line-title";
 import { StoryType } from "./types/story";
 import { StarRate } from "./components/components/star-rate";
+import { MotionTitle } from "./components/components/motion-title";
 
 export default async function HomePage() {
   async function fetchWeekly() {
@@ -115,6 +115,8 @@ export default async function HomePage() {
     fetchCategories(),
   ]);
 
+  console.log("WEEKLY: ", weeklyRes.data)
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -136,7 +138,7 @@ export default async function HomePage() {
       />
 
       <div className="space-y-8">
-        <HomePageTitle />
+        <MotionTitle title="Khám phá kho truyện" subTitle="Đầy mê hoặc" />
         <WeeklyStory weeklyStory={weeklyRes?.data?.[0]} />
         <PotentialStarletSection potentialStarlets={potentialRes?.data ?? []} />
         <RankingSection rankingNovels={rankingRes?.data ?? []} />
@@ -159,7 +161,7 @@ export default async function HomePage() {
 
             <TabsContent value="best-novels" className="space-y-4">
               {bestStoriesRes.data.data.map((novel: StoryType) => (
-                <Link href="/novels/lord-mysteries" key={novel.id}>
+                <Link href={`/novels/${novel.slug}`} key={novel.id}>
                   <div
                     key={novel.id}
                     className="flex items-center gap-4 bg-gradient-to-br from-gray-800/90 to-gray-900 shadow-md hover:shadow-lg p-3 rounded-lg min-w-72 hover:scale-102 transition-transform duration-200"
@@ -222,7 +224,7 @@ export default async function HomePage() {
             <Sparkles className="mr-2 h-5 w-5 text-emerald-400" />
             <h2 className="text-2xl font-bold text-white">Truyện đặc sắc</h2>
           </div>
-          <div className="space-y-6">
+          <div className="space-y-4">
             {featuredRes.data.data.map((novel: StoryType) => (
               <NovelCard key={novel.id} {...novel} />
             ))}

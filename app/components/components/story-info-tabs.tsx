@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs"
 import { Calendar, ChevronRight, LockKeyhole, SortAsc, SortDesc, Star } from "lucide-react"
-import { cn } from "@/app/lib/utils"
+import { cn, formatDateTime } from "@/app/lib/utils"
 import { PaginationWithLinks } from "./pagination"
 import { FC, useState } from "react"
 import { StoryType } from "@/app/types/story"
@@ -31,19 +31,19 @@ export const StoryInfoTab: FC<StoryInfoTabProps> = ({
               value="chapters"
               className="rounded-none border-b-2 border-transparent px-4 py-2 data-[state=active]:border-emerald-500 data-[state=active]:bg-transparent"
             >
-              Chapters
+              Danh sách chương
             </TabsTrigger>
             <TabsTrigger
               value="reviews"
               className="rounded-none border-b-2 border-transparent px-4 py-2 data-[state=active]:border-emerald-500 data-[state=active]:bg-transparent"
             >
-              Reviews
+              Đánh giá
             </TabsTrigger>
             <TabsTrigger
               value="similar"
               className="rounded-none border-b-2 border-transparent px-4 py-2 data-[state=active]:border-emerald-500 data-[state=active]:bg-transparent"
             >
-              Similar Novels
+              Truyện cùng thể loại
             </TabsTrigger>
           </TabsList>
 
@@ -53,14 +53,14 @@ export const StoryInfoTab: FC<StoryInfoTabProps> = ({
                 <h2 className="text-xl font-bold text-white">
                   Danh sách chương
                   <span className="ml-2 text-sm font-normal text-gray-400">
-                    ({chapters.data.totalElements})
+                    ({chapters.data?.totalElements})
                   </span>
                 </h2>
 
                 <div className="flex items-center gap-2">
                   <div className="flex items-center gap-2 rounded-lg bg-gray-700 p-1">
                     <Link
-                      href={`/novels/${storyDetails.slug}?sortType=DESC`}
+                      href={`/novels/${storyDetails?.slug}?sortType=DESC`}
                       className={cn(
                         "rounded-md px-3 py-1 text-sm",
                         sort === "DESC"
@@ -72,7 +72,7 @@ export const StoryInfoTab: FC<StoryInfoTabProps> = ({
                       Mới nhất
                     </Link>
                     <Link
-                      href={`/novels/${storyDetails.slug}?sortType=ASC`}
+                      href={`/novels/${storyDetails?.slug}?sortType=ASC`}
                       className={cn(
                         "rounded-md px-3 py-1 text-sm",
                         sort === "ASC"
@@ -93,10 +93,10 @@ export const StoryInfoTab: FC<StoryInfoTabProps> = ({
                   "mb-6 space-y-3"
                 )}
               >
-                {chapters.data?.data.map((chapter) => (
+                {chapters.data?.data?.map((chapter) => (
                   <Link
-                    key={chapter.id}
-                    href={`/novels/${storyDetails.slug}/${chapter.slug}`}
+                    key={chapter?.id}
+                    href={`/novels/${storyDetails?.slug}/${chapter?.slug}`}
                     className={cn(
                       "group block rounded-lg bg-gray-700/50 p-3 hover:bg-gray-700"
                     )}
@@ -109,9 +109,8 @@ export const StoryInfoTab: FC<StoryInfoTabProps> = ({
                       <div
                         className="flex-1"
                       >
-                        <h3 className="font-medium text-emerald-400 group-hover:text-emerald-300">
-                          
-                            {chapter.title}
+                        <h3 className="font-medium text-emerald-400 group-hover:text-emerald-300 line-clamp-2">
+                            {chapter?.title}
                         </h3>
 
                         <div
@@ -121,13 +120,13 @@ export const StoryInfoTab: FC<StoryInfoTabProps> = ({
                         >
                           <div className="flex items-center gap-1">
                             <Calendar className="h-3 w-3" />
-                            <span>{chapter.createdAt}</span>
+                            <span className="text-sm">{formatDateTime(chapter?.createdAt)}</span>
                           </div>
                         </div>
                       </div>
 
                         <div className="ml-4 flex items-center gap-2">
-                          {chapter.price !== 0 && (
+                          {chapter?.price !== 0 && (
                             <span className="p-0.5 text-xs font-medium text-emerald-400">
                               <LockKeyhole className="h-5 w-5 text-emerald-400" />
                             </span>
@@ -147,8 +146,8 @@ export const StoryInfoTab: FC<StoryInfoTabProps> = ({
                   pageSizeSearchParam: "pageSize",
                   pageSizeOptions: [10, 20, 50, 100],
                 }}
-                page={page}
-                pageSize={pageSize}
+                page={page ?? 0}
+                pageSize={pageSize ?? 20}
                 totalCount={chapters?.data?.totalElements ? (chapters.data.totalElements - pageSize) : 0}
               />
             </div>
@@ -161,7 +160,7 @@ export const StoryInfoTab: FC<StoryInfoTabProps> = ({
                 {/* Rating Summary */}
                 <div className="flex flex-col items-center rounded-lg bg-gray-800 p-4 sm:w-64">
                   <div className="text-5xl font-bold text-white">
-                    {storyDetails.rate.toFixed(1)}
+                    {(storyDetails.rate ?? 0).toFixed(1)}
                   </div>
                   <div className="mb-4 flex items-center gap-1">
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -339,7 +338,7 @@ export const StoryInfoTab: FC<StoryInfoTabProps> = ({
 
               <div className="mt-6 text-center">
                 <Link
-                  href={`/tags/${storyDetails.categories?.[0]?.name}`}
+                  href={`/categories/${storyDetails.categories?.[0]?.slug}`}
                   className="inline-block rounded-full bg-gray-700 px-6 py-2 text-sm font-medium text-white hover:bg-gray-600"
                 >
                   Xem thêm truyện {storyDetails.categories?.[0]?.name}

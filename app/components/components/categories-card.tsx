@@ -21,7 +21,7 @@ type CategoriesProps = {
 
 export const CategoriesTag = ({
   name,
-  // slug,
+  slug,
   color = "blue",
 }: CategoriesProps) => {
   return (
@@ -29,7 +29,7 @@ export const CategoriesTag = ({
       whileHover={{ scale: 1.03 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
-      <Link href={`/categories/${name.toLowerCase()}`}>
+      <Link href={`/categories/${slug.toLowerCase()}`}>
         <div
           className={cn(
             "flex h-12 items-center justify-between rounded-lg border bg-gradient-to-br p-3 transition-all",

@@ -253,7 +253,7 @@ export const Filter: FC<FilterProps> = ({
           </Button>
 
           <Button
-            className="bg-gradient-to-r from-emerald-400 to-teal-500"
+            className="bg-gradient-to-r from-emerald-500 to-teal-600"
             onClick={applySearch}
           >
             TÌM KIẾM

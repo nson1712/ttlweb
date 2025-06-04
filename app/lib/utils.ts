@@ -12,7 +12,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function formatRating(rating: number): string {
-  return rating.toFixed(1);
+  return (rating ?? 0).toFixed(1);
 }
 
 export function truncateText(text: string, maxLength: number): string {
@@ -207,4 +207,8 @@ export function normalizeFilterPayload(
   }
 
   return payload;
+}
+
+export const capitalizeFirstLetter = (value: string) => {
+  return value?.charAt(0)?.toUpperCase() + value?.slice(1)
 }

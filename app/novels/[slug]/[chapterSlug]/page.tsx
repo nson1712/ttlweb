@@ -423,7 +423,7 @@
 //         {/* Reading Progress Bar */}
 //         {/* <div className="h-1 w-full bg-gray-200 dark:bg-gray-800">
 //           <div
-//             className="h-full bg-gradient-to-r from-emerald-400 to-teal-500"
+//             className="h-full bg-gradient-to-r from-emerald-500 to-teal-600"
 //             style={{ width: `${progress}%` }}
 //           ></div>
 //         </div> */}

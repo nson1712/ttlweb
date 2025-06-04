@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../../components/ui/button";
-import { BookmarkIcon, Clock } from "lucide-react";
+import { BookmarkIcon, Clock, User } from "lucide-react";
 import { AuthorType, CategoryType } from "@/app/lib/types";
 import { BaseTag } from "../components/base-tag";
 import { formatDateTime } from "@/app/lib/utils";
@@ -17,7 +17,6 @@ export interface NovelCardProps {
   rate?: number;
   totalRatings?: number;
   categories?: CategoryType[];
-  description?: string;
   updatedAt?: string;
   chapterCount?: number;
   shortDescription: string;
@@ -49,13 +48,12 @@ export function NovelCard({
       <div className="flex-1 flex flex-col">
         <div className="flex justify-between items-start">
           <div className="space-y-1">
-            {/* <Link href={`/novels/${slug}`}> */}
-            <Link href={`/novels/lord-mysteries`}>
+            <Link href={`/novels/${slug}`}>
               <h2 className="text-xl font-bold text-emerald-400 hover:text-emerald-300 transition-colors">
                 {title}
               </h2>
             </Link>
-            <p className="text-gray-400">{author?.name}</p>
+            <p className="text-gray-400 flex gap-x-1"><User className="w-4 h-5 mt-0.5" />{author?.name}</p>
 
             <StarRate rate={rate ?? 0} />
           </div>
@@ -66,21 +64,29 @@ export function NovelCard({
         </div>
 
         <div className="flex flex-wrap gap-2 my-2">
-          {categories?.map((cate,index) => (
-            <BaseTag key={index} href={`/categories/${cate.slug}`} name={cate.name} />
+          {categories?.map((cate, index) => (
+            <BaseTag
+              key={index}
+              href={`/categories/${cate.slug}`}
+              name={cate.name}
+            />
           ))}
         </div>
 
         {shortDescription && (
-          <p className="text-gray-300 text-sm mt-2 line-clamp-3">
-            {shortDescription}
-          </p>
+          <div
+            className="text-gray-300 text-sm mt-2 line-clamp-3"
+            dangerouslySetInnerHTML={{
+              __html: shortDescription,
+            }}
+          />
         )}
 
         <div className="mt-auto flex items-center justify-between pt-4">
           {updatedAt && (
             <div className="flex gap-x-1 text-sm text-gray-400 bg-gray-700 px-2 py-1 rounded">
-              <Clock className="w-4 h-4 self-center" /> {formatDateTime(updatedAt)}
+              <Clock className="w-4 h-4 self-center" />{" "}
+              {formatDateTime(updatedAt)}
             </div>
           )}
 

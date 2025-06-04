@@ -39,9 +39,9 @@ async function fetchChapters(
     url: "/chapters",
     params: {
       page: page || 0,
-      pageSize: pageSize || 50,
+      size: pageSize || 20,
       filter: `storyId|eq|${storyId}`,
-      sort: `createdAt:${sortType}`,
+      sort: `createdAt:${sortType ?? "ASC"}`,
     },
   });
   return res;
@@ -61,14 +61,13 @@ export default async function NovelDetailPage({
   const { slug } = await params;
   const { page, pageSize, sortType } = await searchParams;
   const storyDetailsRes = await fetchStoryDetails(slug);
+  const storyDetails = storyDetailsRes?.data?.data
   const chaptersRes = await fetchChapters(
     Number(storyDetailsRes.data?.data?.id),
     page ?? 0,
-    pageSize ?? 50,
+    pageSize ?? 20,
     sortType
   );
-
-  console.log("CHAPTERS RES: ", chaptersRes.data.data)
 
   if (!storyDetailsRes) {
     return (
@@ -79,7 +78,7 @@ export default async function NovelDetailPage({
         </p>
         <Link
           href="/"
-          className="mt-4 rounded-lg bg-gradient-to-r from-emerald-400 to-teal-500 px-4 py-2 text-sm font-medium text-white"
+          className="mt-4 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-600 px-4 py-2 text-sm font-medium text-white"
         >
           Quay lại trang chủ
         </Link>
@@ -98,7 +97,7 @@ export default async function NovelDetailPage({
             </Link>
             <ChevronRight className="mx-2 h-4 w-4" />
             <a className="text-emerald-400">
-              {storyDetailsRes.data?.data?.title}
+              {storyDetails?.title}
             </a>
           </nav>
         </div>
@@ -106,10 +105,10 @@ export default async function NovelDetailPage({
         {/* Novel Header */}
         <div className="relative mb-8 overflow-hidden rounded-xl bg-gradient-to-br from-gray-800/90 to-gray-900 p-6 shadow-xl">
           <div className="absolute inset-0 overflow-hidden opacity-10">
-            {storyDetailsRes.data?.data?.coverImage && (
+            {storyDetails?.coverImage && (
               <Image
-                src={storyDetailsRes.data?.data?.coverImage}
-                alt={storyDetailsRes.data?.data?.title}
+                src={storyDetails?.coverImage}
+                alt={storyDetails?.title}
                 fill
                 className="object-cover"
                 priority
@@ -121,10 +120,10 @@ export default async function NovelDetailPage({
             {/* Cover Image */}
             <div className="relative mx-auto w-48 md:mx-0 md:w-56 flex-shrink-0">
               <div className="aspect-[3/4] overflow-hidden rounded-lg shadow-lg">
-                {storyDetailsRes.data.data?.coverImage && (
+                {storyDetails?.coverImage && (
                   <Image
-                    src={storyDetailsRes.data?.data?.coverImage}
-                    alt={storyDetailsRes.data?.data?.title}
+                    src={storyDetails?.coverImage}
+                    alt={storyDetails?.title}
                     fill
                     className="object-cover"
                     priority
@@ -135,7 +134,7 @@ export default async function NovelDetailPage({
               <div className="absolute bottom-1 left-1  rounded-full bg-black/80 px-3 py-1 text-sm font-medium text-white shadow-md">
                 <div className="flex items-center gap-1">
                   <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                  <span>{storyDetailsRes.data?.data?.rate.toFixed(1)}</span>
+                  <span>{(storyDetails?.rate ?? 0).toFixed(1)}</span>
                   {/* <span className="text-gray-300">({storyDetailsRes.data.totalRatings})</span> */}
                 </div>
               </div>
@@ -145,12 +144,12 @@ export default async function NovelDetailPage({
             <div className="flex-1 space-y-4">
               <div>
                 <h1 className="text-3xl font-bold text-white md:text-4xl">
-                  {storyDetailsRes.data?.data?.title}
+                  {storyDetails?.title}
                 </h1>
                 <div className="mt-2 flex items-center gap-3">
                   <div className="flex items-center gap-1 text-sm text-gray-300">
                     <User className="h-4 w-4 text-emerald-400" />
-                    {/* <span>{storyDetails.author}</span> */}
+                    <span>{storyDetails?.author?.name}</span>
                   </div>
                   <div className="flex items-center gap-1 text-sm text-gray-300">
                     <BookOpen className="h-4 w-4 text-emerald-400" />
@@ -159,7 +158,7 @@ export default async function NovelDetailPage({
                   <div className="flex items-center gap-1 text-sm text-gray-300">
                     <Eye className="h-4 w-4 text-emerald-400" />
                     <span>
-                      {storyDetailsRes.data?.data?.totalView.toLocaleString()}{" "}
+                      {storyDetails?.totalView.toLocaleString()}{" "}
                       lượt đọc
                     </span>
                   </div>
@@ -167,9 +166,9 @@ export default async function NovelDetailPage({
               </div>
 
               <div className="flex flex-wrap gap-2">
-                {storyDetailsRes.data?.data?.categories.map((category) => (
+                {storyDetails?.categories.map((category) => (
                   <BaseTag
-                    href={`/categories/${category.name}`}
+                    href={`/categories/${category.slug}`}
                     key={category.id}
                     name={category.name}
                   />
@@ -179,19 +178,17 @@ export default async function NovelDetailPage({
               <p
                 className="line-clamp-5 text-gray-300"
                 dangerouslySetInnerHTML={{
-                  __html: storyDetailsRes?.data?.data?.shortDescription || "",
+                  __html: storyDetails?.shortDescription || "",
                 }}
               />
 
-              {/* <p className="text-gray-300 line-clamp-5">{storyDetails.shortDescription}</p> */}
-
               <div className="flex flex-wrap gap-3">
-                <Link
+                {/* <Link
                   href={`/novels/${storyDetailsRes.data?.data?.slug}/${chaptersRes.data.data?.[0]?.slug}`}
-                  className="rounded-full bg-gradient-to-r from-emerald-400 to-teal-500 px-6 py-2 text-sm font-medium text-white hover:bg-emerald-600"
+                  className="rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 px-6 py-2 text-sm font-medium text-white hover:bg-emerald-600"
                 >
                   Đọc ngay
-                </Link>
+                </Link> */}
                 {/* <button
                   onClick={() => setIsFollowing(!isFollowing)}
                   className={cn(
@@ -231,7 +228,7 @@ export default async function NovelDetailPage({
         {/* Novel Content Tabs */}
         <StoryInfoTab
           chapters={chaptersRes}
-          storyDetails={storyDetailsRes.data.data}
+          storyDetails={storyDetails}
         />
       </div>
     </div>

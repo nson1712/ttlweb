@@ -64,7 +64,7 @@ export function UpdateCard({
               </p>
               <div className="flex items-center gap-2 text-xs text-gray-500">
                 <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
-                <span>{rate?.toFixed(1)}</span>
+                <span>{(rate ?? 0).toFixed(1)}</span>
                 <Clock className="h-3 w-3" />
                 <span>{formatDateTime(updatedAt)}</span>
               </div>

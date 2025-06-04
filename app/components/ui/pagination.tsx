@@ -54,7 +54,7 @@ const PaginationLink = ({
         size,
       }),
       isActive &&
-        "bg-gradient-to-r from-emerald-400 to-teal-500 text-white hover:bg-gradient-to-r hover:from-emerald-400 hover:to-teal-500 border-none",
+        "bg-gradient-to-r from-emerald-500 to-teal-600 text-white hover:bg-gradient-to-r hover:from-emerald-400 hover:to-teal-500 border-none",
       className
     )}
     {...props}

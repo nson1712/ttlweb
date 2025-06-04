@@ -10,7 +10,7 @@ export type StoryType = {
   slug: string;
   rate: number;
   totalView: number;
-  totalChapters: number
+  totalChapter: number
   mainCategories: TCategory[];
   updatedAt: string;
   shortDescription: string;

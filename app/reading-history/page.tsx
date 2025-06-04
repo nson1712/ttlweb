@@ -217,7 +217,7 @@ export default function ReadingHistoryPage() {
 
         {/* Reading History Header */}
         <div className="relative mb-8 overflow-hidden rounded-xl bg-gradient-to-br from-gray-800/90 to-gray-900 p-6 shadow-xl">
-          <div className="absolute inset-0 overflow-hidden opacity-10 bg-gradient-to-r from-emerald-400 to-teal-500"></div>
+          <div className="absolute inset-0 overflow-hidden opacity-10 bg-gradient-to-r from-emerald-500 to-teal-600"></div>
 
           <div className="relative z-10 flex flex-col gap-6 md:flex-row">
             {/* Reading Stats Card */}
@@ -293,7 +293,7 @@ export default function ReadingHistoryPage() {
 
               <div className="flex flex-wrap gap-3">
                 <Button
-                  className="rounded-full bg-gradient-to-r from-emerald-400 to-teal-500 px-6 py-2 text-sm font-medium text-white hover:bg-emerald-600"
+                  className="rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 px-6 py-2 text-sm font-medium text-white hover:bg-emerald-600"
                 >
                   Continue Reading
                 </Button>
