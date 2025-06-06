@@ -31,14 +31,19 @@ export default async function HomePage() {
       })
     ).data;
   }
+
   async function fetchPotential() {
-    return (
-      await httpClient.get({
-        url: "/api/story/potential/list",
-        params: { page: 0, size: 20 },
-      })
-    ).data;
+  try {
+    const response = await httpClient.get({
+      url: "/api/story/potential/list",
+      params: { page: 0, size: 10 },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("fetch error:", error);
+    throw error;
   }
+}
 
   async function fetchRanking() {
     return (
@@ -114,8 +119,6 @@ export default async function HomePage() {
     // fetchHashtag(),
     fetchCategories(),
   ]);
-
-  console.log("WEEKLY: ", weeklyRes.data)
 
   const jsonLd = {
     "@context": "https://schema.org",

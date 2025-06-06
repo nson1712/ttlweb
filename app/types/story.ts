@@ -1,4 +1,4 @@
-import { AuthorType } from "../lib/types";
+import { AuthorType, CategoryType } from "../lib/types";
 import { TCategory } from "./category";
 
 export type StoryType = {
@@ -40,10 +40,9 @@ export type RankingNovelProps = {
   slug: string;
   title: string;
   coverImage: string;
-  author: string;
+  author: AuthorType;
   rate: number;
-  totalRatings: number;
-  categories: string[];
+  categories: CategoryType[];
   rank: number;
 };
 

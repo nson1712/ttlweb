@@ -1,14 +1,14 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { Button } from "@/app/components/ui/button";
+// import { Button } from "@/app/components/ui/button";
 import {
   Calendar,
   ChevronLeft,
   ChevronRight,
-  Coins,
+  // Coins,
   List,
-  Lock,
+  // Lock,
   LockKeyhole,
 } from "lucide-react";
 import { cn, formatDateTime } from "@/app/lib/utils";
@@ -43,12 +43,19 @@ export default function ChapterContent({
   nextSlug,
   chaptersList,
 }: Props) {
+  console.log("CONTENTS: ", contents);
+  console.log("DETAILS: ", details);
   return (
     <div className="mx-auto max-w-4xl py-8 space-y-6 text-lg">
       <h1 className="text-2xl sm:text-3xl font-bold flex justify-center">
         {details.title}
       </h1>
-      {details.price !== 0 ? (
+      <div>
+        {contents.map((c, idx) => (
+          <p key={idx}>{c.content}</p>
+        ))}
+      </div>
+      {/* {details.price !== 0 ? (
         <div className="text-center py-10">
           <p className="mb-6 italic">Nội dung chương này đang bị khóa.</p>
           <Button className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white">
@@ -62,17 +69,27 @@ export default function ChapterContent({
             <p key={idx}>{c.content}</p>
           ))}
         </div>
-      )}
+      )} */}
 
       <div className="mt-10 flex justify-between">
         <Link
           href={prevSlug ? `/novels/${novelSlug}/${prevSlug}` : "#"}
           className={cn(
-            "flex items-center py-2 px-3 rounded font-medium select-none bg-gradient-to-r from-emerald-500 to-teal-600",
+            "hidden sm:flex items-center py-2 px-3 rounded font-medium select-none bg-gradient-to-r from-emerald-500 to-teal-600",
             !prevSlug && "pointer-events-none opacity-50"
           )}
         >
           <ChevronLeft /> Chương trước
+        </Link>
+
+        <Link
+          href={prevSlug ? `/novels/${novelSlug}/${prevSlug}` : "#"}
+          className={cn(
+            "flex sm:hidden items-center py-2 px-3 rounded font-medium select-none bg-gradient-to-r from-emerald-500 to-teal-600",
+            !prevSlug && "pointer-events-none opacity-50"
+          )}
+        >
+          <ChevronLeft />
         </Link>
 
         <Dialog>
@@ -81,60 +98,62 @@ export default function ChapterContent({
               <List />
             </div>
           </DialogTrigger>
-          <DialogContent className="bg-slate-900 h-auto max-h-[95%]">
+          <DialogContent className="bg-slate-900 h-[95vh] max-h-[95vh]">
             <DialogHeader>
               <DialogTitle>Danh sách chương</DialogTitle>
             </DialogHeader>
-            <div>
+            <div className="flex-1 overflow-y-auto space-y-1.5 mb-4">
               {!chaptersList ? (
                 <LoadingSpinner className="" />
               ) : (
-                <div className="space-y-1.5 mb-4 max-h-[20%] overflow-y-auto">
-                  {chaptersList?.data?.data?.map((chapter) => (
-                    <Link
-                      key={chapter?.id}
-                      href={`/novels/${novelSlug}/${chapter?.slug}`}
-                      className={
-                        "group block rounded-lg bg-gray-700/50 p-3 hover:bg-gray-700"
-                      }
-                    >
-                      <div className={"flex items-center justify-between"}>
-                        <div className={"flex-1"}>
-                          <h3 className="font-medium text-emerald-400 group-hover:text-emerald-300 line-clamp-1">
-                            {chapter?.title}
-                          </h3>
+                chaptersList?.data?.data?.map((chapter) => (
+                  <Link
+                    key={chapter?.id}
+                    href={`/novels/${novelSlug}/${chapter?.slug}`}
+                    className={
+                      "group block rounded-lg bg-gray-700/50 p-3 hover:bg-gray-700"
+                    }
+                  >
+                    <div className={"flex items-center justify-between"}>
+                      <div className={"flex-1"}>
+                        <h3 className="font-medium text-emerald-400 group-hover:text-emerald-300 line-clamp-1">
+                          {chapter?.title}
+                        </h3>
 
-                          <div
-                            className={
-                              "flex items-center gap-3 text-xs text-gray-400"
-                            }
-                          >
-                            <div className="flex items-center gap-1">
-                              <Calendar className="h-3 w-3" />
-                              <span>{formatDateTime(chapter?.createdAt)}</span>
-                            </div>
+                        <div
+                          className={
+                            "flex items-center gap-3 text-xs text-gray-400"
+                          }
+                        >
+                          <div className="flex items-center gap-1">
+                            <Calendar className="h-3 w-3" />
+                            <span>{formatDateTime(chapter?.createdAt)}</span>
                           </div>
                         </div>
-
-                        <div className="ml-4 flex items-center gap-2">
-                          {chapter?.price !== 0 && (
-                            <span className="p-0.5 text-xs font-medium text-emerald-400">
-                              <LockKeyhole className="h-5 w-5 text-emerald-400" />
-                            </span>
-                          )}
-                          <ChevronRight className="h-5 w-5 text-gray-500 group-hover:text-emerald-400" />
-                        </div>
                       </div>
-                    </Link>
-                  ))}
-                </div>
+
+                      <div className="ml-4 flex items-center gap-2">
+                        {chapter?.price !== 0 && (
+                          <span className="p-0.5 text-xs font-medium text-emerald-400">
+                            <LockKeyhole className="h-5 w-5 text-emerald-400" />
+                          </span>
+                        )}
+                        <ChevronRight className="h-5 w-5 text-gray-500 group-hover:text-emerald-400" />
+                      </div>
+                    </div>
+                  </Link>
+                ))
+
+                // <div className="space-y-1.5 mb-4 max-h-[20%] overflow-y-auto">
+
+                // </div>
               )}
-              <div className="mx-auto">
-                <RangeSelect
-                  pageSearchParam="page"
-                  totalCount={chaptersList?.data?.totalElements}
-                />
-              </div>
+            </div>
+            <div className="mx-auto min-w-52">
+              <RangeSelect
+                pageSearchParam="page"
+                totalCount={chaptersList?.data?.totalElements}
+              />
             </div>
           </DialogContent>
         </Dialog>
@@ -142,11 +161,20 @@ export default function ChapterContent({
         <Link
           href={nextSlug ? `/novels/${novelSlug}/${nextSlug}` : "#"}
           className={cn(
-            "flex items-center py-2 px-3 rounded font-medium select-none bg-gradient-to-r from-emerald-500 to-teal-600",
+            "hidden sm:flex items-center py-2 px-3 rounded font-medium select-none bg-gradient-to-r from-emerald-500 to-teal-600",
             !nextSlug && "pointer-events-none opacity-50"
           )}
         >
           Chương tiếp <ChevronRight />
+        </Link>
+        <Link
+          href={nextSlug ? `/novels/${novelSlug}/${nextSlug}` : "#"}
+          className={cn(
+            "flex sm:hidden items-center py-2 px-3 rounded font-medium select-none bg-gradient-to-r from-emerald-500 to-teal-600",
+            !nextSlug && "pointer-events-none opacity-50"
+          )}
+        >
+          <ChevronRight />
         </Link>
       </div>
     </div>

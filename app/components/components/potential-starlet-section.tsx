@@ -20,12 +20,12 @@ export const PotentialStarletSection: FC<PotenialStarletPropsType> = ({
           <Sparkles className="mr-2 h-5 w-5 text-emerald-400" />
           <h2 className="text-2xl font-bold text-white">Truyện tiềm năng</h2>
         </div>
-        <Link
+        {/* <Link
           href="/new-talents"
           className="text-sm font-medium text-emerald-400 hover:text-emerald-300"
         >
           View All
-        </Link>
+        </Link> */}
       </div>
 
       <div className="grid grid-cols-4 gap-4 md:grid-cols-5 lg:grid-cols-10">
@@ -69,7 +69,7 @@ function PotentialStarletCard({
                     key={category.id}
                     className="rounded-full bg-emerald-500/80 px-2 py-0.5 text-xs font-medium text-white backdrop-blur-sm"
                   >
-                    {category.name}
+                    {category?.name}
                   </span>
                 ))}
               </div>

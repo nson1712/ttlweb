@@ -1,8 +1,17 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Search, Menu, X, BookOpen, Home, Clock, User, Tag } from "lucide-react";
+import {
+  Search,
+  Menu,
+  X,
+  BookOpen,
+  Home,
+  Clock,
+  User,
+  Tag,
+} from "lucide-react";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import {
@@ -32,7 +41,7 @@ import Image from "next/image";
 export function Header() {
   const router = useRouter();
   const { user, isLoggedIn, logout } = useAuth();
-  console.log("USER: ", user)
+  console.log("USER: ", user);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -68,17 +77,17 @@ export function Header() {
   };
 
   return (
-    <header 
+    <header
       className={cn(
         "sticky top-0 z-50 transition-all duration-300",
-        scrolled 
-          ? "bg-gray-900/95 backdrop-blur-md shadow-lg" 
+        scrolled
+          ? "bg-gray-900/95 backdrop-blur-md shadow-lg"
           : "bg-gradient-to-r from-gray-900 to-gray-800"
       )}
     >
       {/* Top accent bar */}
       <div className="h-1 w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500"></div>
-      
+
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -86,7 +95,9 @@ export function Header() {
             <div className="flex items-center gap-2">
               <div className="relative overflow-hidden rounded-lg">
                 <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-600 opacity-80 animate-pulse-slow"></div>
-                <span className="relative z-10 text-xl font-bold text-white px-3 py-2">NS</span>
+                <span className="relative z-10 text-xl font-bold text-white px-3 py-2">
+                  NS
+                </span>
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                 NovelSigh
@@ -100,22 +111,26 @@ export function Header() {
               <NavigationMenuList className="gap-1">
                 <NavigationMenuItem>
                   <Link href="/" legacyBehavior passHref>
-                    <NavigationMenuLink className={cn(
-                      navigationMenuTriggerStyle(),
-                      "bg-transparent hover:bg-gray-800/70 text-gray-200 hover:text-white"
-                    )}>
+                    <NavigationMenuLink
+                      className={cn(
+                        navigationMenuTriggerStyle(),
+                        "bg-transparent hover:bg-gray-800/70 text-gray-200 hover:text-white"
+                      )}
+                    >
                       <Home className="w-4 h-4 mr-2" />
                       Trang chủ
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
-                
+
                 <NavigationMenuItem>
                   <Link href="/novels" legacyBehavior passHref>
-                    <NavigationMenuLink className={cn(
-                      navigationMenuTriggerStyle(),
-                      "bg-transparent hover:bg-gray-800/70 text-gray-200 hover:text-white"
-                    )}>
+                    <NavigationMenuLink
+                      className={cn(
+                        navigationMenuTriggerStyle(),
+                        "bg-transparent hover:bg-gray-800/70 text-gray-200 hover:text-white"
+                      )}
+                    >
                       <BookOpen className="w-4 h-4 mr-2" />
                       Truyện
                     </NavigationMenuLink>
@@ -124,28 +139,32 @@ export function Header() {
 
                 <NavigationMenuItem>
                   <Link href="/categories" legacyBehavior passHref>
-                    <NavigationMenuLink className={cn(
-                      navigationMenuTriggerStyle(),
-                      "bg-transparent hover:bg-gray-800/70 text-gray-200 hover:text-white"
-                    )}>
+                    <NavigationMenuLink
+                      className={cn(
+                        navigationMenuTriggerStyle(),
+                        "bg-transparent hover:bg-gray-800/70 text-gray-200 hover:text-white"
+                      )}
+                    >
                       <Tag className="w-4 h-4 mr-2" />
                       Thể loại
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
-                
+
                 <NavigationMenuItem>
                   <Link href="/updates" legacyBehavior passHref>
-                    <NavigationMenuLink className={cn(
-                      navigationMenuTriggerStyle(),
-                      "bg-transparent hover:bg-gray-800/70 text-gray-200 hover:text-white"
-                    )}>
+                    <NavigationMenuLink
+                      className={cn(
+                        navigationMenuTriggerStyle(),
+                        "bg-transparent hover:bg-gray-800/70 text-gray-200 hover:text-white"
+                      )}
+                    >
                       <Clock className="w-4 h-4 mr-2" />
                       Mới cập nhật
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
-                
+
                 {/* <NavigationMenuItem>
                   <Link href="/popular" legacyBehavior passHref>
                     <NavigationMenuLink className={cn(
@@ -157,7 +176,7 @@ export function Header() {
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem> */}
-                
+
                 {/* <NavigationMenuItem>
                   <NavigationMenuTrigger className="bg-transparent hover:bg-gray-800/70 text-gray-200 hover:text-white">
                     <Compass className="w-4 h-4 mr-2" />
@@ -303,7 +322,7 @@ export function Header() {
 
             {/* User Menu */}
             {isLoggedIn ? (
-              <DropdownMenu >
+              <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button className="hidden sm:flex bg-transparent hover:bg-gray-800/70 pl-2 pr-4 py-1 items-center gap-2 transition-all hover:border-gray-600">
                     <div className="relative">
@@ -317,7 +336,9 @@ export function Header() {
                       <span className="absolute bottom-0 right-0 h-2.5 w-2.5 bg-green-500 rounded-full border-2 border-gray-900"></span>
                     </div>
                     <div className="flex flex-col items-start">
-                      <span className="text-sm font-medium text-white">River</span>
+                      <span className="text-sm font-medium text-white">
+                        River
+                      </span>
                       {/* <span className="text-xs text-gray-400">Premium</span> */}
                     </div>
                   </Button>
@@ -328,25 +349,53 @@ export function Header() {
                 >
                   <DropdownMenuItem className="rounded-lg focus:bg-gray-700 focus:text-white">
                     <User className="mr-2 h-4 w-4" />
-                    <Link href="/profile" className="flex-1">Trang cá nhân</Link>
+                    <Link href="/profile" className="flex-1">
+                      Trang cá nhân
+                    </Link>
                   </DropdownMenuItem>
-                  {/* <DropdownMenuItem className="rounded-lg focus:bg-gray-700 focus:text-white">
+                  <DropdownMenuItem className="rounded-lg focus:bg-gray-700 focus:text-white">
                     <BookOpen className="mr-2 h-4 w-4" />
-                    <Link href="/bookmarks" className="flex-1">Bookmarks</Link>
-                  </DropdownMenuItem> */}
-                  {/* <DropdownMenuItem className="rounded-lg focus:bg-gray-700 focus:text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 h-4 w-4">
+                    <Link href="/bookmarks" className="flex-1">
+                      Bookmarks
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="rounded-lg focus:bg-gray-700 focus:text-white">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="mr-2 h-4 w-4"
+                    >
                       <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
                       <circle cx="12" cy="12" r="3"></circle>
                     </svg>
-                    <Link href="/settings" className="flex-1">Settings</Link>
-                  </DropdownMenuItem> */}
+                    <Link href="/settings" className="flex-1">
+                      Settings
+                    </Link>
+                  </DropdownMenuItem>
                   <DropdownMenuSeparator className="bg-gray-700" />
                   <DropdownMenuItem
                     className="rounded-lg focus:bg-red-900/30 text-red-400 focus:text-red-300"
                     onClick={handleLogout}
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 h-4 w-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="mr-2 h-4 w-4"
+                    >
                       <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                       <polyline points="16 17 21 12 16 7"></polyline>
                       <line x1="21" y1="12" x2="9" y2="12"></line>
@@ -357,11 +406,11 @@ export function Header() {
               </DropdownMenu>
             ) : (
               <div className="hidden sm:flex items-center gap-2">
-                <Link href="/login">
+                {/* <Link href="/login">
                   <Button className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white border-none">
                     Đăng nhập
                   </Button>
-                </Link>
+                </Link> */}
               </div>
             )}
 
@@ -401,11 +450,11 @@ export function Header() {
                   autoFocus
                 />
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                <Button 
-                  type="submit" 
+                <Button
+                  type="submit"
                   className="absolute right-1 top-1/2 transform -translate-y-1/2 bg-emerald-500 hover:bg-emerald-600 rounded-md h-8 px-3"
                 >
-                  Search
+                  Tìm kiếm
                 </Button>
               </form>
             </motion.div>
@@ -427,25 +476,34 @@ export function Header() {
                   <MobileNavItem href="/" icon={<Home className="h-4 w-4" />}>
                     Trang chủ
                   </MobileNavItem>
-                  <MobileNavItem href="/categories" icon={<Tag className="h-4 w-4" />}>
+                  <MobileNavItem
+                    href="/categories"
+                    icon={<Tag className="h-4 w-4" />}
+                  >
                     Thể loại
                   </MobileNavItem>
-                  <MobileNavItem href="/novels" icon={<BookOpen className="h-4 w-4" />}>
+                  <MobileNavItem
+                    href="/novels"
+                    icon={<BookOpen className="h-4 w-4" />}
+                  >
                     Truyện
                   </MobileNavItem>
-                  <MobileNavItem href="/updates" icon={<Clock className="h-4 w-4" />}>
+                  <MobileNavItem
+                    href="/updates"
+                    icon={<Clock className="h-4 w-4" />}
+                  >
                     Mới cập nhật
                   </MobileNavItem>
-                  <MobileNavItem href="/login" icon={<User className="h-4 w-4" />}>
+                  {/* <MobileNavItem href="/login" icon={<User className="h-4 w-4" />}>
                     Đăng nhập
-                  </MobileNavItem>
-                  
-                  {isLoggedIn && (
+                  </MobileNavItem> */}
+
+                  {/* {isLoggedIn && (
                     <>
                       <MobileNavItem href="/profile" icon={<User className="h-4 w-4" />}>
                         Tài khoản
                       </MobileNavItem>
-                      {/* <MobileNavItem href="/bookmarks" icon={<BookOpen className="h-4 w-4" />}>
+                      <MobileNavItem href="/bookmarks" icon={<BookOpen className="h-4 w-4" />}>
                         Bookmarks
                       </MobileNavItem>
                       <MobileNavItem href="/settings" icon={
@@ -455,7 +513,7 @@ export function Header() {
                         </svg>
                       }>
                         Settings
-                      </MobileNavItem> */}
+                      </MobileNavItem>
                       <button
                         onClick={handleLogout}
                         className="flex items-center gap-3 px-4 py-3 text-red-400 hover:bg-gray-700/50 rounded-lg mt-1 transition-colors"
@@ -468,7 +526,7 @@ export function Header() {
                         Đăng xuất
                       </button>
                     </>
-                  )}
+                  )} */}
                 </nav>
               </div>
             </motion.div>
@@ -480,22 +538,22 @@ export function Header() {
 }
 
 // Helper Components
-// function ExploreMenuItem({ 
-//   href, 
-//   title, 
-//   description, 
-//   icon, 
-//   className 
-// }: { 
-//   href: string; 
-//   title: string; 
-//   description: string; 
+// function ExploreMenuItem({
+//   href,
+//   title,
+//   description,
+//   icon,
+//   className
+// }: {
+//   href: string;
+//   title: string;
+//   description: string;
 //   icon: string;
 //   className?: string;
 // }) {
 //   return (
-//     <Link 
-//       href={href} 
+//     <Link
+//       href={href}
 //       className={cn(
 //         "block rounded-lg p-3 hover:bg-gray-700/50 transition-colors",
 //         className
@@ -512,15 +570,15 @@ export function Header() {
 //   );
 // }
 
-// function NotificationItem({ 
-//   title, 
-//   description, 
-//   time, 
-//   isNew = false 
-// }: { 
-//   title: string; 
-//   description: string; 
-//   time: string; 
+// function NotificationItem({
+//   title,
+//   description,
+//   time,
+//   isNew = false
+// }: {
+//   title: string;
+//   description: string;
+//   time: string;
 //   isNew?: boolean;
 // }) {
 //   return (
@@ -537,18 +595,18 @@ export function Header() {
 //   );
 // }
 
-function MobileNavItem({ 
-  href, 
-  children, 
-  icon 
-}: { 
-  href: string; 
-  children: React.ReactNode; 
+function MobileNavItem({
+  href,
+  children,
+  icon,
+}: {
+  href: string;
+  children: React.ReactNode;
   icon: React.ReactNode;
 }) {
   return (
     <Link
-      href={href} 
+      href={href}
       className="flex items-center gap-3 px-4 py-3 text-gray-200 hover:text-white hover:bg-gray-700/50 rounded-lg transition-colors"
     >
       {icon}
@@ -556,4 +614,3 @@ function MobileNavItem({
     </Link>
   );
 }
-

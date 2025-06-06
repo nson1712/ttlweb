@@ -1,5 +1,6 @@
 // import { NovelCard } from "../components/novels/novel-card";
 import { Filter } from "../components/components/filter";
+import { NotFound } from "../components/components/not-found";
 import { PaginationWithLinks } from "../components/components/pagination";
 import { NovelCard } from "../components/novels/novel-card";
 import { StoriesApiResponse } from "../interfaces/story";
@@ -74,9 +75,7 @@ export default async function NovelsPage({
             return <NovelCard key={novel.slug} {...novel} />;
           })
         ) : (
-          <div className="text-center py-8">
-            <p className="text-gray-400">Không tìm thấy truyện</p>
-          </div>
+          <NotFound />
         )}
       </div>
       <PaginationWithLinks

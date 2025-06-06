@@ -65,8 +65,8 @@ export type CategoryType = {
 export type AuthorType = {
   id: number;
   avatar: string;
-  name: string;
-  slug: string;
-  status: string;
-  totalStory: number
+  name?: string;
+  slug?: string;
+  status?: string;
+  totalStory?: number
 };

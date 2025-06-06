@@ -270,11 +270,11 @@ export const Filter: FC<FilterProps> = ({
 
       {/* Advanced Filters */}
       {showAdvancedFilters && (
-        <div className="mt-6 lg:grid lg:grid-cols-6 gap-6">
+        <div className="mt-6 lg:grid lg:grid-cols-6 gap-6 space-y-4">
           {/* Categories */}
           <div className="lg:col-span-4">
             <Label className="block mb-2 text-emerald-400">Thể loại</Label>
-            <div className="grid grid-cols-6 gap-2 mt-2 max-h-52 overflow-y-auto">
+            <div className="grid grid-cols-2 sm:grid-cols-6 gap-2 mt-2 max-h-52 overflow-y-auto">
               {categories?.map((cate) => (
                 <div key={cate.id} className="flex items-center space-x-2">
                   <Checkbox
@@ -313,7 +313,7 @@ export const Filter: FC<FilterProps> = ({
 
           {/* Status */}
           <div className="col-span-2">
-            <Label htmlFor="translate-status">Trạng thái</Label>
+            <Label className="text-red-400" htmlFor="translate-status">Trạng thái</Label>
             <Select
               value={filterOptions.status || "COMPLETED"}
               onValueChange={handleTranslateStatusChange}
