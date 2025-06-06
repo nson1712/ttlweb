@@ -10,7 +10,7 @@ import { formatDateTime } from "@/app/lib/utils";
 import { StarRate } from "../components/star-rate";
 
 export interface NovelCardProps {
-  slug: string;
+  slug?: string;
   title: string;
   coverImage: string;
   author?: AuthorType;
@@ -37,8 +37,8 @@ export function NovelCard({
     <div className="group relative flex flex-col md:flex-row gap-4 bg-gradient-to-br from-gray-800/90 to-gray-900 shadow-md transition-all hover:shadow-2xl rounded-lg overflow-hidden p-4">
       <div className="relative w-full md:w-48 h-64 md:h-auto flex-shrink-0 aspect-[3/4]">
         <Image
-          src={coverImage}
-          alt={title}
+          src={coverImage ?? "/default-image.jpg"}
+          alt={title ?? "default-image"}
           fill
           className="object-cover rounded-md"
           sizes="(max-width: 768px) 100vw, 192px"
@@ -48,7 +48,7 @@ export function NovelCard({
       <div className="flex-1 flex flex-col">
         <div className="flex justify-between items-start">
           <div className="space-y-1">
-            <Link href={`/novels/${slug}`}>
+            <Link href={`/novels/${slug ?? ""}`}>
               <h2 className="text-xl font-bold text-emerald-400 hover:text-emerald-300 transition-colors">
                 {title}
               </h2>
@@ -67,8 +67,8 @@ export function NovelCard({
           {categories?.map((cate, index) => (
             <BaseTag
               key={index}
-              href={`/categories/${cate.slug}`}
-              name={cate.name}
+              href={`/categories/${cate?.slug}`}
+              name={cate?.name}
             />
           ))}
         </div>
@@ -111,7 +111,7 @@ export function NovelCard({
               </div>
             )}
 
-            <Link href={`/novels/${slug}`}>
+            <Link href={`/novels/${slug ?? ""}`}>
               <Button className="rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 px-6 py-2.5 text-sm font-medium text-white shadow-lg transition-all hover:shadow-emerald-500/20">
                 ◃Chi tiết▹
               </Button>

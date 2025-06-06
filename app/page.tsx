@@ -36,7 +36,7 @@ export default async function HomePage() {
   try {
     const res = await httpClient.get({
       url: "/api/story/potential/list",
-      params: { page: 0, size: 10 },
+      params: { page: 0, size: 20 },
     });
     return res.data;
   } catch (error) {

@@ -29,8 +29,8 @@ export const PotentialStarletSection: FC<PotenialStarletPropsType> = ({
       </div>
 
       <div className="grid grid-cols-4 gap-4 md:grid-cols-5 lg:grid-cols-10">
-        {(potentialStarlets ?? []).map((novel) => (
-          <PotentialStarletCard key={novel.id} {...novel} />
+        {(potentialStarlets ?? []).map((novel, index) => (
+          <PotentialStarletCard key={novel?.id ?? index} {...novel} />
         ))}
       </div>
     </section>
@@ -54,8 +54,8 @@ function PotentialStarletCard({
         <div className="group space-y-2">
           <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
             <Image
-              src={coverImage}
-              alt={title}
+              src={coverImage ?? "/default-image.jpg"}
+              alt={title ?? "potential-starlet"}
               fill
               className="object-cover transition-transform duration-300 group-hover:scale-105"
               sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 16vw"

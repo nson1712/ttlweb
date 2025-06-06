@@ -641,8 +641,8 @@ import type {
   ChaptersApiResponse,
   StoryDetailsApiResponse,
 } from "@/app/interfaces/story";
-import { LoaderIcon } from "lucide-react";
 import { httpClient } from "@/app/utils/httpClient";
+import Loading from "@/app/components/components/loading";
 
 async function fetchBySlug(
   slug: string,
@@ -742,7 +742,7 @@ export default async function ChapterDetailPage({
   const storyDetailsRes = await fetchStoryDetails(slug);
 
   return (
-    <Suspense fallback={<LoaderIcon />}>
+    <Suspense fallback={<Loading />}>
       <ChapterContent
         storySlug={slug}
         storyTitle={storyDetailsRes?.data?.data?.title}
