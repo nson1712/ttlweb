@@ -14,7 +14,7 @@ import { StoriesApiResponse } from "@/app/interfaces/story";
 import { colorClasses } from "@/app/lib/store-data";
 import { CategoryType } from "@/app/lib/types";
 import { Suspense } from "react";
-import Loading from "./loading";
+import Loading from "../../components/components/loading";
 import { NotFound } from "@/app/components/components/not-found";
 
 const fetchCategories = async () => {

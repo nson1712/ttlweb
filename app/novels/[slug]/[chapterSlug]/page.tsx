@@ -151,9 +151,9 @@
 
 //   const { fetchResource } = useResourceStore();
 
-  // const chapterDetailsResponse = useResourceStore(
-  //   (s) => s.resources?.chapterDetails
-  // ) as ChapterApiResponse;
+// const chapterDetailsResponse = useResourceStore(
+//   (s) => s.resources?.chapterDetails
+// ) as ChapterApiResponse;
 
 //   const chapterDetails = chapterDetailsResponse?.data
 
@@ -639,6 +639,7 @@ import type {
   ChapterApiResponse,
   ChapterDetailsApiResponse,
   ChaptersApiResponse,
+  StoryDetailsApiResponse,
 } from "@/app/interfaces/story";
 import { LoaderIcon } from "lucide-react";
 import { httpClient } from "@/app/utils/httpClient";
@@ -686,15 +687,37 @@ async function fetchChapters(
   return res;
 }
 
+async function fetchStoryDetails(
+  slug: string
+): Promise<StoryDetailsApiResponse> {
+  const res = await httpClient.get({
+    url: "/api/story/detail",
+    params: { slug: slug },
+  });
+  return {
+    data: {
+      data: res.data,
+      totalElements: res.data?.totalElements ?? 0,
+      totalPages: res.data?.totalPages ?? 0,
+      page: res.data?.page ?? 0,
+      size: res.data?.size ?? 0,
+      hasNext: res.data?.hasNext ?? false,
+    },
+  };
+}
+
 export default async function ChapterDetailPage({
   params,
   searchParams,
 }: {
   params: Promise<{ slug: string; chapterSlug: string }>;
-  searchParams: Promise<{ page?: number | undefined; pageSize?: number | undefined }>;
+  searchParams: Promise<{
+    page?: number | undefined;
+    pageSize?: number | undefined;
+  }>;
 }) {
-  const {slug, chapterSlug} = await params
-  const {page, pageSize} = await searchParams
+  const { slug, chapterSlug } = await params;
+  const { page, pageSize } = await searchParams;
   const isId = /^\d+$/.test(chapterSlug);
   const detailResp = isId
     ? await fetchById(Number(chapterSlug))
@@ -716,10 +739,13 @@ export default async function ChapterDetailPage({
     pageSize ?? 50
   );
 
+  const storyDetailsRes = await fetchStoryDetails(slug);
+
   return (
     <Suspense fallback={<LoaderIcon />}>
       <ChapterContent
-        novelSlug={slug}
+        storySlug={slug}
+        storyTitle={storyDetailsRes?.data?.data?.title}
         chapterSlug={detail.slug}
         details={detail}
         contents={contentsResp.data}

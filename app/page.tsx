@@ -34,11 +34,11 @@ export default async function HomePage() {
 
   async function fetchPotential() {
   try {
-    const response = await httpClient.get({
+    const res = await httpClient.get({
       url: "/api/story/potential/list",
       params: { page: 0, size: 10 },
     });
-    return response.data;
+    return res.data;
   } catch (error) {
     console.error("fetch error:", error);
     throw error;

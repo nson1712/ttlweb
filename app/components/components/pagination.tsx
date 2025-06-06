@@ -41,7 +41,7 @@ export function PaginationWithLinks({
   const searchParams = useSearchParams();
 
   const totalPageCount = Math.ceil(totalCount / pageSize);
-  const lastPageIndex = totalPageCount;
+  const lastPageIndex = totalPageCount - 1;
 
   const buildLink = useCallback(
     (newPageIndex: number) => {
@@ -152,15 +152,27 @@ export function PaginationWithLinks({
     return items;
   };
 
+  // const onJumpKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  //   if (e.key === "Enter") {
+  //     let valOneBased = Number((e.target as HTMLInputElement).value);
+  //     if (!valOneBased || valOneBased < 1) valOneBased = 1;
+  //     if (valOneBased > totalPageCount) valOneBased = totalPageCount;
+  //     const newIndex = valOneBased - 1;
+  //     router.push(buildLink(newIndex));
+  //   }
+  // };
+
   const onJumpKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      let valOneBased = Number((e.target as HTMLInputElement).value);
-      if (!valOneBased || valOneBased < 1) valOneBased = 1;
-      if (valOneBased > totalPageCount) valOneBased = totalPageCount;
-      const newIndex = valOneBased - 1;
-      router.push(buildLink(newIndex));
-    }
-  };
+  if (e.key === "Enter") {
+    let valOneBased = Number((e.target as HTMLInputElement).value);
+    if (!valOneBased || valOneBased < 1) valOneBased = 1;
+    if (valOneBased > totalPageCount) valOneBased = totalPageCount;
+    const newIndex = valOneBased - 1;
+    const newUrl = buildLink(newIndex);
+    router.push(newUrl);
+    router.refresh(); // ép cập nhật lại trang
+  }
+};
 
   return (
     <div className="xl:flex justify-end space-y-4 xl:space-y-0 items-center gap-3 w-full">

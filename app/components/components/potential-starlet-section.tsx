@@ -20,12 +20,12 @@ export const PotentialStarletSection: FC<PotenialStarletPropsType> = ({
           <Sparkles className="mr-2 h-5 w-5 text-emerald-400" />
           <h2 className="text-2xl font-bold text-white">Truyện tiềm năng</h2>
         </div>
-        {/* <Link
-          href="/new-talents"
-          className="text-sm font-medium text-emerald-400 hover:text-emerald-300"
+        <Link
+          href="/potential-starlets"
+          className="text-base font-medium text-emerald-400 hover:text-emerald-300"
         >
-          View All
-        </Link> */}
+          Xem tất cả
+        </Link>
       </div>
 
       <div className="grid grid-cols-4 gap-4 md:grid-cols-5 lg:grid-cols-10">

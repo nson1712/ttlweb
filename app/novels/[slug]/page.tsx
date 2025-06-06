@@ -9,6 +9,7 @@ import {
 import { BaseTag } from "@/app/components/components/base-tag";
 import { httpClient } from "@/app/utils/httpClient";
 import { StoryInfoTab } from "@/app/components/components/story-info-tabs";
+import { NotFound } from "@/app/components/components/not-found";
 
 async function fetchStoryDetails(
   slug: string
@@ -60,31 +61,28 @@ export default async function NovelDetailPage({
 }) {
   const { slug } = await params;
   const { page, pageSize, sortType } = await searchParams;
-  const storyDetailsRes = await fetchStoryDetails(slug);
-  const storyDetails = storyDetailsRes?.data?.data
+
+  let storyDetailsRes: StoryDetailsApiResponse | null = null;
+  try {
+    storyDetailsRes = await fetchStoryDetails(slug);
+  } catch (error) {
+    console.error("Error fetching story details:", error);
+    return <NotFound />;
+  }
+
+  const storyDetails = storyDetailsRes?.data?.data;
+
+  // Nếu storyDetails không có hoặc ID không hợp lệ, cũng trả về NotFound
+  if (!storyDetails || !storyDetails.id) {
+    return <NotFound title="Quay lại trang chủ" />;
+  }
+
   const chaptersRes = await fetchChapters(
-    Number(storyDetailsRes.data?.data?.id),
+    Number(storyDetails.id),
     page ?? 0,
     pageSize ?? 20,
     sortType
   );
-
-  if (!storyDetailsRes) {
-    return (
-      <div className="flex h-[70vh] flex-col items-center justify-center">
-        <h1 className="text-2xl font-bold text-white">Không tìm thấy truyện</h1>
-        <p className="mt-2 text-gray-400">
-          Truyện không tồn tại hoặc đã bị gỡ!
-        </p>
-        <Link
-          href="/"
-          className="mt-4 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-600 px-4 py-2 text-sm font-medium text-white"
-        >
-          Quay lại trang chủ
-        </Link>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen">

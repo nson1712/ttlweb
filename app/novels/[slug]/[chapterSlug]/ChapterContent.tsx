@@ -22,10 +22,12 @@ import {
   DialogTrigger,
 } from "@/app/components/ui/dialog";
 import { ChaptersApiResponse } from "@/app/interfaces/story";
-import { LoadingSpinner } from "@/app/components/components/loading";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/app/components/ui/breadcrumb";
+import Loading from "@/app/components/components/loading";
 
 interface Props {
-  novelSlug: string;
+  storySlug: string;
+  storyTitle: string;
   chapterSlug: string;
   details: ChapterType;
   contents: ChapterDetailType[];
@@ -35,7 +37,8 @@ interface Props {
 }
 
 export default function ChapterContent({
-  novelSlug,
+  storySlug,
+  storyTitle,
   // chapterSlug,
   details,
   contents,
@@ -43,14 +46,30 @@ export default function ChapterContent({
   nextSlug,
   chaptersList,
 }: Props) {
-  console.log("CONTENTS: ", contents);
-  console.log("DETAILS: ", details);
   return (
     <div className="mx-auto max-w-4xl py-8 space-y-6 text-lg">
+      <Breadcrumb className="flex w-full">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink className="text-gray-400 hover:text-emerald-500" href="/">Trang chủ</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink className="text-gray-400 hover:text-emerald-500" href={`/novels/${storySlug}`}>
+               {storyTitle}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem className="flex-1 line-clamp-1">
+            <BreadcrumbPage className="text-emerald-500">{details.title}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
       <h1 className="text-2xl sm:text-3xl font-bold flex justify-center">
         {details.title}
       </h1>
       <div>
+        
         {contents.map((c, idx) => (
           <p key={idx}>{c.content}</p>
         ))}
@@ -73,7 +92,7 @@ export default function ChapterContent({
 
       <div className="mt-10 flex justify-between">
         <Link
-          href={prevSlug ? `/novels/${novelSlug}/${prevSlug}` : "#"}
+          href={prevSlug ? `/novels/${storySlug}/${prevSlug}` : "#"}
           className={cn(
             "hidden sm:flex items-center py-2 px-3 rounded font-medium select-none bg-gradient-to-r from-emerald-500 to-teal-600",
             !prevSlug && "pointer-events-none opacity-50"
@@ -83,7 +102,7 @@ export default function ChapterContent({
         </Link>
 
         <Link
-          href={prevSlug ? `/novels/${novelSlug}/${prevSlug}` : "#"}
+          href={prevSlug ? `/novels/${storySlug}/${prevSlug}` : "#"}
           className={cn(
             "flex sm:hidden items-center py-2 px-3 rounded font-medium select-none bg-gradient-to-r from-emerald-500 to-teal-600",
             !prevSlug && "pointer-events-none opacity-50"
@@ -104,12 +123,12 @@ export default function ChapterContent({
             </DialogHeader>
             <div className="flex-1 overflow-y-auto space-y-1.5 mb-4">
               {!chaptersList ? (
-                <LoadingSpinner className="" />
+                <Loading />
               ) : (
                 chaptersList?.data?.data?.map((chapter) => (
                   <Link
                     key={chapter?.id}
-                    href={`/novels/${novelSlug}/${chapter?.slug}`}
+                    href={`/novels/${storySlug}/${chapter?.slug}`}
                     className={
                       "group block rounded-lg bg-gray-700/50 p-3 hover:bg-gray-700"
                     }
@@ -159,7 +178,7 @@ export default function ChapterContent({
         </Dialog>
 
         <Link
-          href={nextSlug ? `/novels/${novelSlug}/${nextSlug}` : "#"}
+          href={nextSlug ? `/novels/${storySlug}/${nextSlug}` : "#"}
           className={cn(
             "hidden sm:flex items-center py-2 px-3 rounded font-medium select-none bg-gradient-to-r from-emerald-500 to-teal-600",
             !nextSlug && "pointer-events-none opacity-50"
@@ -168,7 +187,7 @@ export default function ChapterContent({
           Chương tiếp <ChevronRight />
         </Link>
         <Link
-          href={nextSlug ? `/novels/${novelSlug}/${nextSlug}` : "#"}
+          href={nextSlug ? `/novels/${storySlug}/${nextSlug}` : "#"}
           className={cn(
             "flex sm:hidden items-center py-2 px-3 rounded font-medium select-none bg-gradient-to-r from-emerald-500 to-teal-600",
             !nextSlug && "pointer-events-none opacity-50"

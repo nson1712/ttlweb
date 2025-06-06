@@ -3,7 +3,7 @@ import { MainLayout } from "../app/components/layout/main-layout";
 import { ReactNode, Suspense } from "react";
 import "./globals.css";
 import { Metadata } from "next";
-import { LoadingSpinner } from "./components/components/loading";
+import Loading from "./components/components/loading";
 
 export const metadata: Metadata = {
   title: "Tàng Thư Lâu – Discover & Read Novels Online",
@@ -55,7 +55,7 @@ export default function RootLayout({
         >
           <Suspense
             fallback={
-              <LoadingSpinner  />
+              <Loading  />
             }
           >
             <MainLayout>{children}</MainLayout>

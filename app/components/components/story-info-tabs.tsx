@@ -9,6 +9,7 @@ import { FC, useState } from "react"
 import { StoryType } from "@/app/types/story"
 import { ChaptersApiResponse } from "@/app/interfaces/story"
 import { useSearchParams } from "next/navigation"
+import { isEmpty } from "lodash"
 
 type StoryInfoTabProps = {
   chapters: ChaptersApiResponse
@@ -336,14 +337,14 @@ export const StoryInfoTab: FC<StoryInfoTabProps> = ({
                 ))}
               </div> */}
 
-              <div className="mt-6 text-center">
+              {!isEmpty(storyDetails.categories) && <div className="mt-6 text-center">
                 <Link
                   href={`/categories/${storyDetails.categories?.[0]?.slug}`}
                   className="inline-block rounded-full bg-gray-700 px-6 py-2 text-sm font-medium text-white hover:bg-gray-600"
                 >
                   Xem thêm truyện {storyDetails.categories?.[0]?.name}
                 </Link>
-              </div>
+              </div>}
             </div>
           </TabsContent>
 

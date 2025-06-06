@@ -56,7 +56,7 @@ export const WeeklyStory: FC<WeeklyStoryPropsType> = ({ weeklyStory }) => {
             {weeklyStory?.categories.map((category) => (
               <BaseTag
                 key={category.id}
-                href={`categories/${category.name}`}
+                href={`categories/${category.slug}`}
                 name={category.name}
               />
             ))}

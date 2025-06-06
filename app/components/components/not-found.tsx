@@ -21,7 +21,7 @@ export const NotFound: FC<NotFoundProps> = ({ href, title }) => {
           href={href ?? "/"}
           className="mt-4 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-600 px-4 py-2 text-sm font-medium text-white"
         >
-          {title}
+          {title ?? "Quay lại trang chủ"}
         </Link>
       )}
     </div>

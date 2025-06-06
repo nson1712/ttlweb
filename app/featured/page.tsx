@@ -1,4 +1,4 @@
-import { Sparkles} from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { NovelCard } from "../components/novels/novel-card";
 import { PaginationWithLinks } from "../components/components/pagination";
 import { httpClient } from "../utils/httpClient";
@@ -28,11 +28,13 @@ export default async function FeaturedPage({
   }>;
 }) {
   const { page, pageSize } = await searchParams;
+  const parsedPage = typeof page === "string" ? parseInt(page, 10) : page ?? 0;
+  const parsedPageSize =
+    typeof pageSize === "string" ? parseInt(pageSize, 10) : pageSize ?? 20;
 
   const [featureStoriesRes] = await Promise.all([
     fetchFeatureStories(page ?? 0, pageSize ?? 20),
   ]);
-  console.log("FEATURE STORIES: ", featureStoriesRes);
 
   return (
     <div className="min-h-screen">
@@ -134,7 +136,6 @@ export default async function FeaturedPage({
           </div>
         </div> */}
 
-        {/* Novels Grid/List */}
         {featureStoriesRes.data?.totalElements > 0 ? (
           <div className="space-y-6">
             {featureStoriesRes?.data?.data?.map((novel: StoryType) => (
@@ -145,7 +146,6 @@ export default async function FeaturedPage({
           <NotFound href="/" title="Quay lại trang chủ" />
         )}
 
-        {/* Pagination */}
         {featureStoriesRes.data?.totalElements > 0 && (
           <div className="mt-8">
             <PaginationWithLinks
@@ -154,11 +154,9 @@ export default async function FeaturedPage({
                 pageSizeSearchParam: "pageSize",
                 pageSizeOptions: [10, 20, 50, 100],
               }}
-              page={page ?? 0}
-              pageSize={pageSize ?? 20}
-              totalCount={
-                featureStoriesRes.data?.totalElements - (pageSize ?? 20)
-              }
+              page={parsedPage ?? 0}
+              pageSize={parsedPageSize ?? 20}
+              totalCount={featureStoriesRes.data?.totalElements}
             />
           </div>
         )}
