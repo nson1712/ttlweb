@@ -1,32 +1,4 @@
-// Mock data for the application
-import { Novel } from "./types";
-
-import { Champion, Region, Story } from "./types";
-
-export const champions: Champion[] = [
-  {
-    id: "ahri",
-    name: "Ahri",
-    title: "the Nine-Tailed Fox",
-    region: "Ionia",
-    description: "Innately connected to the magic of the spirit realm...",
-    image: "/champions/ahri.jpg",
-    tags: ["Mage", "Assassin"],
-  },
-  // Add more champions...
-];
-
-export const regions: Region[] = [
-  {
-    id: "demacia",
-    name: "Demacia",
-    description:
-      "A strong, lawful kingdom with a prestigious military history...",
-    image: "/regions/demacia.jpg",
-    bannerImage: "/regions/demacia-banner.jpg",
-  },
-  // Add more regions...
-];
+import { Story } from "./types";
 
 export const stories: Story[] = [
   {
@@ -38,265 +10,6 @@ export const stories: Story[] = [
     author: "Riot Games",
   },
   // Add more stories...
-];
-
-export const mockNovels: Novel[] = [
-  {
-    id: "1",
-    slug: "madman-family",
-    title: "I Am The Madman Of This Family",
-    coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741422661_i-am-the-madman-of-this-family.webp",
-    author: "Solver Keter",
-    rating: 4.5,
-    totalRatings: 11,
-    categories: ["Adventure", "Fantasy", "Action"],
-    description:
-      'Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!... Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...Solver Keter, one of the Five Lunatics of Lawless City, regresses to when he was the illegitimate son of a doomed archery family. "If I regressed and couldn\'t even save my family, I might as well go kill myself." For my family? No, for my freedom!...',
-    updatedAt: "8 hours ago",
-    chapterCount: 46,
-    language: "Chinese",
-    status: "ongoing",
-    yearOfRelease: 2022,
-    tags: ["Regression", "Family", "Revenge"],
-  },
-  {
-    id: "2",
-    slug: "industrial-cthulhu",
-    title: "Industrial Cthulhu: Starting as an Island Lord",
-    coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741422661_i-am-the-madman-of-this-family.webp",
-    author: "Unknown Author",
-    rating: 4.2,
-    totalRatings: 21,
-    categories: [
-      "Adventure",
-      "Fantasy",
-      "Historical",
-      "Horror",
-      "Mystery",
-      "Supernatural",
-      "Tragedy",
-      "Action",
-    ],
-    description:
-      '"I saw with my own eyes that they used the finest, rustproof refined steel to make utensils and cans, filling them with just a little food, then casually throwing them away after eating." "I saw with my own eyes that they used giant beasts as tall as mountains to devour soil and rocks, digging out..."',
-    updatedAt: "8 hours ago",
-    chapterCount: 42,
-    language: "English",
-    status: "ongoing",
-    yearOfRelease: 2023,
-    tags: ["Evil Gods", "System", "Island Development"],
-  },
-  {
-    id: "3",
-    slug: "genius-cloning",
-    title: "The Genius of Cloning in the Academy City",
-    coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741422661_i-am-the-madman-of-this-family.webp",
-    author: "Unknown Author",
-    rating: 4.7,
-    totalRatings: 19,
-    categories: [
-      "Comedy",
-      "Psychological",
-      "Gender Bender",
-      "Fantasy",
-      "Supernatural",
-      "Adventure",
-      "Martial Arts",
-    ],
-    description:
-      "I awoke as Violet, a familiar villainess trapped in a shady corporate research lab. Screw this! With my unstoppable cloning technique, I'm getting out of here and going to the Academy to live my own life!...",
-    updatedAt: "3 hours ago",
-    chapterCount: 23,
-    language: "Japanese",
-    status: "ongoing",
-    yearOfRelease: 2024,
-    tags: ["Reincarnation", "Academy", "Cloning", "Female Protagonist"],
-  },
-  {
-    id: "4",
-    slug: "lord-mysteries",
-    title: "Lord of the Mysteries",
-    coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741422661_i-am-the-madman-of-this-family.webp",
-    author: "Cuttlefish That Loves Diving",
-    rating: 4.7,
-    totalRatings: 853,
-    categories: ["Fantasy", "Mystery", "Supernatural"],
-    description:
-      "With the rising tide of steam power and machinery, who can come close to being a Beyonder? Shrouded in the fog of history and darkness, who or what is the lurking evil that murmurs into our ears?",
-    updatedAt: "2 days ago",
-    chapterCount: 1430,
-    language: "Chinese",
-    status: "completed",
-    yearOfRelease: 2018,
-    tags: ["Gods", "Steampunk", "Mystery", "Lovecraftian"],
-  },
-  {
-    id: "5",
-    slug: "legendary-mechanic",
-    title: "The Legendary Mechanic",
-    coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741422661_i-am-the-madman-of-this-family.webp",
-    author: "Chocolion",
-    rating: 4.7,
-    totalRatings: 712,
-    categories: ["Sci-Fi", "Adventure", "Fantasy"],
-    description:
-      "What would a regular old-school game player do when he's transported into a futuristic virtual game world filled with spaceships, wormholes, advanced technology, and superpowers?",
-    updatedAt: "1 day ago",
-    chapterCount: 1465,
-    language: "Chinese",
-    status: "completed",
-    yearOfRelease: 2017,
-    tags: ["Game Elements", "Mecha", "Space"],
-  },
-  {
-    id: "6",
-    slug: "shadow-slave",
-    title: "Shadow Slave",
-    coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741422661_i-am-the-madman-of-this-family.webp",
-    author: "Guiltythree",
-    rating: 4.1,
-    totalRatings: 769,
-    categories: ["Fantasy", "Action", "Adventure"],
-    description:
-      "Growing up in poverty, Sunny never expected anything good from life. However, even he did not anticipate being chosen by the Nightmare Spell and becoming one of the Awakened - an elite group of people gifted with supernatural powers.",
-    updatedAt: "12 hours ago",
-    chapterCount: 852,
-    language: "English",
-    status: "ongoing",
-    yearOfRelease: 2020,
-    tags: ["System", "Cultivation", "Dark"],
-  },
-  {
-    id: "7",
-    slug: "circle-inevitability",
-    title: "Circle of Inevitability",
-    coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741422661_i-am-the-madman-of-this-family.webp",
-    author: "Cuttlefish That Loves Diving",
-    rating: 4.6,
-    totalRatings: 528,
-    categories: ["Fantasy", "Mystery", "Supernatural"],
-    description:
-      "A mysterious world filled with Beyonders and extraordinary abilities. Follow the protagonist as they navigate through the intricate web of secrets and powers.",
-    updatedAt: "3 days ago",
-    chapterCount: 745,
-    language: "Chinese",
-    status: "ongoing",
-    yearOfRelease: 2021,
-    tags: ["Gods", "Mystery", "Beyonder"],
-  },
-  {
-    id: "8",
-    slug: "top-tier-providence",
-    title: "Top Tier Providence, Secretly Cultivate for a Thousand Years",
-    coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741422661_i-am-the-madman-of-this-family.webp",
-    author: "Ren Wo Xiao",
-    rating: 4.5,
-    totalRatings: 542,
-    categories: ["Fantasy", "Adventure", "Martial Arts"],
-    description:
-      "Han Jue was transmigrated into a cultivation world with an almost omnipotent system. However, he quickly discovered that offending even a single person could lead to unimaginable consequences.",
-    updatedAt: "5 days ago",
-    chapterCount: 1024,
-    language: "Chinese",
-    status: "ongoing",
-    yearOfRelease: 2019,
-    tags: ["Cultivation", "System", "Cautious Protagonist"],
-  },
-  {
-    id: "9",
-    slug: "three-wives",
-    title: "My Three Wives Are Beautiful Vampires",
-    coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741422661_i-am-the-madman-of-this-family.webp",
-    author: "Victor_Weismann",
-    rating: 4.1,
-    totalRatings: 587,
-    categories: ["Fantasy", "Romance", "Supernatural", "Harem"],
-    description:
-      "Victor was a normal young man who was visiting a night club until it was attacked by vampires. When he wakes up, he finds himself in the house of a vampire ready to be sacrificed.",
-    updatedAt: "1 day ago",
-    chapterCount: 635,
-    language: "English",
-    status: "ongoing",
-    yearOfRelease: 2020,
-    tags: ["Vampire", "Harem", "Romance"],
-  },
-  {
-    id: "10",
-    slug: "cultivation-online",
-    title: "Cultivation Online",
-    coverImage:
-      "https://ranobes.top/uploads/posts/2025-03/thumbs/1741422661_i-am-the-madman-of-this-family.webp",
-    author: "MyLittleBrother",
-    rating: 3.6,
-    totalRatings: 579,
-    categories: ["Fantasy", "Adventure", "Martial Arts", "Virtual Reality"],
-    description:
-      "Yuan was born with an incurable illness that left him blind at a young age and crippled a few years later, rendering everything below his head useless. Deemed hopeless and irredeemable, his parents abandoned him, and soon after, he lost his will to live.",
-    updatedAt: "2 days ago",
-    chapterCount: 420,
-    language: "English",
-    status: "ongoing",
-    yearOfRelease: 2021,
-    tags: ["Cultivation", "Game Elements", "Virtual Reality"],
-  },
-];
-
-// Recent updates for the update tape
-export const recentUpdates = [
-  {
-    id: "lord-void",
-    slug: "lord-void",
-    coverImage:
-      "/1742474407_the-empty-box-and-zeroth-maria.webp",
-    title: "The Lord of Void and Real",
-    chapter: "Chapter 319: Three Stars Demolishing Demons",
-    updatedAt: "9 minutes ago",
-  },
-  {
-    id: "beast-taming",
-    slug: "beast-taming",
-    coverImage:
-      "/1742474407_the-empty-box-and-zeroth-maria.webp",
-    title: "Beast Taming Patrol",
-    chapter: "Chapter 674: Youyou Advances!",
-    updatedAt: "14 minutes ago",
-  },
-  {
-    id: "disciple-simulator",
-    slug: "disciple-simulator",
-    coverImage:
-      "/1742474407_the-empty-box-and-zeroth-maria.webp",
-    title: "I Have A Disciple Simulator",
-    chapter: "Chapter 911: The Humble Hallucinatory Dark Demon Venerable!",
-    updatedAt: "14 minutes ago",
-  },
-  {
-    id: "grinding-experience",
-    slug: "grinding-experience",
-    coverImage:
-      "/1742474407_the-empty-box-and-zeroth-maria.webp",
-    title: "I Am Grinding Experience In Another World",
-    chapter: "Chapter 671: Return to Qingqiu",
-    updatedAt: "15 minutes ago",
-  },
-  {
-    id: "reversing-life",
-    slug: "reversing-life",
-    coverImage:
-      "/1742474407_the-empty-box-and-zeroth-maria.webp",
-    title: "Reversing Life With Item Copy",
-    chapter: "Chapter 128: Not Quite Yet",
-    updatedAt: "16 minutes ago",
-  },
 ];
 
 // Available categories for filtering
@@ -1184,6 +897,7 @@ export const allChapters = [
     releaseDate: "Jan 2, 2025",
     views: 234567,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-2",
@@ -1194,6 +908,7 @@ export const allChapters = [
     releaseDate: "Jan 5, 2025",
     views: 198765,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-3",
@@ -1204,6 +919,7 @@ export const allChapters = [
     releaseDate: "Jan 8, 2025",
     views: 187654,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-4",
@@ -1214,6 +930,7 @@ export const allChapters = [
     releaseDate: "Jan 11, 2025",
     views: 176543,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-5",
@@ -1224,6 +941,7 @@ export const allChapters = [
     releaseDate: "Jan 14, 2025",
     views: 165432,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-6",
@@ -1234,6 +952,7 @@ export const allChapters = [
     releaseDate: "Jan 17, 2025",
     views: 154321,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-7",
@@ -1244,6 +963,7 @@ export const allChapters = [
     releaseDate: "Jan 20, 2025",
     views: 143210,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-8",
@@ -1254,6 +974,7 @@ export const allChapters = [
     releaseDate: "Jan 23, 2025",
     views: 132109,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-9",
@@ -1264,6 +985,7 @@ export const allChapters = [
     releaseDate: "Jan 26, 2025",
     views: 121098,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-10",
@@ -1274,6 +996,7 @@ export const allChapters = [
     releaseDate: "Jan 29, 2025",
     views: 110987,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-11",
@@ -1284,6 +1007,7 @@ export const allChapters = [
     releaseDate: "Feb 1, 2025",
     views: 109876,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-12",
@@ -1294,6 +1018,7 @@ export const allChapters = [
     releaseDate: "Feb 4, 2025",
     views: 98765,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-13",
@@ -1304,6 +1029,7 @@ export const allChapters = [
     releaseDate: "Feb 7, 2025",
     views: 87654,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-14",
@@ -1314,6 +1040,7 @@ export const allChapters = [
     releaseDate: "Feb 10, 2025",
     views: 76543,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-15",
@@ -1324,6 +1051,7 @@ export const allChapters = [
     releaseDate: "Feb 13, 2025",
     views: 65432,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-16",
@@ -1334,6 +1062,7 @@ export const allChapters = [
     releaseDate: "Feb 16, 2025",
     views: 54321,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-17",
@@ -1344,6 +1073,7 @@ export const allChapters = [
     releaseDate: "Feb 19, 2025",
     views: 43210,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-18",
@@ -1354,6 +1084,7 @@ export const allChapters = [
     releaseDate: "Feb 22, 2025",
     views: 32109,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-19",
@@ -1364,6 +1095,7 @@ export const allChapters = [
     releaseDate: "Feb 25, 2025",
     views: 21098,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-20",
@@ -1374,6 +1106,7 @@ export const allChapters = [
     releaseDate: "Feb 28, 2025",
     views: 10987,
     isNew: false,
+    isLocked: true
   },
   {
     id: "lord-mysteries-1430",
@@ -1384,6 +1117,7 @@ export const allChapters = [
     releaseDate: "Apr 15, 2025",
     views: 54321,
     isNew: true,
+    isLocked: true,
   },
 
   // Legendary Mechanic chapters
@@ -1406,6 +1140,7 @@ export const allChapters = [
     releaseDate: "Jan 8, 2025",
     views: 176543,
     isNew: false,
+    isLocked: true
   },
   {
     id: "legendary-mechanic-1465",
@@ -1450,3 +1185,14 @@ export const allChapters = [
     isNew: true,
   },
 ];
+
+export const mockUser = {
+  name: "Alex",
+  avatar: "https://png.pngtree.com/png-clipart/20240321/original/pngtree-avatar-job-student-flat-portrait-of-man-png-image_14639683.png",
+  level: "Bookworm Lvl 42",
+  memberSince: "June 2020",
+  booksCompleted: 247,
+  readingStreak: "42 days",
+  favoriteGenre: "Fantasy",
+  coins: 50000, // Added user coins
+};

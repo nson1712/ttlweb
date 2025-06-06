@@ -41,12 +41,13 @@ export function PaginationWithLinks({
   const searchParams = useSearchParams();
 
   const totalPageCount = Math.ceil(totalCount / pageSize);
+  const lastPageIndex = totalPageCount - 1;
 
   const buildLink = useCallback(
-    (newPage: number) => {
+    (newPageIndex: number) => {
       const key = pageSearchParam || "page";
       const sp = new URLSearchParams(searchParams ?? undefined);
-      sp.set(key, String(newPage));
+      sp.set(key, String(newPageIndex));
       return `${pathname}?${sp.toString()}`;
     },
     [searchParams, pathname, pageSearchParam]
@@ -54,32 +55,33 @@ export function PaginationWithLinks({
 
   const navToPageSize = useCallback(
     (newPageSize: number) => {
-      const key = pageSizeSelectOptions?.pageSizeSearchParam || "pageSize";
+      const sizeKey = pageSizeSelectOptions?.pageSizeSearchParam || "pageSize";
+      const pageKey = pageSearchParam || "page";
       const sp = new URLSearchParams(searchParams ?? undefined);
-      sp.set(key, String(newPageSize));
+      sp.set(sizeKey, String(newPageSize));
+      // reset page index to 0 on pageSize change
+      sp.set(pageKey, "0");
       router.push(`${pathname}?${sp.toString()}`);
     },
-    [searchParams, pathname, pageSizeSelectOptions?.pageSizeSearchParam, router]
+    [
+      searchParams,
+      pathname,
+      pageSizeSelectOptions?.pageSizeSearchParam,
+      pageSearchParam,
+      router,
+    ]
   );
 
   const renderPageNumbers = () => {
     const items: ReactNode[] = [];
-    const total = totalPageCount;
+    const total = totalPageCount + 1;
 
     if (total <= 5) {
-      for (let i = 1; i <= total; i++) {
+      for (let idx = 0; idx < total; idx++) {
         items.push(
-          <PaginationItem key={i}>
-            <PaginationLink
-              className={
-                page === i
-                  ? "bg-gradient-to-r from-emerald-400 to-teal-500 border-none"
-                  : "rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 border-none"
-              }
-              href={buildLink(i)}
-              isActive={page === i}
-            >
-              {i}
+          <PaginationItem key={idx}>
+            <PaginationLink href={buildLink(idx)} isActive={page === idx}>
+              {idx + 1}
             </PaginationLink>
           </PaginationItem>
         );
@@ -89,23 +91,24 @@ export function PaginationWithLinks({
 
     let start = page - 1;
     let end = page + 1;
-    if (page <= 3) {
-      start = 2;
-      end = 4;
-    } else if (page >= total - 2) {
-      start = total - 3;
-      end = total - 1;
+    if (page <= 1) {
+      start = 1;
+      end = 3;
+    } else if (page >= lastPageIndex - 1) {
+      start = lastPageIndex - 3;
+      end = lastPageIndex - 1;
     }
 
+    // First page
     items.push(
-      <PaginationItem className="" key={1}>
-        <PaginationLink href={buildLink(1)} isActive={page === 1}>
+      <PaginationItem key={0}>
+        <PaginationLink href={buildLink(0)} isActive={page === 0}>
           1
         </PaginationLink>
       </PaginationItem>
     );
 
-    if (start > 2) {
+    if (start > 1) {
       items.push(
         <PaginationItem key="ellipsis-start">
           <PaginationEllipsis />
@@ -113,17 +116,20 @@ export function PaginationWithLinks({
       );
     }
 
-    for (let i = start; i <= end; i++) {
-      items.push(
-        <PaginationItem key={i}>
-          <PaginationLink href={buildLink(i)} isActive={page === i}>
-            {i}
-          </PaginationLink>
-        </PaginationItem>
-      );
+    // Middle pages
+    for (let idx = start; idx <= end; idx++) {
+      if (idx > 0 && idx < lastPageIndex) {
+        items.push(
+          <PaginationItem key={idx}>
+            <PaginationLink href={buildLink(idx)} isActive={page === idx}>
+              {idx + 1}
+            </PaginationLink>
+          </PaginationItem>
+        );
+      }
     }
 
-    if (end < total - 1) {
+    if (end < lastPageIndex - 1) {
       items.push(
         <PaginationItem key="ellipsis-end">
           <PaginationEllipsis />
@@ -131,10 +137,14 @@ export function PaginationWithLinks({
       );
     }
 
+    // Last page
     items.push(
-      <PaginationItem key={total}>
-        <PaginationLink href={buildLink(total)} isActive={page === total}>
-          {total}
+      <PaginationItem key={lastPageIndex}>
+        <PaginationLink
+          href={buildLink(lastPageIndex)}
+          isActive={page === lastPageIndex}
+        >
+          {lastPageIndex + 1}
         </PaginationLink>
       </PaginationItem>
     );
@@ -142,15 +152,27 @@ export function PaginationWithLinks({
     return items;
   };
 
-  // Handle quick‑jump
+  // const onJumpKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  //   if (e.key === "Enter") {
+  //     let valOneBased = Number((e.target as HTMLInputElement).value);
+  //     if (!valOneBased || valOneBased < 1) valOneBased = 1;
+  //     if (valOneBased > totalPageCount) valOneBased = totalPageCount;
+  //     const newIndex = valOneBased - 1;
+  //     router.push(buildLink(newIndex));
+  //   }
+  // };
+
   const onJumpKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      let val = Number((e.target as HTMLInputElement).value);
-      if (!val || val < 1) val = 1;
-      if (val > totalPageCount) val = totalPageCount;
-      router.push(buildLink(val));
-    }
-  };
+  if (e.key === "Enter") {
+    let valOneBased = Number((e.target as HTMLInputElement).value);
+    if (!valOneBased || valOneBased < 1) valOneBased = 1;
+    if (valOneBased > totalPageCount) valOneBased = totalPageCount;
+    const newIndex = valOneBased - 1;
+    const newUrl = buildLink(newIndex);
+    router.push(newUrl);
+    router.refresh(); // ép cập nhật lại trang
+  }
+};
 
   return (
     <div className="xl:flex justify-end space-y-4 xl:space-y-0 items-center gap-3 w-full">
@@ -158,12 +180,9 @@ export function PaginationWithLinks({
         <PaginationContent className="max-sm:gap-0">
           <PaginationItem>
             <PaginationPrevious
-              href={buildLink(Math.max(page - 1, 1))}
-              aria-disabled={page === 1}
-              tabIndex={page === 1 ? -1 : undefined}
-              className={
-                page === 1 ? "pointer-events-none opacity-50" : undefined
-              }
+              href={buildLink(Math.max(page - 1, 0))}
+              aria-disabled={page === 0}
+              tabIndex={page === 0 ? -1 : undefined}
             />
           </PaginationItem>
 
@@ -171,21 +190,15 @@ export function PaginationWithLinks({
 
           <PaginationItem>
             <PaginationNext
-              href={buildLink(Math.min(page + 1, totalPageCount))}
-              aria-disabled={page === totalPageCount}
-              tabIndex={page === totalPageCount ? -1 : undefined}
-              className={
-                page === totalPageCount
-                  ? "pointer-events-none opacity-50"
-                  : undefined
-              }
+              href={buildLink(Math.min(page + 1, lastPageIndex))}
+              aria-disabled={page === lastPageIndex}
+              tabIndex={page === lastPageIndex ? -1 : undefined}
             />
           </PaginationItem>
         </PaginationContent>
       </Pagination>
 
       <div className="flex items-center justify-end">
-        {/* Page Size Select */}
         {pageSizeSelectOptions && (
           <SelectRowsPerPage
             options={pageSizeSelectOptions.pageSizeOptions}
@@ -194,13 +207,12 @@ export function PaginationWithLinks({
           />
         )}
 
-        {/* Quick‑Jumper */}
         {totalPageCount > 1 && (
-          <div className="flex items-center gap-2 min-w-32 justify-end ">
-            <span className="text-sm">Go to</span>
+          <div className="flex items-center gap-2 min-w-32 justify-end w-auto ml-2">
+            <div className="text-sm w-max">Tới trang</div>
             <input
               type="number"
-              defaultValue={page}
+              defaultValue={page + 1}
               min={1}
               max={totalPageCount}
               onKeyDown={onJumpKeyDown}
@@ -224,19 +236,18 @@ const SelectRowsPerPage = ({
   pageSize: number;
 }) => {
   return (
-    <div className="flex items-center gap-2 ">
+    <div className="flex items-center gap-2">
       <Select
         defaultValue={String(pageSize)}
         onValueChange={(v) => setPageSize(Number(v))}
       >
         <SelectTrigger className="min-w-24">
-          {/* self‑closing, value comes from defaultValue */}
           <SelectValue placeholder="Select size" />
         </SelectTrigger>
         <SelectContent>
           {options.map((opt) => (
             <SelectItem key={opt} value={String(opt)}>
-              {opt} / page
+              {opt} / trang
             </SelectItem>
           ))}
         </SelectContent>

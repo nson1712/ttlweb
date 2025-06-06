@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useAuth } from "../../lib/auth-context";
+import { useAuth } from "../../context/auth-context";
 import { BookmarkIcon } from "lucide-react";
 import { Button } from "../../components/ui/button";
 import { useRouter } from "next/navigation";

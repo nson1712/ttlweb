@@ -46,7 +46,7 @@ const handleError = async (
     // ProfileStore.setProfile({});
     // Router.push("/login");
     // useRouter().push("/login")
-    redirect("/dang-nhap")
+    redirect("/dang-nhap");
     // logout
   }
   if (!hideErrorNoti && errorMessage) {
