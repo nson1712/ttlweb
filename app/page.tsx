@@ -49,7 +49,7 @@ export default async function HomePage() {
     return (
       await httpClient.get({
         url: "/api/story/ranking/list",
-        params: { page: 0, size: 20 },
+        params: { page: 0, size: 10 },
       })
     ).data;
   }

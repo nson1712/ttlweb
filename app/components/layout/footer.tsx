@@ -102,9 +102,9 @@ export function Footer() {
             <div>
               <div className="flex items-center gap-2 mb-6">
                 <div className="relative overflow-hidden rounded-lg bg-gradient-to-r from-emerald-500 to-teal-600 p-2">
-                  <span className="text-lg font-bold text-white">NS</span>
+                  <span className="text-lg font-bold text-white">TTL</span>
                 </div>
-                <span className="text-xl font-bold text-white">NovelSigh</span>
+                <span className="text-xl font-bold text-white">Tàng Thư Lâu</span>
               </div>
 
               <p className="text-gray-400 mb-6">
@@ -149,7 +149,8 @@ export function Footer() {
               </h3>
               <div className="space-y-3">
                 <FooterLink
-                  href="m.me/620462677825010"
+                  href="https://m.me/620462677825010"
+                  target="_blank"
                   icon={<Facebook size={16} />}
                 >
                   Chat với chúng tôi
@@ -209,7 +210,7 @@ export function Footer() {
             <div className="text-sm text-gray-500">
               <span className="flex items-center">
                 Made with <Heart className="h-4 w-4 text-red-500 mx-1" /> by
-                NovelSigh
+                Tàng Thư Lâu
               </span>
             </div>
           </div>
@@ -236,14 +237,17 @@ function FooterLink({
   href,
   children,
   icon,
+  target
 }: {
   href: string;
   children: React.ReactNode;
   icon: React.ReactNode;
+  target?: string
 }) {
   return (
     <Link
       href={href}
+      target={target}
       className="text-gray-400 hover:text-emerald-400 transition-colors flex items-center group"
     >
       <span className="mr-2 text-gray-500 group-hover:text-emerald-400 transition-colors">

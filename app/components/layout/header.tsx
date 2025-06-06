@@ -40,7 +40,11 @@ import Image from "next/image";
 
 export function Header() {
   const router = useRouter();
-  const { user, isLoggedIn, logout } = useAuth();
+  const {
+    user,
+    isLoggedIn,
+    //  logout
+  } = useAuth();
   console.log("USER: ", user);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -71,10 +75,10 @@ export function Header() {
     }
   };
 
-  const handleLogout = () => {
-    logout();
-    router.push("/");
-  };
+  // const handleLogout = () => {
+  //   logout();
+  //   router.push("/");
+  // };
 
   return (
     <header
@@ -96,11 +100,11 @@ export function Header() {
               <div className="relative overflow-hidden rounded-lg">
                 <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-600 opacity-80 animate-pulse-slow"></div>
                 <span className="relative z-10 text-xl font-bold text-white px-3 py-2">
-                  NS
+                  TTL
                 </span>
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                NovelSigh
+                Tàng Thư Lâu
               </span>
             </div>
           </Link>
@@ -339,7 +343,6 @@ export function Header() {
                       <span className="text-sm font-medium text-white">
                         River
                       </span>
-                      {/* <span className="text-xs text-gray-400">Premium</span> */}
                     </div>
                   </Button>
                 </DropdownMenuTrigger>
@@ -382,7 +385,7 @@ export function Header() {
                   <DropdownMenuSeparator className="bg-gray-700" />
                   <DropdownMenuItem
                     className="rounded-lg focus:bg-red-900/30 text-red-400 focus:text-red-300"
-                    onClick={handleLogout}
+                    // onClick={handleLogout}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

@@ -63,7 +63,6 @@ export const RankingSection : FC<RankingNovelSectionProps> = ({rankingNovels}) =
 
         <TabsContent value="power-ranking" className="space-y-4 mt-2">
           {rankingNovels?.map((novel, index) => (
-            console.log("NOVEL: ", novel),
             <RankingNovelCard key={novel.id} {...{...novel, rank: index + 1}} />
           ))}
         </TabsContent>
