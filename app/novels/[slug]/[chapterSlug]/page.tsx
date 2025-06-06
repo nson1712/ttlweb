@@ -644,6 +644,31 @@ import type {
 import { httpClient } from "@/app/utils/httpClient";
 import Loading from "@/app/components/components/loading";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string; chapterSlug: string }>;
+}) {
+  const { slug, chapterSlug } = await params;
+
+  const chapRes = await httpClient.get({
+    url: `/chapter/${slug}/${chapterSlug}`,
+  });
+
+  const storyRes = await httpClient.get({
+    url: "/api/story/detail",
+    params: { slug: slug },
+  });
+
+  const chapterData = chapRes.data
+
+  const storyData = storyRes.data
+
+  return {
+    title: `${chapterData?.seoTitle} - ${storyData?.title}`,
+    description: chapterData?.metaDescription || "Đọc chương mới nhất trên Tàng Thư Lâu!",
+  };
+}
 async function fetchBySlug(
   slug: string,
   chapterSlug: string
