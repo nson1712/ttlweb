@@ -1,4 +1,4 @@
-export function LoadingSpinner({ className }: { className: string }) {
+export function LoadingSpinner({ className }: { className?: string }) {
   return (
     <div className={className}>
       <svg

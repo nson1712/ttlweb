@@ -14,7 +14,12 @@ import {
 } from "../ui/select";
 import { FC, useEffect, useState } from "react";
 import { CategoryType, FilterOptions } from "@/app/lib/types";
-import { createFilter, normalizeFilterPayload, parseFilterString } from "@/app/lib/utils";
+import {
+  createFilter,
+  normalizeFilterPayload,
+  parseFilterString,
+} from "@/app/lib/utils";
+import { useSearch } from "@/app/context/search-context";
 
 const getInitialFilterOptions = (
   searchParams: URLSearchParams
@@ -40,21 +45,24 @@ const getInitialFilterOptions = (
 type FilterProps = {
   operators: Map<string, string>;
   searchKey?: string;
-  categories?: CategoryType[]
+  categories?: CategoryType[];
 };
 
 export const Filter: FC<FilterProps> = ({
   operators,
   searchKey = "searchTerm",
-  categories
+  categories,
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { searchTerm, setSearchTerm } = useSearch();
 
   // Nếu URL có ?adv=true thì mở Advanced
-  const [showAdvancedFilters, setShowAdvancedFilters] = useState<boolean>(() => {
-    return searchParams.get("adv") === "true";
-  });
+  const [showAdvancedFilters, setShowAdvancedFilters] = useState<boolean>(
+    () => {
+      return searchParams.get("adv") === "true";
+    }
+  );
 
   const [isClient, setIsClient] = useState(false);
 
@@ -113,13 +121,21 @@ export const Filter: FC<FilterProps> = ({
   //   });
   // };
 
-  // Luôn cập nhật searchTerm
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
     setFilterOptions((prev) => ({
       ...prev,
       searchTerm: e.target.value,
     }));
+    setSearchTerm(value);
   };
+
+  useEffect(() => {
+    setFilterOptions((prev) => ({
+      ...prev,
+      searchTerm: searchTerm,
+    }));
+  }, [searchTerm]);
 
   // const handleSortChange = (value: string) => {
   //   setFilterOptions((prev) => ({
@@ -174,7 +190,7 @@ export const Filter: FC<FilterProps> = ({
       searchTerm: "",
       // reset thêm field khác nếu có
     });
-
+    setSearchTerm("");
     const newParams = new URLSearchParams();
     if (showAdvancedFilters) {
       newParams.set("adv", "true");
@@ -183,21 +199,21 @@ export const Filter: FC<FilterProps> = ({
   };
 
   const applySearch = () => {
-  const raw: Record<string, unknown> = { ...filterOptions };
+    const raw: Record<string, unknown> = { ...filterOptions };
 
-  if (searchKey !== "searchTerm") {
-    raw[searchKey] = raw.searchTerm;
-    delete raw.searchTerm;
-  }
+    if (searchKey !== "searchTerm") {
+      raw[searchKey] = raw.searchTerm;
+      delete raw.searchTerm;
+    }
 
-  const payload = normalizeFilterPayload(raw, operators);
+    const payload = normalizeFilterPayload(raw, operators);
 
-  const filterString = createFilter(payload, operators);
-  const newParams = new URLSearchParams();
-  newParams.set("filter", filterString);
-  if (showAdvancedFilters) newParams.set("adv", "true");
-  router.push(`/novels?${newParams.toString()}`);
-};
+    const filterString = createFilter(payload, operators);
+    const newParams = new URLSearchParams();
+    newParams.set("filter", filterString);
+    if (showAdvancedFilters) newParams.set("adv", "true");
+    router.push(`/novels?${newParams.toString()}`);
+  };
   const getCategoryNamesFromSlugs = (slugs: string[]): string => {
     return slugs
       .map((slug) => {
@@ -210,17 +226,17 @@ export const Filter: FC<FilterProps> = ({
   return (
     <div className="bg-gray-800 p-4 rounded-lg">
       <div className="w-full lg:flex space-y-4 lg:space-y-0 items-end gap-4 mb-4">
-          <div className="w-full">
-            <Label htmlFor="search">Tìm kiếm</Label>
-            <Input
-              id="search"
-              placeholder="Nhập từ khóa..."
-              value={filterOptions.searchTerm}
-              onChange={handleSearchChange}
-              className="bg-gray-700 text-white border-gray-600"
-            />
-          </div>
-          <div className="w-full">
+        <div className="w-full">
+          <Label htmlFor="search">Tìm kiếm</Label>
+          <Input
+            id="search"
+            placeholder="Nhập từ khóa..."
+            value={filterOptions.searchTerm}
+            onChange={handleSearchChange}
+            className="bg-gray-700 text-white border-gray-600"
+          />
+        </div>
+        <div className="w-full">
           <Label htmlFor="categories">Thể loại</Label>
           <Input
             id="categories"
@@ -313,7 +329,9 @@ export const Filter: FC<FilterProps> = ({
 
           {/* Status */}
           <div className="col-span-2">
-            <Label className="text-red-400" htmlFor="translate-status">Trạng thái</Label>
+            <Label className="text-red-400" htmlFor="translate-status">
+              Trạng thái
+            </Label>
             <Select
               value={filterOptions.status || "COMPLETED"}
               onValueChange={handleTranslateStatusChange}

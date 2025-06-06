@@ -125,14 +125,14 @@ export default async function HomePage() {
     "@type": "WebPage",
     name: "Discover Your Next Reading Adventure",
     description:
-      "Explore thousands of novels across all your favorite genres. Start your reading journey today on TruyenABC!",
-    url: "https://truyenabc.com/",
+      "Explore thousands of novels across all your favorite genres. Start your reading journey today on Tàng Thư Lâu!",
+    url: "https://tangthulau.com/",
   };
 
   return (
     <>
       <Head>
-        <link rel="canonical" href="https://truyenabc.site/" />
+        <link rel="canonical" href="https://tangthulau.com/" />
       </Head>
       <Script
         id="json-ld"

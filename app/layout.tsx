@@ -3,11 +3,12 @@ import { MainLayout } from "../app/components/layout/main-layout";
 import { ReactNode, Suspense } from "react";
 import "./globals.css";
 import { Metadata } from "next";
+import { LoadingSpinner } from "./components/components/loading";
 
 export const metadata: Metadata = {
-  title: "TruyenABC – Discover & Read Novels Online",
+  title: "Tàng Thư Lâu – Discover & Read Novels Online",
   description:
-    "TruyenABC brings you thousands of online novels across every genre—fantasy, romance, sci-fi, and more. Find your next favorite read today!",
+    "Tàng Thư Lâu brings you thousands of online novels across every genre—fantasy, romance, sci-fi, and more. Find your next favorite read today!",
   keywords: [
     "online novels",
     "read web novels",
@@ -17,11 +18,11 @@ export const metadata: Metadata = {
     "novel discovery",
   ],
   openGraph: {
-    title: "TruyenABC – Discover & Read Novels Online",
+    title: "Tàng Thư Lâu – Discover & Read Novels Online",
     description:
-      "Thousands of novels across all genres. Start your next reading adventure on TruyenABC!",
-    url: "https://truyenabc.site/",
-    siteName: "TruyenABC",
+      "Thousands of novels across all genres. Start your next reading adventure on Tàng Thư Lâu!",
+    url: "https://tangthulau.com/",
+    siteName: "Tàng Thư Lâu",
     images: [
       { url: "https://yoursite.com/og-image.jpg", width: 1200, height: 630 },
     ],
@@ -29,9 +30,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "TruyenABC – Discover & Read Novels Online",
+    title: "Tàng Thư Lâu – Discover & Read Novels Online",
     description:
-      "Thousands of novels across all genres. Start your next reading adventure on TruyenABC!",
+      "Thousands of novels across all genres. Start your next reading adventure on Tàng Thư Lâu!",
     images: ["https://yoursite.com/twitter-card.jpg"],
   },
   robots: { index: true, follow: true },
@@ -54,9 +55,7 @@ export default function RootLayout({
         >
           <Suspense
             fallback={
-              <div className="flex h-64 items-center justify-center">
-                Loading…
-              </div>
+              <LoadingSpinner  />
             }
           >
             <MainLayout>{children}</MainLayout>

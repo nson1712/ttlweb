@@ -32,25 +32,25 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../../components/ui/dropdown-menu";
-import { useAuth } from "../../lib/auth-context";
+import { useAuth } from "../../context/auth-context";
 // import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "../../lib/utils";
 import Image from "next/image";
+import { useSearch } from "@/app/context/search-context";
 
 export function Header() {
   const router = useRouter();
   const {
-    user,
+    // user,
     isLoggedIn,
     //  logout
   } = useAuth();
-  console.log("USER: ", user);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
   const [scrolled, setScrolled] = useState(false);
   // const [ notifications ] = useState(3);
+  const {searchTerm, setSearchTerm} = useSearch()
 
   // Handle scroll effect
   useEffect(() => {
