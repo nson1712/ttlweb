@@ -13,17 +13,17 @@ export interface Novel {
   updatedAt?: string;
   chapterCount?: number;
   language?: string;
-  status?: 'ongoing' | 'completed' | 'hiatus';
+  status?: "ongoing" | "completed" | "hiatus";
   yearOfRelease?: number;
-  tags?: string[];
+  hashtags?: string[];
   featuredReason?: string;
   views?: number;
 }
 
 export interface Chapter {
-  id?: string
+  id?: string;
   slug: string;
-  storySlug: string;
+  novelSlug: string;
   title: string;
   views?: number;
   number: number;
@@ -31,55 +31,42 @@ export interface Chapter {
   createdAt: string;
   updatedAt: string;
   releaseDate?: string;
-  isNew?: boolean
+  isNew?: boolean;
 }
 
 export interface FilterOptions {
+  [key: string]: string | string[] | number | undefined;
   categories: string[];
-  excludedCategories: string[];
-  tags: string[];
-  excludedTags: string[];
+  hashtags: string[];
   searchTerm: string;
-  yearFrom?: number;
-  yearTo?: number;
-  languages: string[];
-  excludedLanguages: string[];
-  translateStatus?: string;
-  statusInCOO?: string;
+  status?: string;
   minChapters?: number;
   maxChapters?: number;
   minRatings?: number;
   maxRatings?: number;
-  authors?: string[];
-  excludedAuthors?: string[];
-  translators?: string[];
-  excludedTranslators?: string[];
-  sortBy: string;
-}
-
-export interface Champion {
-  id: string
-  name: string
-  title: string
-  region: string
-  description: string
-  image: string
-  tags: string[]
-}
-
-export interface Region {
-  id: string
-  name: string
-  description: string
-  image: string
-  bannerImage: string
+  // sort: string;
 }
 
 export interface Story {
-  id: string
-  title: string
-  description: string
-  image: string
-  date: string
-  author: string
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  date: string;
+  author: string;
 }
+
+export type CategoryType = {
+  id: number;
+  name: string;
+  slug: string;
+};
+
+export type AuthorType = {
+  id: number;
+  avatar: string;
+  name?: string;
+  slug?: string;
+  status?: string;
+  totalStory?: number
+};
