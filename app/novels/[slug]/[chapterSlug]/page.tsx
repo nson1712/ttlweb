@@ -669,6 +669,7 @@ export async function generateMetadata({
     description: chapterData?.metaDescription || "Đọc chương mới nhất trên Tàng Thư Lâu!",
   };
 }
+
 async function fetchBySlug(
   slug: string,
   chapterSlug: string

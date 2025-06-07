@@ -3,15 +3,13 @@ import React from "react";
 import Link from "next/link";
 // import { Button } from "@/app/components/ui/button";
 import {
-  Calendar,
   ChevronLeft,
   ChevronRight,
   // Coins,
   List,
   // Lock,
-  LockKeyhole,
 } from "lucide-react";
-import { cn, formatDateTime } from "@/app/lib/utils";
+import { cn } from "@/app/lib/utils";
 import type { ChapterDetailType, ChapterType } from "@/app/types/chapter";
 import { RangeSelect } from "@/app/components/components/range-select";
 import {
@@ -22,8 +20,16 @@ import {
   DialogTrigger,
 } from "@/app/components/ui/dialog";
 import { ChaptersApiResponse } from "@/app/interfaces/story";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/app/components/ui/breadcrumb";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/app/components/ui/breadcrumb";
 import Loading from "@/app/components/components/loading";
+import { ChapterList } from "@/app/components/components/chapter-list";
 
 interface Props {
   storySlug: string;
@@ -51,17 +57,27 @@ export default function ChapterContent({
       <Breadcrumb className="flex w-full">
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink className="text-gray-400 hover:text-emerald-500" href="/">Trang chủ</BreadcrumbLink>
+            <BreadcrumbLink
+              className="text-gray-400 hover:text-emerald-500"
+              href="/"
+            >
+              Trang chủ
+            </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink className="text-gray-400 hover:text-emerald-500" href={`/novels/${storySlug}`}>
-               {storyTitle}
+            <BreadcrumbLink
+              className="text-gray-400 hover:text-emerald-500"
+              href={`/novels/${storySlug}`}
+            >
+              {storyTitle}
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem className="flex-1 line-clamp-1">
-            <BreadcrumbPage className="text-emerald-500">{details.title}</BreadcrumbPage>
+            <BreadcrumbPage className="text-emerald-500">
+              {details.title}
+            </BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
@@ -69,7 +85,6 @@ export default function ChapterContent({
         {details.title}
       </h1>
       <div>
-        
         {contents.map((c, idx) => (
           <p key={idx}>{c.content}</p>
         ))}
@@ -125,47 +140,10 @@ export default function ChapterContent({
               {!chaptersList ? (
                 <Loading />
               ) : (
-                chaptersList?.data?.data?.map((chapter) => (
-                  <Link
-                    key={chapter?.id}
-                    href={`/novels/${storySlug}/${chapter?.slug}`}
-                    className={
-                      "group block rounded-lg bg-gray-700/50 p-3 hover:bg-gray-700"
-                    }
-                  >
-                    <div className={"flex items-center justify-between"}>
-                      <div className={"flex-1"}>
-                        <h3 className="font-medium text-emerald-400 group-hover:text-emerald-300 line-clamp-1">
-                          {chapter?.title}
-                        </h3>
-
-                        <div
-                          className={
-                            "flex items-center gap-3 text-xs text-gray-400"
-                          }
-                        >
-                          <div className="flex items-center gap-1">
-                            <Calendar className="h-3 w-3" />
-                            <span>{formatDateTime(chapter?.createdAt)}</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="ml-4 flex items-center gap-2">
-                        {chapter?.price !== 0 && (
-                          <span className="p-0.5 text-xs font-medium text-emerald-400">
-                            <LockKeyhole className="h-5 w-5 text-emerald-400" />
-                          </span>
-                        )}
-                        <ChevronRight className="h-5 w-5 text-gray-500 group-hover:text-emerald-400" />
-                      </div>
-                    </div>
-                  </Link>
-                ))
-
-                // <div className="space-y-1.5 mb-4 max-h-[20%] overflow-y-auto">
-
-                // </div>
+                <ChapterList
+                  chapters={chaptersList?.data?.data ?? []}
+                  storySlug={storySlug}
+                />
               )}
             </div>
             <div className="mx-auto min-w-52">

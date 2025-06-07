@@ -192,7 +192,7 @@ export function Footer() {
           <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
             <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6 mb-4 md:mb-0">
               <p className="text-sm text-gray-400">
-                &copy; {year} NovelSigh. All rights reserved.
+                &copy; {year} TangThuLau. All rights reserved.
               </p>
               {/* <div className="flex space-x-4 text-sm text-gray-500">
                 <Link href="/privacy" className="hover:text-emerald-400 transition-colors">

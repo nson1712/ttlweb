@@ -39,10 +39,10 @@ export const PotentialStarletSection: FC<PotenialStarletPropsType> = ({
 
 function PotentialStarletCard({
   id,
+  author,
   slug,
   title,
   coverImage,
-  // author,
   categories,
 }: PotenialStarletType) {
   return (
@@ -80,7 +80,7 @@ function PotentialStarletCard({
             <h3 className="text-sm font-medium text-white line-clamp-2 group-hover:text-emerald-400">
               {title}
             </h3>
-            {/* <p className="text-xs text-gray-400">{author}</p> */}
+            <p className="text-xs text-gray-400">{author?.name}</p>
           </div>
         </div>
       </Link>
