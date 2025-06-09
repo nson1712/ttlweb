@@ -1,34 +1,9 @@
-// import { NovelCard } from "../components/novels/novel-card";
 import { Filter } from "../components/components/filter";
 import { NotFound } from "../components/components/not-found";
 import { PaginationWithLinks } from "../components/components/pagination";
 import { NovelCard } from "../components/novels/novel-card";
-import { StoriesApiResponse } from "../interfaces/story";
+import { fetchCategories, fetchStories } from "../lib/fetch-data";
 import { StoryType } from "../types/story";
-import { httpClient } from "../utils/httpClient";
-
-const fetchStories = async (
-  page: number | undefined,
-  pageSize: number | undefined,
-  filter: string
-): Promise<StoriesApiResponse> => {
-  return await httpClient.get({
-    url: "api/story",
-    params: {
-      page: page || 0,
-      size: pageSize || 20,
-      filter: filter,
-    },
-  });
-};
-
-async function fetchCategories() {
-  return (
-    await httpClient.get({
-      url: "api/category/list",
-    })
-  ).data;
-}
 
 export default async function NovelsPage({
   searchParams,
@@ -41,9 +16,14 @@ export default async function NovelsPage({
 }) {
   const { page, pageSize, filter } = await searchParams;
   const parsedPage = typeof page === "string" ? parseInt(page, 10) : page ?? 0;
-  const parsedPageSize = typeof pageSize === "string" ? parseInt(pageSize, 10) : pageSize ?? 20;
+  const parsedPageSize =
+    typeof pageSize === "string" ? parseInt(pageSize, 10) : pageSize ?? 20;
   const [storiesRes, categoriesRes] = await Promise.all([
-    fetchStories(page ?? 0, pageSize ?? 20, filter),
+    fetchStories({
+      page: page ?? 0,
+      pageSize: pageSize ?? 0,
+      filter: filter
+    }),
     fetchCategories(),
   ]);
 
@@ -79,19 +59,19 @@ export default async function NovelsPage({
         )}
       </div>
       <PaginationWithLinks
-          pageSearchParam="page"
-          pageSizeSelectOptions={{
-            pageSizeSearchParam: "pageSize",
-            pageSizeOptions: [10, 20, 50, 100],
-          }}
-          page={parsedPage}
-          pageSize={parsedPageSize}
-          totalCount={
-            storiesRes?.data?.totalElements
-              ?  storiesRes.data.totalElements - parsedPageSize
-              : 0
-          }
-        />
+        pageSearchParam="page"
+        pageSizeSelectOptions={{
+          pageSizeSearchParam: "pageSize",
+          pageSizeOptions: [10, 20, 50, 100],
+        }}
+        page={parsedPage}
+        pageSize={parsedPageSize}
+        totalCount={
+          storiesRes?.data?.totalElements
+            ? storiesRes.data.totalElements - parsedPageSize
+            : 0
+        }
+      />
     </div>
   );
 }

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     url: "https://tangthulau.com/",
     siteName: "Tàng Thư Lâu",
     images: [
-      { url: "https://yoursite.com/og-image.jpg", width: 1200, height: 630 },
+      { url: "https://tangthulau.com/og-image.jpg", width: 1200, height: 630 },
     ],
     type: "website",
   },
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     title: "Tàng Thư Lâu – Discover & Read Novels Online",
     description:
       "Thousands of novels across all genres. Start your next reading adventure on Tàng Thư Lâu!",
-    images: ["https://yoursite.com/twitter-card.jpg"],
+    images: ["https://tangthulau.com/twitter-card.jpg"],
   },
   robots: { index: true, follow: true },
 };

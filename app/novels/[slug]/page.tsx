@@ -1,51 +1,45 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Star, BookOpen, ChevronRight, User, Eye } from "lucide-react";
-
 import {
-  ChaptersApiResponse,
-  StoryDetailsApiResponse,
-} from "@/app/interfaces/story";
+  Star,
+  BookOpen,
+  ChevronRight,
+  User,
+  Eye,
+  CheckCircle2Icon,
+  Loader2Icon,
+} from "lucide-react";
+
+import { StoryDetailsApiResponse } from "@/app/interfaces/story";
 import { BaseTag } from "@/app/components/components/base-tag";
 import { httpClient } from "@/app/utils/httpClient";
 import { StoryInfoTab } from "@/app/components/components/story-info-tabs";
 import { NotFound } from "@/app/components/components/not-found";
+import { fetchChapters, fetchStoryDetails } from "@/app/lib/fetch-data";
 
-async function fetchStoryDetails(
-  slug: string
-): Promise<StoryDetailsApiResponse> {
-  const res = await httpClient.get({
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const storyRes = await httpClient.get({
     url: "/api/story/detail",
     params: { slug: slug },
   });
-  return {
-    data: {
-      data: res.data,
-      totalElements: res.data?.totalElements ?? 0,
-      totalPages: res.data?.totalPages ?? 0,
-      page: res.data?.page ?? 0,
-      size: res.data?.size ?? 0,
-      hasNext: res.data?.hasNext ?? false,
-    },
-  };
-}
 
-async function fetchChapters(
-  storyId: number,
-  page: number,
-  pageSize: number,
-  sortType: string
-): Promise<ChaptersApiResponse> {
-  const res = await httpClient.get({
-    url: "/chapters",
-    params: {
-      page: page || 0,
-      size: pageSize || 20,
-      filter: `storyId|eq|${storyId}`,
-      sort: `createdAt:${sortType ?? "ASC"}`,
-    },
+  const metaDataRes = await httpClient.get({
+    url: `/api/story/${slug}/meta-data`,
   });
-  return res;
+
+  const storyData = storyRes.data;
+  const metaData = metaDataRes.data;
+
+  return {
+    title: `Tàng Thư Lâu - ${storyData?.title}`,
+    description:
+      metaData?.metaDescription || "Đọc chương mới nhất trên Tàng Thư Lâu!",
+  };
 }
 
 export default async function NovelDetailPage({
@@ -72,17 +66,16 @@ export default async function NovelDetailPage({
 
   const storyDetails = storyDetailsRes?.data?.data;
 
-  // Nếu storyDetails không có hoặc ID không hợp lệ, cũng trả về NotFound
   if (!storyDetails || !storyDetails.id) {
     return <NotFound title="Quay lại trang chủ" />;
   }
 
-  const chaptersRes = await fetchChapters(
-    Number(storyDetails.id),
-    page ?? 0,
-    pageSize ?? 20,
-    sortType
-  );
+  const chaptersRes = await fetchChapters({
+    storyId: Number(storyDetails.id),
+    page: page ?? 0,
+    pageSize: pageSize ?? 20,
+    sortType: sortType,
+  });
 
   return (
     <div className="min-h-screen">
@@ -93,10 +86,8 @@ export default async function NovelDetailPage({
             <Link href="/" className="hover:text-emerald-400">
               Trang chủ
             </Link>
-            <ChevronRight className="mx-2 h-4 w-4" />
-            <a className="text-emerald-400">
-              {storyDetails?.title}
-            </a>
+            <ChevronRight className="mx-2 h-5 w-5" />
+            <a className="text-emerald-400">{storyDetails?.title}</a>
           </nav>
         </div>
 
@@ -129,9 +120,9 @@ export default async function NovelDetailPage({
                 )}
               </div>
 
-              <div className="absolute bottom-1 left-1  rounded-full bg-black/80 px-3 py-1 text-sm font-medium text-white shadow-md">
+              <div className="absolute bottom-1 left-1 rounded-full bg-black/80 px-3 py-1 text-sm font-medium text-white shadow-md">
                 <div className="flex items-center gap-1">
-                  <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                  <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
                   <span>{(storyDetails?.rate ?? 0).toFixed(1)}</span>
                   {/* <span className="text-gray-300">({storyDetailsRes.data.totalRatings})</span> */}
                 </div>
@@ -145,20 +136,32 @@ export default async function NovelDetailPage({
                   {storyDetails?.title}
                 </h1>
                 <div className="mt-2 flex items-center gap-3">
-                  <div className="flex items-center gap-1 text-sm text-gray-300">
-                    <User className="h-4 w-4 text-emerald-400" />
+                  <div className="flex items-center gap-1 text-base text-gray-300">
+                    <User className="h-5 w-5 text-emerald-400" />
                     <span>{storyDetails?.author?.name}</span>
                   </div>
-                  <div className="flex items-center gap-1 text-sm text-gray-300">
-                    <BookOpen className="h-4 w-4 text-emerald-400" />
+                  <div className="flex items-center gap-1 text-base text-gray-300">
+                    <BookOpen className="h-5 w-5 text-emerald-400" />
                     <span>{chaptersRes.data?.totalElements} chương</span>
                   </div>
-                  <div className="flex items-center gap-1 text-sm text-gray-300">
-                    <Eye className="h-4 w-4 text-emerald-400" />
+                  <div className="flex items-center gap-1 text-base text-gray-300">
+                    <Eye className="h-5 w-5 text-emerald-400" />
                     <span>
-                      {storyDetails?.totalView.toLocaleString()}{" "}
-                      lượt đọc
+                      {storyDetails?.totalView.toLocaleString()} lượt đọc
                     </span>
+                  </div>
+                  <div className="flex items-center gap-1 text-base text-gray-300">
+                    {storyDetails.status === "COMPLETED" ? (
+                      <div className="flex gap-x-1 text-gray-300">
+                        <CheckCircle2Icon className="text-green-500 w-5 h-5 self-center" />{" "}
+                        Hoàn thành
+                      </div>
+                    ) : (
+                      <div className="flex gap-x-1 text-gray-300">
+                        <Loader2Icon className="text-blue w-3.5 h-3.5 self-center" />
+                        Đang ra
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -174,7 +177,7 @@ export default async function NovelDetailPage({
               </div>
 
               <p
-                className="line-clamp-5 text-gray-300"
+                className="max-h-36 overflow-y-auto text-gray-300"
                 dangerouslySetInnerHTML={{
                   __html: storyDetails?.shortDescription || "",
                 }}
@@ -197,7 +200,7 @@ export default async function NovelDetailPage({
                   )}
                 >
                   <Heart
-                    className={cn("h-4 w-4", isFollowing && "fill-emerald-400")}
+                    className={cn("h-5 w-5", isFollowing && "fill-emerald-400")}
                   />
                   <span>{isFollowing ? "Following" : "Follow"}</span>
                 </button>
@@ -212,7 +215,7 @@ export default async function NovelDetailPage({
                 >
                   <Bookmark
                     className={cn(
-                      "h-4 w-4",
+                      "h-5 w-5",
                       isBookmarked && "fill-emerald-400"
                     )}
                   />
@@ -223,11 +226,7 @@ export default async function NovelDetailPage({
           </div>
         </div>
 
-        {/* Novel Content Tabs */}
-        <StoryInfoTab
-          chapters={chaptersRes}
-          storyDetails={storyDetails}
-        />
+        <StoryInfoTab chapters={chaptersRes} storyDetails={storyDetails} />
       </div>
     </div>
   );

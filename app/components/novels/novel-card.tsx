@@ -35,7 +35,7 @@ export function NovelCard({
 }: NovelCardProps) {
   return (
     <div className="group relative flex flex-col md:flex-row gap-4 bg-gradient-to-br from-gray-800/90 to-gray-900 shadow-md transition-all hover:shadow-2xl rounded-lg overflow-hidden p-4">
-      <div className="relative w-full md:w-48 h-64 md:h-auto flex-shrink-0 aspect-[3/4]">
+      <Link href={`/novels/${slug}`} className="relative w-full md:w-48 h-64 md:h-auto flex-shrink-0 aspect-[3/4] hover:scale-105 transition-all duration-200">
         <Image
           src={coverImage ?? "/default-image.jpg"}
           alt={title ?? "default-image"}
@@ -43,7 +43,7 @@ export function NovelCard({
           className="object-cover rounded-md"
           sizes="(max-width: 768px) 100vw, 192px"
         />
-      </div>
+      </Link>
 
       <div className="flex-1 flex flex-col">
         <div className="flex justify-between items-start">
@@ -53,7 +53,7 @@ export function NovelCard({
                 {title}
               </h2>
             </Link>
-            <p className="text-gray-400 flex gap-x-1"><User className="w-4 h-5 mt-0.5" />{author?.name}</p>
+            <p className="text-gray-400 flex gap-x-1"><User className="w-4 h-5 mt-0.5 text-emerald-500" />{author?.name}</p>
 
             <StarRate rate={rate ?? 0} />
           </div>
@@ -85,7 +85,7 @@ export function NovelCard({
         <div className="mt-auto flex items-center justify-between pt-4">
           {updatedAt && (
             <div className="flex gap-x-1 text-sm text-gray-400 bg-gray-700 px-2 py-1 rounded">
-              <Clock className="w-4 h-4 self-center" />{" "}
+              <Clock className="w-4 h-4 self-center text-emerald-500" />{" "}
               {formatDateTime(updatedAt)}
             </div>
           )}

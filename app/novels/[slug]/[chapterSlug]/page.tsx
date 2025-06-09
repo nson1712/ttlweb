@@ -635,14 +635,15 @@
 
 import { Suspense } from "react";
 import ChapterContent from "./ChapterContent";
-import type {
-  ChapterApiResponse,
-  ChapterDetailsApiResponse,
-  ChaptersApiResponse,
-  StoryDetailsApiResponse,
-} from "@/app/interfaces/story";
 import { httpClient } from "@/app/utils/httpClient";
 import Loading from "@/app/components/components/loading";
+import {
+  fetchById,
+  fetchBySlug,
+  fetchChapters,
+  fetchContents,
+  fetchStoryDetails,
+} from "@/app/lib/fetch-data";
 
 export async function generateMetadata({
   params,
@@ -660,74 +661,14 @@ export async function generateMetadata({
     params: { slug: slug },
   });
 
-  const chapterData = chapRes.data
+  const chapterData = chapRes.data;
 
-  const storyData = storyRes.data
+  const storyData = storyRes.data;
 
   return {
     title: `${chapterData?.seoTitle} - ${storyData?.title}`,
-    description: chapterData?.metaDescription || "Đọc chương mới nhất trên Tàng Thư Lâu!",
-  };
-}
-async function fetchBySlug(
-  slug: string,
-  chapterSlug: string
-): Promise<ChapterApiResponse> {
-  const res = await httpClient.get({
-    url: `/chapter/${slug}/${chapterSlug}`,
-  });
-  return res;
-}
-
-async function fetchById(chapterId: number): Promise<ChapterApiResponse> {
-  const res = await httpClient.get({
-    url: `/chapter/${chapterId}`,
-  });
-  return res;
-}
-
-async function fetchContents(
-  chapterId: number
-): Promise<ChapterDetailsApiResponse> {
-  const res = await httpClient.get({
-    url: "/chapter/details",
-    params: { chapterId: chapterId.toString() },
-  });
-  return res;
-}
-
-async function fetchChapters(
-  storyId: number,
-  page: number,
-  size: number
-): Promise<ChaptersApiResponse> {
-  const res = await httpClient.get({
-    url: "/chapters",
-    params: {
-      page: page || 0,
-      size: size || 50,
-      filter: `storyId|eq|${storyId}`,
-    },
-  });
-  return res;
-}
-
-async function fetchStoryDetails(
-  slug: string
-): Promise<StoryDetailsApiResponse> {
-  const res = await httpClient.get({
-    url: "/api/story/detail",
-    params: { slug: slug },
-  });
-  return {
-    data: {
-      data: res.data,
-      totalElements: res.data?.totalElements ?? 0,
-      totalPages: res.data?.totalPages ?? 0,
-      page: res.data?.page ?? 0,
-      size: res.data?.size ?? 0,
-      hasNext: res.data?.hasNext ?? false,
-    },
+    description:
+      chapterData?.metaDescription || "Đọc chương mới nhất trên Tàng Thư Lâu!",
   };
 }
 
@@ -746,7 +687,10 @@ export default async function ChapterDetailPage({
   const isId = /^\d+$/.test(chapterSlug);
   const detailResp = isId
     ? await fetchById(Number(chapterSlug))
-    : await fetchBySlug(slug, chapterSlug);
+    : await fetchBySlug({
+        slug: slug,
+        chapterSlug: chapterSlug,
+      });
   const detail = detailResp.data;
 
   const prevSlug = detail.prevChapterId
@@ -758,11 +702,11 @@ export default async function ChapterDetailPage({
 
   const contentsResp = await fetchContents(Number(detail.id));
 
-  const chaptersList = await fetchChapters(
-    Number(detail.storyId),
-    page ?? 0,
-    pageSize ?? 50
-  );
+  const chaptersList = await fetchChapters({
+    storyId: Number(detail.storyId),
+    page: page ?? 0,
+    pageSize: pageSize ?? 50,
+  });
 
   const storyDetailsRes = await fetchStoryDetails(slug);
 

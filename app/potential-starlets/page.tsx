@@ -1,37 +1,8 @@
 import { NotFound } from "../components/components/not-found";
 import { PaginationWithLinks } from "../components/components/pagination";
 import { NovelCard } from "../components/novels/novel-card";
-import { StoriesApiResponse } from "../interfaces/story";
+import { fetchPotential, totalElementsCache } from "../lib/fetch-data";
 import { StoryType } from "../types/story";
-import { httpClient } from "../utils/httpClient";
-
-const totalElementsCache: Record<number, number> = {};
-
-const fetchPotential = async (
-  page: number | undefined,
-  pageSize: number | undefined
-): Promise<StoriesApiResponse | null> => {
-  try {
-    const res = await httpClient.get({
-      url: "api/story/potential/list",
-      params: {
-        page: page || 0,
-        size: pageSize || 20,
-      },
-    });
-    if (
-      page === 0 &&
-      typeof res.data?.totalElements === "number" &&
-      typeof pageSize === "number"
-    ) {
-      totalElementsCache[pageSize] = res.data.totalElements;
-    }
-    return res;
-  } catch (error) {
-    console.error("error: ", error);
-    return null;
-  }
-};
 
 export default async function PotentialStarletsPage({
   searchParams,
@@ -46,7 +17,10 @@ export default async function PotentialStarletsPage({
   const parsedPageSize =
     typeof pageSize === "string" ? parseInt(pageSize, 10) : pageSize ?? 20;
 
-  const potentialRes = await fetchPotential(parsedPage, parsedPageSize);
+  const potentialRes = await fetchPotential({
+    page: parsedPage,
+    pageSize: parsedPageSize
+  });
 
   const totalElements =
     potentialRes?.data?.totalElements ??
