@@ -10,14 +10,12 @@ import {
   Loader2Icon,
 } from "lucide-react";
 
-import {
-  ChaptersApiResponse,
-  StoryDetailsApiResponse,
-} from "@/app/interfaces/story";
+import { StoryDetailsApiResponse } from "@/app/interfaces/story";
 import { BaseTag } from "@/app/components/components/base-tag";
 import { httpClient } from "@/app/utils/httpClient";
 import { StoryInfoTab } from "@/app/components/components/story-info-tabs";
 import { NotFound } from "@/app/components/components/not-found";
+import { fetchChapters, fetchStoryDetails } from "@/app/lib/fetch-data";
 
 export async function generateMetadata({
   params,
@@ -30,50 +28,18 @@ export async function generateMetadata({
     params: { slug: slug },
   });
 
+  const metaDataRes = await httpClient.get({
+    url: `/api/story/${slug}/meta-data`,
+  });
+
   const storyData = storyRes.data;
+  const metaData = metaDataRes.data;
 
   return {
     title: `Tàng Thư Lâu - ${storyData?.title}`,
     description:
-      storyData?.metaDescription || "Đọc chương mới nhất trên Tàng Thư Lâu!",
+      metaData?.metaDescription || "Đọc chương mới nhất trên Tàng Thư Lâu!",
   };
-}
-
-async function fetchStoryDetails(
-  slug: string
-): Promise<StoryDetailsApiResponse> {
-  const res = await httpClient.get({
-    url: "/api/story/detail",
-    params: { slug: slug },
-  });
-  return {
-    data: {
-      data: res.data,
-      totalElements: res.data?.totalElements ?? 0,
-      totalPages: res.data?.totalPages ?? 0,
-      page: res.data?.page ?? 0,
-      size: res.data?.size ?? 0,
-      hasNext: res.data?.hasNext ?? false,
-    },
-  };
-}
-
-async function fetchChapters(
-  storyId: number,
-  page: number,
-  pageSize: number,
-  sortType: string
-): Promise<ChaptersApiResponse> {
-  const res = await httpClient.get({
-    url: "/chapters",
-    params: {
-      page: page || 0,
-      size: pageSize || 20,
-      filter: `storyId|eq|${storyId}`,
-      sort: `createdAt:${sortType ?? "ASC"}`,
-    },
-  });
-  return res;
 }
 
 export default async function NovelDetailPage({
@@ -104,12 +70,12 @@ export default async function NovelDetailPage({
     return <NotFound title="Quay lại trang chủ" />;
   }
 
-  const chaptersRes = await fetchChapters(
-    Number(storyDetails.id),
-    page ?? 0,
-    pageSize ?? 20,
-    sortType
-  );
+  const chaptersRes = await fetchChapters({
+    storyId: Number(storyDetails.id),
+    page: page ?? 0,
+    pageSize: pageSize ?? 20,
+    sortType: sortType,
+  });
 
   return (
     <div className="min-h-screen">

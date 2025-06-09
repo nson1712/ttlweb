@@ -5,10 +5,10 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { FC } from "react";
-import { PotenialStarletType } from "@/app/types/story";
+import { PotenialStarletType, StoryType } from "@/app/types/story";
 
 export type PotenialStarletPropsType = {
-  potentialStarlets: PotenialStarletType[];
+  potentialStarlets: StoryType[];
 };
 export const PotentialStarletSection: FC<PotenialStarletPropsType> = ({
   potentialStarlets,

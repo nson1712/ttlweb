@@ -1,23 +1,9 @@
 import { Sparkles } from "lucide-react";
 import { NovelCard } from "../components/novels/novel-card";
 import { PaginationWithLinks } from "../components/components/pagination";
-import { httpClient } from "../utils/httpClient";
 import { StoryType } from "../types/story";
 import { NotFound } from "../components/components/not-found";
-
-const fetchFeatureStories = async (
-  page: number | undefined,
-  pageSize: number | undefined
-) => {
-  return await httpClient.get({
-    url: "api/story",
-    params: {
-      page: page,
-      size: pageSize,
-      sort: "rate|gt|4.0",
-    },
-  });
-};
+import { fetchStories } from "../lib/fetch-data";
 
 export default async function FeaturedPage({
   searchParams,
@@ -33,7 +19,11 @@ export default async function FeaturedPage({
     typeof pageSize === "string" ? parseInt(pageSize, 10) : pageSize ?? 20;
 
   const [featureStoriesRes] = await Promise.all([
-    fetchFeatureStories(page ?? 0, pageSize ?? 20),
+    fetchStories({
+      page: page ?? 0,
+      pageSize: pageSize ?? 20,
+      sort: "rate|gt|4.0"
+    }),
   ]);
 
   return (

@@ -23,7 +23,7 @@ export type WeeklyStoryPropsType = {
 
 export type PotenialStarletType = {
   id: string;
-  author: AuthorType;
+  author?: AuthorType;
   title: string;
   coverImage: string;
   status?: string;

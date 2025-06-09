@@ -1,19 +1,11 @@
 import { colorClasses } from "../lib/store-data";
-import { httpClient } from "../utils/httpClient";
 import { CategoriesTag } from "../components/components/categories-card";
 import { MotionTitle } from "../components/components/motion-title";
+import { fetchCategories } from "../lib/fetch-data";
 
 interface Category {
   name: string;
   slug: string;
-}
-
-async function fetchCategories() {
-  return (
-    await httpClient.get({
-      url: "api/category/list",
-    })
-  ).data;
 }
 
 export default async function CategoriesPage() {

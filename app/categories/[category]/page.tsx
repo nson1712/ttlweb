@@ -9,36 +9,12 @@ import {
 import { NovelCard } from "../../components/novels/novel-card";
 import { capitalizeFirstLetter, cn } from "../../lib/utils";
 import { PaginationWithLinks } from "@/app/components/components/pagination";
-import { httpClient } from "@/app/utils/httpClient";
-import { StoriesApiResponse } from "@/app/interfaces/story";
 import { colorClasses } from "@/app/lib/store-data";
 import { CategoryType } from "@/app/lib/types";
 import { Suspense } from "react";
 import Loading from "../../components/components/loading";
 import { NotFound } from "@/app/components/components/not-found";
-
-const fetchCategories = async () => {
-  return (
-    await httpClient.get({
-      url: "api/category/list",
-    })
-  ).data;
-};
-
-const fetchStories = async (
-  page: number | undefined,
-  pageSize: number | undefined,
-  categorySlug: string
-): Promise<StoriesApiResponse> => {
-  return await httpClient.get({
-    url: "api/story",
-    params: {
-      page: page || 0,
-      size: pageSize || 20,
-      filter: `categories.slug|in|${categorySlug}`,
-    },
-  });
-};
+import { fetchCategories, fetchStories } from "@/app/lib/fetch-data";
 
 export default async function TagDetailPage({
   params,
@@ -56,7 +32,11 @@ export default async function TagDetailPage({
 
   const [categoriesRes, storiesRes] = await Promise.all([
     fetchCategories(),
-    fetchStories(page, pageSize, category),
+    fetchStories({
+      page: page,
+      pageSize: pageSize,
+      filter: `categories.slug|in|${category}`,
+    }),
   ]);
 
   const colorKeys = Object.keys(colorClasses) as (keyof typeof colorClasses)[];
@@ -140,33 +120,22 @@ export default async function TagDetailPage({
               Sắp xếp theo:
             </span>
             <Link
-              href={`/categories/${category}?sort=popular`}
-              className={cn(
-                "rounded-full px-3 py-1 text-sm font-medium transition-colors",
-                sort === "popular"
-                  ? "bg-emerald-500 text-white"
-                  : "bg-gray-700 text-gray-300 hover:bg-gray-600"
-              )}
-            >
-              Popular
-            </Link>
-            <Link
               href={`/categories/${category}?sort=rate:DESC`}
               className={cn(
                 "rounded-full px-3 py-1 text-sm font-medium transition-colors",
-                sort === "rating"
-                  ? "bg-emerald-500 text-white"
+                sort === "rate:DESC"
+                  ? "bg-gradient-to-r from-emerald-500 to-teal-600 text-white"
                   : "bg-gray-700 text-gray-300 hover:bg-gray-600"
               )}
             >
               Đánh giá
             </Link>
             <Link
-              href={`/categories/${category}?sort=updatedAt:DESC}`}
+              href={`/categories/${category}?sort=updatedAt:DESC`}
               className={cn(
                 "rounded-full px-3 py-1 text-sm font-medium transition-colors",
-                sort === "newest"
-                  ? "bg-emerald-500 text-white"
+                sort === "updatedAt:DESC"
+                  ? "bg-gradient-to-r from-emerald-500 to-teal-600 text-white"
                   : "bg-gray-700 text-gray-300 hover:bg-gray-600"
               )}
             >
@@ -177,8 +146,8 @@ export default async function TagDetailPage({
               href={`/categories/${category}?sort=updatedAt:ASC`}
               className={cn(
                 "rounded-full px-3 py-1 text-sm font-medium transition-colors",
-                sort === "oldest"
-                  ? "bg-emerald-500 text-white"
+                sort === "updatedAt:ASC"
+                  ? "bg-gradient-to-r from-emerald-500 to-teal-600 text-white"
                   : "bg-gray-700 text-gray-300 hover:bg-gray-600"
               )}
             >
@@ -200,7 +169,6 @@ export default async function TagDetailPage({
           <NotFound href="/categories" title="Danh sách thể loại" />
         )}
 
-        {/* Pagination */}
         {storiesRes.data?.totalElements > 0 && (
           <div className="mt-8">
             <PaginationWithLinks

@@ -1,14 +1,14 @@
 import { MotionTitle } from "../components/components/motion-title";
 import { PaginationWithLinks } from "../components/components/pagination";
 import { RecentUpdates } from "../components/components/recently-updated";
-import { httpClient } from "../utils/httpClient";
+import { fetchLatestChapters } from "../lib/fetch-data";
 
 export default async function UpdatesPage({
   searchParams,
 }: {
   searchParams: Promise<{
-    page?: string | undefined;
-    pageSize?: string | undefined;
+    page?: string;
+    pageSize?: string;
     filter?: string;
     timeframe?: string;
     keyword?: string;
@@ -18,16 +18,10 @@ export default async function UpdatesPage({
   const parsedPage = typeof page === "string" ? parseInt(page, 10) : page ?? 0;
   const parsedPageSize = typeof pageSize === "string" ? parseInt(pageSize, 10) : pageSize ?? 20;
 
-  async function fetchLatestChapters() {
-    return (
-      await httpClient.get({
-        url: "/api/story/latest-chapter",
-        params: { page: parsedPage, size: parsedPageSize },
-      })
-    ).data;
-  }
-
-  const [recentUpdatesRes] = await Promise.all([fetchLatestChapters()]);
+  const [recentUpdatesRes] = await Promise.all([fetchLatestChapters({
+    page: parsedPage ?? 0,
+    pageSize: parsedPageSize ?? 20
+  })]);
 
   return (
     <div className="min-h-screen">
