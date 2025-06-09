@@ -6,12 +6,12 @@ export async function GET() {
   const pageSize = 1000; // set a large number to fetch all stories
   const allStories = await fetchStories({ page: 0, pageSize });
 
-  const baseUrl = "https://yourdomain.com"; // replace with your domain
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL; // replace with your domain
 
   const urls = allStories.data.data.map((story) => {
     return `
       <url>
-        <loc>${baseUrl}/novel/${story.slug}</loc>
+        <loc>${baseUrl}novels/${story.slug}</loc>
         <lastmod>${new Date(story.updatedAt).toISOString()}</lastmod>
       </url>
     `;
