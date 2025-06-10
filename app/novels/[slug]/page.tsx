@@ -28,17 +28,17 @@ export async function generateMetadata({
     params: { slug: slug },
   });
 
-  const metaDataRes = await httpClient.get({
-    url: `/api/story/${slug}/meta-data`,
-  });
+  // const metaDataRes = await httpClient.get({
+  //   url: `/api/story/${slug}/meta-data`,
+  // });
 
   const storyData = storyRes.data;
-  const metaData = metaDataRes.data;
+  // const metaData = metaDataRes.data;
 
   return {
     title: `Tàng Thư Lâu - ${storyData?.title}`,
     description:
-      metaData?.metaDescription || "Đọc chương mới nhất trên Tàng Thư Lâu!",
+      storyData?.metaDescription || "Đọc chương mới nhất trên Tàng Thư Lâu!",
   };
 }
 
