@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/private/',
     },
-    sitemap: 'https://tangthulau.com/sitemap.xml',
+    sitemap: 'https://truyenabc.site/sitemap.xml',
   }
 }

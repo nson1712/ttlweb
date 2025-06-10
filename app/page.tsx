@@ -63,13 +63,13 @@ export default async function HomePage() {
     name: "Discover Your Next Reading Adventure",
     description:
       "Explore thousands of novels across all your favorite genres. Start your reading journey today on Tàng Thư Lâu!",
-    url: "https://tangthulau.com/",
+    url: "https://truyenabc.site/",
   };
 
   return (
     <>
       <Head>
-        <link rel="canonical" href="https://tangthulau.com/" />
+        <link rel="canonical" href="https://truyenabc.site/" />
       </Head>
       <Script
         id="json-ld"

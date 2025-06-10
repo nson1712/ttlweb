@@ -240,7 +240,7 @@ export const Filter: FC<FilterProps> = ({
           <Label htmlFor="categories">Thể loại</Label>
           <Input
             id="categories"
-            placeholder="Slice of Life, Drama..."
+            placeholder="Tiên hiệp, Kiếm hiệp,..."
             value={getCategoryNamesFromSlugs(filterOptions.categories)}
             readOnly
             onClick={() => setShowAdvancedFilters(true)}

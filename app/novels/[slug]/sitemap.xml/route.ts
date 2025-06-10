@@ -8,7 +8,7 @@ export async function GET(
   context: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await context.params;
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL!;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
 
   const storyRes = await fetchStoryDetails(slug);
   const storyId = Number(storyRes?.data?.data?.id);

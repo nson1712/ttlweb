@@ -24,21 +24,21 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const storyRes = await httpClient.get({
-    url: "/api/story/detail",
-    params: { slug: slug },
+    url: `/api/story/${slug}`,
   });
 
-  // const metaDataRes = await httpClient.get({
-  //   url: `/api/story/${slug}/meta-data`,
-  // });
+  const metaDataRes = await httpClient.get({
+    url: `/api/story/${slug}/meta-data`,
+  });
 
   const storyData = storyRes.data;
-  // const metaData = metaDataRes.data;
+  const metaData = metaDataRes.data;
 
   return {
     title: `Tàng Thư Lâu - ${storyData?.title}`,
     description:
-      storyData?.metaDescription || "Đọc chương mới nhất trên Tàng Thư Lâu!",
+      metaData?.metaDescription || "Đọc chương mới nhất trên Tàng Thư Lâu!",
+      keywords: metaData?.metaKeywords
   };
 }
 
@@ -135,7 +135,7 @@ export default async function NovelDetailPage({
                 <h1 className="text-3xl font-bold text-white md:text-4xl">
                   {storyDetails?.title}
                 </h1>
-                <div className="mt-2 flex items-center gap-3">
+                <div className="mt-2 flex flex-wrap items-center gap-3">
                   <div className="flex items-center gap-1 text-base text-gray-300">
                     <User className="h-5 w-5 text-emerald-400" />
                     <span>{storyDetails?.author?.name}</span>
