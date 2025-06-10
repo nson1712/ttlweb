@@ -34,7 +34,7 @@ export async function GET(
       const changefreq = ageInDays < 7 ? "daily" : "weekly";
       //chapter đầu tiên ưu tiên cao hơn, ví dụ 0.9, sau đó 0.8
       const index = chapters.findIndex((x) => x.slug === c.slug);
-      const priority = (index === 0 ? 0.9 : 0.8).toFixed(1);
+      const priority = (index === 0 ? 1 : 0.9).toFixed(1);
 
       return `
   <url>
