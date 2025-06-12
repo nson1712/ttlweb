@@ -95,6 +95,7 @@ export default function CollectionsPage() {
               src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1528&q=80"
               alt="Collections background"
               fill
+              unoptimized
               className="object-cover"
             />
           </div>
@@ -394,6 +395,7 @@ function FeaturedCollectionCard({ collection }: { collection: Collection }) {
                   src={image}
                   alt={`Cover ${index + 1}`}
                   fill
+                  unoptimized
                   className="object-cover"
                 />
               </div>
@@ -422,6 +424,7 @@ function FeaturedCollectionCard({ collection }: { collection: Collection }) {
                   src={collection.creator.avatar}
                   alt={collection.creator.name}
                   fill
+                  unoptimized
                   className="object-cover"
                 />
               </div>
@@ -470,6 +473,7 @@ function CollectionCard({ collection }: { collection: Collection }) {
                   src={image}
                   alt={`Cover ${index + 1}`}
                   fill
+                  unoptimized
                   className="object-cover"
                 />
               </div>
@@ -497,6 +501,7 @@ function CollectionCard({ collection }: { collection: Collection }) {
                 src={collection.creator.avatar}
                 alt={collection.creator.name}
                 fill
+                unoptimized
                 className="object-cover"
               />
             </div>
@@ -543,6 +548,7 @@ function CollectionListItem({ collection }: { collection: Collection }) {
                     src={image}
                     alt={`Cover ${index + 1}`}
                     fill
+                    unoptimized
                     className="object-cover"
                   />
                 </div>
@@ -573,6 +579,7 @@ function CollectionListItem({ collection }: { collection: Collection }) {
                     src={collection.creator.avatar}
                     alt={collection.creator.name}
                     fill
+                    unoptimized
                     className="object-cover"
                   />
                 </div>

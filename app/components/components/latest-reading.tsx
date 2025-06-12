@@ -47,6 +47,7 @@ export default function LatestReadingSection() {
                 alt={latestReading.novel}
                 width={224}
                 height={336}
+                unoptimized
                 className="h-full w-full object-cover"
                 priority
               />

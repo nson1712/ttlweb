@@ -68,6 +68,7 @@ export function ChapterPreview({
                   src={coverImage}
                   alt={storyTitle}
                   fill
+                  unoptimized
                   className="object-cover"
                   sizes="36px"
                 />

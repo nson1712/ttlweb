@@ -572,6 +572,7 @@ export default function ReadingHistoryPage() {
                               alt={item.novel}
                               width={48}
                               height={64}
+                              unoptimized
                               className="h-full w-full object-cover"
                             />
                           </div>
@@ -606,6 +607,7 @@ export default function ReadingHistoryPage() {
                               alt={item.novel}
                               width={64}
                               height={96}
+                              unoptimized
                               className="h-full w-full object-cover"
                             />
                           </div>

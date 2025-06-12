@@ -336,6 +336,7 @@ export function Header() {
                         height={32}
                         src="https://png.pngtree.com/png-clipart/20240321/original/pngtree-avatar-job-student-flat-portrait-of-man-png-image_14639683.png"
                         alt="User avatar"
+                        unoptimized
                       />
                       <span className="absolute bottom-0 right-0 h-2.5 w-2.5 bg-green-500 rounded-full border-2 border-gray-900"></span>
                     </div>

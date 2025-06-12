@@ -128,6 +128,7 @@ export default function ReaderCommunityChat() {
                   alt={chat.user.name} 
                   width={32} 
                   height={32}
+                  unoptimized
                   className="rounded-full group-hover:scale-110 transition-transform duration-300"
                 />
               </div>

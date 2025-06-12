@@ -99,6 +99,7 @@ export default async function NovelDetailPage({
                 src={storyDetails?.coverImage}
                 alt={storyDetails?.title}
                 fill
+                unoptimized
                 className="object-cover"
                 priority
               />
@@ -114,6 +115,7 @@ export default async function NovelDetailPage({
                     src={storyDetails?.coverImage}
                     alt={storyDetails?.title}
                     fill
+                    unoptimized
                     className="object-cover"
                     priority
                   />

@@ -40,6 +40,7 @@ export function NovelCard({
           src={coverImage ?? "/default-image.jpg"}
           alt={title ?? "default-image"}
           fill
+          unoptimized
           className="object-cover rounded-md"
           sizes="(max-width: 768px) 100vw, 192px"
         />

@@ -26,6 +26,7 @@ export const WeeklyStory: FC<WeeklyStoryPropsType> = ({ weeklyStory }) => {
               src={weeklyStory?.coverImage ?? "/placeholder-cover.jpg"}
               alt={weeklyStory?.title ?? "Truyện đặc sắc trong tuần"}
               fill
+              unoptimized
               className="object-cover"
               sizes="(max-width: 768px) 200px, 200px"
               priority

@@ -158,6 +158,7 @@ export default function SettingsPage() {
                             src={user.profileImage}
                             alt="Profile"
                             fill
+                            unoptimized
                             className="object-cover"
                           />
                         </div>

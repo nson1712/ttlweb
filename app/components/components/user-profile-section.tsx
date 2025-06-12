@@ -33,6 +33,7 @@ export default function ReaderProfileSection() {
                 alt="Reader Avatar"
                 layout="fill"
                 objectFit="cover"
+                unoptimized
                 className="rounded-hexagon transform transition-transform duration-700 group-hover:scale-110"
               />
 

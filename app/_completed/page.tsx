@@ -481,6 +481,7 @@ export default function CompletedNovelsPage() {
                           src={novel.coverImage}
                           alt={novel.title}
                           fill
+                          unoptimized
                           className="object-cover transition-transform duration-300 group-hover:scale-105"
                           sizes={view === "grid" ? "(max-width: 768px) 100vw, 33vw" : "(max-width: 768px) 100vw, 25vw"}
                           priority

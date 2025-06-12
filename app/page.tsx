@@ -113,6 +113,7 @@ export default async function HomePage() {
                         src={novel?.coverImage}
                         alt={novel?.title}
                         className="object-cover rounded-md"
+                        unoptimized
                         width={50}
                         height={50}
                       />

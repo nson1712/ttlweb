@@ -30,6 +30,7 @@ export const EnhancedNovelCard: React.FC<{ novel: Novel }> = ({ novel }) => {
           <Image 
             src={novel.coverImage} 
             alt={novel.title}
+            unoptimized
             className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
           
           {/* Overlay Gradient */}

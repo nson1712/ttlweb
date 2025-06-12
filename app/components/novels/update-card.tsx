@@ -50,6 +50,7 @@ export function UpdateCard({
                 src={coverImage}
                 alt={title}
                 fill
+                unoptimized
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
                 sizes="48px"
               />

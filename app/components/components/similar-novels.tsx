@@ -23,6 +23,7 @@ export function SimilarNovelsSection({
                 src={n.coverImage}
                 alt={n.title}
                 fill
+                unoptimized
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
               />
               <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 via-black/20 to-transparent">

@@ -57,6 +57,7 @@ function PotentialStarletCard({
               src={coverImage ?? "/default-image.jpg"}
               alt={title ?? "potential-starlet"}
               fill
+              unoptimized
               className="object-cover transition-transform duration-300 group-hover:scale-105"
               sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 16vw"
             />
