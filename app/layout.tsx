@@ -4,6 +4,7 @@ import { ReactNode, Suspense } from "react";
 import "./globals.css";
 import { Metadata } from "next";
 import Loading from "./components/components/loading";
+import AntiTamper from "./components/layout/anti-tamper";
 
 export const metadata: Metadata = {
   title: "Tàng Thư Lâu – Discover & Read Novels Online",
@@ -21,10 +22,10 @@ export const metadata: Metadata = {
     title: "Tàng Thư Lâu – Discover & Read Novels Online",
     description:
       "Thousands of novels across all genres. Start your next reading adventure on Tàng Thư Lâu!",
-    url: "https://tangthulau.com/",
+    url: "https://truyenabc.site/",
     siteName: "Tàng Thư Lâu",
     images: [
-      { url: "https://tangthulau.com/og-image.jpg", width: 1200, height: 630 },
+      { url: "https://truyenabc.site/og-image.jpg", width: 1200, height: 630 },
     ],
     type: "website",
   },
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
     title: "Tàng Thư Lâu – Discover & Read Novels Online",
     description:
       "Thousands of novels across all genres. Start your next reading adventure on Tàng Thư Lâu!",
-    images: ["https://tangthulau.com/twitter-card.jpg"],
+    images: ["https://truyenabc.site/twitter-card.jpg"],
   },
   robots: { index: true, follow: true },
 };
@@ -45,7 +46,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
+      <head>
+        <AntiTamper />
+      </head>
       <body>
         <ThemeProvider
           attribute="class"
@@ -53,11 +56,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Suspense
-            fallback={
-              <Loading  />
-            }
-          >
+          <Suspense fallback={<Loading />}>
             <MainLayout>{children}</MainLayout>
           </Suspense>
         </ThemeProvider>

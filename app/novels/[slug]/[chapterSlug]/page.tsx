@@ -657,11 +657,11 @@ export async function generateMetadata({
   });
 
   const storyRes = await httpClient.get({
-    url: "/api/story/detail",
-    params: { slug: slug },
+    url: `/api/story/${slug}`,
   });
 
   const chapterData = chapRes.data;
+  console.log("CHAPTER DATA: ", chapterData)
 
   const storyData = storyRes.data;
 
@@ -669,6 +669,7 @@ export async function generateMetadata({
     title: `${chapterData?.seoTitle} - ${storyData?.title}`,
     description:
       chapterData?.metaDescription || "Đọc chương mới nhất trên Tàng Thư Lâu!",
+    keywords: chapterData?.metaKeywords
   };
 }
 

@@ -53,7 +53,7 @@ export default function ChapterContent({
   chaptersList,
 }: Props) {
   return (
-    <div className="mx-auto max-w-4xl py-8 space-y-6 text-lg">
+    <div className="mx-auto max-w-4xl py-8 space-y-6 text-lg break-words">
       <Breadcrumb className="flex w-full">
         <BreadcrumbList>
           <BreadcrumbItem>

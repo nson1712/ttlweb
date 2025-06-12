@@ -35,8 +35,7 @@ export const fetchStoryDetails = async (
   slug: string
 ): Promise<StoryDetailsApiResponse> => {
   const res = await httpClient.get({
-    url: "/api/story/detail",
-    params: { slug: slug },
+    url: `/api/story/${slug}`,
   });
   return {
     data: {
