@@ -577,12 +577,12 @@ export default function ReadingHistoryPage() {
                             />
                           </div>
                           <div className="flex-1">
-                            <Link href={`/novels/${item.novelSlug}`}>
+                            <Link href={`/truyen/${item.novelSlug}`}>
                               <h3 className="font-medium text-emerald-400 group-hover:text-emerald-300">
                                 {item.novel}
                               </h3>
                             </Link>
-                            <Link href={`/novels/${item.novelSlug}/${item.chapterNumber}`}>
+                            <Link href={`/truyen/${item.novelSlug}/${item.chapterNumber}`}>
                               <p className="text-sm text-gray-300">{item.chapter}</p>
                             </Link>
                             <div className="mt-1 flex items-center gap-3 text-xs text-gray-400">
@@ -612,12 +612,12 @@ export default function ReadingHistoryPage() {
                             />
                           </div>
                           <div className="text-center">
-                            <Link href={`/novels/${item.novelSlug}`}>
+                            <Link href={`/truyen/${item.novelSlug}`}>
                               <h3 className="font-medium text-emerald-400 group-hover:text-emerald-300 line-clamp-1">
                                 {item.novel}
                               </h3>
                             </Link>
-                            <Link href={`/novels/${item.novelSlug}/${item.chapterNumber}`}>
+                            <Link href={`/truyen/${item.novelSlug}/${item.chapterNumber}`}>
                               <p className="text-sm text-gray-300 line-clamp-1">{item.chapter}</p>
                             </Link>
                             <div className="mt-1 flex flex-col items-center justify-center text-xs text-gray-400">

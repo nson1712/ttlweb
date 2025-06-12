@@ -70,7 +70,7 @@ export function Header() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchTerm.trim()) {
-      router.push(`/novels?filter=title%7Clike%7C${searchTerm}`);
+      router.push(`/truyen?filter=title%7Clike%7C${searchTerm}`);
       setIsSearchOpen(false);
     }
   };
@@ -128,7 +128,7 @@ export function Header() {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <Link href="/novels" legacyBehavior passHref>
+                  <Link href="/truyen" legacyBehavior passHref>
                     <NavigationMenuLink
                       className={cn(
                         navigationMenuTriggerStyle(),
@@ -142,7 +142,7 @@ export function Header() {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <Link href="/categories" legacyBehavior passHref>
+                  <Link href="/the-loai" legacyBehavior passHref>
                     <NavigationMenuLink
                       className={cn(
                         navigationMenuTriggerStyle(),
@@ -156,7 +156,7 @@ export function Header() {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <Link href="/updates" legacyBehavior passHref>
+                  <Link href="/moi-cap-nhat" legacyBehavior passHref>
                     <NavigationMenuLink
                       className={cn(
                         navigationMenuTriggerStyle(),
@@ -481,19 +481,19 @@ export function Header() {
                     Trang chủ
                   </MobileNavItem>
                   <MobileNavItem
-                    href="/categories"
+                    href="/the-loai"
                     icon={<Tag className="h-4 w-4" />}
                   >
                     Thể loại
                   </MobileNavItem>
                   <MobileNavItem
-                    href="/novels"
+                    href="/truyen"
                     icon={<BookOpen className="h-4 w-4" />}
                   >
                     Truyện
                   </MobileNavItem>
                   <MobileNavItem
-                    href="/updates"
+                    href="/moi-cap-nhat"
                     icon={<Clock className="h-4 w-4" />}
                   >
                     Mới cập nhật

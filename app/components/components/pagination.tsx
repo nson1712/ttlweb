@@ -41,7 +41,7 @@ export function PaginationWithLinks({
   const searchParams = useSearchParams();
 
   const totalPageCount = Math.ceil(totalCount / pageSize);
-  const lastPageIndex = totalPageCount - 1;
+  const lastPageIndex = totalPageCount - 1 < 0 ? 0 : totalPageCount - 1;
 
   const buildLink = useCallback(
     (newPageIndex: number) => {
@@ -163,16 +163,16 @@ export function PaginationWithLinks({
   // };
 
   const onJumpKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-  if (e.key === "Enter") {
-    let valOneBased = Number((e.target as HTMLInputElement).value);
-    if (!valOneBased || valOneBased < 1) valOneBased = 1;
-    if (valOneBased > totalPageCount) valOneBased = totalPageCount;
-    const newIndex = valOneBased - 1;
-    const newUrl = buildLink(newIndex);
-    router.push(newUrl);
-    router.refresh(); // ép cập nhật lại trang
-  }
-};
+    if (e.key === "Enter") {
+      let valOneBased = Number((e.target as HTMLInputElement).value);
+      if (!valOneBased || valOneBased < 1) valOneBased = 1;
+      if (valOneBased > totalPageCount) valOneBased = totalPageCount;
+      const newIndex = valOneBased - 1;
+      const newUrl = buildLink(newIndex);
+      router.push(newUrl);
+      router.refresh(); // ép cập nhật lại trang
+    }
+  };
 
   return (
     <div className="xl:flex justify-end space-y-4 xl:space-y-0 items-center gap-3 w-full">
@@ -182,7 +182,7 @@ export function PaginationWithLinks({
             <PaginationPrevious
               href={buildLink(Math.max(page - 1, 0))}
               aria-disabled={page === 0}
-              tabIndex={page === 0 ? -1 : undefined}
+              tabIndex={page === 0 ? 0 : undefined}
             />
           </PaginationItem>
 
@@ -192,7 +192,7 @@ export function PaginationWithLinks({
             <PaginationNext
               href={buildLink(Math.min(page + 1, lastPageIndex))}
               aria-disabled={page === lastPageIndex}
-              tabIndex={page === lastPageIndex ? -1 : undefined}
+              tabIndex={page === lastPageIndex ? 0 : undefined}
             />
           </PaginationItem>
         </PaginationContent>

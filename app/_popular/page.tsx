@@ -245,7 +245,7 @@ export default function PopularPage() {
     //                   </div>
     //                 </div>
     //                 <div className="flex flex-wrap gap-3">
-    //                   <Link href={`/novels/${featuredNovel.slug}`}>
+    //                   <Link href={`/truyen/${featuredNovel.slug}`}>
     //                     <button className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg transition-colors">
     //                       Read Now
     //                     </button>
@@ -369,7 +369,7 @@ export default function PopularPage() {
 //   getSortIcon: (field: string) => React.ReactNode;
 // }) {
 //   return (
-//     <Link href={`/novels/${novel.slug}`}>
+//     <Link href={`/truyen/${novel.slug}`}>
 //       <motion.div
 //         whileHover={{ y: -2 }}
 //         transition={{ type: "spring", stiffness: 300, damping: 10 }}

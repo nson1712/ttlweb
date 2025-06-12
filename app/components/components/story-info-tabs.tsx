@@ -62,7 +62,7 @@ export const StoryInfoTab: FC<StoryInfoTabProps> = ({
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-2 rounded-lg bg-gray-700 p-1">
                 <Link
-                  href={`/novels/${storyDetails?.slug}?sortType=DESC`}
+                  href={`/truyen/${storyDetails?.slug}?sortType=DESC`}
                   className={cn(
                     "rounded-md px-3 py-1 text-sm",
                     sort === "DESC"
@@ -74,7 +74,7 @@ export const StoryInfoTab: FC<StoryInfoTabProps> = ({
                   Mới nhất
                 </Link>
                 <Link
-                  href={`/novels/${storyDetails?.slug}?sortType=ASC`}
+                  href={`/truyen/${storyDetails?.slug}?sortType=ASC`}
                   className={cn(
                     "rounded-md px-3 py-1 text-sm",
                     sort === "ASC"
@@ -260,8 +260,8 @@ export const StoryInfoTab: FC<StoryInfoTabProps> = ({
                 {relatedNovels.map((relatedNovel) => (
                   <Link
                     key={relatedNovel.id}
-                    // href={`/novels/${relatedNovel.slug}`}
-                    href={`/novels/lord-mysteries`}
+                    // href={`/truyen/${relatedNovel.slug}`}
+                    href={`/truyen/lord-mysteries`}
                     className="group block"
                   >
                     <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
@@ -297,7 +297,7 @@ export const StoryInfoTab: FC<StoryInfoTabProps> = ({
           {!isEmpty(storyDetails.categories) && (
             <div className="mt-6 text-center">
               <Link
-                href={`/categories/${storyDetails.categories?.[0]?.slug}`}
+                href={`/the-loai/${storyDetails.categories?.[0]?.slug}`}
                 className="inline-block rounded-full bg-gray-700 px-6 py-2 text-sm font-medium text-white hover:bg-gray-600"
               >
                 Xem thêm truyện {storyDetails.categories?.[0]?.name}

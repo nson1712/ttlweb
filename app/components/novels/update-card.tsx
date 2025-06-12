@@ -39,7 +39,7 @@ export function UpdateCard({
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
       <Link
-        href={`/novels/${slug}/${chapterSlug}`}
+        href={`/truyen/${slug}/${chapterSlug}`}
         className="block"
         id={`${chapterTitle}-${id}`}
       >

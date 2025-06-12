@@ -25,7 +25,7 @@ export async function GET(
   const urls = chapters
     .filter((c) => c.slug)
     .map((c) => {
-      const loc = `${baseUrl}novels/${slug}/${c.slug}`;
+      const loc = `${baseUrl}truyen/${slug}/${c.slug}`;
       const lastmod = new Date(c.updatedAt || Date.now()).toISOString();
       //chapter vừa được cập nhật <7 ngày thì changefreq=daily, ưu tiên cao
       const updatedAt = c.updatedAt ? new Date(c.updatedAt) : new Date();

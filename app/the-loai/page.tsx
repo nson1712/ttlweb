@@ -22,6 +22,8 @@ export default async function CategoriesPage() {
       color: colorKeys[index % colorKeys.length],
     })
   );
+
+  const updatedCategories = categoriesWithColors.filter(tag => tag.slug !== 'nu-cuong');
   return (
     <div className="min-h-screen">
       <div className="mx-auto">
@@ -29,7 +31,7 @@ export default async function CategoriesPage() {
         <MotionTitle title="Danh sách" subTitle="thể loại" />
 
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-          {categoriesWithColors.map((tag) => (
+          {updatedCategories.map((tag) => (
             <CategoriesTag key={tag.name} {...tag} />
           ))}
         </div>

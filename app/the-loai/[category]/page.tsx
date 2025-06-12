@@ -83,7 +83,7 @@ export default async function TagDetailPage({
         {/* Header */}
         <div className="mb-8">
           <Link
-            href="/categories"
+            href="/the-loai"
             className="mb-4 inline-flex items-center text-sm font-medium text-emerald-400 hover:text-emerald-300"
           >
             <ChevronLeft className="mr-1 h-4 w-4" />
@@ -120,7 +120,7 @@ export default async function TagDetailPage({
               Sắp xếp theo:
             </span>
             <Link
-              href={`/categories/${category}?sort=rate:DESC`}
+              href={`/the-loai/${category}?sort=rate:DESC`}
               className={cn(
                 "rounded-full px-3 py-1 text-sm font-medium transition-colors",
                 sort === "rate:DESC"
@@ -131,7 +131,7 @@ export default async function TagDetailPage({
               Đánh giá
             </Link>
             <Link
-              href={`/categories/${category}?sort=updatedAt:DESC`}
+              href={`/the-loai/${category}?sort=updatedAt:DESC`}
               className={cn(
                 "rounded-full px-3 py-1 text-sm font-medium transition-colors",
                 sort === "updatedAt:DESC"
@@ -143,7 +143,7 @@ export default async function TagDetailPage({
               Mới nhất
             </Link>
             <Link
-              href={`/categories/${category}?sort=updatedAt:ASC`}
+              href={`/the-loai/${category}?sort=updatedAt:ASC`}
               className={cn(
                 "rounded-full px-3 py-1 text-sm font-medium transition-colors",
                 sort === "updatedAt:ASC"
@@ -166,7 +166,7 @@ export default async function TagDetailPage({
             </div>
           </Suspense>
         ) : (
-          <NotFound href="/categories" title="Danh sách thể loại" />
+          <NotFound href="/the-loai" title="Danh sách thể loại" />
         )}
 
         {storiesRes.data?.totalElements > 0 && (

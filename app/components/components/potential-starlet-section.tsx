@@ -21,7 +21,7 @@ export const PotentialStarletSection: FC<PotenialStarletPropsType> = ({
           <h2 className="text-2xl font-bold text-white">Truyện tiềm năng</h2>
         </div>
         <Link
-          href="/potential-starlets"
+          href="/truyen-tiem-nang"
           className="text-base font-medium text-emerald-400 hover:text-emerald-300"
         >
           Xem tất cả
@@ -29,9 +29,12 @@ export const PotentialStarletSection: FC<PotenialStarletPropsType> = ({
       </div>
 
       <div className="grid grid-cols-4 gap-4 md:grid-cols-5 lg:grid-cols-10">
-        {(potentialStarlets ?? []).map((novel, index) => (
-          <PotentialStarletCard key={novel?.id ?? index} {...novel} />
-        ))}
+        {(potentialStarlets ?? []).map(
+          (novel, index) =>
+            novel && (
+              <PotentialStarletCard key={novel?.id ?? index} {...novel} />
+            )
+        )}
       </div>
     </section>
   );
@@ -50,7 +53,7 @@ function PotentialStarletCard({
       whileHover={{ y: -5 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
-      <Link href={`/novels/${slug}`} className="block" id={id}>
+      <Link href={`/truyen/${slug}`} className="block" id={id}>
         <div className="group space-y-2">
           <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
             <Image

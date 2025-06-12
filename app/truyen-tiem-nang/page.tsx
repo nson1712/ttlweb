@@ -36,7 +36,7 @@ export default async function PotentialStarletsPage({
         typeof potentialRes.data.totalElements === "number" &&
         potentialRes.data.totalElements > 0 ? (
           potentialRes?.data?.data?.map((novel: StoryType, index) => {
-            return <NovelCard key={novel?.slug ?? index} {...novel} />;
+            return novel && <NovelCard key={novel?.slug ?? index} {...novel} />;
           })
         ) : (
           <NotFound />

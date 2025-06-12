@@ -15,7 +15,7 @@ export const ChapterList: FC<ChapterListProps> = ({ chapters, storySlug }) => {
       {chapters.map((chapter) => (
         <Link
           key={chapter?.id}
-          href={`/novels/${storySlug}/${chapter?.slug}`}
+          href={`/truyen/${storySlug}/${chapter?.slug}`}
           className={cn(
             "group block rounded-lg bg-gray-700/50 p-3 hover:bg-gray-700"
           )}

@@ -86,7 +86,7 @@ export const Filter: FC<FilterProps> = ({
     }
     newParams.set("adv", next ? "true" : "false");
 
-    router.push(`/novels?${newParams.toString()}`);
+    router.push(`/truyen?${newParams.toString()}`);
   };
 
   const toggleCategories = (slug: string) => {
@@ -195,7 +195,7 @@ export const Filter: FC<FilterProps> = ({
     if (showAdvancedFilters) {
       newParams.set("adv", "true");
     }
-    router.push(`/novels?${newParams.toString()}`);
+    router.push(`/truyen?${newParams.toString()}`);
   };
 
   const applySearch = () => {
@@ -212,7 +212,7 @@ export const Filter: FC<FilterProps> = ({
     const newParams = new URLSearchParams();
     newParams.set("filter", filterString);
     if (showAdvancedFilters) newParams.set("adv", "true");
-    router.push(`/novels?${newParams.toString()}`);
+    router.push(`/truyen?${newParams.toString()}`);
   };
   const getCategoryNamesFromSlugs = (slugs: string[]): string => {
     return slugs

@@ -129,14 +129,14 @@ export function Footer() {
                 <FooterLink href="/" icon={<Home size={16} />}>
                   Trang chủ
                 </FooterLink>
-                <FooterLink href="/novels" icon={<BookOpen size={16} />}>
+                <FooterLink href="/truyen" icon={<BookOpen size={16} />}>
                   Danh sách truyện
                 </FooterLink>
-                <FooterLink href="/updates" icon={<Clock size={16} />}>
+                <FooterLink href="/moi-cap-nhat" icon={<Clock size={16} />}>
                   Truyện mới cập nhật
                 </FooterLink>
                 {/* <FooterLink href="/popular" icon={<Flame size={16} />}>Truyện nổi bật</FooterLink> */}
-                <FooterLink href="/genres" icon={<BookMarked size={16} />}>
+                <FooterLink href="/the-loai" icon={<BookMarked size={16} />}>
                   Thể loại truyện
                 </FooterLink>
               </div>

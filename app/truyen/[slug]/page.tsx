@@ -116,7 +116,7 @@ export default async function NovelDetailPage({
                     alt={storyDetails?.title}
                     fill
                     unoptimized
-                    className="object-cover"
+                    className="object-cover rounded-xl"
                     priority
                   />
                 )}
@@ -171,7 +171,7 @@ export default async function NovelDetailPage({
               <div className="flex flex-wrap gap-2">
                 {storyDetails?.categories.map((category) => (
                   <BaseTag
-                    href={`/categories/${category.slug}`}
+                    href={`/the-loai/${category.slug}`}
                     key={category.id}
                     name={category.name}
                   />
@@ -187,7 +187,7 @@ export default async function NovelDetailPage({
 
               <div className="flex flex-wrap gap-3">
                 {/* <Link
-                  href={`/novels/${storyDetailsRes.data?.data?.slug}/${chaptersRes.data.data?.[0]?.slug}`}
+                  href={`/truyen/${storyDetailsRes.data?.data?.slug}/${chaptersRes.data.data?.[0]?.slug}`}
                   className="rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 px-6 py-2 text-sm font-medium text-white hover:bg-emerald-600"
                 >
                   Đọc ngay
