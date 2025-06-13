@@ -104,11 +104,7 @@ export const StoryInfoTab: FC<StoryInfoTabProps> = ({
             }}
             page={page ?? 0}
             pageSize={pageSize ?? 20}
-            totalCount={
-              chapters?.data?.totalElements
-                ? chapters.data.totalElements - pageSize
-                : 0
-            }
+            totalCount={chapters?.data?.totalElements}
           />
         </div>
       </TabsContent>

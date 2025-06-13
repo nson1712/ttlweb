@@ -58,11 +58,17 @@ export const WeeklyStory: FC<WeeklyStoryPropsType> = ({ weeklyStory }) => {
           </div>
 
           <div className="flex flex-wrap gap-2">
-            {weeklyStory?.categories?.map((category) => (
+            {[
+              ...weeklyStory.mainCategories,
+              ...weeklyStory?.categories.filter(
+                (item) => item.slug !== weeklyStory.mainCategories?.[0].slug
+              ),
+            ]?.map((category, idx) => (
               <BaseTag
                 key={category?.id}
-                href={`categories/${category?.slug}`}
+                href={`the-loai/${category?.slug}`}
                 name={category?.name}
+                variant={idx === 0 && weeklyStory.mainCategories?.length ? "mainCategories" : "categories"}
               />
             ))}
           </div>

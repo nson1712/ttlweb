@@ -55,6 +55,8 @@ export default async function HomePage() {
     fetchCategories(),
   ]);
 
+  console.log("Weekly Res:", weeklyRes);
+
   return (
       <div className="space-y-8">
         <MotionTitle title="Khám phá kho truyện" subTitle="Đầy mê hoặc" />
@@ -153,7 +155,7 @@ export default async function HomePage() {
               <NovelCard key={novel?.id} {...novel} />
             ))}
           </div>
-          <LinkButton href="/truyen-noi-bat" label="Xem thêm" />
+          <LinkButton href="/truyen-dac-sac" label="Xem thêm" />
         </section>
 
         <section className="mb-12">

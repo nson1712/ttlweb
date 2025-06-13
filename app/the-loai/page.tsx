@@ -2,6 +2,13 @@ import { colorClasses } from "../lib/store-data";
 import { CategoriesTag } from "../components/components/categories-card";
 import { MotionTitle } from "../components/components/motion-title";
 import { fetchCategories } from "../lib/fetch-data";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+} from "../components/ui/breadcrumb";
 
 interface Category {
   name: string;
@@ -23,10 +30,31 @@ export default async function CategoriesPage() {
     })
   );
 
-  const updatedCategories = categoriesWithColors.filter(tag => tag.slug !== 'nu-cuong');
+  const updatedCategories = categoriesWithColors.filter(
+    (tag) => tag.slug !== "nu-cuong"
+  );
   return (
     <div className="min-h-screen">
       <div className="mx-auto">
+        <Breadcrumb className="flex w-full mb-4 sm:mb-0">
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink
+                className="text-gray-400 hover:text-emerald-500"
+                href="/"
+              >
+                Trang chủ
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem className="flex-1 line-clamp-1">
+              <BreadcrumbLink className="text-emerald-500" href={`/the-loai`}>
+                Thể loại
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+
         {/* Header */}
         <MotionTitle title="Danh sách" subTitle="thể loại" />
 

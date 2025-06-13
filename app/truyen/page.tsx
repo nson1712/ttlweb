@@ -22,7 +22,7 @@ export default async function NovelsPage({
     fetchStories({
       page: page ?? 0,
       pageSize: pageSize ?? 0,
-      filter: filter
+      filter: filter,
     }),
     fetchCategories(),
   ]);
@@ -50,12 +50,12 @@ export default async function NovelsPage({
 
       {/* Novels Listing */}
       <div className="space-y-4">
-        {storiesRes.data.totalElements > 0 ? (
+        {storiesRes?.data?.data?.length ? (
           storiesRes.data.data.map((novel: StoryType) => {
             return <NovelCard key={novel.slug} {...novel} />;
           })
         ) : (
-          <NotFound />
+          <NotFound href="/truyen" title="Quay lại" />
         )}
       </div>
       <PaginationWithLinks
@@ -66,11 +66,7 @@ export default async function NovelsPage({
         }}
         page={parsedPage}
         pageSize={parsedPageSize}
-        totalCount={
-          storiesRes?.data?.totalElements
-            ? storiesRes.data.totalElements - parsedPageSize
-            : 0
-        }
+        totalCount={storiesRes?.data?.totalElements}
       />
     </div>
   );

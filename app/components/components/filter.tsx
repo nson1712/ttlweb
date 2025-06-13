@@ -291,19 +291,19 @@ export const Filter: FC<FilterProps> = ({
           <div className="lg:col-span-4">
             <Label className="block mb-2 text-emerald-400">Thể loại</Label>
             <div className="grid grid-cols-2 sm:grid-cols-6 gap-2 mt-2 max-h-52 overflow-y-auto">
-              {categories?.map((cate) => (
-                <div key={cate.id} className="flex items-center space-x-2">
-                  <Checkbox
-                    id={`cate-${cate}`}
-                    className="cursor-pointer border-gray-600 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-emerald-400 data-[state=checked]:to-teal-500"
-                    checked={filterOptions.categories.includes(cate.slug)}
-                    onCheckedChange={() => toggleCategories(cate.slug)}
-                  />
-                  <Label htmlFor={`cate-${cate}`} className="text-sm">
-                    {cate.name}
-                  </Label>
-                </div>
-              ))}
+              {categories
+                ?.filter((item) => item.slug !== "nu-cuong")
+                ?.map((cate) => (
+                  <div key={cate.id} className="flex items-center space-x-2">
+                    <Checkbox
+                      id={`cate-${cate}`}
+                      className="cursor-pointer border-gray-600 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-emerald-400 data-[state=checked]:to-teal-500"
+                      checked={filterOptions.categories.includes(cate.slug)}
+                      onCheckedChange={() => toggleCategories(cate.slug)}
+                    />
+                    <Label className="text-sm">{cate.name}</Label>
+                  </div>
+                ))}
             </div>
           </div>
 

@@ -38,7 +38,7 @@ export async function generateMetadata({
     title: `Tàng Thư Lâu - ${storyData?.title}`,
     description:
       metaData?.metaDescription || "Đọc chương mới nhất trên Tàng Thư Lâu!",
-      keywords: metaData?.metaKeywords
+    keywords: metaData?.metaKeywords,
   };
 }
 
@@ -76,6 +76,8 @@ export default async function NovelDetailPage({
     pageSize: pageSize ?? 20,
     sortType: sortType,
   });
+
+  console.log("storyDetailsRes: ", storyDetailsRes);
 
   return (
     <div className="min-h-screen">
@@ -169,11 +171,22 @@ export default async function NovelDetailPage({
               </div>
 
               <div className="flex flex-wrap gap-2">
-                {storyDetails?.categories.map((category) => (
+                {[
+                  ...storyDetails?.mainCategories,
+                  ...storyDetails?.categories.filter(
+                    (item) =>
+                      item.slug !== storyDetails?.mainCategories?.[0]?.slug
+                  ),
+                ].map((category, idx) => (
                   <BaseTag
                     href={`/the-loai/${category.slug}`}
                     key={category.id}
                     name={category.name}
+                    variant={
+                      idx === 0 && storyDetails?.mainCategories?.length
+                        ? "mainCategories"
+                        : "categories"
+                    }
                   />
                 ))}
               </div>

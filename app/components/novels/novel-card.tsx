@@ -16,6 +16,7 @@ export interface NovelCardProps {
   author?: AuthorType;
   rate?: number;
   totalRatings?: number;
+  mainCategories?: CategoryType[];
   categories?: CategoryType[];
   updatedAt?: string;
   chapterCount?: number;
@@ -28,6 +29,7 @@ export function NovelCard({
   coverImage,
   author,
   rate,
+  mainCategories,
   categories,
   shortDescription,
   updatedAt,
@@ -35,7 +37,10 @@ export function NovelCard({
 }: NovelCardProps) {
   return (
     <div className="group relative flex flex-col md:flex-row gap-4 bg-gradient-to-br from-gray-800/90 to-gray-900 shadow-md transition-all hover:shadow-2xl rounded-lg overflow-hidden p-4">
-      <Link href={`/truyen/${slug}`} className="relative w-full md:w-48 h-64 md:h-auto flex-shrink-0 aspect-[3/4] hover:scale-105 transition-all duration-200">
+      <Link
+        href={`/truyen/${slug}`}
+        className="relative w-full md:w-48 h-64 md:h-auto flex-shrink-0 aspect-[3/4] hover:scale-105 transition-all duration-200"
+      >
         <Image
           src={coverImage ?? "/default-image.jpg"}
           alt={title ?? "default-image"}
@@ -54,7 +59,10 @@ export function NovelCard({
                 {title}
               </h2>
             </Link>
-            <p className="text-gray-400 flex gap-x-1"><User className="w-4 h-5 mt-0.5 text-emerald-500" />{author?.name}</p>
+            <p className="text-gray-400 flex gap-x-1">
+              <User className="w-4 h-5 mt-0.5 text-emerald-500" />
+              {author?.name}
+            </p>
 
             <StarRate rate={rate ?? 0} />
           </div>
@@ -65,11 +73,21 @@ export function NovelCard({
         </div>
 
         <div className="flex flex-wrap gap-2 my-2">
-          {categories?.map((cate, index) => (
+          {[
+            ...(mainCategories ?? []),
+            ...(categories ?? []).filter(
+              (item) => item.slug !== mainCategories?.[0]?.slug
+            ),
+          ].map((cate, index) => (
             <BaseTag
               key={index}
               href={`/the-loai/${cate?.slug}`}
               name={cate?.name}
+              variant={
+                index === 0 && mainCategories?.length
+                  ? "mainCategories"
+                  : "categories"
+              }
             />
           ))}
         </div>

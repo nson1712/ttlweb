@@ -40,6 +40,8 @@ export function PaginationWithLinks({
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+  console.log("TOTAL COUNT:", totalCount);
+
   const totalPageCount = Math.ceil(totalCount / pageSize);
   const lastPageIndex = totalPageCount - 1 < 0 ? 0 : totalPageCount - 1;
 
@@ -74,7 +76,7 @@ export function PaginationWithLinks({
 
   const renderPageNumbers = () => {
     const items: ReactNode[] = [];
-    const total = totalPageCount + 1;
+    const total = totalPageCount;
 
     if (total <= 5) {
       for (let idx = 0; idx < total; idx++) {
@@ -173,6 +175,8 @@ export function PaginationWithLinks({
       router.refresh(); // ép cập nhật lại trang
     }
   };
+
+  console.log("TOTAL PAGE COUNT:", totalPageCount);
 
   return (
     <div className="xl:flex justify-end space-y-4 xl:space-y-0 items-center gap-3 w-full">

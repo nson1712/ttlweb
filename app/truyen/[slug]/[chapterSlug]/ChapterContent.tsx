@@ -65,7 +65,7 @@ export default function ChapterContent({
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
-          <BreadcrumbItem>
+          <BreadcrumbItem className="flex-1 line-clamp-1">
             <BreadcrumbLink
               className="text-gray-400 hover:text-emerald-500"
               href={`/truyen/${storySlug}`}
@@ -84,7 +84,7 @@ export default function ChapterContent({
       <h1 className="text-2xl sm:text-3xl font-bold flex justify-center">
         {details.title}
       </h1>
-      <div>
+      <div className="space-y-3">
         {contents.map((c, idx) => (
           <p key={idx}>{c.content}</p>
         ))}
