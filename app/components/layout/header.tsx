@@ -70,7 +70,7 @@ export function Header() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchTerm.trim()) {
-      router.push(`/novels?filter=title%7Clike%7C${searchTerm}`);
+      router.push(`/truyen?filter=title%7Clike%7C${searchTerm}`);
       setIsSearchOpen(false);
     }
   };
@@ -95,18 +95,11 @@ export function Header() {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="relative z-10">
-            <div className="flex items-center gap-2">
-              <div className="relative overflow-hidden rounded-lg">
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-600 opacity-80 animate-pulse-slow"></div>
-                <span className="relative z-10 text-xl font-bold text-white px-3 py-2">
-                  TTL
-                </span>
-              </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+          <Link href="/" className="relative z-10 flex">
+            <Image className="aspect-[6/5]" src="/favicon.ico" alt="favicon-ttl" width={60} height={50} />
+            <span className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent self-center">
                 Tàng Thư Lâu
               </span>
-            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -128,7 +121,7 @@ export function Header() {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <Link href="/novels" legacyBehavior passHref>
+                  <Link href="/truyen" legacyBehavior passHref>
                     <NavigationMenuLink
                       className={cn(
                         navigationMenuTriggerStyle(),
@@ -142,7 +135,7 @@ export function Header() {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <Link href="/categories" legacyBehavior passHref>
+                  <Link href="/the-loai" legacyBehavior passHref>
                     <NavigationMenuLink
                       className={cn(
                         navigationMenuTriggerStyle(),
@@ -156,7 +149,7 @@ export function Header() {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <Link href="/updates" legacyBehavior passHref>
+                  <Link href="/moi-cap-nhat" legacyBehavior passHref>
                     <NavigationMenuLink
                       className={cn(
                         navigationMenuTriggerStyle(),
@@ -481,19 +474,19 @@ export function Header() {
                     Trang chủ
                   </MobileNavItem>
                   <MobileNavItem
-                    href="/categories"
+                    href="/the-loai"
                     icon={<Tag className="h-4 w-4" />}
                   >
                     Thể loại
                   </MobileNavItem>
                   <MobileNavItem
-                    href="/novels"
+                    href="/truyen"
                     icon={<BookOpen className="h-4 w-4" />}
                   >
                     Truyện
                   </MobileNavItem>
                   <MobileNavItem
-                    href="/updates"
+                    href="/moi-cap-nhat"
                     icon={<Clock className="h-4 w-4" />}
                   >
                     Mới cập nhật

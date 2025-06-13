@@ -1,9 +1,10 @@
-import { Sparkles } from "lucide-react";
 import { NovelCard } from "../components/novels/novel-card";
 import { PaginationWithLinks } from "../components/components/pagination";
 import { StoryType } from "../types/story";
 import { NotFound } from "../components/components/not-found";
 import { fetchStories } from "../lib/fetch-data";
+import { MotionTitle } from "../components/components/motion-title";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "../components/ui/breadcrumb";
 
 export default async function FeaturedPage({
   searchParams,
@@ -22,29 +23,33 @@ export default async function FeaturedPage({
     fetchStories({
       page: page ?? 0,
       pageSize: pageSize ?? 20,
-      sort: "rate|gt|4.0"
+      sort: "rate|gt|4.0",
     }),
   ]);
 
   return (
     <div className="min-h-screen">
       <div className="mx-auto">
-        {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-amber-500/30 bg-gradient-to-br from-amber-500/20 to-amber-600/20 text-amber-400">
-              <Sparkles className="h-6 w-6" />
-            </div>
-            <h1 className="text-3xl font-bold text-white">Truyện đặc sắc</h1>
-            <span className="rounded-full bg-gray-800 px-3 py-1 text-sm font-medium text-gray-300">
-              {featureStoriesRes?.data?.totalElements} truyện
-            </span>
-          </div>
+        <Breadcrumb className="flex w-full mb-4 sm:mb-0">
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink
+                className="text-gray-400 hover:text-emerald-500"
+                href="/"
+              >
+                Trang chủ
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem className="flex-1 line-clamp-1">
+              <BreadcrumbLink className="text-emerald-500" href={`/truyen-dac-sac`}>
+                Truyện đặc sắc
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
 
-          {/* <p className="mt-2 text-gray-400">
-            Browse our handpicked selection of outstanding novels, chosen by our editors and community for their exceptional quality and popularity.
-          </p> */}
-        </div>
+        <MotionTitle title="Truyện" subTitle="Đặc sắc" />
 
         {/* Filters and Sort */}
         {/* <div className="mb-6 flex flex-col gap-4 rounded-xl bg-gray-800/50 p-4 backdrop-blur-sm sm:flex-row sm:items-center sm:justify-between">

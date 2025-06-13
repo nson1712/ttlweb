@@ -191,7 +191,7 @@
 //   //         The chapter you&#39;re looking for doesn&#39;t exist or has been removed.
 //   //       </p>
 //   //       <Link
-//   //         href={`/novels/${slug}`}
+//   //         href={`/truyen/${slug}`}
 //   //         className="mt-4 rounded-full bg-emerald-500 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-600"
 //   //       >
 //   //         Return to Novel
@@ -295,7 +295,7 @@
 //         <div className="mx-auto flex h-16 max-w-4xl items-center justify-between px-4">
 //           <div className="flex items-center gap-4">
 //             <Link
-//               href={`/novels/${storySlug}`}
+//               href={`/truyen/${storySlug}`}
 //               className={cn(
 //                 "flex items-center gap-1 rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
 //                 theme === "light"
@@ -495,7 +495,7 @@
 //         <div className="mt-12 flex items-center justify-between">
 //           {/* {previousChapter ? (
 //             <Link
-//               href={`/novels/${slug}/chapters/${previousChapter.order}`}
+//               href={`/truyen/${slug}/chapters/${previousChapter.order}`}
 //               className={cn(
 //                 "flex items-center gap-2 rounded-lg px-4 py-2 transition-colors",
 //                 theme === "light"
@@ -570,7 +570,7 @@
 
 //           {/* {nextChapter ? (
 //             <Link
-//               href={`/novels/${slug}/chapters/${nextChapter.order}`}
+//               href={`/truyen/${slug}/chapters/${nextChapter.order}`}
 //               className={cn(
 //                 "flex items-center gap-2 rounded-lg px-4 py-2 transition-colors",
 //                 theme === "light"

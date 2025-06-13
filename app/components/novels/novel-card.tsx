@@ -16,6 +16,7 @@ export interface NovelCardProps {
   author?: AuthorType;
   rate?: number;
   totalRatings?: number;
+  mainCategories?: CategoryType[];
   categories?: CategoryType[];
   updatedAt?: string;
   chapterCount?: number;
@@ -28,6 +29,7 @@ export function NovelCard({
   coverImage,
   author,
   rate,
+  mainCategories,
   categories,
   shortDescription,
   updatedAt,
@@ -35,7 +37,10 @@ export function NovelCard({
 }: NovelCardProps) {
   return (
     <div className="group relative flex flex-col md:flex-row gap-4 bg-gradient-to-br from-gray-800/90 to-gray-900 shadow-md transition-all hover:shadow-2xl rounded-lg overflow-hidden p-4">
-      <Link href={`/novels/${slug}`} className="relative w-full md:w-48 h-64 md:h-auto flex-shrink-0 aspect-[3/4] hover:scale-105 transition-all duration-200">
+      <Link
+        href={`/truyen/${slug}`}
+        className="relative w-full md:w-48 h-64 md:h-auto flex-shrink-0 aspect-[3/4] hover:scale-105 transition-all duration-200"
+      >
         <Image
           src={coverImage ?? "/default-image.jpg"}
           alt={title ?? "default-image"}
@@ -49,12 +54,15 @@ export function NovelCard({
       <div className="flex-1 flex flex-col">
         <div className="flex justify-between items-start">
           <div className="space-y-1">
-            <Link href={`/novels/${slug ?? ""}`}>
+            <Link href={`/truyen/${slug ?? ""}`}>
               <h2 className="text-xl font-bold text-emerald-400 hover:text-emerald-300 transition-colors">
                 {title}
               </h2>
             </Link>
-            <p className="text-gray-400 flex gap-x-1"><User className="w-4 h-5 mt-0.5 text-emerald-500" />{author?.name}</p>
+            <p className="text-gray-400 flex gap-x-1">
+              <User className="w-4 h-5 mt-0.5 text-emerald-500" />
+              {author?.name}
+            </p>
 
             <StarRate rate={rate ?? 0} />
           </div>
@@ -65,11 +73,21 @@ export function NovelCard({
         </div>
 
         <div className="flex flex-wrap gap-2 my-2">
-          {categories?.map((cate, index) => (
+          {[
+            ...(mainCategories ?? []),
+            ...(categories ?? []).filter(
+              (item) => item.slug !== mainCategories?.[0]?.slug
+            ),
+          ].map((cate, index) => (
             <BaseTag
               key={index}
-              href={`/categories/${cate?.slug}`}
+              href={`/the-loai/${cate?.slug}`}
               name={cate?.name}
+              variant={
+                index === 0 && mainCategories?.length
+                  ? "mainCategories"
+                  : "categories"
+              }
             />
           ))}
         </div>
@@ -112,7 +130,7 @@ export function NovelCard({
               </div>
             )}
 
-            <Link href={`/novels/${slug ?? ""}`}>
+            <Link href={`/truyen/${slug ?? ""}`}>
               <Button className="rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 px-6 py-2.5 text-sm font-medium text-white shadow-lg transition-all hover:shadow-emerald-500/20">
                 ◃Chi tiết▹
               </Button>

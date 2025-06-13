@@ -25,6 +25,7 @@ import {
   FileQuestion,
 } from "lucide-react";
 import { cn } from "../../lib/utils";
+import Image from "next/image";
 
 export function Footer() {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -100,13 +101,12 @@ export function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             {/* About section */}
             <div>
-              <div className="flex items-center gap-2 mb-6">
-                <div className="relative overflow-hidden rounded-lg bg-gradient-to-r from-emerald-500 to-teal-600 p-2">
-                  <span className="text-lg font-bold text-white">TTL</span>
-                </div>
-                <span className="text-xl font-bold text-white">Tàng Thư Lâu</span>
-              </div>
-
+              <Link href="/" className="relative z-10 flex">
+            <Image className="aspect-[6/5]" src="/favicon.ico" alt="favicon-ttl" width={60} height={50} />
+            <span className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent self-center">
+                Tàng Thư Lâu
+              </span>
+          </Link>
               <p className="text-gray-400 mb-6">
                 Nền tảng số 1 dành cho những độc giả yêu thích thể loại truyện
                 Nam Chủ
@@ -129,14 +129,14 @@ export function Footer() {
                 <FooterLink href="/" icon={<Home size={16} />}>
                   Trang chủ
                 </FooterLink>
-                <FooterLink href="/novels" icon={<BookOpen size={16} />}>
+                <FooterLink href="/truyen" icon={<BookOpen size={16} />}>
                   Danh sách truyện
                 </FooterLink>
-                <FooterLink href="/updates" icon={<Clock size={16} />}>
+                <FooterLink href="/moi-cap-nhat" icon={<Clock size={16} />}>
                   Truyện mới cập nhật
                 </FooterLink>
                 {/* <FooterLink href="/popular" icon={<Flame size={16} />}>Truyện nổi bật</FooterLink> */}
-                <FooterLink href="/genres" icon={<BookMarked size={16} />}>
+                <FooterLink href="/the-loai" icon={<BookMarked size={16} />}>
                   Thể loại truyện
                 </FooterLink>
               </div>

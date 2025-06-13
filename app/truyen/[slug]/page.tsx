@@ -38,7 +38,7 @@ export async function generateMetadata({
     title: `Tàng Thư Lâu - ${storyData?.title}`,
     description:
       metaData?.metaDescription || "Đọc chương mới nhất trên Tàng Thư Lâu!",
-      keywords: metaData?.metaKeywords
+    keywords: metaData?.metaKeywords,
   };
 }
 
@@ -76,6 +76,8 @@ export default async function NovelDetailPage({
     pageSize: pageSize ?? 20,
     sortType: sortType,
   });
+
+  console.log("storyDetailsRes: ", storyDetailsRes);
 
   return (
     <div className="min-h-screen">
@@ -116,7 +118,7 @@ export default async function NovelDetailPage({
                     alt={storyDetails?.title}
                     fill
                     unoptimized
-                    className="object-cover"
+                    className="object-cover rounded-xl"
                     priority
                   />
                 )}
@@ -169,11 +171,22 @@ export default async function NovelDetailPage({
               </div>
 
               <div className="flex flex-wrap gap-2">
-                {storyDetails?.categories.map((category) => (
+                {[
+                  ...storyDetails?.mainCategories,
+                  ...storyDetails?.categories.filter(
+                    (item) =>
+                      item.slug !== storyDetails?.mainCategories?.[0]?.slug
+                  ),
+                ].map((category, idx) => (
                   <BaseTag
-                    href={`/categories/${category.slug}`}
+                    href={`/the-loai/${category.slug}`}
                     key={category.id}
                     name={category.name}
+                    variant={
+                      idx === 0 && storyDetails?.mainCategories?.length
+                        ? "mainCategories"
+                        : "categories"
+                    }
                   />
                 ))}
               </div>
@@ -187,7 +200,7 @@ export default async function NovelDetailPage({
 
               <div className="flex flex-wrap gap-3">
                 {/* <Link
-                  href={`/novels/${storyDetailsRes.data?.data?.slug}/${chaptersRes.data.data?.[0]?.slug}`}
+                  href={`/truyen/${storyDetailsRes.data?.data?.slug}/${chaptersRes.data.data?.[0]?.slug}`}
                   className="rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 px-6 py-2 text-sm font-medium text-white hover:bg-emerald-600"
                 >
                   Đọc ngay

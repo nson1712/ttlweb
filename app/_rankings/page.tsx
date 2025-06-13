@@ -569,7 +569,7 @@ function RankingNovelListItem({
   chapterCount,
 }: RankingNovelProps) {
   return (
-    <Link href={`/novels/${slug}`} key={id}>
+    <Link href={`/truyen/${slug}`} key={id}>
       <motion.div
         whileHover={{ scale: 1.01 }}
         transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -709,7 +709,7 @@ function RankingNovelGridItem({
   chapterCount,
 }: RankingNovelProps) {
   return (
-    <Link href={`/novels/${slug}`} key={id}>
+    <Link href={`/truyen/${slug}`} key={id}>
       <motion.div
         whileHover={{ scale: 1.03 }}
         transition={{ type: "spring", stiffness: 400, damping: 17 }}

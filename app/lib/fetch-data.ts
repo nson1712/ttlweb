@@ -7,8 +7,6 @@ import {
 } from "../interfaces/story";
 import { httpClient } from "../utils/httpClient";
 
-export const totalElementsCache: Record<number, number> = {};
-
 export const fetchStories = async ({
   page,
   pageSize,
@@ -136,13 +134,6 @@ export const fetchPotential = async (
         size: pageSize || 20,
       },
     });
-    if (
-      page === 0 &&
-      typeof res.data?.totalElements === "number" &&
-      typeof pageSize === "number"
-    ) {
-      totalElementsCache[pageSize] = res.data.totalElements;
-    }
     return res;
   } catch (error) {
     console.error("error: ", error);

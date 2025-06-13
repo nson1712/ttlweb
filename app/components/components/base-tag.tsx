@@ -5,13 +5,13 @@ import { FC } from "react";
 type BaseTagProps = {
   href: string;
   name: string;
+  variant: "default" | "secondary" | "outline" | "destructive" | "categories" | "mainCategories";
 };
-export const BaseTag: FC<BaseTagProps> = ({ href, name }) => {
+export const BaseTag: FC<BaseTagProps> = ({ href, name, variant }) => {
   return (
     <Link href={href}>
       <Badge
-        variant="outline"
-        className="bg-gray-700/50 text-xs text-emerald-300 border-emerald-500/20 hover:bg-emerald-900/20 hover:scale-110 transition-all delay-50"
+        variant={variant}
       >
         {name}
       </Badge>

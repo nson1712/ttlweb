@@ -17,7 +17,7 @@ export function SimilarNovelsSection({
       <h2 className="mb-4 text-xl font-bold text-white">Similar Novels</h2>
       <div className="grid grid-cols-2 gap-6 sm:grid-cols-5">
         {novels.map((n) => (
-          <Link key={n.id} href={`/novels/${n.slug}`} className="group block">
+          <Link key={n.id} href={`/truyen/${n.slug}`} className="group block">
             <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-black/30">
               <Image
                 src={n.coverImage}

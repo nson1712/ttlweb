@@ -122,7 +122,7 @@ export default function LatestReadingSection() {
                 asChild
                 className="rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 px-6 py-6 text-sm font-medium text-white hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-emerald-500/20"
               >
-                <Link href={`/novels/${latestReading.novelSlug}/${latestReading.chapterNumber}`}>
+                <Link href={`/truyen/${latestReading.novelSlug}/${latestReading.chapterNumber}`}>
                   Continue Reading <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -132,7 +132,7 @@ export default function LatestReadingSection() {
                 variant="outline"
                 className="rounded-full border-gray-700 text-gray-300 hover:bg-gray-700 hover:text-white"
               >
-                <Link href={`/novels/${latestReading.novelSlug}`}>
+                <Link href={`/truyen/${latestReading.novelSlug}`}>
                   Novel Details
                 </Link>
               </Button>

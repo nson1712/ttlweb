@@ -5,18 +5,20 @@ import { Nunito } from "next/font/google";
 const nunito = Nunito({
   subsets: ["vietnamese"],
   display: "swap",
-  weight: ["1000"]
-})
+  weight: ["1000"],
+});
 
 type MotionTitleProps = {
   title?: string;
   subTitle?: string;
   shortDescription?: string;
+  className?: string;
 };
 export const MotionTitle = ({
   title,
   subTitle,
   shortDescription,
+  className = "",
 }: MotionTitleProps) => {
   return (
     <motion.div
@@ -25,9 +27,11 @@ export const MotionTitle = ({
       transition={{ duration: 0.5 }}
       className="mb-8 text-center"
     >
-      <h1 className={`${nunito.className} text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl`}>
+      <h1
+        className={`${nunito.className} text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl h-fit ${className}`}
+      >
         <span className="block">{title}</span>
-        <span className="block bg-gradient-to-r from-emerald-500 to-teal-600 bg-clip-text text-transparent">
+        <span className="block bg-gradient-to-r from-emerald-500 to-teal-600 bg-clip-text text-transparent pb-2">
           {subTitle}
         </span>
       </h1>

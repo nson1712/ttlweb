@@ -21,7 +21,7 @@ export const WeeklyStory: FC<WeeklyStoryPropsType> = ({ weeklyStory }) => {
           transition={{ duration: 0.5 }}
           className="relative w-full max-w-[200px] aspect-[3/4] overflow-hidden rounded-lg shadow-2xl  hover:scale-105 transition-all duration-200"
         >
-          <Link href={`/novels/${weeklyStory?.slug}`} passHref>
+          <Link href={`/truyen/${weeklyStory?.slug}`} passHref>
             <Image
               src={weeklyStory?.coverImage ?? "/placeholder-cover.jpg"}
               alt={weeklyStory?.title ?? "Truyện đặc sắc trong tuần"}
@@ -45,7 +45,7 @@ export const WeeklyStory: FC<WeeklyStoryPropsType> = ({ weeklyStory }) => {
             <h2 className="text-sm font-medium uppercase tracking-wider text-emerald-400">
               Truyện đặc sắc trong tuần
             </h2>
-            <Link href={`/novels/${weeklyStory?.slug}`} passHref>
+            <Link href={`/truyen/${weeklyStory?.slug}`} passHref>
               <h1 className="text-3xl font-bold text-white md:text-4xl hover:text-emerald-500 transition-colors duration-150">
                 {weeklyStory?.title}
               </h1>
@@ -58,11 +58,17 @@ export const WeeklyStory: FC<WeeklyStoryPropsType> = ({ weeklyStory }) => {
           </div>
 
           <div className="flex flex-wrap gap-2">
-            {weeklyStory?.categories?.map((category) => (
+            {[
+              ...weeklyStory.mainCategories,
+              ...weeklyStory?.categories.filter(
+                (item) => item.slug !== weeklyStory.mainCategories?.[0].slug
+              ),
+            ]?.map((category, idx) => (
               <BaseTag
                 key={category?.id}
-                href={`categories/${category?.slug}`}
+                href={`the-loai/${category?.slug}`}
                 name={category?.name}
+                variant={idx === 0 && weeklyStory.mainCategories?.length ? "mainCategories" : "categories"}
               />
             ))}
           </div>
@@ -86,7 +92,7 @@ export const WeeklyStory: FC<WeeklyStoryPropsType> = ({ weeklyStory }) => {
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <Link href={`/novels/${weeklyStory?.slug}`}>
+            <Link href={`/truyen/${weeklyStory?.slug}`}>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

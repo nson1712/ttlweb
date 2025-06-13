@@ -15,7 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
     },
     {
-      url: baseUrl + "novels/",
+      url: baseUrl + "truyen/",
       changeFrequency: "hourly",
       priority: 0.9,
       lastModified: new Date(),
@@ -25,7 +25,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const dynamicPages: MetadataRoute.Sitemap = stories
     .filter((s) => Boolean(s.slug))
     .map((s) => ({
-      url: `${baseUrl}novels/${s.slug}`, 
+      url: `${baseUrl}truyen/${s.slug}`, 
       lastModified: new Date(s.updatedAt),
       changeFrequency: "weekly",
       priority: 0.8,

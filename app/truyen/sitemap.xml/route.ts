@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
   const urls = stories
     .filter((s) => s.slug)
     .map((s, idx) => {
-      const loc = `${baseUrl}novels/${s.slug}`;
+      const loc = `${baseUrl}truyen/${s.slug}`;
       const lastmod = new Date(s.updatedAt || Date.now()).toISOString();
       const ageInDays =
         (Date.now() - new Date(s.updatedAt || Date.now()).getTime()) /

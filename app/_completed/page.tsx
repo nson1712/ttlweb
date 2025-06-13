@@ -465,7 +465,7 @@ export default function CompletedNovelsPage() {
                     view === "list" && "flex gap-6"
                   )}
                 >
-                  <Link href={`/novels/${novel.slug}`} className="block">
+                  <Link href={`/truyen/${novel.slug}`} className="block">
                     <div className={cn(
                       view === "grid" 
                         ? "flex flex-col" 

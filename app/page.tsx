@@ -4,13 +4,10 @@ import {
   TabsList,
   TabsTrigger,
 } from "../app/components/ui/tabs";
-import { NovelCard } from "../app/components/novels/novel-card";
 import Image from "next/image";
 import { CategoriesTagsSection } from "./components/components/categories-tags-section";
 import { Sparkles } from "lucide-react";
 import Link from "next/link";
-import Head from "next/head";
-import Script from "next/script";
 import { WeeklyStory } from "./components/components/weekly-story";
 import { PotentialStarletSection } from "./components/components/potential-starlet-section";
 import { RankingSection } from "./components/components/ranking-section";
@@ -29,6 +26,7 @@ import {
   fetchRanking,
   fetchWeekly,
 } from "./lib/fetch-data";
+import { NovelCard } from "./components/novels/novel-card";
 
 export default async function HomePage() {
   const [
@@ -57,26 +55,9 @@ export default async function HomePage() {
     fetchCategories(),
   ]);
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    name: "Discover Your Next Reading Adventure",
-    description:
-      "Explore thousands of novels across all your favorite genres. Start your reading journey today on Tàng Thư Lâu!",
-    url: "https://truyenabc.site/",
-  };
+  console.log("Weekly Res:", weeklyRes);
 
   return (
-    <>
-      <Head>
-        <link rel="canonical" href="https://truyenabc.site/" />
-      </Head>
-      <Script
-        id="json-ld"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-
       <div className="space-y-8">
         <MotionTitle title="Khám phá kho truyện" subTitle="Đầy mê hoặc" />
         <WeeklyStory weeklyStory={weeklyRes?.data?.[0]} />
@@ -89,7 +70,7 @@ export default async function HomePage() {
           <div className="col-span-4">
             <GreenLineTitle title="Mới cập nhật" />
             <RecentUpdates recentUpdates={recentUpdatesRes?.data ?? []} />
-            <LinkButton href="/updates" label="Xem thêm" />
+            <LinkButton href="/moi-cap-nhat" label="Xem thêm" />
           </div>
           <Tabs defaultValue="best-novels" className="w-full col-span-2">
             <div className="flex justify-between items-center mb-4">
@@ -104,7 +85,7 @@ export default async function HomePage() {
             <TabsContent value="best-novels">
               <div className="flex flex-col gap-y-2">
                 {bestStoriesRes.data.data.map((novel: StoryType) => (
-                  <Link href={`/novels/${novel?.slug}`} key={novel?.id}>
+                  <Link href={`/truyen/${novel?.slug}`} key={novel?.id}>
                     <div
                       key={novel?.id}
                       className="flex items-center gap-4 bg-gradient-to-br from-gray-800/90 to-gray-900 shadow-md hover:shadow-lg p-3 rounded-lg min-w-72 hover:scale-102 transition-transform duration-200"
@@ -134,7 +115,7 @@ export default async function HomePage() {
 
             <TabsContent value="most-discussed" className="space-y-4">
               {/* {bestNovels.map((novel) => (
-                <Link href="/novels/lord-mysteries" key={novel?.id}>
+                <Link href="/truyen/lord-mysteries" key={novel?.id}>
                   <div
                     key={novel?.id}
                     className="flex items-center gap-4 bg-gradient-to-br from-gray-800/90 to-gray-900 shadow-md hover:shadow-lg p-3 rounded-lg min-w-72 hover:scale-102 transition-transform duration-200"
@@ -174,16 +155,15 @@ export default async function HomePage() {
               <NovelCard key={novel?.id} {...novel} />
             ))}
           </div>
-          <LinkButton href="/featured" label="Xem thêm" />
+          <LinkButton href="/truyen-dac-sac" label="Xem thêm" />
         </section>
 
         <section className="mb-12">
           <CategoriesTagsSection
             categories={categoriesRes.slice(0, 12) ?? []}
           />
-          <LinkButton href="/categories" label="Xem thêm" />
+          <LinkButton href="/the-loai" label="Xem thêm" />
         </section>
       </div>
-    </>
   );
 }

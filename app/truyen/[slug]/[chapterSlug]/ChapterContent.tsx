@@ -65,10 +65,10 @@ export default function ChapterContent({
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
-          <BreadcrumbItem>
+          <BreadcrumbItem className="flex-1 line-clamp-1">
             <BreadcrumbLink
               className="text-gray-400 hover:text-emerald-500"
-              href={`/novels/${storySlug}`}
+              href={`/truyen/${storySlug}`}
             >
               {storyTitle}
             </BreadcrumbLink>
@@ -84,7 +84,7 @@ export default function ChapterContent({
       <h1 className="text-2xl sm:text-3xl font-bold flex justify-center">
         {details.title}
       </h1>
-      <div>
+      <div className="space-y-3">
         {contents.map((c, idx) => (
           <p key={idx}>{c.content}</p>
         ))}
@@ -107,7 +107,7 @@ export default function ChapterContent({
 
       <div className="mt-10 flex justify-between">
         <Link
-          href={prevSlug ? `/novels/${storySlug}/${prevSlug}` : "#"}
+          href={prevSlug ? `/truyen/${storySlug}/${prevSlug}` : "#"}
           className={cn(
             "hidden sm:flex items-center py-2 px-3 rounded font-medium select-none bg-gradient-to-r from-emerald-500 to-teal-600",
             !prevSlug && "pointer-events-none opacity-50"
@@ -117,7 +117,7 @@ export default function ChapterContent({
         </Link>
 
         <Link
-          href={prevSlug ? `/novels/${storySlug}/${prevSlug}` : "#"}
+          href={prevSlug ? `/truyen/${storySlug}/${prevSlug}` : "#"}
           className={cn(
             "flex sm:hidden items-center py-2 px-3 rounded font-medium select-none bg-gradient-to-r from-emerald-500 to-teal-600",
             !prevSlug && "pointer-events-none opacity-50"
@@ -156,7 +156,7 @@ export default function ChapterContent({
         </Dialog>
 
         <Link
-          href={nextSlug ? `/novels/${storySlug}/${nextSlug}` : "#"}
+          href={nextSlug ? `/truyen/${storySlug}/${nextSlug}` : "#"}
           className={cn(
             "hidden sm:flex items-center py-2 px-3 rounded font-medium select-none bg-gradient-to-r from-emerald-500 to-teal-600",
             !nextSlug && "pointer-events-none opacity-50"
@@ -165,7 +165,7 @@ export default function ChapterContent({
           Chương tiếp <ChevronRight />
         </Link>
         <Link
-          href={nextSlug ? `/novels/${storySlug}/${nextSlug}` : "#"}
+          href={nextSlug ? `/truyen/${storySlug}/${nextSlug}` : "#"}
           className={cn(
             "flex sm:hidden items-center py-2 px-3 rounded font-medium select-none bg-gradient-to-r from-emerald-500 to-teal-600",
             !nextSlug && "pointer-events-none opacity-50"
