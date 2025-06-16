@@ -1,13 +1,11 @@
 import Link from "next/link";
 import {
-  ChevronLeft,
-  Tag as TagIcon,
   Filter,
   SortAsc,
   SortDesc,
 } from "lucide-react";
 import { NovelCard } from "../../components/novels/novel-card";
-import { capitalizeFirstLetter, cn } from "../../lib/utils";
+import { cn } from "../../lib/utils";
 import { PaginationWithLinks } from "@/app/components/components/pagination";
 import { colorClasses } from "@/app/lib/store-data";
 import { CategoryType } from "@/app/lib/types";
@@ -15,6 +13,7 @@ import { Suspense } from "react";
 import Loading from "../../components/components/loading";
 import { NotFound } from "@/app/components/components/not-found";
 import { fetchCategories, fetchStories } from "@/app/lib/fetch-data";
+import { StoryByCategoryHeader } from "@/app/components/components/story-by-category-header";
 
 export default async function TagDetailPage({
   params,
@@ -81,36 +80,8 @@ export default async function TagDetailPage({
     <div className="min-h-screen">
       <div className="mx-auto max-w-7xl">
         {/* Header */}
-        <div className="mb-8">
-          <Link
-            href="/the-loai"
-            className="mb-4 inline-flex items-center text-sm font-medium text-emerald-400 hover:text-emerald-300"
-          >
-            <ChevronLeft className="mr-1 h-4 w-4" />
-            Danh sách thể loại
-          </Link>
 
-          <div className="flex items-center gap-3">
-            <div
-              className={cn(
-                "flex h-12 w-12 items-center justify-center rounded-lg border bg-gradient-to-br",
-                finalColorClasses
-              )}
-            >
-              <TagIcon className="h-6 w-6" />
-            </div>
-            <h1 className="text-3xl font-bold text-white">
-              {capitalizeFirstLetter(selectedCategory?.name)}
-            </h1>
-            <span className="rounded-full bg-gray-800 px-3 py-1 text-sm font-medium text-gray-300">
-              {storiesRes.data.totalElements} truyện
-            </span>
-          </div>
-
-          <p className="mt-2 text-gray-400">
-            Danh sách truyện {capitalizeFirstLetter(selectedCategory?.name)}
-          </p>
-        </div>
+        <StoryByCategoryHeader categoryName={selectedCategory?.name} finalColorClasses={finalColorClasses} totalStories={storiesRes.data?.totalElements} />
 
         {/* Filters and Sort */}
         <div className="mb-6 flex flex-col gap-4 rounded-xl bg-gray-800/50 p-4 backdrop-blur-sm sm:flex-row sm:items-center sm:justify-between">

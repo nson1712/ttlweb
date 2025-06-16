@@ -661,7 +661,6 @@ export async function generateMetadata({
   });
 
   const chapterData = chapRes.data;
-  console.log("CHAPTER DATA: ", chapterData)
 
   const storyData = storyRes.data;
 
@@ -712,7 +711,7 @@ export default async function ChapterDetailPage({
   const storyDetailsRes = await fetchStoryDetails(slug);
 
   return (
-    <Suspense fallback={<Loading />}>
+      <Suspense fallback={<Loading />}>
       <ChapterContent
         storySlug={slug}
         storyTitle={storyDetailsRes?.data?.data?.title}

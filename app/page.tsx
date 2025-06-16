@@ -4,10 +4,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "../app/components/ui/tabs";
-import Image from "next/image";
 import { CategoriesTagsSection } from "./components/components/categories-tags-section";
-import { Sparkles } from "lucide-react";
-import Link from "next/link";
 import { WeeklyStory } from "./components/components/weekly-story";
 import { PotentialStarletSection } from "./components/components/potential-starlet-section";
 import { RankingSection } from "./components/components/ranking-section";
@@ -15,7 +12,6 @@ import { RecentUpdates } from "./components/components/recently-updated";
 import { LinkButton } from "./components/components/link-btn";
 import { GreenLineTitle } from "./components/components/green-line-title";
 import { StoryType } from "./types/story";
-import { StarRate } from "./components/components/star-rate";
 import { MotionTitle } from "./components/components/motion-title";
 import {
   fetchBestStories,
@@ -26,7 +22,8 @@ import {
   fetchRanking,
   fetchWeekly,
 } from "./lib/fetch-data";
-import { NovelCard } from "./components/novels/novel-card";
+import { TabCard } from "./components/components/tab-card";
+import { FeaturedSection } from "./components/components/featured-section";
 
 export default async function HomePage() {
   const [
@@ -55,66 +52,41 @@ export default async function HomePage() {
     fetchCategories(),
   ]);
 
-  console.log("Weekly Res:", weeklyRes);
-
   return (
-      <div className="space-y-8">
-        <MotionTitle title="Khám phá kho truyện" subTitle="Đầy mê hoặc" />
-        <WeeklyStory weeklyStory={weeklyRes?.data?.[0]} />
-        <PotentialStarletSection
-          potentialStarlets={potentialRes?.data?.data ?? []}
-        />
-        <RankingSection rankingNovels={rankingRes?.data ?? []} />
+    <div className="space-y-8">
+      <MotionTitle title="Khám phá kho truyện" subTitle="Đầy mê hoặc" />
+      <WeeklyStory weeklyStory={weeklyRes?.data?.[0]} />
+      <PotentialStarletSection
+        potentialStarlets={potentialRes?.data?.data ?? []}
+      />
+      <RankingSection rankingNovels={rankingRes?.data ?? []} />
 
-        <section className="md:grid md:grid-cols-6 gap-x-4 space-y-4 md:space-y-0">
-          <div className="col-span-4">
-            <GreenLineTitle title="Mới cập nhật" />
-            <RecentUpdates recentUpdates={recentUpdatesRes?.data ?? []} />
-            <LinkButton href="/moi-cap-nhat" label="Xem thêm" />
+      <section className="md:grid md:grid-cols-6 gap-x-4 space-y-4 md:space-y-0">
+        <div className="col-span-4">
+          <GreenLineTitle title="Mới cập nhật" />
+          <RecentUpdates recentUpdates={recentUpdatesRes?.data ?? []} />
+          <LinkButton href="/moi-cap-nhat" label="Xem thêm" />
+        </div>
+        <Tabs defaultValue="best-novels" className="w-full col-span-2">
+          <div className="flex justify-between items-center mb-4">
+            <TabsList>
+              <TabsTrigger className="data-[state=active]:text-white" value="best-novels">Truyện hay nhất</TabsTrigger>
+              <TabsTrigger className="data-[state=active]:text-white" value="most-discussed">
+                Thảo luận nhiều nhất
+              </TabsTrigger>
+            </TabsList>
           </div>
-          <Tabs defaultValue="best-novels" className="w-full col-span-2">
-            <div className="flex justify-between items-center mb-4">
-              <TabsList>
-                <TabsTrigger value="best-novels">Truyện hay nhất</TabsTrigger>
-                <TabsTrigger value="most-discussed">
-                  Thảo luận nhiều nhất
-                </TabsTrigger>
-              </TabsList>
+
+          <TabsContent value="best-novels">
+            <div className="flex flex-col gap-y-2">
+              {bestStoriesRes.data.data?.map((novel: StoryType) => (
+                <TabCard key={novel?.id} novel={novel} />
+              ))}
             </div>
+          </TabsContent>
 
-            <TabsContent value="best-novels">
-              <div className="flex flex-col gap-y-2">
-                {bestStoriesRes.data.data.map((novel: StoryType) => (
-                  <Link href={`/truyen/${novel?.slug}`} key={novel?.id}>
-                    <div
-                      key={novel?.id}
-                      className="flex items-center gap-4 bg-gradient-to-br from-gray-800/90 to-gray-900 shadow-md hover:shadow-lg p-3 rounded-lg min-w-72 hover:scale-102 transition-transform duration-200"
-                    >
-                      <Image
-                        src={novel?.coverImage}
-                        alt={novel?.title}
-                        className="object-cover rounded-md"
-                        unoptimized
-                        width={50}
-                        height={50}
-                      />
-                      <div className="flex-1">
-                        <h3 className="font-medium text-emerald-400 line-clamp-2">
-                          {novel?.title}
-                        </h3>
-                        <p className="text-sm text-gray-400">
-                          {novel?.author?.name}
-                        </p>
-                        <StarRate rate={novel?.rate} />
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </TabsContent>
-
-            <TabsContent value="most-discussed" className="space-y-4">
-              {/* {bestNovels.map((novel) => (
+          <TabsContent value="most-discussed" className="space-y-4">
+            {/* {bestNovels.map((novel) => (
                 <Link href="/truyen/lord-mysteries" key={novel?.id}>
                   <div
                     key={novel?.id}
@@ -141,29 +113,15 @@ export default async function HomePage() {
                   </div>
                 </Link>
               ))} */}
-            </TabsContent>
-          </Tabs>
-        </section>
+          </TabsContent>
+        </Tabs>
+      </section>
 
-        <section>
-          <div className="my-6 flex items-center">
-            <Sparkles className="mr-2 h-5 w-5 text-emerald-400" />
-            <h2 className="text-2xl font-bold text-white">Truyện đặc sắc</h2>
-          </div>
-          <div className="space-y-4">
-            {featuredRes.data.data.map((novel: StoryType) => (
-              <NovelCard key={novel?.id} {...novel} />
-            ))}
-          </div>
-          <LinkButton href="/truyen-dac-sac" label="Xem thêm" />
-        </section>
-
-        <section className="mb-12">
-          <CategoriesTagsSection
-            categories={categoriesRes.slice(0, 12) ?? []}
-          />
-          <LinkButton href="/the-loai" label="Xem thêm" />
-        </section>
-      </div>
+      <FeaturedSection feturedStories={featuredRes?.data?.data} />
+      <section className="mb-12">
+        <CategoriesTagsSection categories={categoriesRes.slice(0, 12) ?? []} />
+        <LinkButton href="/the-loai" label="Xem thêm" />
+      </section>
+    </div>
   );
 }
