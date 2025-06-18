@@ -672,56 +672,117 @@ export async function generateMetadata({
   };
 }
 
+// export default async function ChapterDetailPage({
+//   params,
+//   searchParams,
+// }: {
+//   params: Promise<{ slug: string; chapterSlug: string }>;
+//   searchParams: Promise<{
+//     page?: number | undefined;
+//     pageSize?: number | undefined;
+//   }>;
+// }) {
+//   const { slug, chapterSlug } = await params;
+//   const { page, pageSize } = await searchParams;
+//   const isId = /^\d+$/.test(chapterSlug);
+//   const detailResp = isId
+//     ? await fetchById(Number(chapterSlug))
+//     : await fetchBySlug({
+//         slug: slug,
+//         chapterSlug: chapterSlug,
+//       });
+//   const detail = detailResp.data;
+
+//   const prevSlug = detail.prevChapterId
+//     ? (await fetchById(detail.prevChapterId)).data.slug
+//     : null;
+//   const nextSlug = detail.nextChapterId
+//     ? (await fetchById(detail.nextChapterId)).data.slug
+//     : null;
+
+//   const contentsResp = await fetchContents(Number(detail.id));
+
+//   const chaptersList = await fetchChapters({
+//     storyId: Number(detail.storyId),
+//     page: page ?? 0,
+//     pageSize: pageSize ?? 50,
+//   });
+
+//   const storyDetailsRes = await fetchStoryDetails(slug);
+
+//   return (
+//       <Suspense fallback={<Loading />}>
+//       <ChapterContent
+//         storySlug={slug}
+//         storyTitle={storyDetailsRes?.data?.data?.title}
+//         chapterSlug={detail.slug}
+//         details={detail}
+//         contents={contentsResp.data}
+//         prevSlug={prevSlug}
+//         nextSlug={nextSlug}
+//         chaptersList={chaptersList}
+//       />
+//     </Suspense>
+//   );
+// }
+
 export default async function ChapterDetailPage({
   params,
   searchParams,
 }: {
   params: Promise<{ slug: string; chapterSlug: string }>;
-  searchParams: Promise<{
-    page?: number | undefined;
-    pageSize?: number | undefined;
-  }>;
+  searchParams: Promise<{ page?: number; pageSize?: number }>;
 }) {
   const { slug, chapterSlug } = await params;
-  const { page, pageSize } = await searchParams;
   const isId = /^\d+$/.test(chapterSlug);
-  const detailResp = isId
-    ? await fetchById(Number(chapterSlug))
-    : await fetchBySlug({
-        slug: slug,
-        chapterSlug: chapterSlug,
-      });
-  const detail = detailResp.data;
 
-  const prevSlug = detail.prevChapterId
-    ? (await fetchById(detail.prevChapterId)).data.slug
-    : null;
-  const nextSlug = detail.nextChapterId
-    ? (await fetchById(detail.nextChapterId)).data.slug
-    : null;
+  // 1) Khởi động song song chi tiết, story và chaptersList
+  const detailPromise = isId
+    ? fetchById(Number(chapterSlug))
+    : fetchBySlug({ slug, chapterSlug });
 
-  const contentsResp = await fetchContents(Number(detail.id));
-
-  const chaptersList = await fetchChapters({
-    storyId: Number(detail.storyId),
-    page: page ?? 0,
-    pageSize: pageSize ?? 50,
+  const storyDetailsPromise = fetchStoryDetails(slug);
+  const chaptersListPromise  = fetchChapters({
+    storyId: Number((await detailPromise).data.storyId), // nhớ sửa lại cho dùng detailPromise sau
+    page: (await searchParams).page ?? 0,
+    pageSize: (await searchParams).pageSize ?? 50,
   });
 
-  const storyDetailsRes = await fetchStoryDetails(slug);
+  // Chờ detail xong để biết detail.id, prev/nextId
+  const detailResp = await detailPromise;
+  const detail = detailResp.data;
+
+  // 2) Với detail.id xong, khởi động tiếp các fetch còn lại song song
+  const contentsPromise = fetchContents(Number(detail.id));
+  const prevPromise     = detail.prevChapterId ? fetchById(detail.prevChapterId) : Promise.resolve(null);
+  const nextPromise     = detail.nextChapterId ? fetchById(detail.nextChapterId) : Promise.resolve(null);
+
+  // 3) Chờ tất cả cùng lúc
+  const [ contentsResp, prevResp, nextResp, chaptersListRes, storyDetailsRes ] =
+    await Promise.all([
+      contentsPromise,
+      prevPromise,
+      nextPromise,
+      chaptersListPromise,
+      storyDetailsPromise,
+    ]);
+
+  const prevSlug = prevResp?.data?.slug ?? null;
+  const nextSlug = nextResp?.data?.slug ?? null;
 
   return (
-      <Suspense fallback={<Loading />}>
+    <Suspense fallback={<Loading />}>
       <ChapterContent
         storySlug={slug}
-        storyTitle={storyDetailsRes?.data?.data?.title}
+        storyTitle={storyDetailsRes.data.data.title}
         chapterSlug={detail.slug}
         details={detail}
         contents={contentsResp.data}
         prevSlug={prevSlug}
         nextSlug={nextSlug}
-        chaptersList={chaptersList}
+        chaptersList={chaptersListRes}
       />
     </Suspense>
   );
 }
+

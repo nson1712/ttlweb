@@ -1,8 +1,5 @@
 import Link from "next/link";
-import {
-  ChevronRight,
-
-} from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 import { StoryDetailsApiResponse } from "@/app/interfaces/story";
 import { httpClient } from "@/app/utils/httpClient";
@@ -85,7 +82,10 @@ export default async function NovelDetailPage({
           </nav>
         </div>
 
-        <NovelDetailsHeader storyDetails={storyDetails} totalChapters={chaptersRes.data?.totalElements} />
+        <NovelDetailsHeader
+          storyDetails={storyDetails}
+          totalChapters={chaptersRes.data?.totalElements}
+        />
 
         <StoryInfoTab chapters={chaptersRes} storyDetails={storyDetails} />
       </div>

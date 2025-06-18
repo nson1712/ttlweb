@@ -18,7 +18,7 @@ export const TabCard: FC<TabCardProps> = ({ novel }) => {
   const cardBgMap: Record<Theme, string> = {
     light: "bg-gray-100 hover:bg-gray-200",
     dark: "bg-gray-800 hover:bg-gray-700",
-    sepia: "bg-[#e0ceb0] hover:bg-[#e0ceb0]/50",
+    sepia: "bg-[#efe2c0] hover:bg-[#efe2c0]/50",
   };
 
   const titleMap: Record<Theme, string> = {

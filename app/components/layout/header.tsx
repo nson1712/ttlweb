@@ -92,7 +92,7 @@ export function Header() {
   // Bản đồ cho mobile-nav container
   const mobileNavBg: Record<Theme, string> = {
     light: "bg-white border-gray-200",
-    dark: "bg-gray-800/50 border-gray-700/50",
+    dark: "bg-gray-900 border-gray-700/50",
     sepia: "bg-[#f8f1e3] border-[#e8d9c0]/50",
   };
 
