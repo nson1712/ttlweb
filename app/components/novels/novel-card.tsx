@@ -40,21 +40,23 @@ export function NovelCard({
 }: NovelCardProps) {
   const { theme } = useContext(SettingsContext);
   const cardBgMap: Record<Theme, string> = {
-
     light: "bg-gray-100 hover:bg-gray-200",
     dark:  "bg-gray-800 hover:bg-gray-700",
     sepia: "bg-[#efe2c0] hover:bg-[#e0ceb0]",
   };
+
   const titleMap: Record<Theme, string> = {
     light: "text-gray-900 hover:text-emerald-600",
     dark:  "text-emerald-400 hover:text-emerald-300",
     sepia: "text-[#5f4b32] hover:text-emerald-500",
   };
+
   const authorMap: Record<Theme, string> = {
     light: "text-gray-700",
     dark:  "text-gray-300",
     sepia: "text-[#7a6f49]",
   };
+
   const metaMap: Record<Theme, string> = {
     light: "text-gray-500",
     dark:  "text-gray-500",
@@ -66,6 +68,7 @@ export function NovelCard({
     dark:  "bg-emerald-500 hover:bg-emerald-600 text-white",
     sepia: "bg-emerald-500 hover:bg-emerald-600 text-white",
   };
+  
   const lineMap: Record<Theme, string> = {
     light: "from-emerald-600 to-teal-600",
     dark:  "from-emerald-500 to-teal-500",

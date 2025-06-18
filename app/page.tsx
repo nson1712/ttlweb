@@ -5,7 +5,6 @@ import {
   TabsTrigger,
 } from "../app/components/ui/tabs";
 import { CategoriesTagsSection } from "./components/components/categories-tags-section";
-import { WeeklyStory } from "./components/components/weekly-story";
 import { PotentialStarletSection } from "./components/components/potential-starlet-section";
 import { RankingSection } from "./components/components/ranking-section";
 import { RecentUpdates } from "./components/components/recently-updated";
@@ -24,6 +23,7 @@ import {
 } from "./lib/fetch-data";
 import { TabCard } from "./components/components/tab-card";
 import { FeaturedSection } from "./components/components/featured-section";
+import { WeeklyStoryCarousel } from "./components/components/weekly-story-carousel";
 
 export default async function HomePage() {
   const [
@@ -55,7 +55,7 @@ export default async function HomePage() {
   return (
     <div className="space-y-8">
       <MotionTitle title="Khám phá kho truyện" subTitle="Đầy mê hoặc" />
-      <WeeklyStory weeklyStory={weeklyRes?.data?.[0]} />
+      <WeeklyStoryCarousel weeklyStories={weeklyRes?.data ?? []} />
       <PotentialStarletSection
         potentialStarlets={potentialRes?.data?.data ?? []}
       />
