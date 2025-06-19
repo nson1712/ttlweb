@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { FC, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { CategoryType, FilterOptions } from "@/app/lib/types";
 import {
   createFilter,
@@ -20,6 +20,7 @@ import {
   parseFilterString,
 } from "@/app/lib/utils";
 import { useSearch } from "@/app/context/search-context";
+import { SettingsContext, Theme } from "@/app/context/setting-context";
 
 const getInitialFilterOptions = (
   searchParams: URLSearchParams
@@ -53,11 +54,37 @@ export const Filter: FC<FilterProps> = ({
   searchKey = "searchTerm",
   categories,
 }) => {
+  const { theme } = useContext(SettingsContext);
   const router = useRouter();
   const searchParams = useSearchParams();
   const { searchTerm, setSearchTerm } = useSearch();
 
-  // Nếu URL có ?adv=true thì mở Advanced
+  const wrapperBg: Record<Theme, string> = {
+    light: "bg-white",
+    dark: "bg-gray-800",
+    sepia: "bg-[#f8f1e3]",
+  };
+  const inputBg: Record<Theme, string> = {
+    light: "bg-gray-100 placeholder-gray-500",
+    dark: "bg-gray-700 placeholder-gray-400",
+    sepia: "bg-[#efe2c7] placeholder-[#7a6f49]",
+  };
+  const inputText: Record<Theme, string> = {
+    light: "text-gray-900",
+    dark: "text-white",
+    sepia: "text-[#5f4b32]",
+  };
+  const borderColor: Record<Theme, string> = {
+    light: "border-gray-300",
+    dark: "border-gray-600",
+    sepia: "border-[#d1b97e]",
+  };
+  const labelText: Record<Theme, string> = {
+    light: "text-gray-700",
+    dark: "text-gray-300",
+    sepia: "text-[#7a6f49]",
+  };
+
   const [showAdvancedFilters, setShowAdvancedFilters] = useState<boolean>(
     () => {
       return searchParams.get("adv") === "true";
@@ -66,7 +93,6 @@ export const Filter: FC<FilterProps> = ({
 
   const [isClient, setIsClient] = useState(false);
 
-  // Khởi tạo filterOptions từ URL
   const [filterOptions, setFilterOptions] = useState<FilterOptions>(() =>
     getInitialFilterOptions(searchParams)
   );
@@ -224,27 +250,37 @@ export const Filter: FC<FilterProps> = ({
   };
 
   return (
-    <div className="bg-gray-800 p-4 rounded-lg">
+    <div className={`${wrapperBg[theme ?? "dark"]} p-4 rounded-lg`}>
       <div className="w-full lg:flex space-y-4 lg:space-y-0 items-end gap-4 mb-4">
         <div className="w-full">
-          <Label htmlFor="search">Tìm kiếm</Label>
+          <Label className={labelText[theme ?? "dark"]} htmlFor="search">
+            Tìm kiếm
+          </Label>
           <Input
             id="search"
             placeholder="Nhập từ khóa..."
             value={filterOptions.searchTerm}
             onChange={handleSearchChange}
-            className="bg-gray-700 text-white border-gray-600"
+            className={`
+              ${inputBg[theme ?? "dark"]} ${inputText[theme ?? "dark"]} 
+              border ${borderColor[theme ?? "dark"]}
+            `}
           />
         </div>
         <div className="w-full">
-          <Label htmlFor="categories">Thể loại</Label>
+          <Label className={labelText[theme ?? "dark"]} htmlFor="categories">
+            Thể loại
+          </Label>
           <Input
             id="categories"
             placeholder="Tiên hiệp, Kiếm hiệp,..."
             value={getCategoryNamesFromSlugs(filterOptions.categories)}
             readOnly
             onClick={() => setShowAdvancedFilters(true)}
-            className="bg-gray-700 text-white border-gray-600"
+            className={`
+              ${inputBg[theme ?? "dark"]} ${inputText[theme ?? "dark"]}
+              border ${borderColor[theme ?? "dark"]}
+            `}
           />
         </div>
 
@@ -263,20 +299,20 @@ export const Filter: FC<FilterProps> = ({
         <div className="flex gap-x-4">
           <Button
             onClick={toggleAdvanced}
-            className="bg-gradient-to-br from-blue-500 to-blue-600"
+            className="bg-gradient-to-br from-blue-500 to-blue-600 text-white"
           >
             {isClient && showAdvancedFilters ? "ẨN BỚT" : "HIỆN THÊM"}
           </Button>
 
           <Button
-            className="bg-gradient-to-r from-emerald-500 to-teal-600"
+            className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white"
             onClick={applySearch}
           >
             TÌM KIẾM
           </Button>
 
           <Button
-            className="bg-gradient-to-br from-red-400 to-red-500"
+            className="bg-gradient-to-br from-red-400 to-red-500 text-white"
             onClick={resetFilters}
           >
             ĐẶT LẠI
@@ -293,17 +329,25 @@ export const Filter: FC<FilterProps> = ({
             <div className="grid grid-cols-2 sm:grid-cols-6 gap-2 mt-2 max-h-52 overflow-y-auto">
               {categories
                 ?.filter((item) => item.slug !== "nu-cuong")
-                ?.map((cate) => (
-                  <div key={cate.id} className="flex items-center space-x-2">
-                    <Checkbox
-                      id={`cate-${cate}`}
-                      className="cursor-pointer border-gray-600 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-emerald-400 data-[state=checked]:to-teal-500"
-                      checked={filterOptions.categories.includes(cate.slug)}
-                      onCheckedChange={() => toggleCategories(cate.slug)}
-                    />
-                    <Label className="text-sm">{cate.name}</Label>
-                  </div>
-                ))}
+                ?.map((cate) => {
+                  const checkboxId = `cate-${cate.slug}`;
+                  return (
+                    <div key={cate.id} className="flex items-center space-x-2">
+                      <Checkbox
+                        id={checkboxId}
+                        className="cursor-pointer border-gray-600 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-emerald-400 data-[state=checked]:to-teal-500"
+                        checked={filterOptions.categories.includes(cate.slug)}
+                        onCheckedChange={() => toggleCategories(cate.slug)}
+                      />
+                      <Label
+                        htmlFor={checkboxId}
+                        className="text-sm cursor-pointer"
+                      >
+                        {cate.name}
+                      </Label>
+                    </div>
+                  );
+                })}
             </div>
           </div>
 
@@ -336,13 +380,30 @@ export const Filter: FC<FilterProps> = ({
               value={filterOptions.status || "COMPLETED"}
               onValueChange={handleTranslateStatusChange}
             >
-              <SelectTrigger className="bg-gray-700 text-white border-gray-600">
+              <SelectTrigger
+                className={`
+                  ${inputBg[theme ?? "dark"]} ${inputText[theme ?? "dark"]}
+                  border ${borderColor[theme ?? "dark"]}
+                `}
+              >
                 <SelectValue placeholder="HOÀN THÀNH" />
               </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="COMPLETED">HOÀN THÀNH</SelectItem>
-                <SelectItem value="ONGOING">ĐANG RA</SelectItem>
-                <SelectItem value="DROP">DROP</SelectItem>
+              <SelectContent className={`bg-${wrapperBg[theme ?? "dark"]}`}>
+                {["COMPLETED", "ONGOING", "DROP"].map((val) => (
+                  <SelectItem
+                    className={`${
+                      labelText[theme ?? "dark"]
+                    } data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-emerald-400 data-[state=checked]:to-teal-500 data-[state=checked]:text-white`}
+                    key={val}
+                    value={val}
+                  >
+                    {val === "COMPLETED"
+                      ? "HOÀN THÀNH"
+                      : val === "ONGOING"
+                      ? "ĐANG RA"
+                      : "DROP"}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>

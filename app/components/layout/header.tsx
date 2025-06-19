@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -38,6 +38,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "../../lib/utils";
 import Image from "next/image";
 import { useSearch } from "@/app/context/search-context";
+import { SettingsContext, Theme } from "@/app/context/setting-context";
+import { SettingsPanel } from "../components/setting-panel";
 
 export function Header() {
   const router = useRouter();
@@ -46,11 +48,75 @@ export function Header() {
     isLoggedIn,
     //  logout
   } = useAuth();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
   // const [ notifications ] = useState(3);
-  const {searchTerm, setSearchTerm} = useSearch()
+  const { searchTerm, setSearchTerm } = useSearch();
+  const { theme } = useContext(SettingsContext);
+
+  const headerClasses: Record<Theme, string> = {
+    light: "bg-white text-gray-900/95 backdrop-blur-md shadow-lg",
+    dark: "bg-gray-900/95 text-white backdrop-blur-md shadow-lg",
+    sepia: "bg-[#f8f1e3]/95 text-[#5f4b32] backdrop-blur-md shadow-lg",
+  };
+
+  const logoGradientMap: Record<Theme, string> = {
+    light: "from-gray-900 to-gray-700",
+    dark: "from-white to-gray-300",
+    sepia: "from-[#5f4b32] to-[#7a6f49]",
+  };
+
+  const mobileSearchBg: Record<Theme, string> = {
+    light: "bg-white text-gray-900",
+    dark: "bg-gray-900 text-white",
+    sepia: "bg-[#f8f1e3] text-[#5f4b32]",
+  };
+
+  // Bản đồ cho input
+  const mobileInputBg: Record<Theme, string> = {
+    light: "bg-gray-100 placeholder-gray-500 ring-gray-400",
+    dark: "bg-gray-800 placeholder-gray-400 ring-emerald-500",
+    sepia: "bg-[#efe2c7] placeholder-[#7a6f49] ring-[#d1b97e]",
+  };
+
+  // Bản đồ cho button tìm kiếm
+  const mobileBtnBg: Record<Theme, string> = {
+    light: "bg-emerald-500 hover:bg-emerald-600 text-white",
+    dark: "bg-emerald-400 hover:bg-emerald-500 text-white",
+    sepia: "bg-emerald-300 hover:bg-emerald-400 text-white",
+  };
+
+  // Bản đồ cho mobile-nav container
+  const mobileNavBg: Record<Theme, string> = {
+    light: "bg-white border-gray-200",
+    dark: "bg-gray-900 border-gray-700/50",
+    sepia: "bg-[#f8f1e3] border-[#e8d9c0]/50",
+  };
+
+  // Bản đồ cho text item
+  const mobileNavText: Record<Theme, string> = {
+    light: "text-gray-700 hover:text-gray-900 hover:bg-gray-100",
+    dark: "text-gray-200 hover:text-white hover:bg-gray-800/50",
+    sepia: "text-[#5f4b32] hover:text-[#7a6f49] hover:bg-[#f8f1e3]/50",
+  };
+
+  const desktopInputMap: Record<Theme, string> = {
+    light:
+      "bg-gray-100 text-gray-900 border-gray-300 placeholder-gray-500 focus:ring-gray-400",
+    dark: "bg-gray-800 text-white border-gray-700 placeholder-gray-400 focus:ring-emerald-500",
+    sepia:
+      "bg-[#efe2c7] text-[#5f4b32] border-[#e8d9c0] placeholder-[#7a6f49] focus:ring-[#d1b97e]",
+  };
+
+  // Map màu cho icon chung
+  const iconColorMap: Record<Theme, string> = {
+    light: "text-gray-700",
+    dark: "text-gray-200",
+    sepia: "text-[#5f4b32]",
+  };
 
   // Handle scroll effect
   useEffect(() => {
@@ -80,26 +146,68 @@ export function Header() {
   //   router.push("/");
   // };
 
+  const textColorMap: Record<Theme, { base: string; hover: string }> = {
+    light: {
+      base: "text-gray-700",
+      hover: "hover:bg-gray-100 hover:text-gray-900",
+    },
+    dark: {
+      base: "text-gray-200",
+      hover: "hover:bg-gray-800 hover:text-white",
+    },
+    sepia: {
+      base: "text-[#5f4b32]",
+      hover: "hover:bg-[#f8f1e3] hover:text-[#7a6f49]",
+    },
+  };
+
+  const navLinkText = textColorMap[theme ?? "dark"];
+
   return (
     <header
       className={cn(
         "sticky top-0 z-50 transition-all duration-300",
         scrolled
-          ? "bg-gray-900/95 backdrop-blur-md shadow-lg"
-          : "bg-gradient-to-r from-gray-900 to-gray-800"
+          ? headerClasses[theme ?? "dark"]
+          : // khi chưa scroll, bạn có thể chọn gradient riêng cho mỗi theme
+          theme === "light"
+          ? "bg-white text-gray-900"
+          : theme === "dark"
+          ? "bg-gradient-to-r from-gray-900/95 to-gray-900 text-white"
+          : "bg-gradient-to-r from-[#f8f1e3] to-[#efe2c7] text-[#5f4b32]"
       )}
     >
       {/* Top accent bar */}
-      <div className="h-1 w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500"></div>
+      <div
+        className={cn(
+          "h-1 w-full",
+          theme === "light"
+            ? "bg-gradient-to-r from-emerald-600 to-cyan-600"
+            : theme === "dark"
+            ? "bg-gradient-to-r from-emerald-500 to-cyan-500"
+            : "bg-gradient-to-r from-emerald-400 to-cyan-400"
+        )}
+      ></div>
 
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="relative z-10 flex">
-            <Image className="aspect-[6/5]" src="/favicon.ico" alt="favicon-ttl" width={60} height={50} />
-            <span className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent self-center">
-                Tàng Thư Lâu
-              </span>
+            <Image
+              className="aspect-[6/5]"
+              src="/favicon.ico"
+              alt="favicon-ttl"
+              width={60}
+              height={50}
+            />
+            <span
+              className={cn(
+                "text-2xl font-bold bg-gradient-to-r bg-clip-text text-transparent self-center",
+                logoGradientMap[theme ?? "dark"]
+              )}
+            >
+              Tàng Thư Lâu
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -111,7 +219,9 @@ export function Header() {
                     <NavigationMenuLink
                       className={cn(
                         navigationMenuTriggerStyle(),
-                        "bg-transparent hover:bg-gray-800/70 text-gray-200 hover:text-white"
+                        "bg-transparent hover:bg-gray-800/70",
+                        navLinkText.base,
+                        navLinkText.hover
                       )}
                     >
                       <Home className="w-4 h-4 mr-2" />
@@ -125,7 +235,9 @@ export function Header() {
                     <NavigationMenuLink
                       className={cn(
                         navigationMenuTriggerStyle(),
-                        "bg-transparent hover:bg-gray-800/70 text-gray-200 hover:text-white"
+                        "bg-transparent hover:bg-gray-800/70",
+                        navLinkText.base,
+                        navLinkText.hover
                       )}
                     >
                       <BookOpen className="w-4 h-4 mr-2" />
@@ -139,7 +251,9 @@ export function Header() {
                     <NavigationMenuLink
                       className={cn(
                         navigationMenuTriggerStyle(),
-                        "bg-transparent hover:bg-gray-800/70 text-gray-200 hover:text-white"
+                        "bg-transparent hover:bg-gray-800/70",
+                        navLinkText.base,
+                        navLinkText.hover
                       )}
                     >
                       <Tag className="w-4 h-4 mr-2" />
@@ -153,7 +267,9 @@ export function Header() {
                     <NavigationMenuLink
                       className={cn(
                         navigationMenuTriggerStyle(),
-                        "bg-transparent hover:bg-gray-800/70 text-gray-200 hover:text-white"
+                        "bg-transparent hover:bg-gray-800/70",
+                        navLinkText.base,
+                        navLinkText.hover
                       )}
                     >
                       <Clock className="w-4 h-4 mr-2" />
@@ -236,7 +352,10 @@ export function Header() {
                 <Input
                   type="text"
                   placeholder="Tìm kiếm truyện..."
-                  className="w-64 bg-gray-800/70 text-white border-gray-700 rounded-full pl-10 pr-4 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
+                  className={cn(
+                    "w-64 rounded-full pl-10 pr-4 py-2 transition-all focus:border-transparent",
+                    desktopInputMap[theme ?? "dark"]
+                  )}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
@@ -249,9 +368,15 @@ export function Header() {
               variant="ghost"
               size="icon"
               className="md:hidden relative text-gray-300 hover:text-white hover:bg-gray-800/70"
-              onClick={() => setIsSearchOpen(!isSearchOpen)}
+              onClick={() => {
+                setIsSearchOpen((o) => !o);
+                setIsMenuOpen(false);
+                setIsSettingsOpen(false);
+              }}
             >
-              <Search className="h-5 w-5" />
+              <Search
+                className={cn(" h-5 w-5 ", iconColorMap[theme ?? "dark"])}
+              />
             </Button>
 
             {/* Notifications */}
@@ -416,40 +541,70 @@ export function Header() {
               variant="ghost"
               size="icon"
               className="lg:hidden text-gray-300 hover:text-white hover:bg-gray-800/70"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={() => {
+                setIsSearchOpen(false);
+                setIsMenuOpen((o) => !o);
+                setIsSettingsOpen(false);
+              }}
             >
               {isMenuOpen ? (
-                <X className="h-6 w-6" />
+                <X className={cn("h-6 w-6", iconColorMap[theme ?? "dark"])} />
               ) : (
-                <Menu className="h-6 w-6" />
+                <Menu
+                  className={cn("h-6 w-6", iconColorMap[theme ?? "dark"])}
+                />
               )}
             </Button>
           </div>
+
+          <SettingsPanel
+            isOpen={isSettingsOpen}
+            onToggle={() => {
+              setIsSettingsOpen((o) => !o);
+              setIsSearchOpen(false);
+              setIsMenuOpen(false);
+            }}
+          />
         </div>
 
-        {/* Mobile Search (Expandable) */}
         <AnimatePresence>
           {isSearchOpen && (
             <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="overflow-hidden md:hidden mt-4"
+              initial={{ scaleY: 0, opacity: 0 }}
+              animate={{ scaleY: 1, opacity: 1 }}
+              className={cn(
+                "absolute top-full inset-x-0 overflow-hidden md:hidden p-4 rounded-lg",
+                mobileSearchBg[theme ?? "dark"]
+              )}
             >
               <form onSubmit={handleSearch} className="relative">
                 <Input
                   type="text"
                   placeholder="Tìm kiếm truyện..."
-                  className="w-full bg-gray-800 text-white border-gray-700 rounded-lg pl-10 pr-4 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                  className={cn(
+                    "w-full rounded-lg pl-10 pr-4 py-2 focus:border-transparent",
+                    mobileInputBg[theme ?? "dark"]
+                  )}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   autoFocus
                 />
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Search
+                  className={cn(
+                    "absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4",
+                    theme === "light"
+                      ? "text-gray-400"
+                      : theme === "dark"
+                      ? "text-gray-500"
+                      : "text-[#7a6f49]"
+                  )}
+                />
                 <Button
                   type="submit"
-                  className="absolute right-1 top-1/2 transform -translate-y-1/2 bg-emerald-500 hover:bg-emerald-600 rounded-md h-8 px-3"
+                  className={cn(
+                    "absolute right-0.5 top-1/2 bg-gradient-to-r from-emerald-500 to-teal-600 transform -translate-y-1/2 rounded-md h-8 px-3",
+                    mobileBtnBg[theme ?? "dark"]
+                  )}
                 >
                   Tìm kiếm
                 </Button>
@@ -462,152 +617,53 @@ export function Header() {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="lg:hidden overflow-hidden"
+              initial={{ scaleY: 0, opacity: 0 }}
+              animate={{ scaleY: 1, opacity: 1 }}
+              className={cn(
+                "absolute inset-x-0 lg:hidden overflow-hidden mt-4 rounded-xl border p-2",
+                mobileNavBg[theme ?? "dark"]
+              )}
             >
-              <div className="mt-4 pb-4 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700/50 p-2">
-                <nav className="flex flex-col">
-                  <MobileNavItem href="/" icon={<Home className="h-4 w-4" />}>
-                    Trang chủ
-                  </MobileNavItem>
-                  <MobileNavItem
-                    href="/the-loai"
-                    icon={<Tag className="h-4 w-4" />}
+              <nav className="flex flex-col">
+                {[
+                  {
+                    href: "/",
+                    icon: <Home className="h-4 w-4" />,
+                    label: "Trang chủ",
+                  },
+                  {
+                    href: "/the-loai",
+                    icon: <Tag className="h-4 w-4" />,
+                    label: "Thể loại",
+                  },
+                  {
+                    href: "/truyen",
+                    icon: <BookOpen className="h-4 w-4" />,
+                    label: "Truyện",
+                  },
+                  {
+                    href: "/moi-cap-nhat",
+                    icon: <Clock className="h-4 w-4" />,
+                    label: "Mới cập nhật",
+                  },
+                ].map(({ href, icon, label }) => (
+                  <Link
+                    key={href}
+                    href={href}
+                    className={cn(
+                      "flex items-center gap-3 px-4 py-3 rounded-lg transition-colors",
+                      mobileNavText[theme ?? "dark"]
+                    )}
                   >
-                    Thể loại
-                  </MobileNavItem>
-                  <MobileNavItem
-                    href="/truyen"
-                    icon={<BookOpen className="h-4 w-4" />}
-                  >
-                    Truyện
-                  </MobileNavItem>
-                  <MobileNavItem
-                    href="/moi-cap-nhat"
-                    icon={<Clock className="h-4 w-4" />}
-                  >
-                    Mới cập nhật
-                  </MobileNavItem>
-                  {/* <MobileNavItem href="/login" icon={<User className="h-4 w-4" />}>
-                    Đăng nhập
-                  </MobileNavItem> */}
-
-                  {/* {isLoggedIn && (
-                    <>
-                      <MobileNavItem href="/profile" icon={<User className="h-4 w-4" />}>
-                        Tài khoản
-                      </MobileNavItem>
-                      <MobileNavItem href="/bookmarks" icon={<BookOpen className="h-4 w-4" />}>
-                        Bookmarks
-                      </MobileNavItem>
-                      <MobileNavItem href="/settings" icon={
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
-                          <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
-                          <circle cx="12" cy="12" r="3"></circle>
-                        </svg>
-                      }>
-                        Settings
-                      </MobileNavItem>
-                      <button
-                        onClick={handleLogout}
-                        className="flex items-center gap-3 px-4 py-3 text-red-400 hover:bg-gray-700/50 rounded-lg mt-1 transition-colors"
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
-                          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                          <polyline points="16 17 21 12 16 7"></polyline>
-                          <line x1="21" y1="12" x2="9" y2="12"></line>
-                        </svg>
-                        Đăng xuất
-                      </button>
-                    </>
-                  )} */}
-                </nav>
-              </div>
+                    {icon}
+                    <span>{label}</span>
+                  </Link>
+                ))}
+              </nav>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
     </header>
-  );
-}
-
-// Helper Components
-// function ExploreMenuItem({
-//   href,
-//   title,
-//   description,
-//   icon,
-//   className
-// }: {
-//   href: string;
-//   title: string;
-//   description: string;
-//   icon: string;
-//   className?: string;
-// }) {
-//   return (
-//     <Link
-//       href={href}
-//       className={cn(
-//         "block rounded-lg p-3 hover:bg-gray-700/50 transition-colors",
-//         className
-//       )}
-//     >
-//       <div className="flex items-start gap-3">
-//         <div className="text-2xl">{icon}</div>
-//         <div>
-//           <div className="font-medium text-white">{title}</div>
-//           <div className="text-xs text-gray-400 mt-1">{description}</div>
-//         </div>
-//       </div>
-//     </Link>
-//   );
-// }
-
-// function NotificationItem({
-//   title,
-//   description,
-//   time,
-//   isNew = false
-// }: {
-//   title: string;
-//   description: string;
-//   time: string;
-//   isNew?: boolean;
-// }) {
-//   return (
-//     <div className={cn(
-//       "px-2 py-3 hover:bg-gray-700/50 rounded-lg transition-colors cursor-pointer",
-//       isNew && "border-l-2 border-emerald-500 bg-emerald-500/5"
-//     )}>
-//       <div className="flex justify-between items-start">
-//         <div className="font-medium text-sm text-white">{title}</div>
-//         <div className="text-xs text-gray-400">{time}</div>
-//       </div>
-//       <div className="text-xs text-gray-400 mt-1">{description}</div>
-//     </div>
-//   );
-// }
-
-function MobileNavItem({
-  href,
-  children,
-  icon,
-}: {
-  href: string;
-  children: React.ReactNode;
-  icon: React.ReactNode;
-}) {
-  return (
-    <Link
-      href={href}
-      className="flex items-center gap-3 px-4 py-3 text-gray-200 hover:text-white hover:bg-gray-700/50 rounded-lg transition-colors"
-    >
-      {icon}
-      <span>{children}</span>
-    </Link>
   );
 }

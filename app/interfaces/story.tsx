@@ -52,11 +52,11 @@ export interface StoriesApiResponse {
 export interface StoryDetailsApiResponse {
   data: {
     data: StoryType;
-  totalElements: number;
-  totalPages: number;
-  page: number;
-  size: number;
-  hasNext: boolean;
+    totalElements: number;
+    totalPages: number;
+    page: number;
+    size: number;
+    hasNext: boolean;
   }
 }
 export interface ChaptersApiResponse {

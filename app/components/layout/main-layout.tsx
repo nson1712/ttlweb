@@ -1,6 +1,6 @@
-import { Header } from "../../components/layout/header";
-import { Footer } from "../../components/layout/footer";
 import { Providers } from "@/app/providers";
+import { SettingsProvider } from "@/app/context/setting-context";
+import { LayoutInner } from "./main-layout-inner";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -9,13 +9,9 @@ interface MainLayoutProps {
 export function MainLayout({ children }: MainLayoutProps) {
   return (
     <Providers>
-      <div className="flex flex-col min-h-screen bg-gray-900 text-white">
-        <Header />
-        <main className="flex-1 container mx-auto px-4 py-8">
-          {children}
-        </main>
-        <Footer />
-      </div>
+      <SettingsProvider>
+        <LayoutInner>{children}</LayoutInner>
+      </SettingsProvider>
     </Providers>
   );
 }
