@@ -15,6 +15,21 @@ export const instance = axios.create({
     : 0,
 });
 
+import type { InternalAxiosRequestConfig } from "axios";
+import { getOrCreateDeviceId } from "../lib/utils";
+
+instance.interceptors.request.use(
+  (config: InternalAxiosRequestConfig) => {
+    if (typeof window !== "undefined") {
+      const deviceId = getOrCreateDeviceId();
+      config.headers = config.headers ?? {};
+      (config.headers as Record<string, string>)["deviceId"] = deviceId;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
 const handleError = async (
   error: AxiosError,
   hideError: boolean
@@ -135,7 +150,6 @@ const getHTTPClient = (baseURL: string) => ({
       url,
       params,
       method: "GET",
-
       headers,
       options: { ...options, baseURL },
       hideError,

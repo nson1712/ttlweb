@@ -4,6 +4,7 @@ import { FilterOptions } from "./types";
 import * as _ from "lodash";
 import { Dayjs, isDayjs } from "dayjs";
 import { isMoment, Moment } from "moment";
+import { LSK_DEVICE_ID } from "../utils/storage";
 
 const FORMAT_DATE = "YYYY-MM-DDTHH:mm:ssZ";
 
@@ -212,3 +213,21 @@ export function normalizeFilterPayload(
 export const capitalizeFirstLetter = (value: string) => {
   return value?.charAt(0)?.toUpperCase() + value?.slice(1)
 }
+
+function uuidv4(): string {
+  // Generates a RFC4122 version 4 UUID
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    const r = (Math.random() * 16) | 0;
+    const v = c === 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
+export const getOrCreateDeviceId = (): string => {
+  let deviceId = localStorage.getItem(LSK_DEVICE_ID);
+  if (!deviceId) {
+    deviceId = uuidv4();
+    localStorage.setItem(LSK_DEVICE_ID, deviceId);
+  }
+  return deviceId;
+};

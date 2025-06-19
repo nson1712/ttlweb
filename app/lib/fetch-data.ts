@@ -20,8 +20,8 @@ export const fetchStories = async ({
   sort?: string;
   filter?: string;
 }): Promise<StoriesApiResponse> => {
-  return await httpClient.get({
-    url: "api/story",
+  const res =  await httpClient.get({
+    url: "/api/story",
     params: {
       page: page || 0,
       size: pageSize || 20,
@@ -29,6 +29,8 @@ export const fetchStories = async ({
       filter: filter,
     },
   });
+
+  return res
 };
 
 // export const fetchStoryDetails = async (
@@ -100,7 +102,6 @@ export const fetchStoryDetails = async (
   const res = await fetch(
     `${BASE_URL}/api/story/${slug}`,
     {
-      // cache trong 60s, sau đó revalidate
       next: { revalidate: 60 },
     }
   );
@@ -202,7 +203,7 @@ export const fetchPotential = async (
 ): Promise<StoriesApiResponse | null> => {
   try {
     const res = await httpClient.get({
-      url: "api/story/potential/list",
+      url: "/api/story/potential/list",
       params: {
         page: page || 0,
         size: pageSize || 20,
@@ -237,14 +238,14 @@ export const fetchRanking = async () => {
 export const fetchCategories = async () => {
   return (
     await httpClient.get({
-      url: "api/category/list",
+      url: "/api/category/list",
     })
   ).data;
 };
 
 export const fetchFeature = async () => {
   return await httpClient.get({
-    url: "api/story",
+    url: "/api/story",
     params: {
       sort: "rate:DESC",
     },
@@ -253,7 +254,7 @@ export const fetchFeature = async () => {
 
 export const fetchBestStories = async () => {
   return await httpClient.get({
-    url: "api/story",
+    url: "/api/story",
     params: {
       page: 0,
       size: 20,
