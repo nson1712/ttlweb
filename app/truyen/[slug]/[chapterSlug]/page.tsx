@@ -734,6 +734,7 @@ export default async function ChapterDetailPage({
   searchParams: Promise<{ page?: number; pageSize?: number }>;
 }) {
   const { slug, chapterSlug } = await params;
+  console.log("STORY SLUG: ", slug)
   const isId = /^\d+$/.test(chapterSlug);
 
   // 1) Khởi động song song chi tiết, story và chaptersList
