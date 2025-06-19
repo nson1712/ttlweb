@@ -737,28 +737,24 @@ export default async function ChapterDetailPage({
   console.log("STORY SLUG: ", slug)
   const isId = /^\d+$/.test(chapterSlug);
 
-  // 1) Khởi động song song chi tiết, story và chaptersList
   const detailPromise = isId
     ? fetchById(Number(chapterSlug))
     : fetchBySlug({ slug, chapterSlug });
 
   const storyDetailsPromise = fetchStoryDetails(slug);
   const chaptersListPromise  = fetchChapters({
-    storyId: Number((await detailPromise).data.storyId), // nhớ sửa lại cho dùng detailPromise sau
+    storyId: Number((await detailPromise).data.storyId),
     page: (await searchParams).page ?? 0,
     pageSize: (await searchParams).pageSize ?? 50,
   });
 
-  // Chờ detail xong để biết detail.id, prev/nextId
   const detailResp = await detailPromise;
   const detail = detailResp.data;
 
-  // 2) Với detail.id xong, khởi động tiếp các fetch còn lại song song
   const contentsPromise = fetchContents(Number(detail.id));
   const prevPromise     = detail.prevChapterId ? fetchById(detail.prevChapterId) : Promise.resolve(null);
   const nextPromise     = detail.nextChapterId ? fetchById(detail.nextChapterId) : Promise.resolve(null);
 
-  // 3) Chờ tất cả cùng lúc
   const [ contentsResp, prevResp, nextResp, chaptersListRes, storyDetailsRes ] =
     await Promise.all([
       contentsPromise,
