@@ -63,12 +63,6 @@ export function NovelCard({
     sepia: "text-[#8a7055]",
   };
 
-  const linkBtnMap: Record<Theme, string> = {
-    light: "bg-emerald-600 hover:bg-emerald-700 text-white",
-    dark:  "bg-emerald-500 hover:bg-emerald-600 text-white",
-    sepia: "bg-emerald-500 hover:bg-emerald-600 text-white",
-  };
-  
   const lineMap: Record<Theme, string> = {
     light: "from-emerald-600 to-teal-600",
     dark:  "from-emerald-500 to-teal-500",
@@ -184,8 +178,7 @@ export function NovelCard({
             <Link href={`/truyen/${slug}`}>
               <Button
                 className={cn(
-                  "rounded-full px-6 py-2.5 text-sm font-medium shadow-lg transition-all",
-                  linkBtnMap[theme ?? "dark"]
+                  "rounded-full px-6 py-2.5 text-sm font-medium shadow-lg transition-all bg-gradient-to-r from-emerald-500 to-teal-600"
                 )}
               >
                 ◃Chi tiết▹
