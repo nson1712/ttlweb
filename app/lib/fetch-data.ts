@@ -2,6 +2,7 @@ import {
   ChapterApiResponse,
   ChapterDetailsApiResponse,
   ChaptersApiResponse,
+  QuestionApiResponse,
   StoriesApiResponse,
   StoryDetailsApiResponse,
 } from "../interfaces/story";
@@ -175,6 +176,13 @@ export const  fetchContents = async (
     params: { chapterId: chapterId.toString() },
   });
   return res;
+}
+
+
+export const fetchQuestion = async (): Promise<QuestionApiResponse> => {
+  return await httpClient.get({
+    url: "/api/story/question"
+  })
 }
 
 export const fetchLatestChapters = async ({

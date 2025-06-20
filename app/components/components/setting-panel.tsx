@@ -1,9 +1,9 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Slider } from "@/app/components/ui/slider";
+import { Settings as SettingsIcon } from "lucide-react";
 import { SettingsContext, Theme } from "@/app/context/setting-context";
-import { Settings } from "lucide-react";
 import { cn } from "@/app/lib/utils";
 
 interface SettingsPanelProps {
@@ -21,9 +21,33 @@ export function SettingsPanel({ isOpen, onToggle }: SettingsPanelProps) {
     setTheme,
   } = useContext(SettingsContext);
 
+  const panelRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<SVGSVGElement>(null);
+
+  // Close panel when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      const target = event.target as Node;
+      if (
+        isOpen &&
+        panelRef.current &&
+        !panelRef.current.contains(target) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(target)
+      ) {
+        onToggle();
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen, onToggle]);
+
   return (
     <>
-      <Settings
+      <SettingsIcon
+        ref={buttonRef}
         onClick={onToggle}
         className="z-50 w-6 h-6 text-emerald-500 flex items-end cursor-pointer hover:text-emerald-400 transition-colors duration-200"
       />
@@ -31,6 +55,7 @@ export function SettingsPanel({ isOpen, onToggle }: SettingsPanelProps) {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            ref={panelRef}
             initial={{ scaleY: 0, opacity: 0 }}
             animate={{ scaleY: 1, opacity: 1 }}
             className={cn(

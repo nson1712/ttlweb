@@ -1,181 +1,204 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { FC, useState, useEffect, useContext } from "react";
 import Link from "next/link";
-// import Image from "next/image";
-// import { motion } from "framer-motion";
+import Image from "next/image";
 import {
   BookOpen,
   Clock,
   Home,
   Compass,
-  // Mail,
-  // FileText,
-  // Lightbulb,
-  // Facebook,
-  // Twitter,
-  // Instagram,
-  Heart,
-  ArrowUp,
-  // Globe,
-  // Shield,
-  BookMarked,
   Headphones,
-  Facebook,
   FileQuestion,
+  Facebook,
+  BookMarked,
+  ArrowUp,
+  Heart,
 } from "lucide-react";
 import { cn } from "../../lib/utils";
-import Image from "next/image";
+import { SettingsContext, Theme } from "@/app/context/setting-context";
 
-export function Footer() {
-  const [showScrollTop, setShowScrollTop] = useState(false);
-  const [year] = useState(new Date().getFullYear());
+export const Footer: FC = () => {
+  const { theme } = useContext(SettingsContext);
 
-  // Handle scroll effect for scroll-to-top button
-  useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 300;
-      if (isScrolled !== showScrollTop) {
-        setShowScrollTop(isScrolled);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [showScrollTop]);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+  // MAPS
+  const bgMap: Record<Theme, string> = {
+    light: "bg-gray-100",
+    dark: "bg-gray-900",
+    sepia: "bg-[#f4ead2]",
   };
+  const borderMap: Record<Theme, string> = {
+    light: "border-gray-200",
+    dark: "border-gray-800",
+    sepia: "border-[#e8d9c0]",
+  };
+  const textMap: Record<Theme, string> = {
+    light: "text-gray-700",
+    dark: "text-gray-400",
+    sepia: "text-[#7a6f49]",
+  };
+  const logoGradient: Record<Theme, string> = {
+    light: "from-gray-900 to-gray-700",
+    dark: "from-white to-gray-300",
+    sepia: "from-[#5f4b32] to-[#7a6f49]",
+  };
+  const scrollBtnGradient: Record<Theme, string> = {
+    light: "from-green-600 to-cyan-600",
+    dark: "from-emerald-500 to-teal-600",
+    sepia: "from-emerald-400 to-teal-500",
+  };
+  const scrollBtnRing: Record<Theme, string> = {
+    light: "focus:ring-green-400",
+    dark: "focus:ring-emerald-400",
+    sepia: "focus:ring-emerald-300",
+  };
+
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const year = new Date().getFullYear();
+
+  useEffect(() => {
+    const onScroll = () => setShowScrollTop(window.scrollY > 300);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <footer className="relative">
-      {/* Scroll to top button */}
+      {/* Scroll-to-top */}
       <button
         onClick={scrollToTop}
+        aria-label="Scroll to top"
         className={cn(
-          "fixed bottom-6 right-6 z-50 p-3 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-lg transition-all duration-300 hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2",
+          "fixed bottom-6 right-6 z-50 p-3 rounded-full bg-gradient-to-br text-white shadow-lg transition-all duration-300 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2",
+          scrollBtnGradient[theme ?? "dark"]
+            ? `bg-gradient-to-br ${scrollBtnGradient[theme ?? "dark"]}`
+            : "",
+          scrollBtnRing[theme ?? "dark"],
           showScrollTop
-            ? "opacity-100 translate-y-0 cursor-pointer"
+            ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-10 pointer-events-none"
         )}
-        aria-label="Scroll to top"
       >
         <ArrowUp className="h-5 w-5" />
       </button>
 
-      {/* Newsletter section */}
-      {/* <div className="bg-gradient-to-r from-gray-800 to-gray-900 py-12">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Stay Updated with Latest Novels</h2>
-            <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-              Subscribe to our newsletter and never miss new chapter releases, novel announcements, and exclusive content.
-            </p>
-            <form className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
-              <input 
-                type="email" 
-                placeholder="Your email address" 
-                className="flex-1 px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                required
-              />
-              <button 
-                type="submit" 
-                className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-medium rounded-lg hover:from-emerald-600 hover:to-teal-700 transition-all duration-200 shadow-md"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </div>
-      </div> */}
-
-      {/* Main footer content */}
-      <div className="bg-gray-900 pt-16 pb-12 border-t border-gray-800">
+      {/* Main Footer */}
+      <div
+        className={cn(
+          "pt-16 pb-12 border-t",
+          bgMap[theme ?? "dark"],
+          borderMap[theme ?? "dark"]
+        )}
+      >
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-            {/* About section */}
+            {/* Branding */}
             <div>
-              <Link href="/" className="relative z-10 flex">
-            <Image className="aspect-[6/5]" src="/favicon.ico" alt="favicon-ttl" width={60} height={50} />
-            <span className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent self-center">
-                Tàng Thư Lâu
-              </span>
-          </Link>
-              <p className="text-gray-400 mb-6">
+              <Link href="/" className="flex items-center gap-2 mb-4">
+                <Image
+                  src="/favicon.ico"
+                  alt="favicon"
+                  width={60}
+                  height={50}
+                  className="rounded"
+                />
+                <span
+                  className={cn(
+                    "text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r",
+                    logoGradient[theme ?? "dark"]
+                  )}
+                >
+                  Tàng Thư Lâu
+                </span>
+              </Link>
+              <p className={textMap[theme ?? "dark"]}>
                 Nền tảng số 1 dành cho những độc giả yêu thích thể loại truyện
                 Nam Chủ
               </p>
-
-              {/* <div className="flex space-x-4">
-                <SocialLink href="https://facebook.com" icon={<Facebook size={18} />} label="Facebook" />
-                <SocialLink href="https://twitter.com" icon={<Twitter size={18} />} label="Twitter" />
-                <SocialLink href="https://instagram.com" icon={<Instagram size={18} />} label="Instagram" />
-              </div> */}
             </div>
 
-            {/* Quick Links */}
+            {/* Navigation */}
             <div>
-              <h3 className="text-white text-lg font-semibold mb-6 flex items-center">
+              <h3
+                className={cn(
+                  "flex items-center mb-6 text-lg font-semibold",
+                  textMap[theme ?? "dark"]
+                )}
+              >
                 <Compass className="mr-2 h-5 w-5 text-emerald-400" />
                 Điều hướng
               </h3>
               <div className="space-y-3">
-                <FooterLink href="/" icon={<Home size={16} />}>
+                <FooterLink
+                  href="/"
+                  icon={<Home size={16} />}
+                  theme={theme ?? "dark"}
+                >
                   Trang chủ
                 </FooterLink>
-                <FooterLink href="/truyen" icon={<BookOpen size={16} />}>
+                <FooterLink
+                  href="/truyen"
+                  icon={<BookOpen size={16} />}
+                  theme={theme ?? "dark"}
+                >
                   Danh sách truyện
                 </FooterLink>
-                <FooterLink href="/moi-cap-nhat" icon={<Clock size={16} />}>
+                <FooterLink
+                  href="/moi-cap-nhat"
+                  icon={<Clock size={16} />}
+                  theme={theme ?? "dark"}
+                >
                   Truyện mới cập nhật
                 </FooterLink>
-                {/* <FooterLink href="/popular" icon={<Flame size={16} />}>Truyện nổi bật</FooterLink> */}
-                <FooterLink href="/the-loai" icon={<BookMarked size={16} />}>
+                <FooterLink
+                  href="/the-loai"
+                  icon={<BookMarked size={16} />}
+                  theme={theme ?? "dark"}
+                >
                   Thể loại truyện
                 </FooterLink>
               </div>
             </div>
 
+            {/* Support */}
             <div>
-              <h3 className="text-white text-lg font-semibold mb-6 flex items-center">
+              <h3
+                className={cn(
+                  "flex items-center mb-6 text-lg font-semibold",
+                  textMap[theme ?? "dark"]
+                )}
+              >
                 <Headphones className="mr-2 h-5 w-5 text-emerald-400" />
                 Hỗ trợ
               </h3>
               <div className="space-y-3">
                 <FooterLink
                   href="https://m.me/620462677825010"
-                  target="_blank"
                   icon={<Facebook size={16} />}
+                  target="_blank"
+                  theme={theme ?? "dark"}
                 >
                   Chat với chúng tôi
                 </FooterLink>
-                <FooterLink href="/faq" icon={<FileQuestion size={16} />}>
+                <FooterLink
+                  href="/faq"
+                  icon={<FileQuestion size={16} />}
+                  theme={theme ?? "dark"}
+                >
                   FAQ
                 </FooterLink>
               </div>
             </div>
-
-            {/* Information */}
-            {/* <div>
-              <h3 className="text-white text-lg font-semibold mb-6 flex items-center">
-                <FileText className="mr-2 h-5 w-5 text-emerald-400" />
-                Thông tin
-              </h3>
-              <ul className="space-y-3">
-                <FooterLink href="/contacts" icon={<Mail size={16} />}>Liên hệ</FooterLink>
-                <FooterLink href="/rules" icon={<Shield size={16} />}>Chính sách</FooterLink>
-                <FooterLink href="/faq" icon={<Globe size={16} />}>FAQ</FooterLink>
-                <FooterLink href="/about" icon={<Heart size={16} />}>Về chúng tôi</FooterLink>
-              </ul>
-            </div> */}
           </div>
-          <p className="text-gray-400 mb-6">
+
+          <p
+            className={cn(
+              "mb-6 text-sm leading-relaxed",
+              textMap[theme ?? "dark"]
+            )}
+          >
             Người dùng phải tuân thủ đầy đủ mọi quy định pháp luật và quy định
             quốc gia khi chia sẻ nội dung trên nền tảng. Bất kỳ bài viết, hình
             ảnh hay bình luận nào vi phạm thuần phong mỹ tục, chứa nội dung bạo
@@ -188,72 +211,49 @@ export function Footer() {
             phạm ngay khi nhận được yêu cầu.
           </p>
 
-          {/* Bottom section */}
-          <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6 mb-4 md:mb-0">
-              <p className="text-sm text-gray-400">
-                &copy; {year} TangThuLau. All rights reserved.
-              </p>
-              {/* <div className="flex space-x-4 text-sm text-gray-500">
-                <Link href="/privacy" className="hover:text-emerald-400 transition-colors">
-                  Privacy Policy
-                </Link>
-                <Link href="/terms" className="hover:text-emerald-400 transition-colors">
-                  Terms of Service
-                </Link>
-                <Link href="/dmca" className="hover:text-emerald-400 transition-colors">
-                  DMCA
-                </Link>
-              </div> */}
-            </div>
-
-            <div className="text-sm text-gray-500">
-              <span className="flex items-center">
-                Made with <Heart className="h-4 w-4 text-red-500 mx-1" /> by
-                Tàng Thư Lâu
-              </span>
-            </div>
+          <div className="border-t pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p className={cn("text-sm", textMap[theme ?? "dark"])}>
+              &copy; {year} TangThuLau. All rights reserved.
+            </p>
+            <span
+              className={cn(
+                "text-sm flex items-center",
+                textMap[theme ?? "dark"]
+              )}
+            >
+              Made with
+              <Heart className="mx-1 h-4 w-4 text-red-500" />
+              by Tàng Thư Lâu
+            </span>
           </div>
         </div>
       </div>
     </footer>
   );
-}
+};
 
-// Helper Components
-// function SocialLink({ href, icon, label }: { href: string; icon: React.ReactNode; label: string }) {
-//   return (
-//     <Link
-//       href={href}
-//       className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-emerald-500 hover:text-white transition-all duration-200"
-//       aria-label={label}
-//     >
-//       {icon}
-//     </Link>
-//   );
-// }
-
-function FooterLink({
-  href,
-  children,
-  icon,
-  target
-}: {
+// Footer link helper
+type FooterLinkProps = {
   href: string;
-  children: React.ReactNode;
   icon: React.ReactNode;
-  target?: string
-}) {
-  return (
-    <Link
-      href={href}
-      target={target}
-      className="text-gray-400 hover:text-emerald-400 transition-colors flex items-center group"
-    >
-      <span className="mr-2 text-gray-500 group-hover:text-emerald-400 transition-colors">
-        {icon}
-      </span>
-      {children}
-    </Link>
-  );
-}
+  children: React.ReactNode;
+  target?: string;
+  theme: Theme;
+};
+const FooterLink: FC<FooterLinkProps> = ({
+  href,
+  icon,
+  children,
+  target,
+}) => (
+  <Link
+    href={href}
+    target={target}
+    className={cn(
+      "flex items-center gap-2 transition-colors hover:text-emerald-500"
+    )}
+  >
+    {icon}
+    {children}
+  </Link>
+);

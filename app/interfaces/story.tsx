@@ -1,3 +1,4 @@
+import { Question } from "../lib/types";
 import { ChapterDetailType, ChapterType } from "../types/chapter";
 import {
   PotenialStarletType,
@@ -57,7 +58,7 @@ export interface StoryDetailsApiResponse {
     page: number;
     size: number;
     hasNext: boolean;
-  }
+  };
 }
 export interface ChaptersApiResponse {
   data: {
@@ -71,8 +72,11 @@ export interface ChaptersApiResponse {
 }
 
 export interface ChapterApiResponse {
-  data: ChapterType
+  data: ChapterType;
 }
 export interface ChapterDetailsApiResponse {
-    data: ChapterDetailType[];
+  data: ChapterDetailType[];
+}
+export interface QuestionApiResponse {
+  data: Question;
 }

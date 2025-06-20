@@ -231,3 +231,30 @@ export const getOrCreateDeviceId = (): string => {
   }
   return deviceId;
 };
+
+export function simpleHash(str: string): number {
+  let h = 0
+  for (let i = 0; i < str.length; i++) {
+    h  = Math.imul(31, h) + str.charCodeAt(i)
+    h |= 0
+  }
+  return h >>> 0
+}
+
+/**
+ * deterministic “coin flip” per story+chapter
+ * @param storyId numeric ID of the story
+ * @param chapterOrder 1-based chapter number
+ * @param probability e.g. 0.2 for ~1 in 5
+ */
+export function shouldAskByHash(
+  storyId: number,
+  chapterOrder: number,
+  probability = 0.2
+): boolean {
+  const key = `${storyId}:${chapterOrder}`
+  const h = simpleHash(key)
+  // 0 ≤ v < 1
+  const v = h / 0xFFFFFFFF
+  return v < probability
+}

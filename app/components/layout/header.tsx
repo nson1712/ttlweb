@@ -344,7 +344,6 @@ export function Header() {
             </NavigationMenu>
           </div>
 
-          {/* Search and User Actions */}
           <div className="flex items-center gap-2 md:gap-4">
             {/* Desktop Search */}
             <div className="hidden md:block relative">
