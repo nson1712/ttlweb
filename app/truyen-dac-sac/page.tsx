@@ -4,7 +4,15 @@ import { StoryType } from "../types/story";
 import { NotFound } from "../components/components/not-found";
 import { fetchStories } from "../lib/fetch-data";
 import { MotionTitle } from "../components/components/motion-title";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "../components/ui/breadcrumb";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+} from "../components/ui/breadcrumb";
+import { cookies } from "next/headers";
+import { LSK_DEVICE_ID } from "../utils/storage";
 
 export default async function FeaturedPage({
   searchParams,
@@ -18,12 +26,14 @@ export default async function FeaturedPage({
   const parsedPage = typeof page === "string" ? parseInt(page, 10) : page ?? 0;
   const parsedPageSize =
     typeof pageSize === "string" ? parseInt(pageSize, 10) : pageSize ?? 20;
+  const deviceId = (await cookies()).get(LSK_DEVICE_ID)?.value ?? "";
 
   const [featureStoriesRes] = await Promise.all([
     fetchStories({
       page: page ?? 0,
       pageSize: pageSize ?? 20,
       sort: "rate|gt|4.0",
+      deviceId: deviceId,
     }),
   ]);
 
@@ -42,7 +52,10 @@ export default async function FeaturedPage({
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem className="flex-1 line-clamp-1">
-              <BreadcrumbLink className="text-emerald-500" href={`/truyen-dac-sac`}>
+              <BreadcrumbLink
+                className="text-emerald-500"
+                href={`/truyen-dac-sac`}
+              >
                 Truyện đặc sắc
               </BreadcrumbLink>
             </BreadcrumbItem>

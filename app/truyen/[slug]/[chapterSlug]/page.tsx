@@ -644,6 +644,8 @@ import {
   fetchContents,
   fetchStoryDetails,
 } from "@/app/lib/fetch-data";
+import { cookies } from "next/headers";
+import { LSK_DEVICE_ID } from "@/app/utils/storage";
 
 export async function generateMetadata({
   params,
@@ -680,42 +682,53 @@ export default async function ChapterDetailPage({
   searchParams: Promise<{ page?: number; pageSize?: number }>;
 }) {
   const { slug, chapterSlug } = await params;
+  const deviceId = (await cookies()).get(LSK_DEVICE_ID)?.value ?? "";
   const isId = /^\d+$/.test(chapterSlug);
 
   const detailPromise = isId
-    ? fetchById(Number(chapterSlug))
-    : fetchBySlug({ slug, chapterSlug });
+    ? fetchById({
+        chapterId: Number(chapterSlug),
+        deviceId: deviceId,
+      })
+    : fetchBySlug({ slug: slug, chapterSlug: chapterSlug, deviceId: deviceId });
 
-  const storyDetailsPromise = fetchStoryDetails(slug);
+  const storyDetailsPromise = fetchStoryDetails({
+    slug: slug,
+    deviceId: deviceId,
+  });
   const chaptersListPromise = fetchChapters({
     storyId: Number((await detailPromise).data.storyId),
     page: (await searchParams).page ?? 0,
     pageSize: (await searchParams).pageSize ?? 50,
+    deviceId: deviceId,
   });
 
   const detailResp = await detailPromise;
   const detail = detailResp.data;
 
-  const contentsPromise = fetchContents(Number(detail.id));
+  const contentsPromise = fetchContents({
+    chapterId: Number(detail.id),
+    deviceId: deviceId,
+  });
   const prevPromise = detail?.prevChapterId
-    ? fetchById(detail?.prevChapterId)
+    ? fetchById({
+        chapterId: detail?.prevChapterId,
+        deviceId: deviceId,
+      })
     : Promise.resolve(null);
   const nextPromise = detail?.nextChapterId
-    ? fetchById(detail?.nextChapterId)
+    ? fetchById({
+        chapterId: detail?.nextChapterId,
+        deviceId: deviceId,
+      })
     : Promise.resolve(null);
 
-  const [
-    contentsResp,
-    prevResp,
-    nextResp,
-    chaptersListRes,
-    storyDetailsRes,
-  ]: [
+  const [contentsResp, prevResp, nextResp, chaptersListRes, storyDetailsRes]: [
     Awaited<ReturnType<typeof fetchContents>>,
     Awaited<ReturnType<typeof fetchById>> | null,
     Awaited<ReturnType<typeof fetchById>> | null,
     Awaited<ReturnType<typeof fetchChapters>>,
-    Awaited<ReturnType<typeof fetchStoryDetails>>,
+    Awaited<ReturnType<typeof fetchStoryDetails>>
   ] = await Promise.all([
     contentsPromise,
     prevPromise,
@@ -729,16 +742,16 @@ export default async function ChapterDetailPage({
 
   return (
     <Suspense fallback={<Loading />}>
-        <ChapterContent
-          storySlug={slug}
-          storyTitle={storyDetailsRes.data.data.title}
-          chapterSlug={detail.slug}
-          details={detail}
-          contents={contentsResp.data}
-          prevSlug={prevSlug}
-          nextSlug={nextSlug}
-          chaptersList={chaptersListRes}
-        />
+      <ChapterContent
+        storySlug={slug}
+        storyTitle={storyDetailsRes.data.data.title}
+        chapterSlug={detail.slug}
+        details={detail}
+        contents={contentsResp.data}
+        prevSlug={prevSlug}
+        nextSlug={nextSlug}
+        chaptersList={chaptersListRes}
+      />
     </Suspense>
   );
 }

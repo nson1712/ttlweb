@@ -1,8 +1,10 @@
+import { cookies } from "next/headers";
 import { MotionTitle } from "../components/components/motion-title";
 import { PaginationWithLinks } from "../components/components/pagination";
 import { RecentUpdates } from "../components/components/recently-updated";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "../components/ui/breadcrumb";
 import { fetchLatestChapters } from "../lib/fetch-data";
+import { LSK_DEVICE_ID } from "../utils/storage";
 
 export default async function UpdatesPage({
   searchParams,
@@ -19,11 +21,13 @@ export default async function UpdatesPage({
   const parsedPage = typeof page === "string" ? parseInt(page, 10) : page ?? 0;
   const parsedPageSize =
     typeof pageSize === "string" ? parseInt(pageSize, 10) : pageSize ?? 20;
+  const deviceId = (await cookies()).get(LSK_DEVICE_ID)?.value ?? ""
 
   const [recentUpdatesRes] = await Promise.all([
     fetchLatestChapters({
       page: parsedPage ?? 0,
       pageSize: parsedPageSize ?? 20,
+      deviceId: deviceId
     }),
   ]);
 

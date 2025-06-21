@@ -85,7 +85,7 @@ export default function ChapterContent({
     return (
       <div className="space-y-4">
         <h1 className="text-2xl sm:text-3xl font-bold flex justify-center">
-          {details.title}
+          {details?.title}
         </h1>
         <QuestionForm question={question!} onSuccess={onSuccess} />
       </div>
@@ -119,22 +119,22 @@ export default function ChapterContent({
             <BreadcrumbSeparator />
             <BreadcrumbItem className="flex-1 line-clamp-1">
               <BreadcrumbPage className="text-emerald-500">
-                {details.title}
+                {details?.title}
               </BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
 
         <h1 className="text-2xl sm:text-3xl font-bold flex justify-center">
-          {details.title}
+          {details?.title}
         </h1>
         <div
           className={cn("prose max-w-none dark:prose-invert")}
           style={{ fontSize: `${fontSize}px` }}
         >
-          {contents?.map((c, idx) => (
-            <p key={idx} style={{ marginBottom: `${paragraphSpacing}px` }}>
-              {c.content}
+          {contents?.map((c) => (
+            <p key={c?.id} style={{ marginBottom: `${paragraphSpacing}px` }}>
+              {c?.content}
             </p>
           ))}
         </div>

@@ -22,6 +22,8 @@ export function useQuestionScheduler(
   const [question, setQuestion] = useState<Question | null>(null);
   const [initialized, setInitialized] = useState(false);
 
+
+
   useEffect(() => {
     // Read both stored values just once
     const rawBase = localStorage.getItem(baseKey);

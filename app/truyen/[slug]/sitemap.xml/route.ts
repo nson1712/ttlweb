@@ -10,7 +10,9 @@ export async function GET(
   const { slug } = await context.params;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
 
-  const storyRes = await fetchStoryDetails(slug);
+  const storyRes = await fetchStoryDetails({
+    slug: slug,
+  });
   const storyId = Number(storyRes?.data?.data?.id);
   if (!storyId) {
     return new NextResponse("Story not found", { status: 404 });
