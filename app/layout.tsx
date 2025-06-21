@@ -6,6 +6,7 @@ import { Metadata } from "next";
 import Loading from "./components/components/loading";
 import AntiTamper from "./components/layout/anti-tamper";
 import Script from "next/script";
+import DeviceIdSync from "./components/layout/device-id-sync";
 
 export const metadata: Metadata = {
   icons: {
@@ -71,6 +72,7 @@ export default function RootLayout({
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
+        <DeviceIdSync />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

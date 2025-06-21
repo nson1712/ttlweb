@@ -68,5 +68,10 @@ export type AuthorType = {
   name?: string;
   slug?: string;
   status?: string;
-  totalStory?: number
+  totalStory?: number;
+};
+
+export type Question = {
+  id: number;
+  question: string;
 };

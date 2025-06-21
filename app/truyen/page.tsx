@@ -1,9 +1,11 @@
+import { cookies } from "next/headers";
 import { Filter } from "../components/components/filter";
 import { NotFound } from "../components/components/not-found";
 import { PaginationWithLinks } from "../components/components/pagination";
 import { NovelCard } from "../components/novels/novel-card";
 import { fetchCategories, fetchStories } from "../lib/fetch-data";
 import { StoryType } from "../types/story";
+import { LSK_DEVICE_ID } from "../utils/storage";
 
 export default async function NovelsPage({
   searchParams,
@@ -18,13 +20,16 @@ export default async function NovelsPage({
   const parsedPage = typeof page === "string" ? parseInt(page, 10) : page ?? 0;
   const parsedPageSize =
     typeof pageSize === "string" ? parseInt(pageSize, 10) : pageSize ?? 20;
+  const deviceId = (await cookies()).get(LSK_DEVICE_ID)?.value ?? "";
+
   const [storiesRes, categoriesRes] = await Promise.all([
     fetchStories({
       page: page ?? 0,
       pageSize: pageSize ?? 0,
       filter: filter,
+      deviceId: deviceId,
     }),
-    fetchCategories(),
+    fetchCategories({ deviceId: deviceId }),
   ]);
 
   const operators = new Map<string, string>([

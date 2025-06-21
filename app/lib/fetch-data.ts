@@ -2,6 +2,7 @@ import {
   ChapterApiResponse,
   ChapterDetailsApiResponse,
   ChaptersApiResponse,
+  QuestionApiResponse,
   StoriesApiResponse,
   StoryDetailsApiResponse,
 } from "../interfaces/story";
@@ -14,13 +15,15 @@ export const fetchStories = async ({
   pageSize,
   sort,
   filter,
+  deviceId: deviceId,
 }: {
   page: number | undefined;
   pageSize: number | undefined;
   sort?: string;
   filter?: string;
+  deviceId?: string;
 }): Promise<StoriesApiResponse> => {
-  const res =  await httpClient.get({
+  return await httpClient.get({
     url: "/api/story",
     params: {
       page: page || 0,
@@ -28,83 +31,25 @@ export const fetchStories = async ({
       sort: sort,
       filter: filter,
     },
+    headers: {
+      deviceId: deviceId ?? "",
+    } as Record<string, string>,
   });
-
-  return res
 };
 
-// export const fetchStoryDetails = async (
-//   slug: string
-// ): Promise<StoryDetailsApiResponse> => {
-//   const res = await httpClient.get({
-//     url: `/api/story/${slug}`,
-//   });
-//   return {
-//     data: {
-//       data: res.data,
-//       totalElements: res.data?.totalElements ?? 0,
-//       totalPages: res.data?.totalPages ?? 0,
-//       page: res.data?.page ?? 0,
-//       size: res.data?.size ?? 0,
-//       hasNext: res.data?.hasNext ?? false,
-//     },
-//   };
-// };
-
-// export const fetchChapters = async ({
-//   storyId,
-//   page,
-//   pageSize,
-//   sortType,
-// }: {
-//   storyId: number;
-//   page: number;
-//   pageSize: number;
-//   sortType?: string;
-// }): Promise<ChaptersApiResponse> => {
-//   const res = await httpClient.get({
-//     url: "/chapters",
-//     params: {
-//       page: page || 0,
-//       size: pageSize || 20,
-//       filter: `storyId|eq|${storyId}`,
-//       sort: `createdAt:${sortType ?? "ASC"}`,
-//     },
-//   });
-//   return res;
-// };
-
-// export const fetchBySlug = async (
-//   {
-//     slug,
-//   chapterSlug
-//   }: {
-//     slug: string,
-//   chapterSlug: string
-//   }
-// ): Promise<ChapterApiResponse> => {
-//   const res = await httpClient.get({
-//     url: `/chapter/${slug}/${chapterSlug}`,
-//   });
-//   return res;
-// }
-
-// export const fetchById = async (chapterId: number): Promise<ChapterApiResponse> => {
-//   const res = await httpClient.get({
-//     url: `/chapter/${chapterId}`,
-//   });
-//   return res;
-// }
-
-export const fetchStoryDetails = async (
-  slug: string
-): Promise<StoryDetailsApiResponse> => {
-  const res = await fetch(
-    `${BASE_URL}/api/story/${slug}`,
-    {
-      next: { revalidate: 60 },
-    }
-  );
+export const fetchStoryDetails = async ({
+  slug,
+  deviceId,
+}: {
+  slug: string;
+  deviceId?: string;
+}): Promise<StoryDetailsApiResponse> => {
+  const res = await fetch(`${BASE_URL}/api/story/${slug}`, {
+    next: { revalidate: 60 },
+    headers: {
+      deviceId: deviceId ?? "",
+    } as Record<string, string>,
+  });
   if (!res.ok) throw new Error("Failed to fetch story details");
   const json = await res.json();
 
@@ -112,10 +57,10 @@ export const fetchStoryDetails = async (
     data: {
       data: json.data,
       totalElements: json?.totalElements ?? 0,
-      totalPages:   json?.totalPages   ?? 0,
-      page:         json?.page         ?? 0,
-      size:         json?.size         ?? 0,
-      hasNext:      json?.hasNext      ?? false,
+      totalPages: json?.totalPages ?? 0,
+      page: json?.page ?? 0,
+      size: json?.size ?? 0,
+      hasNext: json?.hasNext ?? false,
     },
   };
 };
@@ -125,88 +70,127 @@ export const fetchChapters = async ({
   page,
   pageSize,
   sortType = "ASC",
+  deviceId,
 }: {
   storyId: number;
   page: number;
   pageSize: number;
   sortType?: string;
+  deviceId?: string;
 }): Promise<ChaptersApiResponse> => {
   const params = new URLSearchParams({
-    page:  String(page || 0),
-    size:  String(pageSize || 20),
-    filter:`storyId|eq|${storyId}`,
-    sort:  `createdAt:${sortType}`,
+    page: String(page || 0),
+    size: String(pageSize || 20),
+    filter: `storyId|eq|${storyId}`,
+    sort: `createdAt:${sortType}`,
   });
-  const res = await fetch(
-    `${BASE_URL}/chapters?${params.toString()}`,
-    { next: { revalidate: 60 } }
-  );
+  const res = await fetch(`${BASE_URL}/chapters?${params.toString()}`, {
+    next: { revalidate: 60 },
+    headers: {
+      deviceId: deviceId ?? "",
+    },
+  });
   if (!res.ok) throw new Error("Failed to fetch chapters");
   return res.json();
 };
 
-export const fetchBySlug = async (
-  { slug, chapterSlug }: { slug: string; chapterSlug: string }
-): Promise<ChapterApiResponse> => {
-  const res = await fetch(
-    `${BASE_URL}/chapter/${slug}/${chapterSlug}`,
-    { next: { revalidate: 60 } }
-  );
+export const fetchBySlug = async ({
+  slug,
+  chapterSlug,
+  deviceId,
+}: {
+  slug: string;
+  chapterSlug: string;
+  deviceId: string;
+}): Promise<ChapterApiResponse> => {
+  const res = await fetch(`${BASE_URL}/chapter/${slug}/${chapterSlug}`, {
+    next: { revalidate: 60 },
+    headers: {
+      deviceId: deviceId,
+    },
+  });
   if (!res.ok) throw new Error("Failed to fetch chapter by slug");
   return res.json();
 };
 
-export const fetchById = async (
-  chapterId: number
-): Promise<ChapterApiResponse> => {
-  const res = await fetch(
-    `${BASE_URL}/chapter/${chapterId}`,
-    { next: { revalidate: 60 } }
-  );
+export const fetchById = async ({
+  chapterId,
+  deviceId,
+}: {
+  chapterId: number;
+  deviceId: string;
+}): Promise<ChapterApiResponse> => {
+  const res = await fetch(`${BASE_URL}/chapter/${chapterId}`, {
+    next: { revalidate: 60 },
+    headers: {
+      deviceId: deviceId,
+    },
+  });
   if (!res.ok) throw new Error("Failed to fetch chapter by id");
   return res.json();
 };
 
-export const  fetchContents = async (
-  chapterId: number
-): Promise<ChapterDetailsApiResponse> => {
+export const fetchContents = async ({
+  chapterId,
+  deviceId,
+}: {
+  chapterId: number;
+  deviceId: string;
+}): Promise<ChapterDetailsApiResponse> => {
   const res = await httpClient.get({
     url: "/chapter/details",
     params: { chapterId: chapterId.toString() },
+    headers: {
+      deviceId: deviceId,
+    },
   });
   return res;
-}
+};
+
+export const fetchQuestion = async (): Promise<QuestionApiResponse> => {
+  return await httpClient.get({
+    url: "/api/story/question",
+  });
+};
 
 export const fetchLatestChapters = async ({
   page,
-  pageSize
+  pageSize,
+  deviceId,
 }: {
-  page: number,
-  pageSize: number
+  page: number;
+  pageSize: number;
+  deviceId: string;
 }) => {
-    return (
-      await httpClient.get({
-        url: "/api/story/latest-chapter",
-        params: { page: page ?? 0, size: pageSize ?? 20 },
-      })
-    ).data;
-  }
+  return (
+    await httpClient.get({
+      url: "/api/story/latest-chapter",
+      params: { page: page ?? 0, size: pageSize ?? 20 },
+      headers: {
+        deviceId: deviceId,
+      },
+    })
+  ).data;
+};
 
-export const fetchPotential = async (
-  {
-    page,
-  pageSize
-  }: {
-    page: number | undefined,
-  pageSize: number | undefined
-  }
-): Promise<StoriesApiResponse | null> => {
+export const fetchPotential = async ({
+  page,
+  pageSize,
+  deviceId,
+}: {
+  page: number | undefined;
+  pageSize: number | undefined;
+  deviceId: string;
+}): Promise<StoriesApiResponse | null> => {
   try {
     const res = await httpClient.get({
       url: "/api/story/potential/list",
       params: {
         page: page || 0,
         size: pageSize || 20,
+      },
+      headers: {
+        deviceId: deviceId,
       },
     });
     return res;
@@ -216,49 +200,63 @@ export const fetchPotential = async (
   }
 };
 
-
-export const fetchWeekly = async () => {
+export const fetchWeekly = async ({ deviceId }: { deviceId: string }) => {
   return (
     await httpClient.get({
       url: "/api/story/weekly/list",
       params: { page: 0, size: 20 },
+      headers: {
+        deviceId: deviceId,
+      },
     })
   ).data;
 };
 
-export const fetchRanking = async () => {
+export const fetchRanking = async ({ deviceId }: { deviceId: string }) => {
   return (
     await httpClient.get({
       url: "/api/story/ranking/list",
       params: { page: 0, size: 10 },
+      headers: {
+        deviceId: deviceId,
+      },
     })
   ).data;
 };
 
-export const fetchCategories = async () => {
+export const fetchCategories = async ({ deviceId }: { deviceId: string }) => {
   return (
     await httpClient.get({
       url: "/api/category/list",
+      headers: {
+        deviceId: deviceId,
+      },
     })
   ).data;
 };
 
-export const fetchFeature = async () => {
+export const fetchFeature = async ({ deviceId }: { deviceId: string }) => {
   return await httpClient.get({
     url: "/api/story",
     params: {
       sort: "rate:DESC",
     },
+    headers: {
+      deviceId: deviceId,
+    },
   });
 };
 
-export const fetchBestStories = async () => {
+export const fetchBestStories = async ({ deviceId }: { deviceId: string }) => {
   return await httpClient.get({
     url: "/api/story",
     params: {
       page: 0,
       size: 20,
       filter: "rate|gt|4.0",
+    },
+    headers: {
+      deviceId: deviceId,
     },
   });
 };

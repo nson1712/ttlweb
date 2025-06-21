@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { MotionTitle } from "../components/components/motion-title";
 import { NotFound } from "../components/components/not-found";
 import { PaginationWithLinks } from "../components/components/pagination";
@@ -11,6 +12,7 @@ import {
 } from "../components/ui/breadcrumb";
 import { fetchPotential } from "../lib/fetch-data";
 import { StoryType } from "../types/story";
+import { LSK_DEVICE_ID } from "../utils/storage";
 
 export default async function PotentialStarletsPage({
   searchParams,
@@ -24,13 +26,14 @@ export default async function PotentialStarletsPage({
   const parsedPage = typeof page === "string" ? parseInt(page, 10) : page ?? 0;
   const parsedPageSize =
     typeof pageSize === "string" ? parseInt(pageSize, 10) : pageSize ?? 20;
+  const deviceId = (await cookies()).get(LSK_DEVICE_ID)?.value ?? "";
 
   const potentialRes = await fetchPotential({
     page: page ?? 0,
     pageSize: pageSize ?? 20,
+    deviceId: deviceId,
   });
 
-  console.log("Potential Res:", potentialRes);
   return (
     <div className="space-y-8">
       <Breadcrumb className="flex w-full mb-4 sm:mb-0">

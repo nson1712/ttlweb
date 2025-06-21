@@ -644,6 +644,8 @@ import {
   fetchContents,
   fetchStoryDetails,
 } from "@/app/lib/fetch-data";
+import { cookies } from "next/headers";
+import { LSK_DEVICE_ID } from "@/app/utils/storage";
 
 export async function generateMetadata({
   params,
@@ -668,63 +670,9 @@ export async function generateMetadata({
     title: `${chapterData?.seoTitle} - ${storyData?.title}`,
     description:
       chapterData?.metaDescription || "Đọc chương mới nhất trên Tàng Thư Lâu!",
-    keywords: chapterData?.metaKeywords
+    keywords: chapterData?.metaKeywords,
   };
 }
-
-// export default async function ChapterDetailPage({
-//   params,
-//   searchParams,
-// }: {
-//   params: Promise<{ slug: string; chapterSlug: string }>;
-//   searchParams: Promise<{
-//     page?: number | undefined;
-//     pageSize?: number | undefined;
-//   }>;
-// }) {
-//   const { slug, chapterSlug } = await params;
-//   const { page, pageSize } = await searchParams;
-//   const isId = /^\d+$/.test(chapterSlug);
-//   const detailResp = isId
-//     ? await fetchById(Number(chapterSlug))
-//     : await fetchBySlug({
-//         slug: slug,
-//         chapterSlug: chapterSlug,
-//       });
-//   const detail = detailResp.data;
-
-//   const prevSlug = detail.prevChapterId
-//     ? (await fetchById(detail.prevChapterId)).data.slug
-//     : null;
-//   const nextSlug = detail.nextChapterId
-//     ? (await fetchById(detail.nextChapterId)).data.slug
-//     : null;
-
-//   const contentsResp = await fetchContents(Number(detail.id));
-
-//   const chaptersList = await fetchChapters({
-//     storyId: Number(detail.storyId),
-//     page: page ?? 0,
-//     pageSize: pageSize ?? 50,
-//   });
-
-//   const storyDetailsRes = await fetchStoryDetails(slug);
-
-//   return (
-//       <Suspense fallback={<Loading />}>
-//       <ChapterContent
-//         storySlug={slug}
-//         storyTitle={storyDetailsRes?.data?.data?.title}
-//         chapterSlug={detail.slug}
-//         details={detail}
-//         contents={contentsResp.data}
-//         prevSlug={prevSlug}
-//         nextSlug={nextSlug}
-//         chaptersList={chaptersList}
-//       />
-//     </Suspense>
-//   );
-// }
 
 export default async function ChapterDetailPage({
   params,
@@ -734,35 +682,60 @@ export default async function ChapterDetailPage({
   searchParams: Promise<{ page?: number; pageSize?: number }>;
 }) {
   const { slug, chapterSlug } = await params;
-  console.log("STORY SLUG: ", slug)
+  const deviceId = (await cookies()).get(LSK_DEVICE_ID)?.value ?? "";
   const isId = /^\d+$/.test(chapterSlug);
 
   const detailPromise = isId
-    ? fetchById(Number(chapterSlug))
-    : fetchBySlug({ slug, chapterSlug });
+    ? fetchById({
+        chapterId: Number(chapterSlug),
+        deviceId: deviceId,
+      })
+    : fetchBySlug({ slug: slug, chapterSlug: chapterSlug, deviceId: deviceId });
 
-  const storyDetailsPromise = fetchStoryDetails(slug);
-  const chaptersListPromise  = fetchChapters({
+  const storyDetailsPromise = fetchStoryDetails({
+    slug: slug,
+    deviceId: deviceId,
+  });
+  const chaptersListPromise = fetchChapters({
     storyId: Number((await detailPromise).data.storyId),
     page: (await searchParams).page ?? 0,
     pageSize: (await searchParams).pageSize ?? 50,
+    deviceId: deviceId,
   });
 
   const detailResp = await detailPromise;
   const detail = detailResp.data;
 
-  const contentsPromise = fetchContents(Number(detail.id));
-  const prevPromise     = detail.prevChapterId ? fetchById(detail.prevChapterId) : Promise.resolve(null);
-  const nextPromise     = detail.nextChapterId ? fetchById(detail.nextChapterId) : Promise.resolve(null);
+  const contentsPromise = fetchContents({
+    chapterId: Number(detail.id),
+    deviceId: deviceId,
+  });
+  const prevPromise = detail?.prevChapterId
+    ? fetchById({
+        chapterId: detail?.prevChapterId,
+        deviceId: deviceId,
+      })
+    : Promise.resolve(null);
+  const nextPromise = detail?.nextChapterId
+    ? fetchById({
+        chapterId: detail?.nextChapterId,
+        deviceId: deviceId,
+      })
+    : Promise.resolve(null);
 
-  const [ contentsResp, prevResp, nextResp, chaptersListRes, storyDetailsRes ] =
-    await Promise.all([
-      contentsPromise,
-      prevPromise,
-      nextPromise,
-      chaptersListPromise,
-      storyDetailsPromise,
-    ]);
+  const [contentsResp, prevResp, nextResp, chaptersListRes, storyDetailsRes]: [
+    Awaited<ReturnType<typeof fetchContents>>,
+    Awaited<ReturnType<typeof fetchById>> | null,
+    Awaited<ReturnType<typeof fetchById>> | null,
+    Awaited<ReturnType<typeof fetchChapters>>,
+    Awaited<ReturnType<typeof fetchStoryDetails>>
+  ] = await Promise.all([
+    contentsPromise,
+    prevPromise,
+    nextPromise,
+    chaptersListPromise,
+    storyDetailsPromise,
+  ]);
 
   const prevSlug = prevResp?.data?.slug ?? null;
   const nextSlug = nextResp?.data?.slug ?? null;
@@ -782,4 +755,3 @@ export default async function ChapterDetailPage({
     </Suspense>
   );
 }
-

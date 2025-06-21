@@ -24,8 +24,16 @@ import {
 import { TabCard } from "./components/components/tab-card";
 import { FeaturedSection } from "./components/components/featured-section";
 import { WeeklyStoryCarousel } from "./components/components/weekly-story-carousel";
+import { cookies } from "next/headers";
+import { LSK_DEVICE_ID } from "./utils/storage";
 
 export default async function HomePage() {
+  const deviceId = (await cookies()).get(LSK_DEVICE_ID)?.value ?? "";
+
+  console.log(
+    "DEVICEEEEEEEEEEEEEEEEEEEEE IDDDDDDDDDDDDDDDDDDDDDDDD: ",
+    deviceId
+  );
   const [
     weeklyRes,
     potentialRes,
@@ -33,23 +41,25 @@ export default async function HomePage() {
     recentUpdatesRes,
     featuredRes,
     bestStoriesRes,
-    // hashtagRes,,
+    // hashtagRes,
     categoriesRes,
   ] = await Promise.all([
-    fetchWeekly(),
+    fetchWeekly({ deviceId: deviceId }),
     fetchPotential({
       page: 0,
       pageSize: 20,
+      deviceId: deviceId,
     }),
-    fetchRanking(),
+    fetchRanking({ deviceId: deviceId }),
     fetchLatestChapters({
       page: 0,
       pageSize: 20,
+      deviceId: deviceId,
     }),
-    fetchFeature(),
-    fetchBestStories(),
+    fetchFeature({ deviceId: deviceId }),
+    fetchBestStories({ deviceId: deviceId }),
     // fetchHashtag(),
-    fetchCategories(),
+    fetchCategories({deviceId: deviceId}),
   ]);
 
   return (
@@ -70,8 +80,16 @@ export default async function HomePage() {
         <Tabs defaultValue="best-novels" className="w-full col-span-2">
           <div className="flex justify-between items-center mb-4">
             <TabsList>
-              <TabsTrigger className="data-[state=active]:text-white" value="best-novels">Truyện hay nhất</TabsTrigger>
-              <TabsTrigger className="data-[state=active]:text-white" value="most-discussed">
+              <TabsTrigger
+                className="data-[state=active]:text-white"
+                value="best-novels"
+              >
+                Truyện hay nhất
+              </TabsTrigger>
+              <TabsTrigger
+                className="data-[state=active]:text-white"
+                value="most-discussed"
+              >
                 Thảo luận nhiều nhất
               </TabsTrigger>
             </TabsList>

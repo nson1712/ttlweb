@@ -9,6 +9,8 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "../components/ui/breadcrumb";
+import { cookies } from "next/headers";
+import { LSK_DEVICE_ID } from "../utils/storage";
 
 interface Category {
   name: string;
@@ -16,7 +18,10 @@ interface Category {
 }
 
 export default async function CategoriesPage() {
-  const [categoriesRes] = await Promise.all([fetchCategories()]);
+  const deviceId = (await cookies()).get(LSK_DEVICE_ID)?.value ?? "";
+  const [categoriesRes] = await Promise.all([
+    fetchCategories({ deviceId: deviceId }),
+  ]);
   const colorKeys = Object.keys(colorClasses) as (keyof typeof colorClasses)[];
 
   interface CategoryWithColor extends Category {

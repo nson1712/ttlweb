@@ -7,6 +7,8 @@ import { StoryInfoTab } from "@/app/components/components/story-info-tabs";
 import { NotFound } from "@/app/components/components/not-found";
 import { fetchChapters, fetchStoryDetails } from "@/app/lib/fetch-data";
 import { NovelDetailsHeader } from "@/app/components/components/novel-details-header";
+import { cookies } from "next/headers";
+import { LSK_DEVICE_ID } from "@/app/utils/storage";
 
 export async function generateMetadata({
   params,
@@ -46,10 +48,14 @@ export default async function NovelDetailPage({
 }) {
   const { slug } = await params;
   const { page, pageSize, sortType } = await searchParams;
+  const deviceId = (await cookies()).get(LSK_DEVICE_ID)?.value ?? "";
 
   let storyDetailsRes: StoryDetailsApiResponse | null = null;
   try {
-    storyDetailsRes = await fetchStoryDetails(slug);
+    storyDetailsRes = await fetchStoryDetails({
+      slug: slug,
+      deviceId: deviceId,
+    });
   } catch (error) {
     console.error("Error fetching story details:", error);
     return <NotFound />;
@@ -66,6 +72,7 @@ export default async function NovelDetailPage({
     page: page ?? 0,
     pageSize: pageSize ?? 20,
     sortType: sortType,
+    deviceId: deviceId
   });
 
   return (

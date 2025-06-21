@@ -6,6 +6,8 @@ import { NotFound } from "@/app/components/components/not-found";
 import { fetchCategories, fetchStories } from "@/app/lib/fetch-data";
 import { StoryByCategoryHeader } from "@/app/components/components/story-by-category-header";
 import { StoryByCategoryFilter } from "@/app/components/components/story-by-category-filter";
+import { cookies } from "next/headers";
+import { LSK_DEVICE_ID } from "@/app/utils/storage";
 
 export default async function TagDetailPage({
   params,
@@ -20,13 +22,15 @@ export default async function TagDetailPage({
 }) {
   const { category } = await params;
   const { page, pageSize, sort } = await searchParams;
+  const deviceId = (await cookies()).get(LSK_DEVICE_ID)?.value ?? ""
 
   const [categoriesRes, storiesRes] = await Promise.all([
-    fetchCategories(),
+    fetchCategories({deviceId: deviceId}),
     fetchStories({
       page: page,
       pageSize: pageSize,
       filter: `categories.slug|in|${category}`,
+      deviceId: deviceId
     }),
   ]);
 
