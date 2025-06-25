@@ -26,6 +26,7 @@ export default function QuestionForm({ question, onSuccess }: QuestionProps) {
   const [serverError, setServerError] = React.useState("");
 
   const onSubmit = async (values: { answer: string }) => {
+    if(!question?.id) return
     setLoading(true);
     setServerError("");
     try {

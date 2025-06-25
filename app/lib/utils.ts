@@ -102,11 +102,11 @@ export const createFilter = (
       }
     })
     .join("&");
-}
+};
 
 export const isDate = (date: unknown): date is Moment | Dayjs => {
   return isMoment(date) || isDayjs(date);
-}
+};
 
 export const isEmpty = (value: number | string): boolean => {
   return (
@@ -140,37 +140,50 @@ export type converterFunc = (
   argument?: string
 ) => string | boolean | Array<string> | Array<number> | moment.Moment;
 
-export const decodeParam = (param: string, converters: Map<string, converterFunc>): Record<string, unknown> => {
-  return param.split('&').reduce((acc: Record<string, unknown>, cur: string, curIndex: number, arr: Array<string>): Record<string, unknown> => {
-    const [curKey, , curValue]: Array<string> = cur.split('|');
-    const listValue: Array<string> = [curValue];
+export const decodeParam = (
+  param: string,
+  converters: Map<string, converterFunc>
+): Record<string, unknown> => {
+  return param
+    .split("&")
+    .reduce(
+      (
+        acc: Record<string, unknown>,
+        cur: string,
+        curIndex: number,
+        arr: Array<string>
+      ): Record<string, unknown> => {
+        const [curKey, , curValue]: Array<string> = cur.split("|");
+        const listValue: Array<string> = [curValue];
 
-    if (_.isEmpty(curKey)) {
-      return acc;
-    }
-
-    if (curIndex > 0) {
-      const [lastKey, lastOperator, lastValue]: Array<string> = arr[curIndex - 1].split('|');
-      if (lastKey === curKey) {
-        if (lastOperator === 'gte') {
-          listValue.unshift(lastValue);
-        } else {
-          listValue.push(lastValue);
+        if (_.isEmpty(curKey)) {
+          return acc;
         }
-      }
-    }
-    const converter = converters.get(curKey);
-    if (converter) {
-      acc[curKey] = converter(...listValue);
-    }
-    return acc;
-  }, {});
-}
+
+        if (curIndex > 0) {
+          const [lastKey, lastOperator, lastValue]: Array<string> =
+            arr[curIndex - 1].split("|");
+          if (lastKey === curKey) {
+            if (lastOperator === "gte") {
+              listValue.unshift(lastValue);
+            } else {
+              listValue.push(lastValue);
+            }
+          }
+        }
+        const converter = converters.get(curKey);
+        if (converter) {
+          acc[curKey] = converter(...listValue);
+        }
+        return acc;
+      },
+      {}
+    );
+};
 
 export const isBoolean = (value: string): boolean => {
-  return value === 'true' || value === 'false';
-}
-
+  return value === "true" || value === "false";
+};
 
 export function normalizeFilterPayload(
   opts: Record<string, unknown>,
@@ -184,7 +197,7 @@ export function normalizeFilterPayload(
     const idx = fullKey.indexOf(".");
     if (idx > 0) {
       const base = fullKey.slice(0, idx);
-      // nếu cùng base có nhiều fullKey, có thể ưu tiên hoặc ghi đè sau; 
+      // nếu cùng base có nhiều fullKey, có thể ưu tiên hoặc ghi đè sau;
       // ở đây giả sử chỉ có 1 mapping per base
       baseToFull[base] = fullKey;
     }
@@ -211,14 +224,14 @@ export function normalizeFilterPayload(
 }
 
 export const capitalizeFirstLetter = (value: string) => {
-  return value?.charAt(0)?.toUpperCase() + value?.slice(1)
-}
+  return value?.charAt(0)?.toUpperCase() + value?.slice(1);
+};
 
 function uuidv4(): string {
   // Generates a RFC4122 version 4 UUID
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
     const r = (Math.random() * 16) | 0;
-    const v = c === 'x' ? r : (r & 0x3) | 0x8;
+    const v = c === "x" ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });
 }
@@ -230,4 +243,66 @@ export const getOrCreateDeviceId = (): string => {
     localStorage.setItem(LSK_DEVICE_ID, deviceId);
   }
   return deviceId;
+};
+
+export const utf8Decode = (bytes: Uint8Array) => {
+  let result = "";
+  let i = 0;
+
+  while (i < bytes.length) {
+    const byte1 = bytes[i++];
+
+    if (byte1 < 0x80) {
+      result += String.fromCharCode(byte1);
+    } else if (byte1 < 0xe0) {
+      const byte2 = bytes[i++];
+      result += String.fromCharCode(((byte1 & 0x1f) << 6) | (byte2 & 0x3f));
+    } else if (byte1 < 0xf0) {
+      const byte2 = bytes[i++];
+      const byte3 = bytes[i++];
+      result += String.fromCharCode(
+        ((byte1 & 0x0f) << 12) | ((byte2 & 0x3f) << 6) | (byte3 & 0x3f)
+      );
+    } else {
+      const byte2 = bytes[i++];
+      const byte3 = bytes[i++];
+      const byte4 = bytes[i++];
+      let codepoint =
+        ((byte1 & 0x07) << 18) |
+        ((byte2 & 0x3f) << 12) |
+        ((byte3 & 0x3f) << 6) |
+        (byte4 & 0x3f);
+      codepoint -= 0x10000;
+      result += String.fromCharCode(
+        0xd800 + (codepoint >> 10),
+        0xdc00 + (codepoint & 0x3ff)
+      );
+    }
+  }
+
+  return result;
+};
+
+export const base64URLdecode = (str: string) => {
+  const base64Encoded: string = str.replace(/-/g, "+").replace(/_/g, "/");
+  const padding: string =
+    str.length % 4 === 0 ? "" : "=".repeat(4 - (str.length % 4));
+  const base64WithPadding: string = base64Encoded + padding;
+
+  const binaryString: string = atob(base64WithPadding);
+  const binaryLength: number = binaryString.length;
+  const bytes: Uint8Array = new Uint8Array(binaryLength);
+
+  for (let i = 0; i < binaryLength; i++) {
+    bytes[i] = binaryString.charCodeAt(i);
+  }
+
+  return utf8Decode(bytes);
+};
+
+export const decodeAccessToken = async (accessToken: string) => {
+  const tokens = accessToken.split(".");
+  const decoded = base64URLdecode(tokens[1]);
+  const jsonObj = JSON.parse(decoded);
+  return jsonObj;
 };

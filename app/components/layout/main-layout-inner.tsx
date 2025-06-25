@@ -5,6 +5,7 @@ import { cn } from "@/app/lib/utils";
 import { useContext } from "react";
 import { Header } from "./header";
 import { Footer } from "./footer";
+import { SessionProvider } from "next-auth/react";
 
 export function LayoutInner({ children }: { children: React.ReactNode }) {
   const { theme } = useContext(SettingsContext);
@@ -17,12 +18,14 @@ export function LayoutInner({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className={cn("flex flex-col min-h-screen", themeClasses[theme ?? "dark"])}>
+    <SessionProvider>
+      <div className={cn("flex flex-col min-h-screen", themeClasses[theme ?? "dark"])}>
       <Header />
       <main className="flex-1 container mx-auto px-4 py-8 min-h-svh">
         {children}
       </main>
       <Footer />
     </div>
+    </SessionProvider>
   );
 }
