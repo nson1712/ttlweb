@@ -60,7 +60,7 @@ export default function RootLayout({
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer','GTM-TG7M5XM5');`}
         </Script>
-        {/* <AntiTamper /> */}
+        <AntiTamper />
       </head>
 
       <body>

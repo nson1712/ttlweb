@@ -50,7 +50,7 @@ export const GoogleLoginButton = () => {
     if (status === "authenticated") {
       loginBackend();
     }
-  }, [session, status]);
+  }, [session, status, router, setIsLoggedIn, setProfile]);
 
   return (
     <>

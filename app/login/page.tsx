@@ -1,5 +1,6 @@
 "use client";
 
+import FacebookIcon from "@/public/icon/FacebookIcon";
 // import { useEffect } from "react";
 // import { useRouter } from "next/navigation";
 import { SocialLoginButton } from "../components/components/social-login-btn";
@@ -28,6 +29,14 @@ export default function AuthPage() {
           icon={<GoogleIcon width={30} height={30} />}
           provider="google"
           className="bg-white text-black"
+        />
+
+        <SocialLoginButton
+          title="Facebook"
+          socialType="FACEBOOK"
+          icon={<FacebookIcon width={30} height={30} />}
+          provider="facebook"
+          className="bg-blue-500 text-white"
         />
 
         <ToastContainer />

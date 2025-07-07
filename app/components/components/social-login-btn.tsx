@@ -59,10 +59,10 @@ export const SocialLoginButton: FC<SocialLoginButtonProps> = ({
       }
     };
 
-    if (status === "authenticated") {
+    if (status === "authenticated" && session?.provider === provider) {
       loginBackend();
     }
-  }, [session, status]);
+  }, [session, status, provider, router, setIsLoggedIn, setProfile, socialType]);
 
   return (
     <>
@@ -73,8 +73,7 @@ export const SocialLoginButton: FC<SocialLoginButtonProps> = ({
           className
         )}
         onClick={() => {
-          signIn(provider)
-          
+          signIn(provider);
         }}
       >
         {icon}

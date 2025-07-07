@@ -42,7 +42,7 @@ export default function AuthCallbackPage() {
     };
 
     loginToBackend();
-  }, [session, status]);
+  }, [session, status, provider, router, setIsLoggedIn, setProfile]);
 
   return <p className="text-center mt-20">Đang xử lý đăng nhập...</p>;
 }
