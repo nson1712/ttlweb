@@ -17,8 +17,12 @@ export const removeItemStorage = (key: string): void => {
 };
 
 export const LSK_ACCESS_TOKEN = "accessToken";
+export const LSK_REFRESH_TOKEN = "refreshToken";
 
 export const getAccessToken = () => getItemStorage(LSK_ACCESS_TOKEN);
 export const removeAccessToken = () => removeItemStorage(LSK_ACCESS_TOKEN);
+
+export const getRefreshToken = () => getItemStorage(LSK_REFRESH_TOKEN);
+export const removeRefreshToken = () => removeItemStorage(LSK_REFRESH_TOKEN);
 
 export const LSK_DEVICE_ID = "DEVICE_ID";

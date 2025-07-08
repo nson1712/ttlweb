@@ -32,7 +32,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../../components/ui/dropdown-menu";
-import { useAuth } from "../../context/auth-context";
 // import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "../../lib/utils";
@@ -40,14 +39,13 @@ import Image from "next/image";
 import { useSearch } from "@/app/context/search-context";
 import { SettingsContext, Theme } from "@/app/context/setting-context";
 import { SettingsPanel } from "../components/setting-panel";
+import useGlobalStore from "@/app/stores/globalStore";
+import { signOut } from "next-auth/react";
 
 export function Header() {
   const router = useRouter();
-  const {
-    // user,
-    isLoggedIn,
-    //  logout
-  } = useAuth();
+  const {isLoggedIn, profile} = useGlobalStore()
+  console.log("PROFILE: ", profile)
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -141,10 +139,13 @@ export function Header() {
     }
   };
 
-  // const handleLogout = () => {
-  //   logout();
-  //   router.push("/");
-  // };
+  const handleLogout = () => {
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+      localStorage.removeItem('profile')
+      localStorage.removeItem('isLoggedIn')
+      signOut({ callbackUrl: '/' });
+    };
 
   const textColorMap: Record<Theme, { base: string; hover: string }> = {
     light: {
@@ -451,7 +452,7 @@ export function Header() {
                         className="rounded-full border-2 border-emerald-500"
                         width={32}
                         height={32}
-                        src="https://png.pngtree.com/png-clipart/20240321/original/pngtree-avatar-job-student-flat-portrait-of-man-png-image_14639683.png"
+                        src={`${profile.avatar}`}
                         alt="User avatar"
                         unoptimized
                       />
@@ -459,7 +460,7 @@ export function Header() {
                     </div>
                     <div className="flex flex-col items-start">
                       <span className="text-sm font-medium text-white">
-                        River
+                        {String(profile?.displayName ?? "")}
                       </span>
                     </div>
                   </Button>
@@ -503,7 +504,7 @@ export function Header() {
                   <DropdownMenuSeparator className="bg-gray-700" />
                   <DropdownMenuItem
                     className="rounded-lg focus:bg-red-900/30 text-red-400 focus:text-red-300"
-                    // onClick={handleLogout}
+                    onClick={handleLogout}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -527,11 +528,11 @@ export function Header() {
               </DropdownMenu>
             ) : (
               <div className="hidden sm:flex items-center gap-2">
-                {/* <Link href="/login">
+                <Link href="/login">
                   <Button className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white border-none">
                     Đăng nhập
                   </Button>
-                </Link> */}
+                </Link>
               </div>
             )}
 

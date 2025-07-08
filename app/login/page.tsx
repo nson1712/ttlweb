@@ -1,141 +1,60 @@
 "use client";
 
-import { useAuth } from "../context/auth-context";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-// import Link from "next/link";
-import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
-import { Label } from "../components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
+import FacebookIcon from "@/public/icon/FacebookIcon";
+// import { useEffect } from "react";
+// import { useRouter } from "next/navigation";
+import { SocialLoginButton } from "../components/components/social-login-btn";
+import GoogleIcon from "@/public/icon/GoogleIcon";
+import { ToastContainer } from "react-toastify";
+// import useGlobalStore from "../stores/globalStore";
 
 export default function AuthPage() {
-  const router = useRouter();
-  const { login, register, isLoggedIn } = useAuth();
-  const [activeTab, setActiveTab] = useState("login");
-  console.log("ACTIVE TAB: ", activeTab)
-  
-  // Redirect if already logged in
-  useEffect(() => {
-    if (isLoggedIn) {
-      router.push("/");
-    }
-  }, [isLoggedIn, router]);
-  
-  // Login form state
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
-  const [loginError, setLoginError] = useState("");
-  const [isLoginLoading, setIsLoginLoading] = useState(false);
-  
-  // Register form state
-  const [registerUsername, setRegisterUsername] = useState("");
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
-  const [registerConfirmPassword, setRegisterConfirmPassword] = useState("");
-  const [registerError, setRegisterError] = useState("");
-  const [isRegisterLoading, setIsRegisterLoading] = useState(false);
-  
-  // Forgot password form state
-  const [forgotEmail, setForgotEmail] = useState("");
-  const [forgotSuccess, setForgotSuccess] = useState(false);
-  const [forgotError, setForgotError] = useState("");
-  const [isForgotLoading, setIsForgotLoading] = useState(false);
-  
-  // Handle login form submission
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoginError("");
-    
-    // Basic validation
-    if (!loginEmail || !loginPassword) {
-      setLoginError("Please fill in all fields");
-      return;
-    }
-    
-    setIsLoginLoading(true);
-    
-    try {
-      const success = await login(loginEmail, loginPassword);
-      
-      if (success) {
-        router.push("/");
-      } else {
-        setLoginError("Invalid email or password");
-      }
-    } catch (error) {
-      setLoginError("An error occurred during login");
-      console.error(error);
-    } finally {
-      setIsLoginLoading(false);
-    }
-  };
-  
-  // Handle register form submission
-  const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setRegisterError("");
-    
-    // Basic validation
-    if (!registerUsername || !registerEmail || !registerPassword || !registerConfirmPassword) {
-      setRegisterError("Please fill in all fields");
-      return;
-    }
-    
-    if (registerPassword !== registerConfirmPassword) {
-      setRegisterError("Passwords do not match");
-      return;
-    }
-    
-    if (registerPassword.length < 8) {
-      setRegisterError("Password must be at least 8 characters long");
-      return;
-    }
-    
-    setIsRegisterLoading(true);
-    
-    try {
-      const success = await register(registerUsername, registerEmail, registerPassword);
-      
-      if (success) {
-        router.push("/");
-      } else {
-        setRegisterError("Registration failed. Please try again.");
-      }
-    } catch (error) {
-      setRegisterError("An error occurred during registration");
-      console.error(error);
-    } finally {
-      setIsRegisterLoading(false);
-    }
-  };
-  
-  // Handle forgot password form submission
-  const handleForgotPassword = (e: React.FormEvent) => {
-    e.preventDefault();
-    setForgotError("");
-    setForgotSuccess(false);
-    
-    // Basic validation
-    if (!forgotEmail) {
-      setForgotError("Please enter your email address");
-      return;
-    }
-    
-    setIsForgotLoading(true);
-    
-    // In a real app, you would make an API call here
-    // For now, we'll simulate a successful request
-    setTimeout(() => {
-      setForgotSuccess(true);
-      setIsForgotLoading(false);
-    }, 1000);
-  };
-  
+  // const router = useRouter();
+  // const { isLoggedIn } = useGlobalStore();
+
+  // // Redirect if already logged in
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     router.push("/");
+  //   }
+  // }, [isLoggedIn, router]);
+
   return (
     <div className="max-w-md mx-auto">
-      <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
-        <Tabs defaultValue="login" className="w-full" onValueChange={setActiveTab}>
+      <div className="bg-gray-800 p-6 rounded-lg shadow-lg space-y-4">
+        <h1 className="text-3xl text-center">Đăng nhập</h1>
+        <SocialLoginButton
+          title="Google"
+          socialType="GOOGLE"
+          icon={<GoogleIcon width={30} height={30} />}
+          provider="google"
+          className="bg-white text-black"
+        />
+
+        <SocialLoginButton
+          title="Facebook"
+          socialType="FACEBOOK"
+          icon={<FacebookIcon width={30} height={30} />}
+          provider="facebook"
+          className="bg-blue-500 text-white"
+        />
+
+        <ToastContainer />
+        {/* <div className="flex flex-col items-center gap-4 mt-20">
+      <button
+        onClick={() => signIn("google", undefined, { callbackUrl: "/auth/callback?provider=google" })}
+        className="bg-red-500 text-white p-2 rounded"
+      >
+        Đăng nhập bằng Google
+      </button>
+      <button
+        onClick={() => signIn("facebook", undefined, { callbackUrl: "/auth/callback?provider=facebook" })}
+        className="bg-blue-600 text-white p-2 rounded"
+      >
+        Đăng nhập bằng Facebook
+      </button>
+    </div> */}
+        {/* <Tabs defaultValue="login" className="w-full" onValueChange={setActiveTab}>
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="login">Login</TabsTrigger>
             <TabsTrigger value="register">Sign Up</TabsTrigger>
@@ -341,7 +260,7 @@ export default function AuthPage() {
               </div>
             </form>
           </TabsContent>
-        </Tabs>
+        </Tabs> */}
       </div>
     </div>
   );

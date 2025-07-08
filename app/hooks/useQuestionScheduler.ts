@@ -52,7 +52,7 @@ export function useQuestionScheduler(
       setQuestion(null);
       setInitialized(true);
     }
-  }, [storySlug, currentOrder]);
+  }, [storySlug, currentOrder, baseKey, nextKey]);
 
   // onSuccess should only re-schedule, never read again
   const onSuccess = useCallback(() => {
@@ -61,7 +61,7 @@ export function useQuestionScheduler(
     localStorage.setItem(baseKey, String(base));
     localStorage.setItem(nextKey, String(next));
     setQuestion(null);
-  }, [currentOrder]);
+  }, [currentOrder, baseKey, nextKey]);
 
   return { question, initialized, onSuccess };
 }

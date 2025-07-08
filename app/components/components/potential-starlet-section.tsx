@@ -64,7 +64,7 @@ export const PotentialStarletSection: FC<PotenialStarletPropsType> = ({
       <div className="grid grid-cols-4 gap-4 md:grid-cols-5 lg:grid-cols-10">
         {(potentialStarlets ?? []).map(
           (novel, idx) =>
-            novel && <PotentialStarletCard key={novel.id ?? idx} {...novel} />
+            novel && <PotentialStarletCard key={novel?.id ?? idx} {...novel} />
         )}
       </div>
     </section>
@@ -136,9 +136,9 @@ function PotentialStarletCard({
 
             <div className="absolute bottom-0 left-0 w-full p-2 transform translate-y-full transition-transform duration-300 group-hover:translate-y-0">
               <div className="flex flex-wrap gap-1">
-                {categories?.slice(0, 1).map((category) => (
+                {categories?.slice(0, 1)?.map((category) => (
                   <span
-                    key={category.id}
+                    key={category?.id}
                     className={cn(
                       "rounded-full px-2 py-0.5 text-xs font-medium text-white backdrop-blur-sm",
                       tagBgMap[theme ?? "dark"]
