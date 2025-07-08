@@ -11,6 +11,9 @@ import {
   Clock,
   User,
   Tag,
+  SettingsIcon,
+  LogOutIcon,
+  LogInIcon,
 } from "lucide-react";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
@@ -41,16 +44,16 @@ import { SettingsContext, Theme } from "@/app/context/setting-context";
 import { SettingsPanel } from "../components/setting-panel";
 import useGlobalStore from "@/app/stores/globalStore";
 import { signOut } from "next-auth/react";
+import { dropdownMenuColorMap } from "@/app/lib/store-data";
+import LogoutButton from "../components/logout-btn";
 
 export function Header() {
   const router = useRouter();
-  const {isLoggedIn, profile} = useGlobalStore()
-  console.log("PROFILE: ", profile)
+  const { isLoggedIn, profile, resetState } = useGlobalStore();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-
   // const [ notifications ] = useState(3);
   const { searchTerm, setSearchTerm } = useSearch();
   const { theme } = useContext(SettingsContext);
@@ -140,12 +143,11 @@ export function Header() {
   };
 
   const handleLogout = () => {
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
-      localStorage.removeItem('profile')
-      localStorage.removeItem('isLoggedIn')
-      signOut({ callbackUrl: '/' });
-    };
+    resetState()
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    signOut({ callbackUrl: "/" });
+  };
 
   const textColorMap: Record<Theme, { base: string; hover: string }> = {
     light: {
@@ -163,6 +165,8 @@ export function Header() {
   };
 
   const navLinkText = textColorMap[theme ?? "dark"];
+
+  const dropdownColor = dropdownMenuColorMap[theme ?? "dark"];
 
   return (
     <header
@@ -459,69 +463,77 @@ export function Header() {
                       <span className="absolute bottom-0 right-0 h-2.5 w-2.5 bg-green-500 rounded-full border-2 border-gray-900"></span>
                     </div>
                     <div className="flex flex-col items-start">
-                      <span className="text-sm font-medium text-white">
+                      <span
+                        className={cn(
+                          "text-sm font-medium",
+                          dropdownColor.text
+                        )}
+                      >
                         {String(profile?.displayName ?? "")}
                       </span>
                     </div>
                   </Button>
                 </DropdownMenuTrigger>
+
                 <DropdownMenuContent
                   align="end"
-                  className="w-56 bg-gray-800 text-white border border-gray-700 rounded-xl shadow-xl p-2"
+                  className={cn(
+                    "w-56 rounded-xl shadow-xl p-2",
+                    dropdownColor.background,
+                    dropdownColor.border,
+                    "border"
+                  )}
                 >
-                  <DropdownMenuItem className="rounded-lg focus:bg-gray-700 focus:text-white">
+                  <DropdownMenuItem
+                    className={cn(
+                      "rounded-lg",
+                      dropdownColor.hover,
+                      dropdownColor.text
+                    )}
+                  >
                     <User className="mr-2 h-4 w-4" />
                     <Link href="/profile" className="flex-1">
                       Trang cá nhân
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="rounded-lg focus:bg-gray-700 focus:text-white">
+
+                  <DropdownMenuItem
+                    className={cn(
+                      "rounded-lg",
+                      dropdownColor.hover,
+                      dropdownColor.text
+                    )}
+                  >
                     <BookOpen className="mr-2 h-4 w-4" />
                     <Link href="/bookmarks" className="flex-1">
                       Bookmarks
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="rounded-lg focus:bg-gray-700 focus:text-white">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="mr-2 h-4 w-4"
-                    >
-                      <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
-                      <circle cx="12" cy="12" r="3"></circle>
-                    </svg>
+
+                  <DropdownMenuItem
+                    className={cn(
+                      "rounded-lg",
+                      dropdownColor.hover,
+                      dropdownColor.text
+                    )}
+                  >
+                    <SettingsIcon className="mr-2 h-4 w-4" />
                     <Link href="/settings" className="flex-1">
                       Settings
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator className="bg-gray-700" />
+
+                  <DropdownMenuSeparator className={dropdownColor.divider} />
+
                   <DropdownMenuItem
-                    className="rounded-lg focus:bg-red-900/30 text-red-400 focus:text-red-300"
                     onClick={handleLogout}
+                    className={cn(
+                      "rounded-lg",
+                      dropdownColor.danger,
+                      dropdownColor.dangerText
+                    )}
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="mr-2 h-4 w-4"
-                    >
-                      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                      <polyline points="16 17 21 12 16 7"></polyline>
-                      <line x1="21" y1="12" x2="9" y2="12"></line>
-                    </svg>
+                    <LogOutIcon className="mr-2 h-4 w-4" />
                     Đăng xuất
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -659,6 +671,21 @@ export function Header() {
                     <span>{label}</span>
                   </Link>
                 ))}
+                <div className="w-[95%] mx-auto mb-4 border-[0.5px] border-gray-500"></div>
+                {isLoggedIn ? (
+                  <LogoutButton />
+                ) : (
+                  <Link
+                    href="/login"
+                    className={cn(
+                      "flex items-center gap-3 px-4 py-3 rounded-lg transition-colors",
+                      mobileNavText[theme ?? "dark"]
+                    )}
+                  >
+                    <LogInIcon className="h-4 w-4" />
+                    <span>Đăng nhập</span>
+                  </Link>
+                )}
               </nav>
             </motion.div>
           )}
