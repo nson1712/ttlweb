@@ -30,10 +30,6 @@ import { LSK_DEVICE_ID } from "./utils/storage";
 export default async function HomePage() {
   const deviceId = (await cookies()).get(LSK_DEVICE_ID)?.value ?? "";
 
-  console.log(
-    "DEVICEEEEEEEEEEEEEEEEEEEEE IDDDDDDDDDDDDDDDDDDDDDDDD: ",
-    deviceId
-  );
   const [
     weeklyRes,
     potentialRes,
@@ -59,7 +55,7 @@ export default async function HomePage() {
     fetchFeature({ deviceId: deviceId }),
     fetchBestStories({ deviceId: deviceId }),
     // fetchHashtag(),
-    fetchCategories({deviceId: deviceId}),
+    fetchCategories({ deviceId: deviceId }),
   ]);
 
   return (

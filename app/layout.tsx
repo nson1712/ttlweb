@@ -7,6 +7,7 @@ import Loading from "./components/components/loading";
 import AntiTamper from "./components/layout/anti-tamper";
 import Script from "next/script";
 import DeviceIdSync from "./components/layout/device-id-sync";
+import GlobalLoadingOverlay from "./components/components/loading-overlay";
 
 export const metadata: Metadata = {
   icons: {
@@ -83,6 +84,7 @@ export default function RootLayout({
             <MainLayout>{children}</MainLayout>
           </Suspense>
         </ThemeProvider>
+        <GlobalLoadingOverlay />
       </body>
     </html>
   );
