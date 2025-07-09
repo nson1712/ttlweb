@@ -1,6 +1,6 @@
-import NextAuth from "next-auth/next";
+import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import type { NextAuthOptions } from "next-auth";
+import FacebookProvider from "next-auth/providers/facebook";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -8,16 +8,36 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_CLIENT_ID!,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          scope: "email,public_profile",
+        },
+      },
+    }),
   ],
-  pages: {
-    signIn: "/login",
+  secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async jwt({ token, account }) {
+      if (account?.provider === "google" || account?.provider === "facebook") {
+        token.idToken = account.id_token;
+        token.accessToken = account.access_token;
+        token.provider = account.provider;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      session.user = {
+        email: token.email,
+        name: token.name,
+        image: token.picture
+      }
+      session.idToken = token.idToken as string;
+      session.accessToken = token.accessToken as string;
+      session.provider = token.provider as string;
+      return session;
+    },
   },
-  // …các thiết lập khác nếu có
 };
-
-/**
- * Khi import từ "next-auth/next", NextAuth() trả ra một handler
- * có kiểu (req: Request | NextRequest) => Promise<Response>.
- * Bạn chỉ cần export default nó để tái sử dụng trong App Router.
- */
-export default NextAuth(authOptions);
