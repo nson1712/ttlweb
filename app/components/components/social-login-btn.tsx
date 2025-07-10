@@ -29,6 +29,8 @@ export const SocialLoginButton: FC<SocialLoginButtonProps> = ({
   const isLoggedIn = useGlobalStore((state) => state.isLoggedIn);
   const setIsLoading = useGlobalStore((state) => state.setIsLoading);
 
+  console.log("SESSIONN: ", session)
+
   useEffect(() => {
     const loginBackend = async () => {
       try {
