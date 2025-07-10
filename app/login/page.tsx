@@ -6,9 +6,77 @@ import FacebookIcon from "@/public/icon/FacebookIcon";
 import { SocialLoginButton } from "../components/components/social-login-btn";
 import GoogleIcon from "@/public/icon/GoogleIcon";
 import { ToastContainer } from "react-toastify";
+import { Button } from "../components/ui/button";
+import {
+  FacebookAPIResponse,
+  FacebookLoginResponse,
+} from "../components/components/facebook-sdk";
+import { getOrCreateDeviceId } from "../lib/utils";
+import { httpClient } from "../utils/httpClient";
+import { useRouter } from "next/navigation";
+import useGlobalStore from "../stores/globalStore";
 // import useGlobalStore from "../stores/globalStore";
 
 export default function AuthPage() {
+  const router = useRouter();
+  const setProfile = useGlobalStore((state) => state.setProfile);
+  const setIsLoggedIn = useGlobalStore((state) => state.setIsLoggedIn);
+  const isLoggedIn = useGlobalStore((state) => state.isLoggedIn);
+  const setIsLoading = useGlobalStore((state) => state.setIsLoading);
+
+  const handleFacebookLogin = () => {
+    if (typeof window.FB !== "undefined") {
+      window.FB.login(
+        function (response: { authResponse: FacebookLoginResponse }) {
+          const { authResponse } = response;
+          console.log("response: ", response)
+          if (authResponse) {
+            const accessToken = authResponse.accessToken;
+            // Send accessToken to backend or handle further actions
+            sendTokenToBackend(accessToken);
+
+            // Get user info
+            // window.FB.api(
+            //   "/me",
+            //   { fields: "name,email,picture" },
+            //   function (userInfo: FacebookAPIResponse) {
+            //     console.log("User Info:", userInfo);
+            //     // Handle user info here (save to state or send to server)
+            //   }
+            // );
+          } else {
+            console.log("User cancelled login or did not fully authorize.");
+          }
+        },
+        { scope: "public_profile,email" } // Request additional permissions
+      );
+    }
+  };
+
+  const sendTokenToBackend = async (accessToken: string) => {
+    try {
+      setIsLoading(true);
+      const deviceId = getOrCreateDeviceId();
+      const response = await httpClient.post({
+        url: "/public/login-by-social",
+        data: {
+          socialType: "FACEBOOK",
+          token: accessToken,
+        },
+        headers: { deviceId },
+      });
+      const result = response.data;
+      setIsLoggedIn(true);
+      setProfile(result);
+      localStorage.setItem("accessToken", result.accessToken);
+      localStorage.setItem("refreshToken", result.refreshToken);
+      router.push("/");
+    } catch (err) {
+      console.error("Login error:", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   // const router = useRouter();
   // const { isLoggedIn } = useGlobalStore();
 
@@ -23,7 +91,7 @@ export default function AuthPage() {
     <div className="max-w-md mx-auto">
       <div className="bg-gray-800 p-6 rounded-lg shadow-lg space-y-4">
         <h1 className="text-3xl text-center">Đăng nhập</h1>
-        <SocialLoginButton
+        {/* <SocialLoginButton
           title="Google"
           socialType="GOOGLE"
           icon={<GoogleIcon width={30} height={30} />}
@@ -37,7 +105,14 @@ export default function AuthPage() {
           icon={<FacebookIcon width={30} height={30} />}
           provider="facebook"
           className="bg-blue-500 text-white"
-        />
+        /> */}
+
+        <Button
+          className="bg-blue-500 text-white"
+          onClick={handleFacebookLogin}
+        >
+          Đăng nhập bằng facebook
+        </Button>
 
         <ToastContainer />
         {/* <div className="flex flex-col items-center gap-4 mt-20">

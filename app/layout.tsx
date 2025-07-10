@@ -8,6 +8,7 @@ import Loading from "./components/components/loading";
 import Script from "next/script";
 import DeviceIdSync from "./components/layout/device-id-sync";
 import GlobalLoadingOverlay from "./components/components/loading-overlay";
+import FacebookSDK from "./components/components/facebook-sdk";
 
 export const metadata: Metadata = {
   icons: {
@@ -73,6 +74,7 @@ export default function RootLayout({
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
+        <FacebookSDK />
         <DeviceIdSync />
         <ThemeProvider
           attribute="class"
