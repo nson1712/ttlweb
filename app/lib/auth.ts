@@ -25,7 +25,7 @@ export const authOptions: NextAuthOptions = {
         token.idToken = account.id_token;
         token.accessToken = account.access_token;
         token.provider = account.provider;
-        console.log("TOKEN: ", token)
+        console.log("TOKEN: ", token);
       }
       return token;
     },
@@ -33,13 +33,16 @@ export const authOptions: NextAuthOptions = {
       session.user = {
         email: token.email,
         name: token.name,
-        image: token.picture
-      }
+        image: token.picture,
+      };
       session.idToken = token.idToken as string;
       session.accessToken = token.accessToken as string;
       session.provider = token.provider as string;
-      console.log("SESSION: ", session)
+      console.log("SESSION: ", session);
       return session;
     },
+  },
+  pages: {
+    signIn: "/login",
   },
 };
