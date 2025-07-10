@@ -4,7 +4,7 @@ import { ReactNode, Suspense } from "react";
 import "./globals.css";
 import { Metadata } from "next";
 import Loading from "./components/components/loading";
-import AntiTamper from "./components/layout/anti-tamper";
+// import AntiTamper from "./components/layout/anti-tamper";
 import Script from "next/script";
 import DeviceIdSync from "./components/layout/device-id-sync";
 import GlobalLoadingOverlay from "./components/components/loading-overlay";
@@ -61,7 +61,7 @@ export default function RootLayout({
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer','GTM-TG7M5XM5');`}
         </Script>
-        <AntiTamper />
+        {/* <AntiTamper /> */}
       </head>
 
       <body>
