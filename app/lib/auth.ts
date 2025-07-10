@@ -25,11 +25,12 @@ export const authOptions: NextAuthOptions = {
         token.idToken = account.id_token;
         token.accessToken = account.access_token;
         token.provider = account.provider;
-        console.log("TOKEN: ", token);
       }
       return token;
     },
     async session({ session, token }) {
+      console.log("session: ", session);
+      console.log("token: ", token);
       session.user = {
         email: token.email,
         name: token.name,
@@ -40,6 +41,17 @@ export const authOptions: NextAuthOptions = {
       session.provider = token.provider as string;
       console.log("SESSION: ", session);
       return session;
+    },
+  },
+  cookies: {
+    sessionToken: {
+      name: "next-auth.session-token",
+      options: {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        path: "/",
+      },
     },
   },
   pages: {

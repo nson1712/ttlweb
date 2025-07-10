@@ -28,45 +28,41 @@ export const SocialLoginButton: FC<SocialLoginButtonProps> = ({
   const setIsLoggedIn = useGlobalStore((state) => state.setIsLoggedIn);
   const isLoggedIn = useGlobalStore((state) => state.isLoggedIn);
   const setIsLoading = useGlobalStore((state) => state.setIsLoading);
+  console.log("STATUS: ", status);
 
-  console.log("SESSIONN: ", session)
+  console.log("SESSION: ", session); 
 
   useEffect(() => {
-    const loginBackend = async () => {
-      try {
-        setIsLoading(true);
-
-        const deviceId = getOrCreateDeviceId();
-        const response = await httpClient.post({
-          url: "/public/login-by-social",
-          data: {
-            socialType: socialType,
-            token: session?.accessToken,
-          },
-          headers: { deviceId },
-        });
-
-        const result = response.data;
-        setIsLoggedIn(true);
-        setProfile(result);
-
-        localStorage.setItem("accessToken", result.accessToken);
-        localStorage.setItem("refreshToken", result.refreshToken);
-
-        router.push("/");
-
-      } catch (err) {
-        console.error("Login error:", err);
-      } finally {
-        setIsLoading(false); // stop loading
-      }
-    };
-
     if (
       status === "authenticated" &&
       session?.provider === provider &&
       !isLoggedIn
     ) {
+      const loginBackend = async () => {
+        try {
+          setIsLoading(true);
+          const deviceId = getOrCreateDeviceId();
+          const response = await httpClient.post({
+            url: "/public/login-by-social",
+            data: {
+              socialType: socialType,
+              token: session?.accessToken,
+            },
+            headers: { deviceId },
+          });
+          const result = response.data;
+          setIsLoggedIn(true);
+          setProfile(result);
+          localStorage.setItem("accessToken", result.accessToken);
+          localStorage.setItem("refreshToken", result.refreshToken);
+          router.push("/");
+        } catch (err) {
+          console.error("Login error:", err);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+
       loginBackend();
     }
   }, [
@@ -80,6 +76,7 @@ export const SocialLoginButton: FC<SocialLoginButtonProps> = ({
     setIsLoading,
     router,
   ]);
+
   return (
     <button
       className={cn(
