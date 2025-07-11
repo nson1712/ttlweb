@@ -1,4 +1,4 @@
-import useFacebookSDK from "@/app/hooks/use-facebookSDK";
+import useFacebookSDK from "@/app/hooks/usefacebookSDK";
 
 const TTLPagePlugin = ({
   width,
