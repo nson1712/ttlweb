@@ -17,6 +17,8 @@ import {
 } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { SettingsContext, Theme } from "@/app/context/setting-context";
+import TTLPagePlugin from "../components/fb-plugin";
+import YouTubeEmbed from "../components/youtube-plugin";
 
 export const Footer: FC = () => {
   const { theme } = useContext(SettingsContext);
@@ -191,6 +193,19 @@ export const Footer: FC = () => {
                 </FooterLink>
               </div>
             </div>
+
+            <div className="space-y-3 w-full flex flex-col items-center">
+              <div className="w-full max-w-screen-lg flex justify-center">
+                <div>
+                  <TTLPagePlugin width={350} />
+                </div>
+              </div>
+              <YouTubeEmbed
+                channelId="UUda73N9OjoBnHnrEQxYYZpw"
+                height="150px"
+                width="350px"
+              />
+            </div>
           </div>
 
           <p
@@ -240,12 +255,7 @@ type FooterLinkProps = {
   target?: string;
   theme: Theme;
 };
-const FooterLink: FC<FooterLinkProps> = ({
-  href,
-  icon,
-  children,
-  target,
-}) => (
+const FooterLink: FC<FooterLinkProps> = ({ href, icon, children, target }) => (
   <Link
     href={href}
     target={target}
