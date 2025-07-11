@@ -12,10 +12,10 @@ import {
   DropdownMenuTrigger,
 } from "../../ui/dropdown-menu";
 import { cn } from "../../../lib/utils";
-import { signOut } from "next-auth/react";
 import useGlobalStore from "@/app/stores/globalStore";
 import { dropdownMenuColorMap } from "@/app/lib/store-data";
 import { Theme, UserProfile } from ".";
+import { useRouter } from "next/navigation";
 
 interface UserMenuProps {
   isLoggedIn: boolean;
@@ -24,6 +24,7 @@ interface UserMenuProps {
 }
 
 export const UserMenu = ({ isLoggedIn, userProfile, theme }: UserMenuProps) => {
+  const router = useRouter();
   const { resetState } = useGlobalStore();
   const isLoading = useGlobalStore((state) => state.isLoading);
   const hasHydrated = useGlobalStore((state) => state.hasHydrated);
@@ -32,7 +33,7 @@ export const UserMenu = ({ isLoggedIn, userProfile, theme }: UserMenuProps) => {
     resetState();
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
-    signOut({ callbackUrl: "/" });
+    router.push("/");
   };
 
   const dropdownColor = dropdownMenuColorMap[theme];

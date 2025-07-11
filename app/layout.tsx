@@ -4,10 +4,12 @@ import { ReactNode, Suspense } from "react";
 import "./globals.css";
 import { Metadata } from "next";
 import Loading from "./components/components/loading";
-// import AntiTamper from "./components/layout/anti-tamper";
+import AntiTamper from "./components/layout/anti-tamper";
 import Script from "next/script";
 import DeviceIdSync from "./components/layout/device-id-sync";
 import GlobalLoadingOverlay from "./components/components/loading-overlay";
+import FacebookSDK from "./components/components/facebook-sdk";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 export const metadata: Metadata = {
   icons: {
@@ -61,7 +63,7 @@ export default function RootLayout({
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer','GTM-TG7M5XM5');`}
         </Script>
-        {/* <AntiTamper /> */}
+        <AntiTamper />
       </head>
 
       <body>
@@ -73,17 +75,20 @@ export default function RootLayout({
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
+        <FacebookSDK />
         <DeviceIdSync />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Suspense fallback={<Loading />}>
-            <MainLayout>{children}</MainLayout>
-          </Suspense>
-        </ThemeProvider>
+        <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID!}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Suspense fallback={<Loading />}>
+              <MainLayout>{children}</MainLayout>
+            </Suspense>
+          </ThemeProvider>
+        </GoogleOAuthProvider>
         <GlobalLoadingOverlay />
       </body>
     </html>

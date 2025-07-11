@@ -55,7 +55,7 @@ const useGlobalStore = create<GlobalState>()(
           profile: {},
           isLoggedIn: false,
           isLoading: false,
-          hasHydrated: false,
+          hasHydrated: true,
         });
         localStorage.removeItem("global-store");
       },
