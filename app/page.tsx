@@ -31,46 +31,46 @@ export default async function HomePage() {
   const deviceId = (await cookies()).get(LSK_DEVICE_ID)?.value ?? "";
 
   const [
-    // weeklyRes,
-    // potentialRes,
-    // rankingRes,
-    // recentUpdatesRes,
-    // featuredRes,
-    // bestStoriesRes,
+    weeklyRes,
+    potentialRes,
+    rankingRes,
+    recentUpdatesRes,
+    featuredRes,
+    bestStoriesRes,
     // hashtagRes,
-    // categoriesRes,
+    categoriesRes,
   ] = await Promise.all([
-    // fetchWeekly({ deviceId: deviceId }),
-    // fetchPotential({
-    //   page: 0,
-    //   pageSize: 20,
-    //   deviceId: deviceId,
-    // }),
-    // fetchRanking({ deviceId: deviceId }),
-    // fetchLatestChapters({
-    //   page: 0,
-    //   pageSize: 20,
-    //   deviceId: deviceId,
-    // }),
-    // fetchFeature({ deviceId: deviceId }),
-    // fetchBestStories({ deviceId: deviceId }),
+    fetchWeekly({ deviceId: deviceId }),
+    fetchPotential({
+      page: 0,
+      pageSize: 20,
+      deviceId: deviceId,
+    }),
+    fetchRanking({ deviceId: deviceId }),
+    fetchLatestChapters({
+      page: 0,
+      pageSize: 20,
+      deviceId: deviceId,
+    }),
+    fetchFeature({ deviceId: deviceId }),
+    fetchBestStories({ deviceId: deviceId }),
     // fetchHashtag(),
-    // fetchCategories({ deviceId: deviceId }),
+    fetchCategories({ deviceId: deviceId }),
   ]);
 
   return (
     <div className="space-y-8">
       <MotionTitle title="Khám phá kho truyện" subTitle="Đầy mê hoặc" />
-      {/* <WeeklyStoryCarousel weeklyStories={weeklyRes?.data ?? []} /> */}
-      {/* <PotentialStarletSection
+      <WeeklyStoryCarousel weeklyStories={weeklyRes?.data ?? []} />
+      <PotentialStarletSection
         potentialStarlets={potentialRes?.data?.data ?? []}
-      /> */}
-      {/* <RankingSection rankingNovels={rankingRes?.data ?? []} /> */}
+      />
+      <RankingSection rankingNovels={rankingRes?.data ?? []} />
 
       <section className="md:grid md:grid-cols-6 gap-x-4 space-y-4 md:space-y-0">
         <div className="col-span-4">
           <GreenLineTitle title="Mới cập nhật" />
-          {/* <RecentUpdates recentUpdates={recentUpdatesRes?.data ?? []} /> */}
+          <RecentUpdates recentUpdates={recentUpdatesRes?.data ?? []} />
           <LinkButton href="/moi-cap-nhat" label="Xem thêm" />
         </div>
         <Tabs defaultValue="best-novels" className="w-full col-span-2">
@@ -91,13 +91,13 @@ export default async function HomePage() {
             </TabsList>
           </div>
 
-          {/* <TabsContent value="best-novels">
+          <TabsContent value="best-novels">
             <div className="flex flex-col gap-y-2">
               {bestStoriesRes.data.data?.map((novel: StoryType) => (
                 <TabCard key={novel?.id} novel={novel} />
               ))}
             </div>
-          </TabsContent> */}
+          </TabsContent>
 
           <TabsContent value="most-discussed" className="space-y-4">
             {/* {bestNovels.map((novel) => (
@@ -131,9 +131,9 @@ export default async function HomePage() {
         </Tabs>
       </section>
 
-      {/* <FeaturedSection feturedStories={featuredRes?.data?.data} /> */}
+      <FeaturedSection feturedStories={featuredRes?.data?.data} />
       <section className="mb-12">
-        {/* <CategoriesTagsSection categories={categoriesRes.slice(0, 12) ?? []} /> */}
+        <CategoriesTagsSection categories={categoriesRes.slice(0, 12) ?? []} />
         <LinkButton href="/the-loai" label="Xem thêm" />
       </section>
     </div>

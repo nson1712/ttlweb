@@ -1,66 +1,70 @@
 "use client";
 
 import FacebookIcon from "@/public/icon/FacebookIcon";
-// import { useEffect } from "react";
-// import { useRouter } from "next/navigation";
 import { SocialLoginButton } from "../components/components/social-login-btn";
 import GoogleIcon from "@/public/icon/GoogleIcon";
-import { ToastContainer } from "react-toastify";
-import { Button } from "../components/ui/button";
-import {
-  FacebookAPIResponse,
-  FacebookLoginResponse,
-} from "../components/components/facebook-sdk";
+import { FacebookLoginResponse } from "../components/components/facebook-sdk";
 import { getOrCreateDeviceId } from "../lib/utils";
 import { httpClient } from "../utils/httpClient";
 import { useRouter } from "next/navigation";
 import useGlobalStore from "../stores/globalStore";
+import { useGoogleLogin } from "@react-oauth/google";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
+import Image from "next/image";
 // import useGlobalStore from "../stores/globalStore";
 
 export default function AuthPage() {
   const router = useRouter();
   const setProfile = useGlobalStore((state) => state.setProfile);
   const setIsLoggedIn = useGlobalStore((state) => state.setIsLoggedIn);
-  const isLoggedIn = useGlobalStore((state) => state.isLoggedIn);
+  // const isLoggedIn = useGlobalStore((state) => state.isLoggedIn);
   const setIsLoading = useGlobalStore((state) => state.setIsLoading);
+
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      const accessToken = tokenResponse.access_token;
+      sendTokenToBackend(accessToken, "GOOGLE");
+    },
+    onError: (error) => {
+      console.error("Google Login Error:", error);
+    },
+  });
 
   const handleFacebookLogin = () => {
     if (typeof window.FB !== "undefined") {
       window.FB.login(
         function (response: { authResponse: FacebookLoginResponse }) {
           const { authResponse } = response;
-          console.log("response: ", response)
+          console.log("response: ", response);
           if (authResponse) {
             const accessToken = authResponse.accessToken;
-            // Send accessToken to backend or handle further actions
-            sendTokenToBackend(accessToken);
-
-            // Get user info
-            // window.FB.api(
-            //   "/me",
-            //   { fields: "name,email,picture" },
-            //   function (userInfo: FacebookAPIResponse) {
-            //     console.log("User Info:", userInfo);
-            //     // Handle user info here (save to state or send to server)
-            //   }
-            // );
+            sendTokenToBackend(accessToken, "FACEBOOK");
           } else {
             console.log("User cancelled login or did not fully authorize.");
           }
         },
-        { scope: "public_profile,email" } // Request additional permissions
+        { scope: "public_profile,email" }
       );
     }
   };
 
-  const sendTokenToBackend = async (accessToken: string) => {
+  const sendTokenToBackend = async (
+    accessToken: string,
+    socialType: "GOOGLE" | "FACEBOOK"
+  ) => {
     try {
       setIsLoading(true);
       const deviceId = getOrCreateDeviceId();
       const response = await httpClient.post({
         url: "/public/login-by-social",
         data: {
-          socialType: "FACEBOOK",
+          socialType: socialType,
           token: accessToken,
         },
         headers: { deviceId },
@@ -88,255 +92,64 @@ export default function AuthPage() {
   // }, [isLoggedIn, router]);
 
   return (
-    <div className="max-w-md mx-auto">
-      <div className="bg-gray-800 p-6 rounded-lg shadow-lg space-y-4">
-        <h1 className="text-3xl text-center">Đăng nhập</h1>
-        {/* <SocialLoginButton
-          title="Google"
-          socialType="GOOGLE"
-          icon={<GoogleIcon width={30} height={30} />}
-          provider="google"
-          className="bg-white text-black"
-        />
+    <div className="flex justify-center h-auto p-4 relative overflow-hidden">
+      <div className="absolute inset-0 bg-black/10"></div>
+      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
 
-        <SocialLoginButton
-          title="Facebook"
-          socialType="FACEBOOK"
-          icon={<FacebookIcon width={30} height={30} />}
-          provider="facebook"
-          className="bg-blue-500 text-white"
-        /> */}
+      <Card className="w-full max-w-md relative z-10 bg-slate-800 backdrop-blur-sm border-0 shadow-2xl">
+        <CardHeader className="space-y-4 text-center pb-8">
+          <div className="mx-auto rounded-2xl flex items-center justify-center mb-4">
+            <Image
+              src="/favicon.ico"
+              width={100}
+              height={100}
+              alt="Tang Thu Lau"
+            />
+          </div>
 
-        <Button
-          className="bg-blue-500 text-white"
-          onClick={handleFacebookLogin}
-        >
-          Đăng nhập bằng facebook
-        </Button>
+          <CardTitle className="text-3xl font-bold bg-gradient-to-r text-white">
+            Đăng nhập
+          </CardTitle>
+          <CardDescription className="text-gray-200 text-base">
+            Chọn phương thức đăng nhập để tiếp tục
+          </CardDescription>
+        </CardHeader>
 
-        <ToastContainer />
-        {/* <div className="flex flex-col items-center gap-4 mt-20">
-      <button
-        onClick={() => signIn("google", undefined, { callbackUrl: "/auth/callback?provider=google" })}
-        className="bg-red-500 text-white p-2 rounded"
-      >
-        Đăng nhập bằng Google
-      </button>
-      <button
-        onClick={() => signIn("facebook", undefined, { callbackUrl: "/auth/callback?provider=facebook" })}
-        className="bg-blue-600 text-white p-2 rounded"
-      >
-        Đăng nhập bằng Facebook
-      </button>
-    </div> */}
-        {/* <Tabs defaultValue="login" className="w-full" onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="login">Login</TabsTrigger>
-            <TabsTrigger value="register">Sign Up</TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="login" className="mt-6">
-            <form onSubmit={handleLogin} className="space-y-4">
-              <div>
-                <Label htmlFor="login-email">Email</Label>
-                <Input
-                  id="login-email"
-                  type="email"
-                  placeholder="your.email@example.com"
-                  value={loginEmail}
-                  onChange={(e) => setLoginEmail(e.target.value)}
-                  className="bg-gray-700 text-white border-gray-600"
-                  disabled={isLoginLoading}
-                />
-              </div>
-              
-              <div>
-                <Label htmlFor="login-password">Password</Label>
-                <Input
-                  id="login-password"
-                  type="password"
-                  placeholder="********"
-                  value={loginPassword}
-                  onChange={(e) => setLoginPassword(e.target.value)}
-                  className="bg-gray-700 text-white border-gray-600"
-                  disabled={isLoginLoading}
-                />
-              </div>
-              
-              {loginError && (
-                <div className="text-red-500 text-sm">{loginError}</div>
-              )}
-              
-              <div className="flex justify-between items-center">
-                <Button
-                  type="button"
-                  variant="link"
-                  className="text-blue-400 p-0 h-auto"
-                  onClick={() => setActiveTab("forgot")}
-                  disabled={isLoginLoading}
-                >
-                  Forgot password?
-                </Button>
-                
-                <Button 
-                  type="submit" 
-                  className="bg-blue-600 hover:bg-blue-700"
-                  disabled={isLoginLoading}
-                >
-                  {isLoginLoading ? "Signing in..." : "Sign in"}
-                </Button>
-              </div>
-              
-              <div className="text-center mt-4">
-                <p className="text-gray-400">
-                  Don&apos;t have an account?{" "}
-                  <Button
-                    type="button"
-                    variant="link"
-                    className="text-blue-400 p-0 h-auto"
-                    onClick={() => setActiveTab("register")}
-                    disabled={isLoginLoading}
-                  >
-                    Sign up
-                  </Button>
-                </p>
-              </div>
-            </form>
-          </TabsContent>
-          
-          <TabsContent value="register" className="mt-6">
-            <form onSubmit={handleRegister} className="space-y-4">
-              <div>
-                <Label htmlFor="register-username">Username</Label>
-                <Input
-                  id="register-username"
-                  type="text"
-                  placeholder="YourUsername"
-                  value={registerUsername}
-                  onChange={(e) => setRegisterUsername(e.target.value)}
-                  className="bg-gray-700 text-white border-gray-600"
-                  disabled={isRegisterLoading}
-                />
-              </div>
-              
-              <div>
-                <Label htmlFor="register-email">Email</Label>
-                <Input
-                  id="register-email"
-                  type="email"
-                  placeholder="your.email@example.com"
-                  value={registerEmail}
-                  onChange={(e) => setRegisterEmail(e.target.value)}
-                  className="bg-gray-700 text-white border-gray-600"
-                  disabled={isRegisterLoading}
-                />
-              </div>
-              
-              <div>
-                <Label htmlFor="register-password">Password</Label>
-                <Input
-                  id="register-password"
-                  type="password"
-                  placeholder="********"
-                  value={registerPassword}
-                  onChange={(e) => setRegisterPassword(e.target.value)}
-                  className="bg-gray-700 text-white border-gray-600"
-                  disabled={isRegisterLoading}
-                />
-              </div>
-              
-              <div>
-                <Label htmlFor="register-confirm-password">Confirm Password</Label>
-                <Input
-                  id="register-confirm-password"
-                  type="password"
-                  placeholder="********"
-                  value={registerConfirmPassword}
-                  onChange={(e) => setRegisterConfirmPassword(e.target.value)}
-                  className="bg-gray-700 text-white border-gray-600"
-                  disabled={isRegisterLoading}
-                />
-              </div>
-              
-              {registerError && (
-                <div className="text-red-500 text-sm">{registerError}</div>
-              )}
-              
-              <div className="flex justify-end">
-                <Button 
-                  type="submit" 
-                  className="bg-blue-600 hover:bg-blue-700"
-                  disabled={isRegisterLoading}
-                >
-                  {isRegisterLoading ? "Signing up..." : "Sign up"}
-                </Button>
-              </div>
-              
-              <div className="text-center mt-4">
-                <p className="text-gray-400">
-                  Already have an account?{" "}
-                  <Button
-                    type="button"
-                    variant="link"
-                    className="text-blue-400 p-0 h-auto"
-                    onClick={() => setActiveTab("login")}
-                    disabled={isRegisterLoading}
-                  >
-                    Sign in
-                  </Button>
-                </p>
-              </div>
-            </form>
-          </TabsContent>
-          
-          <TabsContent value="forgot" className="mt-6">
-            <form onSubmit={handleForgotPassword} className="space-y-4">
-              <div>
-                <Label htmlFor="forgot-email">Email</Label>
-                <Input
-                  id="forgot-email"
-                  type="email"
-                  placeholder="your.email@example.com"
-                  value={forgotEmail}
-                  onChange={(e) => setForgotEmail(e.target.value)}
-                  className="bg-gray-700 text-white border-gray-600"
-                  disabled={isForgotLoading || forgotSuccess}
-                />
-              </div>
-              
-              {forgotError && (
-                <div className="text-red-500 text-sm">{forgotError}</div>
-              )}
-              
-              {forgotSuccess && (
-                <div className="text-green-500 text-sm">
-                  Password reset instructions have been sent to your email.
-                </div>
-              )}
-              
-              <div className="flex justify-between items-center">
-                <Button
-                  type="button"
-                  variant="link"
-                  className="text-blue-400 p-0 h-auto"
-                  onClick={() => setActiveTab("login")}
-                  disabled={isForgotLoading}
-                >
-                  Back to login
-                </Button>
-                
-                <Button 
-                  type="submit" 
-                  className="bg-blue-600 hover:bg-blue-700"
-                  disabled={isForgotLoading || forgotSuccess}
-                >
-                  {isForgotLoading ? "Sending..." : "Reset Password"}
-                </Button>
-              </div>
-            </form>
-          </TabsContent>
-        </Tabs> */}
-      </div>
+        <CardContent className="space-y-4 pb-8">
+          {/* Social login buttons */}
+          <SocialLoginButton
+            title="Google"
+            icon={<GoogleIcon className="w-6 h-6" />}
+            className="bg-white border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300"
+            handleLogin={handleGoogleLogin}
+          />
+
+          <SocialLoginButton
+            title="Facebook"
+            icon={<FacebookIcon className="w-6 h-6 text-blue-600" />}
+            className="bg-blue-500 border-blue-200 text-white hover:bg-blue-400 hover:border-blue-300"
+            handleLogin={handleFacebookLogin}
+          />
+
+          <div className="text-center text-sm text-gray-500 pt-4">
+            Bằng cách đăng nhập, bạn đồng ý với{" "}
+            <a
+              href="#"
+              className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
+            >
+              Điều khoản sử dụng
+            </a>{" "}
+            và{" "}
+            <a
+              href="#"
+              className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
+            >
+              Chính sách bảo mật
+            </a>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
