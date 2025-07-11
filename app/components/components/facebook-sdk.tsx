@@ -39,6 +39,9 @@ declare global {
         params: { fields: string },
         callback: (response: FacebookAPIResponse) => void
       ) => void;
+      XFBML: {
+        parse: () => void;
+      };
     };
     fbAsyncInit: () => void;
   }
