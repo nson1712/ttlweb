@@ -53,7 +53,7 @@ import { cn } from "@/app/lib/utils";
 const nunito = Nunito({
   subsets: ["vietnamese"],
   display: "swap",
-  weight: ["1000"],
+  weight: ["900"],
 });
 
 type MotionTitleProps = {
