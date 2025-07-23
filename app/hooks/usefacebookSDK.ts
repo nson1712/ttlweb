@@ -6,6 +6,8 @@ interface UseFacebookSDKProps {
 
 const useFacebookSDK = ({ src }: UseFacebookSDKProps) => {
   useEffect(() => {
+    if (typeof window === "undefined") return;
+    
     if (window.FB) {
       window.FB.XFBML.parse();
       return;
