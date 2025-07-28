@@ -17,14 +17,16 @@ export const UserAvatar = ({ avatar, displayName }: UserAvatarProps) => {
     <div className="flex gap-x-4 items-center sm:hidden">
       {!isHydrated ? (
         <Skeleton className="w-6 h-6 rounded-full" />
-      ) : (
+      ) : avatar ? (
         <Image
           className="rounded-full"
-          src={avatar || ""}
+          src={avatar}
           alt={displayName || "avatar"}
           width={25}
           height={25}
         />
+      ) : (
+        <div className="w-6 h-6 rounded-full bg-gray-300 dark:bg-gray-600" />
       )}
     </div>
   );
